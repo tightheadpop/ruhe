@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Web;
 
-namespace localhost {
+namespace Ruhe.TestWeb {
 	/// <summary>
 	/// Summary description for Global.
 	/// </summary>

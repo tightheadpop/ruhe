@@ -8,7 +8,6 @@ namespace Ruhe.Common {
 	}
 
 	public abstract class DateTimeUtilities {
-
 		public static DateTime GetFirstDayOfWeek(DateTime dateTime) {
 			return dateTime.AddDays((int) dateTime.DayOfWeek * -1);
 		}

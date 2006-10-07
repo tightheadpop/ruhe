@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestExtensions", "Ruhe
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestWeb", "http://localhost/ruhe/Ruhe.TestWeb.csproj", "{23BF4CF9-33C2-419F-B6CB-062A4642B385}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestWeb", "Ruhe.TestWeb\Ruhe.TestWeb.csproj", "{23BF4CF9-33C2-419F-B6CB-062A4642B385}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject

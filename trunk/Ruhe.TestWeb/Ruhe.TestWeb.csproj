@@ -1,6 +1,6 @@
 <VisualStudioProject>
     <CSHARP
-        ProjectType = "Web"
+        ProjectType = "Local"
         ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{23BF4CF9-33C2-419F-B6CB-062A4642B385}"
@@ -59,7 +59,7 @@
                     OutputPath = "bin\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
+                    TreatWarningsAsErrors = "true"
                     WarningLevel = "4"
                 />
             </Settings>

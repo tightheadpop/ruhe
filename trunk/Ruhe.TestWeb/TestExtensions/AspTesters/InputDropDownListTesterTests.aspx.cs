@@ -1,8 +1,8 @@
 using System;
 using System.Web.UI;
 
-namespace Ruhe.TestWeb {
-	public class _Default : Page {
+namespace Ruhe.TestWeb.Extensions.AspTesters {
+	public class InputDropDownListTesterTests : Page {
 		private void Page_Load(object sender, EventArgs e) {}
 
 		#region Web Form Designer generated code

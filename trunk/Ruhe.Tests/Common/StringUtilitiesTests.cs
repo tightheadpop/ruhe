@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Ruhe.Common;
 
@@ -67,6 +68,22 @@ namespace Ruhe.Tests.Common {
 		public void StringAfter() {
 			Assert.AreEqual("extension", StringUtilities.StringAfter("file.name.extension", "."));
 			Assert.AreEqual("file.name.extension", StringUtilities.StringAfter("file.name.extension", @"\"));
+		}
+
+		[Test]
+		public void TrimToEmpty() {
+			Assert.AreEqual(String.Empty, StringUtilities.TrimToEmpty(null));
+			Assert.AreEqual(String.Empty, StringUtilities.TrimToEmpty(String.Empty));
+			Assert.AreEqual("paul", StringUtilities.TrimToEmpty("  paul "));
+		}
+
+		[Test]
+		public void CsvQuote() {
+			Assert.AreEqual(String.Empty, StringUtilities.CsvQuote((string) null));
+			Assert.AreEqual(String.Empty, StringUtilities.CsvQuote(String.Empty));
+			Assert.AreEqual("\"foo,bar\"", StringUtilities.CsvQuote("foo,bar"), "should wrap in quotes if a comma is present");
+			Assert.AreEqual("\"\"\"foo,bar\"\"\"", StringUtilities.CsvQuote("\"foo,bar\""),
+			                "should esacpe double quotes by doubling them");
 		}
 	}
 }
