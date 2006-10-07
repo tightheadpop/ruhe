@@ -80,5 +80,43 @@ namespace Ruhe.Common {
 			}
 			return false;
 		}
+
+		public static string TrimToEmpty(string s) {
+			if (s == null) {
+				return String.Empty;
+			}
+			return s.Trim();
+		}
+
+		public static string TrimToNull(string s) {
+			if (s == null) {
+				return null;
+			}
+			return s.Trim();
+		}
+
+		public static string CsvQuote(string s) {
+			string workingCopy = TrimToEmpty(s).Replace("\"", "\"\"");
+			if (workingCopy.IndexOf(",") > -1) {
+				return "\"" + workingCopy + "\"";
+			}
+			return workingCopy;
+		}
+
+		public static string[] CsvQuote(string[] strings) {
+			for (int i = 0; i < strings.Length; i++) {
+				strings[i] = CsvQuote(strings[i]);
+			}
+			return strings;
+		}
+
+		public static bool AreNotEmpty(params string[] values) {
+			foreach (string value in values) {
+				if (TrimToEmpty(value) == String.Empty) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 }

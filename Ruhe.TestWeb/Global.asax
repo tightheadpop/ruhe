@@ -1,1 +1,1 @@
-<%@ Application Codebehind="Global.asax.cs" Inherits="localhost.Global" %>
+<%@ Application Codebehind="Global.asax.cs" Inherits="Ruhe.TestWeb.Global" %>

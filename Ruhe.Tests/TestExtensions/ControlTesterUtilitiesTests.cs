@@ -9,7 +9,7 @@ namespace Ruhe.Tests.Extensions {
 	[TestFixture]
 	public class ControlTesterUtilitiesTests : WebFormTestCase {
 		[Test]
-		public void GetUrlPathInNonWebContextAccessesConfigFile() {
+		public void GetUrlPathAccessesConfigFile() {
 			Assert(ControlTesterUtilities.GetUrlPath(typeof(EncodedLabel))
 			       	.Equals("http://localhost/ruhe/Web/UI/Controls/EncodedLabelTests.aspx"));
 		}
@@ -27,11 +27,6 @@ namespace Ruhe.Tests.Extensions {
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Message)));
 			PanelTester messageWrapper1 = new PanelTester("message1_wrapper", CurrentWebForm);
 			Assert(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
-		}
-
-		[Test]
-		public void GetUrlPathInWebContextAccessesHttpContextInstance() {
-			
 		}
 	}
 }

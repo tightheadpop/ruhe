@@ -109,6 +109,11 @@
                     AssemblyName = "NUnitAsp"
                     HintPath = "..\external\NUnitAsp.dll"
                 />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -123,12 +128,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Common\CollectionsTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Common\DateTimeUtilitiesTests.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Common\DelimitedStringBuilderTests.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Common\DisposeTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

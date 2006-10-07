@@ -89,12 +89,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Disposer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Month.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Reflector.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Utilities\Collections.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
