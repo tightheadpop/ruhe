@@ -1,0 +1,61 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.Web", "Ruhe.Web\Ruhe.Web.csproj", "{8262DC2E-A3BB-4999-9F70-97E268C2EB71}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.Common", "Ruhe.Common\Ruhe.Common.csproj", "{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.Tests", "Ruhe.Tests\Ruhe.Tests.csproj", "{F461081F-4BE4-493B-94E6-CBB33D5E69CD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestExtensions", "Ruhe.TestExtensions\Ruhe.TestExtensions.csproj", "{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestWeb", "Ruhe.TestWeb\Ruhe.TestWeb.csproj", "{23BF4CF9-33C2-419F-B6CB-062A4642B385}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{8262DC2E-A3BB-4999-9F70-97E268C2EB71}.Debug.ActiveCfg = Debug|.NET
+		{8262DC2E-A3BB-4999-9F70-97E268C2EB71}.Debug.Build.0 = Debug|.NET
+		{8262DC2E-A3BB-4999-9F70-97E268C2EB71}.Release.ActiveCfg = Release|.NET
+		{8262DC2E-A3BB-4999-9F70-97E268C2EB71}.Release.Build.0 = Release|.NET
+		{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}.Debug.ActiveCfg = Debug|.NET
+		{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}.Debug.Build.0 = Debug|.NET
+		{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}.Release.ActiveCfg = Release|.NET
+		{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}.Release.Build.0 = Release|.NET
+		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Debug.ActiveCfg = Debug|.NET
+		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Debug.Build.0 = Debug|.NET
+		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Release.ActiveCfg = Release|.NET
+		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Release.Build.0 = Release|.NET
+		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug.ActiveCfg = Debug|.NET
+		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug.Build.0 = Debug|.NET
+		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release.ActiveCfg = Release|.NET
+		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release.Build.0 = Release|.NET
+		{23BF4CF9-33C2-419F-B6CB-062A4642B385}.Debug.ActiveCfg = Debug|.NET
+		{23BF4CF9-33C2-419F-B6CB-062A4642B385}.Debug.Build.0 = Debug|.NET
+		{23BF4CF9-33C2-419F-B6CB-062A4642B385}.Release.ActiveCfg = Release|.NET
+		{23BF4CF9-33C2-419F-B6CB-062A4642B385}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(SolutionItems) = postSolution
+		external\nunit.core.extensions.dll = external\nunit.core.extensions.dll
+		external\nunit.framework.dll = external\nunit.framework.dll
+		external\NUnitAsp.dll = external\NUnitAsp.dll
+		Ruhe.resharper = Ruhe.resharper
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

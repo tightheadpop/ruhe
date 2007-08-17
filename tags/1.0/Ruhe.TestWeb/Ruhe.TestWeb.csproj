@@ -1,0 +1,369 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Local"
+        ProductVersion = "7.10.6030"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{23BF4CF9-33C2-419F-B6CB-062A4642B385}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "Ruhe.TestWeb"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "Library"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "Ruhe.TestWeb"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "true"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "true"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Web"
+                    AssemblyName = "System.Web"
+                    HintPath = "..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"
+                />
+                <Reference
+                    Name = "Ruhe.Common"
+                    Project = "{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Ruhe.Web"
+                    Project = "{8262DC2E-A3BB-4999-9F70-97E268C2EB71}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Default.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Default.aspx.cs"
+                    DependentUpon = "Default.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Default.aspx.resx"
+                    DependentUpon = "Default.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Global.asax"
+                    SubType = "Component"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Global.asax.cs"
+                    DependentUpon = "Global.asax"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Global.asax.resx"
+                    DependentUpon = "Global.asax.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web.config"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "TestExtensions\AspTesters\GridTesterTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "TestExtensions\AspTesters\GridTesterTests.aspx.cs"
+                    DependentUpon = "GridTesterTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TestExtensions\AspTesters\GridTesterTests.aspx.resx"
+                    DependentUpon = "GridTesterTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "TestExtensions\AspTesters\InputDropDownListTesterTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.cs"
+                    DependentUpon = "InputDropDownListTesterTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.resx"
+                    DependentUpon = "InputDropDownListTesterTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\EncodedLabelTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\EncodedLabelTests.aspx.cs"
+                    DependentUpon = "EncodedLabelTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\EncodedLabelTests.aspx.resx"
+                    DependentUpon = "EncodedLabelTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx.cs"
+                    DependentUpon = "InputDropDownAutoPostBackDisplay.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx.resx"
+                    DependentUpon = "InputDropDownAutoPostBackDisplay.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownNotRequired.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownNotRequired.aspx.cs"
+                    DependentUpon = "InputDropDownNotRequired.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownNotRequired.aspx.resx"
+                    DependentUpon = "InputDropDownNotRequired.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownPostBackIsolation.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownPostBackIsolation.aspx.cs"
+                    DependentUpon = "InputDropDownPostBackIsolation.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownPostBackIsolation.aspx.resx"
+                    DependentUpon = "InputDropDownPostBackIsolation.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownReadOnly.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownReadOnly.aspx.cs"
+                    DependentUpon = "InputDropDownReadOnly.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownReadOnly.aspx.resx"
+                    DependentUpon = "InputDropDownReadOnly.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownRequired.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownRequired.aspx.cs"
+                    DependentUpon = "InputDropDownRequired.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputDropDownRequired.aspx.resx"
+                    DependentUpon = "InputDropDownRequired.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputNumberTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputNumberTests.aspx.cs"
+                    DependentUpon = "InputNumberTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputNumberTests.aspx.resx"
+                    DependentUpon = "InputNumberTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputTextBoxReadOnly.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputTextBoxReadOnly.aspx.cs"
+                    DependentUpon = "InputTextBoxReadOnly.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputTextBoxReadOnly.aspx.resx"
+                    DependentUpon = "InputTextBoxReadOnly.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputTextBoxTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputTextBoxTests.aspx.cs"
+                    DependentUpon = "InputTextBoxTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\InputTextBoxTests.aspx.resx"
+                    DependentUpon = "InputTextBoxTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\LabeledControlPanelTests.aspx"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\LabeledControlPanelTests.aspx.cs"
+                    DependentUpon = "LabeledControlPanelTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\LabeledControlPanelTests.aspx.resx"
+                    DependentUpon = "LabeledControlPanelTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\LinkButtonTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\LinkButtonTests.aspx.cs"
+                    DependentUpon = "LinkButtonTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\LinkButtonTests.aspx.resx"
+                    DependentUpon = "LinkButtonTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\MessageTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\MessageTests.aspx.cs"
+                    DependentUpon = "MessageTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\MessageTests.aspx.resx"
+                    DependentUpon = "MessageTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\Validators\ValidatorControllerTests.aspx"
+                    SubType = "Form"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\Validators\ValidatorControllerTests.aspx.cs"
+                    DependentUpon = "ValidatorControllerTests.aspx"
+                    SubType = "ASPXCodeBehind"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web\UI\Controls\Validators\ValidatorControllerTests.aspx.resx"
+                    DependentUpon = "ValidatorControllerTests.aspx.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+
