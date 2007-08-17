@@ -232,7 +232,22 @@
       <Folder name="Shared Solution Templates" />
     </Surrounds>
     <FileTemplates>
-      <Folder name="Shared Solution Templates" />
+      <Folder name="Shared Solution Templates">
+        <Template uid="56eeb163-0997-4a35-8bfc-36341731173d" text="using NUnit.Framework;&#xD;&#xA;&#xD;&#xA;namespace $Namespace$ {&#xD;&#xA;	[TestFixture]&#xD;&#xA;	public class $TestCase$ {&#xD;&#xA;		[Test]&#xD;&#xA;		public void $TestMethod$() {&#xD;&#xA;			$END$&#xD;&#xA;		}&#xD;&#xA;	}&#xD;&#xA;}" shortcut="" description="TestCase" reformat="true" shortenQualifiedReferences="true">
+          <Context>
+            <ProjectLanguageContext language="CSharp" />
+          </Context>
+          <Variables>
+            <Variable name="Namespace" expression="fileDefaultNamespace()" initialRange="-1" />
+            <Variable name="TestCase" expression="getFileNameWithoutExtension()" initialRange="-1" />
+            <Variable name="TestMethod" expression="" initialRange="0" />
+          </Variables>
+          <CustomProperties>
+            <Property key="FileName" value="Test" />
+            <Property key="Extension" value="cs" />
+          </CustomProperties>
+        </Template>
+      </Folder>
     </FileTemplates>
   </SharedSolutionTemplateManager>
 </Configuration>

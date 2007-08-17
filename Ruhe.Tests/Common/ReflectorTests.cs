@@ -145,7 +145,6 @@ namespace Ruhe.Tests.Common {
 			}
 
 			public void Dispose() {
-				// TODO:  Add TestObject.Dispose implementation
 			}
 		}
 	}
