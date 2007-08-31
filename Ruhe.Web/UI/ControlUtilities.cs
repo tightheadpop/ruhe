@@ -57,7 +57,7 @@ namespace Ruhe.Web.UI {
 			#region Client Script
 
 			const string scriptKey = "AddEventListener";
-			if (!control.Page.IsClientScriptBlockRegistered(scriptKey)) {
+			if (!control.Page.ClientScript.IsClientScriptBlockRegistered(typeof(ControlUtilities), scriptKey)) {
 				string addEventListenerScript = @"
 <script type='text/javascript' language='javascript'>
 function AddEventListener(controlId, eventName, listenerAction) {
@@ -70,7 +70,7 @@ function AddEventListener(controlId, eventName, listenerAction) {
 	}
 }
 </script>";
-				control.Page.RegisterClientScriptBlock(scriptKey, addEventListenerScript);
+				control.Page.ClientScript.RegisterClientScriptBlock(typeof(ControlUtilities), scriptKey, addEventListenerScript);
 			}
 
 			#endregion
@@ -82,18 +82,13 @@ function AddEventListener(controlId, eventName, listenerAction) {
 			                                     clientId,
 			                                     clientEventName,
 			                                     functionReference);
-			control.Page.RegisterStartupScript(GetRandomName(), startUpScript);
-		}
-
-		public static void SetInitialFocus(Control control) {
-			((Page) HttpContext.Current.Handler).RegisterStartupScript("initial page focus",
-			                                                           String.Format("<script type='text/javascript'>if (document.getElementById('{0}')) document.getElementById('{0}').focus();</script>", control.ClientID));
+			control.Page.ClientScript.RegisterStartupScript(typeof(ControlUtilities), GetRandomName(), startUpScript);
 		}
 
 		public static void SetInitialFocus(Control container, Type typeOfFirstControlToRecieveFocus) {
 			ArrayList controls = FindControlsRecursive(container, typeOfFirstControlToRecieveFocus);
 			if (controls.Count > 0)
-				SetInitialFocus((Control) controls[0]);
+				container.Page.SetFocus((Control) controls[0]);
 		}
 	}
 }

@@ -40,8 +40,8 @@ namespace Ruhe.Web.UI.Controls.Validators {
 			base.OnPreRender(args);
 
 			if (RenderUplevel) {
-				if (!Page.IsClientScriptBlockRegistered("OrGroupValidation")) {
-					Page.RegisterClientScriptBlock("OrGroupValidation",
+				if (!Page.ClientScript.IsClientScriptBlockRegistered(GetType(), "OrGroupValidation")) {
+					Page.ClientScript.RegisterClientScriptBlock(GetType(), "OrGroupValidation",
 					                               @"
 function OrGroupValidatorEvaluateIsValid(validator)
 {

@@ -5,6 +5,5 @@
 <ruhe:InputTextBox id="testBox1" ReadOnly="True" Required="True" runat="server"/>
 <ruhe:InputTextBox id="testBox2" runat="server"/>
 	<asp:Button id="submitButton" Text="Submit" runat="server"/>
-	<Asp:Label id="result" runat="server" enableviewstate="false"/>
-	<ruhe:ViewStateViewer runat="Server"/>
+	<asp:Label id="result" runat="server" enableviewstate="false"/>
 </form>

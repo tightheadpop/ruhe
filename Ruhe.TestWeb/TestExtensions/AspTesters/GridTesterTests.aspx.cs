@@ -3,9 +3,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Ruhe.TestWeb.Tests.Extensions.AspTesters {
-	/// <summary>
-	/// Summary description for GridTesterTests.
-	/// </summary>
 	public class GridTesterTests : Page {
 		protected DataGrid grid;
 

@@ -22,7 +22,7 @@ namespace Ruhe.TestExtensions {
 		/// </summary>
 		public static string TestSite {
 			get {
-				string result = ConfigurationSettings.AppSettings["Test.Url"];
+				string result = ConfigurationManager.AppSettings["Test.Url"];
 				result = StringUtilities.ForcePrefix("http://", result);
 				result = StringUtilities.ForceSuffix(result, "/");
 				return result;
