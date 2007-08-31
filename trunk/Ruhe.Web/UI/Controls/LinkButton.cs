@@ -13,7 +13,7 @@ namespace Ruhe.Web.UI.Controls {
 
 		protected override void OnPreRender(EventArgs e) {
 			base.OnPreRender(e);
-			Page.RegisterStartupScript(ClientID + "accessibility",
+			Page.ClientScript.RegisterStartupScript(GetType(), ClientID + "accessibility",
 			                           String.Format(@"
 <script type='text/javascript'>
 	document.getElementById('{0}').style.display = '';

@@ -126,7 +126,7 @@ namespace Ruhe.Common {
 		}
 
 		public static Type GetCrossAssemblyType(string assemblyName, string fullName, bool throwExceptionOnFailure) {
-			Assembly assembly = Assembly.LoadWithPartialName(assemblyName);
+			Assembly assembly = Assembly.Load(assemblyName);
 			return assembly.GetType(fullName, throwExceptionOnFailure, true);
 		}
 
