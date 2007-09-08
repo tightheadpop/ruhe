@@ -112,7 +112,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		private void LoadPage(NumericFormat format) {
-			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputNumber)) + "?mode=" + format.ToString());
+			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputNumber)) + "?mode=" + format);
 		}
 
 		private void LoadPage(NumericFormat format, double minimum, double maximum) {
@@ -120,7 +120,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			builder.Add("mode", format.ToString());
 			builder.Add("min", minimum.ToString());
 			builder.Add("max", maximum.ToString());
-			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputNumber)) + "?" + builder.ToString());
+			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputNumber)) + "?" + builder);
 		}
 	}
 }

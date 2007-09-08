@@ -8,13 +8,6 @@ namespace Ruhe.Web.UI {
 	public sealed class ControlUtilities {
 		private ControlUtilities() {}
 
-		public static string GetHtml(Control control) {
-			StringWriter stringWriter = new StringWriter();
-			HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
-			control.RenderControl(htmlTextWriter);
-			return stringWriter.ToString();
-		}
-
 		public static Control FindControlRecursive(Control parent, string childId) {
 			if (parent.ID == childId)
 				return parent;

@@ -74,14 +74,8 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.core.extensions">
-      <Name>nunit.core.extensions</Name>
-      <HintPath>..\external\nunit.core.extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="NUnitAsp">
-      <Name>NUnitAsp</Name>
-      <HintPath>..\external\NUnitAsp.dll</HintPath>
-    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="NUnitAsp, Version=2.0.0.41294, Culture=neutral, PublicKeyToken=f9bdb8e9d00f2b23" />
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -104,15 +98,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspTesters\GridTester.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="AspTesters\InputDropDownListTester.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ControlAssert.cs" />
     <Compile Include="ControlTesterUtilities.cs">
       <SubType>Code</SubType>
     </Compile>

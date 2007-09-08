@@ -1,20 +1,16 @@
 using System;
 using System.Configuration;
-using System.Reflection;
-using System.Xml;
+using System.IO;
+using System.Web.UI;
 using NUnit.Extensions.Asp;
 using Ruhe.Common;
 
 namespace Ruhe.TestExtensions {
+	//TODO move to Ruhe.Tests as helper class specific to this project
 	public class ControlTesterUtilities {
 		public static string GetUrlPath(Type controlType) {
 			string path = StringUtilities.RemovePrefix(controlType.FullName, @"\w+\.").Replace(".", "/");
 			return String.Format("{0}{1}Tests.aspx", TestSite, path);
-		}
-
-		public static XmlElement GetXmlElement(ControlTester tester) {
-			HtmlTag tag = (HtmlTag) Reflector.GetPropertyValue(tester, "Tag", BindingFlags.NonPublic | BindingFlags.Instance);
-			return (XmlElement) Reflector.GetPropertyValue(tag, "Element", BindingFlags.NonPublic | BindingFlags.Instance);
 		}
 
 		/// <summary>
@@ -30,8 +26,18 @@ namespace Ruhe.TestExtensions {
 		}
 
 		public static bool HasChildElement(ControlTester tester, string id) {
-			XmlElement element = GetXmlElement(tester);
-			return element.SelectSingleNode(String.Format(".//*[@id=\"{0}\"]", id)) != null;
+			return new GeneralControlTester(id, tester).Visible;
+		}
+
+		public static string GetHtml(Control control) {
+			StringWriter stringWriter = new StringWriter();
+			HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
+			control.RenderControl(htmlTextWriter);
+			return stringWriter.ToString();
+		}
+
+		private class GeneralControlTester : ControlTester {
+			public GeneralControlTester(string id, ControlTester container) : base(id, container) {}
 		}
 	}
 }

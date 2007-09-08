@@ -137,15 +137,14 @@
     <Compile Include="Common\StringUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TestExtensions\AspTesters\GridTesterTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="NUnitAdapter.cs" />
     <Compile Include="TestExtensions\AspTesters\InputDropDownListTesterTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TestExtensions\ControlTesterUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TestExtensions\HtmlTesters\HtmlImageTester.cs" />
     <Compile Include="Web\FileStreamerTests.cs">
       <SubType>Code</SubType>
     </Compile>

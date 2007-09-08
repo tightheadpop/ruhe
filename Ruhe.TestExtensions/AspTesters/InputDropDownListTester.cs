@@ -21,10 +21,5 @@ namespace Ruhe.TestExtensions.AspTesters {
 		public void SelectByValue(int value) {
 			SelectByValue(value.ToString());
 		}
-
-		public string SelectedValue {
-			get { return Items[SelectedIndex].Value; }
-			set { SelectByValue(value); }
-		}
 	}
 }
