@@ -27,7 +27,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		public void InitialState() {
 			AssertVisibility(button, true);
 			AssertVisibility(link, true);
-			Assert(ControlTesterUtilities.GetXmlElement(link).Attributes["style"].InnerText == "display:none;");
+			Assert.AreEqual("display:none;", new HtmlTagTester(link.AspId).Attribute("style"), "The hyperlink should be emitted with style that hides it");
 			AssertEquals(String.Empty, target.Text);
 		}
 

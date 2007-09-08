@@ -68,16 +68,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		[Test]
 		public void Containment() {
-			Assert(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
-			Assert(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1"));
-			Assert(ControlTesterUtilities.HasChildElement(messageBody1, "message1_dummyLink"));
+			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
+			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1"));
+			AssertTrue(ControlTesterUtilities.HasChildElement(messageBody1, "message1_dummyLink"));
 		}
 
 		[Test]
 		public void AddControlDynamically() {
 			addControl.Click();
 			AssertVisibility(added, true);
-			Assert("the added control must appear inside the message body",
+			AssertTrue("the added control must appear inside the message body",
 			       ControlTesterUtilities.HasChildElement(messageBody1, "message1_added"));
 		}
 
@@ -107,7 +107,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			AssertVisibility(messageWrapper5, true);
 			AssertVisibility(messageBody5, true);
 			AssertVisibility(messageHeader5, true);
-			Assert(ControlTesterUtilities.HasChildElement(messageBody5, "message5_replacement"));
+			AssertTrue(ControlTesterUtilities.HasChildElement(messageBody5, "message5_replacement"));
 		}
 	}
 }

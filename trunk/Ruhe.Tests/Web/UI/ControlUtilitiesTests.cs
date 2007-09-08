@@ -55,14 +55,6 @@ namespace Ruhe.Tests.Web.UI {
 			Assert.IsFalse(result.Contains(grandChild), "result contains non-namingcontainer grandchild control");
 		}
 
-		[Test]
-		public void GetHtmlFromControl() {
-			Label thing = new Label();
-			thing.Text = "thing";
-			string result = ControlUtilities.GetHtml(thing);
-			Assert.AreEqual("<span>thing</span>", result, "Html output does not match");
-		}
-
 		private class GenericNamingContainer : Panel, INamingContainer {}
 	}
 }

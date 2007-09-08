@@ -1,10 +1,10 @@
 using System;
-using System.Xml;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Common;
 using Ruhe.TestExtensions;
+using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
@@ -15,56 +15,46 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		private ButtonTester submitButton;
 		private ValidationSummaryTester summary;
 		private LabelTester readOnly;
-		private XmlDocument xmlDocument;
 		private LabelTester resultLabel;
+		private HtmlImageTester requiredImage;
 
 		protected override void SetUp() {
 			base.SetUp();
-			xmlDocument = new XmlDocument();
 			testBox = new TextBoxTester("testBox", CurrentWebForm);
 			aspxRequired = new TextBoxTester("aspxRequired", CurrentWebForm);
 			submitButton = new ButtonTester("submitButton", CurrentWebForm);
 			summary = new ValidationSummaryTester("summary", CurrentWebForm);
 			readOnly = new LabelTester("testBox_readOnly", CurrentWebForm);
 			resultLabel = new LabelTester("result", CurrentWebForm);
+			requiredImage = new HtmlImageTester("testBox_requiredLabel");
 		}
 
 		[Test]
-		public void NotRequired() {
+		public void RequiredIndicatorDoesNotAppearWhenFieldIsNotRequired() {
 			LoadPage();
-			AssertRequiredIsVisible(false);
-
-			submitButton.Click();
-			AssertVisibility(summary, false);
+			WebAssert.NotVisible(requiredImage);
 		}
 
 		[Test]
-		public void Required() {
+		public void RequiredIndicatorAppearsWhenFieldIsRequired() {
 			LoadPage("Required");
-
-			AssertRequiredIsVisible(true);
-
-			submitButton.Click();
-			Assert(summary.Messages.Length == 1);
-
-			testBox.Text = "non-empty";
-			submitButton.Click();
-			AssertVisibility(summary, false);
+			WebAssert.Visible(requiredImage);
 		}
 
 		[Test]
-		public void EnsureInvalidFieldStopsProcessingOfClickEventHandler() {
+		public void InvalidFieldStopsProcessingOfClickEventHandler() {
 			LoadPage("Required");
 			submitButton.Click();
-			AssertEquals("click handler was executed after failed validation", String.Empty, resultLabel.Text);
+			Assert.AreEqual(String.Empty, resultLabel.Text, "click handler was executed after failed validation");
 		}
 
 		[Test]
-		public void NoRegexValidation() {
+		public void NoRegexValidationIsAppliedIfTheValidationExpressionPropertyIsNotSet() {
 			LoadPage();
 			testBox.Text = "12";
 			submitButton.Click();
-			AssertVisibility(summary, false);
+			Console.Write(Browser.CurrentPageText);
+			Assert.AreEqual(string.Empty, new HtmlTagTester(summary.AspId).InnerHtml.Trim());
 		}
 
 		[Test]
@@ -77,37 +67,32 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			foreach (string badValue in badValues) {
 				testBox.Text = badValue;
 				submitButton.Click();
-				Assert(summary.Messages.Length == 1);
+				AssertTrue(summary.Messages[0].Length > 0);
 			}
 
 			testBox.Text = "123";
 			submitButton.Click();
-			AssertVisibility(summary, false);
+			Assert.AreEqual(string.Empty, new HtmlTagTester(summary.AspId).InnerHtml.Trim());
 		}
 
 		[Test]
 		public void NotReadOnly() {
 			LoadPage();
-			AssertVisibility(readOnly, false);
-			AssertVisibility(testBox, true);
-			AssertEquals(1, xmlDocument.SelectNodes("//input[@id = \"testBox\"][@class = \"test\"]").Count);
-			AssertEquals(0, xmlDocument.SelectNodes("//span[@id = \"testBox_readOnly\"][@class = \"test\"]").Count);
+			WebAssert.Visible(testBox);
+			WebAssert.NotVisible(readOnly);
 		}
 
 		[Test]
 		public void ReadOnly() {
 			LoadPage("ReadOnly");
-			Console.WriteLine(Browser.CurrentPageText);
-			AssertVisibility(readOnly, true);
-			AssertVisibility(testBox, false);
-			AssertEquals(0, xmlDocument.SelectNodes("//input[@id = \"testBox\"][@class = \"test\"]").Count);
-			AssertEquals("&amp;test", xmlDocument.SelectNodes("//span[@id = \"testBox_readOnly\"][@class = \"test\"]")[0].InnerXml);
+			WebAssert.NotVisible(testBox);
+			WebAssert.Visible(readOnly);
 		}
 
 		[Test]
 		public void ControlCollection() {
 			InputTextBox box = new InputTextBox();
-			Assert(box.Controls[0] != null);
+			AssertTrue(box.Controls[0] != null);
 		}
 
 		[Test]
@@ -115,7 +100,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			LoadPage("Required");
 			submitButton.Click();
 
-			Assert(StringUtilities.Contains(summary.Messages[0], "in the testBox field."));
+			AssertTrue(StringUtilities.Contains(summary.Messages[0], "in the testBox field."));
 		}
 
 		[Test]
@@ -125,7 +110,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			AssertVisibility(testBox, false);
 
 			submitButton.Click();
-			Assert(summary.Messages.Length == 1);
+			AssertTrue(summary.Messages.Length == 1);
 		}
 
 		private void LoadPage() {
@@ -135,11 +120,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		private void LoadPage(string option) {
 			string url = ControlTesterUtilities.GetUrlPath(typeof(InputTextBox));
 			Browser.GetPage(string.Format("{0}?{1}=on", url, option));
-			xmlDocument.LoadXml(Browser.CurrentPageText);
-		}
-
-		private void AssertRequiredIsVisible(bool visibility) {
-			AssertEquals(Convert.ToInt32(visibility), xmlDocument.SelectNodes("//img[@title = \"Required\"]").Count);
 		}
 	}
 }

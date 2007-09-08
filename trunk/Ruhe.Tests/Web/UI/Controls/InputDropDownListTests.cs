@@ -2,53 +2,47 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
+using NUnit.Extensions.Asp.HtmlTester;
 using NUnit.Framework;
 using Ruhe.TestExtensions;
+using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
 	[TestFixture]
 	public class InputDropDownListTests : WebFormTestCase {
-		private ButtonTester submitButton;
-		private ValidationSummaryTester summary;
 		private XmlDocument xmlDocument;
 		private string baseUrl;
 
 		protected override void SetUp() {
 			base.SetUp();
-			xmlDocument = new XmlDocument();
-			submitButton = new ButtonTester("submitButton", CurrentWebForm);
-			summary = new ValidationSummaryTester("summary", CurrentWebForm);
 			baseUrl = Regex.Replace(ControlTesterUtilities.GetUrlPath(typeof(InputDropDownList)), "(.*/).*", "$1");
 		}
 
 		private void LoadPage(string pageName) {
 			Browser.GetPage(baseUrl + pageName);
+			xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(Browser.CurrentPageText);
 		}
 
 		[Test]
-		public void ControlCollection() {
+		public void CanHaveChildControls() {
 			InputDropDownList list = new InputDropDownList();
-			Assert(list.Controls[0] != null);
+			Assert.IsNotNull(list.Controls[0]);
 		}
 
 		[Test]
 		public void NotRequired() {
 			LoadPage("InputDropDownNotRequired.aspx");
-			AssertEquals(0, xmlDocument.SelectNodes("//img[@title = \"Required\"]").Count);
-
-			submitButton.Click();
-			AssertVisibility(summary, false);
+			HtmlControlTester img = new HtmlImageTester("DropDownTest_required");
+			WebAssert.NotVisible(img);
 		}
 
 		[Test]
 		public void Required() {
 			LoadPage("InputDropDownRequired.aspx");
-			AssertEquals(1, xmlDocument.SelectNodes("//img[@title = \"Required\"]").Count);
-
-			submitButton.Click();
-			AssertEquals(1, summary.Messages.Length);
+			HtmlControlTester img = new HtmlImageTester("DropDownTest_required");
+			WebAssert.Visible(img);
 		}
 
 		[Test]
@@ -58,12 +52,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			list.DataSource = items;
 			list.DataBind();
 
-			Assert(list.Items[0] == list.SelectedItem);
-			Assert(list.Items[0].Selected);
+			AssertTrue(list.Items[0] == list.SelectedItem);
+			AssertTrue(list.Items[0].Selected);
 
 			list.SelectByValue("bravo");
-			Assert(list.Items[1].Selected);
-			Assert(!list.Items[0].Selected && !list.Items[2].Selected);
+			AssertTrue(list.Items[1].Selected);
+			AssertTrue(!list.Items[0].Selected && !list.Items[2].Selected);
 		}
 
 		[Test]
@@ -74,8 +68,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			list.DataBind();
 
 			list.SelectByValue(2);
-			Assert(list.Items[1].Selected);
-			Assert(!list.Items[0].Selected && !list.Items[2].Selected);
+			AssertTrue(list.Items[1].Selected);
+			AssertTrue(!list.Items[0].Selected && !list.Items[2].Selected);
 		}
 
 		[Test]
@@ -85,13 +79,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			list.DataSource = items;
 			list.DataBind();
 
-			Assert(list.Items[0] == list.SelectedItem);
-			Assert(list.Items[0].Selected);
+			AssertTrue(list.Items[0] == list.SelectedItem);
+			AssertTrue(list.Items[0].Selected);
 
 			list.SelectByValue("bravo");
 			list.SelectByValue("charlie");
-			Assert(list.Items[2].Selected);
-			Assert(!list.Items[0].Selected && !list.Items[1].Selected);
+			AssertTrue(list.Items[2].Selected);
+			AssertTrue(!list.Items[0].Selected && !list.Items[1].Selected);
 		}
 
 		[Test]
@@ -102,9 +96,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			list.DataBind();
 
 			list.SelectByValue("zulu");
-			Assert(list.Items[0] == list.SelectedItem);
-			Assert(list.Items[0].Selected);
-			Assert(!list.Items[1].Selected && !list.Items[2].Selected);
+			AssertTrue(list.Items[0] == list.SelectedItem);
+			AssertTrue(list.Items[0].Selected);
+			AssertTrue(!list.Items[1].Selected && !list.Items[2].Selected);
 		}
 
 		[Test]
@@ -119,7 +113,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			AssertEquals(byProduct2.Text, "did not fire");
 
 			dropDownList1.SelectedIndex = 2; // <--- a postback happens here
-			Assert("Selected index of first drop down list should be the second option", dropDownList1.SelectedIndex == 2);
+			AssertTrue("Selected index of first drop down list should be the second option", dropDownList1.SelectedIndex == 2);
 
 			AssertEquals(byProduct1.Text, "did fire");
 			AssertEquals(byProduct2.Text, "did not fire");
@@ -157,7 +151,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			LabelTester readOnlyListLabel = new LabelTester("readOnlyFalseListMultiItem_readOnly", CurrentWebForm);
 
 			AssertVisibility(readOnlyList, true);
-			Assert(readOnlyList.Items.Count > 1);
+			AssertTrue(readOnlyList.Items.Count > 1);
 			AssertVisibility(readOnlyListLabel, false);
 		}
 
@@ -171,16 +165,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			LabelTester secondLabel = new LabelTester("secondDropDownList_readOnly", CurrentWebForm);
 
 			AssertVisibility(firstList, true);
-			Assert(firstList.Items.Count > 1);
+			AssertTrue(firstList.Items.Count > 1);
 			AssertVisibility(secondList, true);
-			Assert(secondList.Items.Count > 1);
+			AssertTrue(secondList.Items.Count > 1);
 			AssertVisibility(firstLabel, false);
 			AssertVisibility(secondLabel, false);
 
 			firstList.SelectedIndex = 1;
 
 			AssertVisibility(firstList, true);
-			Assert(firstList.Items.Count > 1);
+			AssertTrue(firstList.Items.Count > 1);
 			AssertVisibility(secondList, false);
 			AssertVisibility(firstLabel, false);
 			AssertVisibility(secondLabel, true);
@@ -196,7 +190,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			LabelTester fourthLabel = new LabelTester("fourthDropDownList_readOnly", CurrentWebForm);
 
 			AssertVisibility(thirdList, true);
-			Assert(thirdList.Items.Count > 1);
+			AssertTrue(thirdList.Items.Count > 1);
 			AssertVisibility(fourthList, false);
 			AssertVisibility(thirdLabel, false);
 			AssertVisibility(fourthLabel, true);
@@ -204,9 +198,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			thirdList.SelectedIndex = 1;
 
 			AssertVisibility(thirdList, true);
-			Assert(thirdList.Items.Count > 1);
+			AssertTrue(thirdList.Items.Count > 1);
 			AssertVisibility(fourthList, true);
-			Assert(fourthList.Items.Count > 1);
+			AssertTrue(fourthList.Items.Count > 1);
 			AssertVisibility(thirdLabel, false);
 			AssertVisibility(fourthLabel, false);
 		}

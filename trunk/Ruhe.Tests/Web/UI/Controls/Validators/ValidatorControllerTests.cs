@@ -1,48 +1,43 @@
-using System.Xml;
-using NUnit.Extensions.Asp;
-using NUnit.Extensions.Asp.AspTester;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using NUnit.Framework;
 using Ruhe.Common;
-using Ruhe.TestExtensions;
+using Ruhe.Web.UI;
+using Ruhe.Web.UI.Controls;
+using Ruhe.Web.UI.Controls.Icons;
 using Ruhe.Web.UI.Controls.Validators;
 
 namespace Ruhe.Tests.Web.UI.Controls.Validators {
 	[TestFixture]
-	public class ValidatorControllerTests : WebFormTestCase {
-		private ValidationSummaryTester summary;
-		private ButtonTester submit;
-		private TextBoxTester ruheTextBox;
+	public class ValidatorControllerTests {
+		private InputTextBox textbox;
 
-		protected override void SetUp() {
-			base.SetUp();
-			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(ValidatorController)));
-
-			summary = new ValidationSummaryTester("summary", CurrentWebForm);
-			submit = new ButtonTester("submit", CurrentWebForm);
-			ruheTextBox = new TextBoxTester("ruheTextBox", CurrentWebForm);
+		[Test]
+		public void ErrorMessagesAreSetUpCorrectly() {
+			foreach (BaseValidator validator in ControlUtilities.FindControlsRecursive(textbox, typeof(BaseValidator))) {
+				Assert.AreEqual(textbox.ID, validator.ControlToValidate);
+				Assert.IsTrue(validator.ErrorMessage.StartsWith("<a "), "The error message should start with a link");
+				Assert.IsTrue(StringUtilities.Contains(validator.ErrorMessage, "in the Field Name field."), "The error message should include the label text");
+				Assert.IsTrue(StringUtilities.Contains(validator.ErrorMessage, "you're wrong"), "The error message should include the original error message");
+			}
 		}
 
 		[Test]
-		public void InitialPageState() {
-			AssertVisibility(summary, false);
-			AssertVisibility(submit, true);
-			AssertVisibility(ruheTextBox, true);
+		public void RequiredValidatorHasRequiredIcon() {
+			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(textbox, typeof(RequiredIcon)).Count);
 		}
 
-		[Test]
-		public void ValidatorSetUp() {
-			submit.Click();
-			AssertEquals("expected 1 error message", 1, summary.Messages.Length);
-
-			string message = summary.Messages[0];
-
-			Assert("the error message should be an anchor tag", message.StartsWith("<a "));
-			Assert("message must end have 'in the {label text} field.'",
-			       StringUtilities.Contains(message, "in the Ruhe field."));
-
-			XmlDocument page = ControlTesterUtilities.GetXmlElement(ruheTextBox).OwnerDocument;
-			XmlNodeList validationImages = page.SelectNodes("//span[@class = \"validation\"]/img");
-			AssertEquals("the error icon and/or required icon is missing", 2, validationImages.Count);
+		[SetUp]
+		public void SetUp() {
+			textbox = new InputTextBox();
+			textbox.ID = "foo";
+			textbox.LabelText = "Field Name";
+			textbox.ErrorMessage = "you're wrong";
+			NamingContainer container = new NamingContainer();
+			container.Controls.Add(textbox);
+			ValidatorController.InitializeValidators(textbox);
 		}
+
+		private class NamingContainer : Control, INamingContainer {}
 	}
 }

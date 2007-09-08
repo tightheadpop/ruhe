@@ -1,4 +1,4 @@
-using System.Xml;
+using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
@@ -10,23 +10,23 @@ namespace Ruhe.Tests.Extensions {
 	public class ControlTesterUtilitiesTests : WebFormTestCase {
 		[Test]
 		public void GetUrlPathAccessesConfigFile() {
-			Assert(ControlTesterUtilities.GetUrlPath(typeof(EncodedLabel))
-			       	.Equals("http://localhost/ruhe/Web/UI/Controls/EncodedLabelTests.aspx"));
-		}
-
-		[Test]
-		public void GetXmlElement() {
-			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(EncodedLabel)));
-			LabelTester label = new LabelTester("label", CurrentWebForm);
-			XmlElement labelElement = ControlTesterUtilities.GetXmlElement(label);
-			AssertEquals("span", labelElement.Name);
+			AssertTrue(ControlTesterUtilities.GetUrlPath(typeof(EncodedLabel))
+			           	.Equals("http://localhost/ruhe/Web/UI/Controls/EncodedLabelTests.aspx"));
 		}
 
 		[Test]
 		public void HasChildElement() {
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Message)));
 			PanelTester messageWrapper1 = new PanelTester("message1_wrapper", CurrentWebForm);
-			Assert(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
+			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
+		}
+
+		[Test]
+		public void GetHtmlFromControl() {
+			Label thing = new Label();
+			thing.Text = "thing";
+			string result = ControlTesterUtilities.GetHtml(thing);
+			Assert.AreEqual("<span>thing</span>", result, "Html output does not match");
 		}
 	}
 }
