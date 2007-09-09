@@ -195,7 +195,7 @@
     <Compile Include="UI\Controls\SectionHeader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Validators\ValidatorController.cs">
+    <Compile Include="UI\Controls\Validators\DefaultValidatorConfigurator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\ControlUtilities.cs">

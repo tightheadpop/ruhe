@@ -10,7 +10,7 @@ using Ruhe.Web.UI.Controls.Validators;
 
 namespace Ruhe.Tests.Web.UI.Controls.Validators {
 	[TestFixture]
-	public class ValidatorControllerTests : WebFormTestCase {
+	public class DefaultValidatorConfiguratorTests : WebFormTestCase {
 		private ValidationSummaryTester summary;
 		private ButtonTester submitButton;
 
@@ -21,7 +21,7 @@ namespace Ruhe.Tests.Web.UI.Controls.Validators {
 		}
 
 		[Test]
-		public void ErrorMessageFromValidatorController() {
+		public void ErrorMessagesAreConfiguredProperly() {
 			LoadPage();
 			submitButton.Click();
 
@@ -45,7 +45,7 @@ namespace Ruhe.Tests.Web.UI.Controls.Validators {
 			inputTextBox.ErrorMessage = "you're wrong";
 			NamingContainer container = new NamingContainer();
 			container.Controls.Add(inputTextBox);
-			ValidatorController.InitializeValidators(inputTextBox);
+			DefaultValidatorConfigurator.InitializeValidators(inputTextBox);
 			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(inputTextBox, typeof(RequiredIcon)).Count);
 		}
 
