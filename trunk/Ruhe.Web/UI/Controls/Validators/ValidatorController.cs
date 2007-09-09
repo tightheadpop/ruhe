@@ -6,26 +6,35 @@ using System.Web.UI.WebControls;
 using Ruhe.Web.UI.Controls.Icons;
 
 namespace Ruhe.Web.UI.Controls.Validators {
-	//TODO: siwtch to DefaultValidatorController and create configuration setting that specifies an
+	//TODO: switch to DefaultValidatorController and create configuration setting that specifies an
 	// assembly and class to use per project.
+	// eliminate function bucket style
 	public class ValidatorController {
-		public static void InitializeValidator(BaseValidator validator, string errorMessage) {
-			errorMessage = errorMessage.TrimEnd('.');
-			string errorIconHoverHelp = errorMessage + ".";
-			string summaryMessage;
-			string summaryClickFocusElementClientId;
-			Control controlToValidate = validator.NamingContainer.FindControl(validator.ControlToValidate);
-			summaryMessage = GetValidationSummaryErrorMessage(controlToValidate, errorMessage);
-			summaryClickFocusElementClientId = GetClientId(controlToValidate);
-			validator.Controls.Clear();
-			validator.Controls.Add(new ErrorIcon(errorIconHoverHelp));
-			validator.ErrorMessage = string.Format("<a href='javascript:document.getElementById(&quot;{0}&quot;).focus();'>{1}</a>",
-			                                       summaryClickFocusElementClientId,
-			                                       summaryMessage);
-			validator.Display = ValidatorDisplay.Dynamic;
-			validator.ForeColor = Color.Empty;
-			validator.CssClass = "validation";
-			validator.EnableViewState = false;
+		private static void InitializeValidator(BaseValidator validator, string errorMessage) {
+			validator.PreRender += GetPreRenderDelegate(errorMessage);
+		}
+
+		private static EventHandler GetPreRenderDelegate(string errorMessage) {
+			return
+				delegate(object sender, EventArgs e) {
+					BaseValidator validator = (BaseValidator) sender;
+					errorMessage = errorMessage.TrimEnd('.');
+					string errorIconHoverHelp = errorMessage + ".";
+					string summaryMessage;
+					string summaryClickFocusElementClientId;
+					Control controlToValidate = validator.NamingContainer.FindControl(validator.ControlToValidate);
+					summaryMessage = GetValidationSummaryErrorMessage(controlToValidate, errorMessage);
+					summaryClickFocusElementClientId = GetClientId(controlToValidate);
+					validator.Controls.Clear();
+					validator.Controls.Add(new ErrorIcon(errorIconHoverHelp));
+					validator.ErrorMessage = string.Format("<a href='javascript:document.getElementById(&quot;{0}&quot;).focus();'>{1}</a>",
+					                                       summaryClickFocusElementClientId,
+					                                       summaryMessage);
+					validator.Display = ValidatorDisplay.Dynamic;
+					validator.ForeColor = Color.Empty;
+					validator.CssClass = "validation";
+					validator.EnableViewState = false;
+				};
 		}
 
 		public static void InitializeValidators(IInputControl control) {

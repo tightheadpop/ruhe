@@ -1,7 +1,8 @@
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using NUnit.Extensions.Asp;
+using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Common;
+using Ruhe.TestExtensions;
 using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
 using Ruhe.Web.UI.Controls.Icons;
@@ -9,33 +10,43 @@ using Ruhe.Web.UI.Controls.Validators;
 
 namespace Ruhe.Tests.Web.UI.Controls.Validators {
 	[TestFixture]
-	public class ValidatorControllerTests {
-		private InputTextBox textbox;
+	public class ValidatorControllerTests : WebFormTestCase {
+		private ValidationSummaryTester summary;
+		private ButtonTester submitButton;
+
+		private void LoadPage() {
+			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputTextBox)) + "?Required=on");
+			summary = new ValidationSummaryTester("master_body_summary");
+			submitButton = new ButtonTester("master_body_submitButton");
+		}
 
 		[Test]
-		public void ErrorMessagesAreSetUpCorrectly() {
-			foreach (BaseValidator validator in ControlUtilities.FindControlsRecursive(textbox, typeof(BaseValidator))) {
-				Assert.AreEqual(textbox.ID, validator.ControlToValidate);
-				Assert.IsTrue(validator.ErrorMessage.StartsWith("<a "), "The error message should start with a link");
-				Assert.IsTrue(StringUtilities.Contains(validator.ErrorMessage, "in the Field Name field."), "The error message should include the label text");
-				Assert.IsTrue(StringUtilities.Contains(validator.ErrorMessage, "you're wrong"), "The error message should include the original error message");
-			}
+		public void ErrorMessageFromValidatorController() {
+			LoadPage();
+			submitButton.Click();
+
+			string errorMessage = summary.Messages[0];
+			StringAssert.Contains("in the testBox field.", errorMessage, "the field's label text should be used in completing the validation message that appears in the summary");
+			StringAssert.StartsWith("<a ", errorMessage, "The error message should start with a link");
+			StringAssert.Contains("you're wrong", errorMessage, "The error message should include the original error message");
+		}
+
+		[Test]
+		public void GeneratedValidationSummaryJavaScriptUsesCorrectClientId() {
+			LoadPage();
+			StringAssert.Contains("document.getElementById(&quot;master_body_testBox&quot;).focus();", Browser.CurrentPageText);
 		}
 
 		[Test]
 		public void RequiredValidatorHasRequiredIcon() {
-			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(textbox, typeof(RequiredIcon)).Count);
-		}
-
-		[SetUp]
-		public void SetUp() {
-			textbox = new InputTextBox();
-			textbox.ID = "foo";
-			textbox.LabelText = "Field Name";
-			textbox.ErrorMessage = "you're wrong";
+			InputTextBox inputTextBox = new InputTextBox();
+			inputTextBox.ID = "foo";
+			inputTextBox.LabelText = "Field Name";
+			inputTextBox.ErrorMessage = "you're wrong";
 			NamingContainer container = new NamingContainer();
-			container.Controls.Add(textbox);
-			ValidatorController.InitializeValidators(textbox);
+			container.Controls.Add(inputTextBox);
+			ValidatorController.InitializeValidators(inputTextBox);
+			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(inputTextBox, typeof(RequiredIcon)).Count);
 		}
 
 		private class NamingContainer : Control, INamingContainer {}
