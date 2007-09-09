@@ -175,7 +175,7 @@
     <Compile Include="Web\UI\Controls\MessageTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\Controls\Validators\DefaultValidatorConfiguratorTests.cs">
+    <Compile Include="Web\UI\DefaultValidatorConfiguratorTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\ControlUtilitiesTests.cs">
