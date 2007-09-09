@@ -37,16 +37,14 @@ namespace Ruhe.Web.UI.Controls.Icons {
 			overview.Controls.Add(new EncodedLabel("Below are explanations of the symbols that you may encounter on this page."));
 
 			Table table = new Table();
-			TableRow row;
-			TableCell cell;
 
 			foreach (IIcon icon in controlList.Values) {
-				row = new TableRow();
+				TableRow row = new TableRow();
 				row.Style.Add("margin-top", "5px");
 				table.Rows.Add(row);
 
 				//Add icon cell
-				cell = new TableCell();
+				TableCell cell = new TableCell();
 				cell.HorizontalAlign = HorizontalAlign.Center;
 				cell.VerticalAlign = VerticalAlign.Top;
 				row.Cells.Add(cell);

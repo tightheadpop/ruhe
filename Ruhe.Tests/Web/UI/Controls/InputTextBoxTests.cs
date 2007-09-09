@@ -20,13 +20,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		protected override void SetUp() {
 			base.SetUp();
-			testBox = new TextBoxTester("testBox", CurrentWebForm);
-			aspxRequired = new TextBoxTester("aspxRequired", CurrentWebForm);
-			submitButton = new ButtonTester("submitButton", CurrentWebForm);
-			summary = new ValidationSummaryTester("summary", CurrentWebForm);
-			readOnly = new LabelTester("testBox_readOnly", CurrentWebForm);
-			resultLabel = new LabelTester("result", CurrentWebForm);
-			requiredImage = new HtmlImageTester("testBox_requiredLabel");
+			testBox = new TextBoxTester("master_body_testBox", CurrentWebForm);
+			aspxRequired = new TextBoxTester("master_body_aspxRequired", CurrentWebForm);
+			submitButton = new ButtonTester("master_body_submitButton", CurrentWebForm);
+			summary = new ValidationSummaryTester("master_body_summary", CurrentWebForm);
+			readOnly = new LabelTester("master_body_testBox_readOnly", CurrentWebForm);
+			resultLabel = new LabelTester("master_body_result", CurrentWebForm);
+			requiredImage = new HtmlImageTester("master_body_testBox_requiredLabel");
 		}
 
 		[Test]
@@ -103,8 +103,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			AssertTrue(StringUtilities.Contains(summary.Messages[0], "in the testBox field."));
 		}
 
-		[Test]
-		public void RequiredSetInAspx() {
+		[Test] public void MarkerIsVisibleWhenRequiredIsSetInAspxFile() {
 			LoadPage("AspxRequired");
 			AssertVisibility(aspxRequired, true);
 			AssertVisibility(testBox, false);

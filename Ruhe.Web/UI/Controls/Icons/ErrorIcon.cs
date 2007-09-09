@@ -12,7 +12,7 @@ namespace Ruhe.Web.UI.Controls.Icons {
 		}
 
 		public override string SourcePath {
-			get { return "/images/error.gif"; }
+			get { return "~/images/error.gif"; }
 		}
 	}
 }

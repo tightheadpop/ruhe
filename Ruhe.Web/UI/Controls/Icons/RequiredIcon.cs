@@ -14,7 +14,7 @@ namespace Ruhe.Web.UI.Controls.Icons {
 		}
 
 		public override string SourcePath {
-			get { return "/images/required.gif"; }
+			get { return "~/images/required.gif"; }
 		}
 
 		protected override void Render(HtmlTextWriter writer) {

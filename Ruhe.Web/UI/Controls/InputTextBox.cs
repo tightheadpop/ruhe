@@ -37,7 +37,16 @@ namespace Ruhe.Web.UI.Controls {
 			ValidatorController.InitializeValidators(this);
 		}
 
+		public override string ID {
+			get { return base.ID; }
+			set {
+				base.ID = value;
+				AssignIdsToChildControls();
+			}
+		}
+
 		protected virtual void AssignIdsToChildControls() {
+			EnsureChildControls();
 			requiredLabel.ID = ID + "_requiredLabel";
 			requiredValidator.ID = ID + "_requiredValidator";
 			readOnlyLabel.ID = ID + "_readOnly";
@@ -194,7 +203,7 @@ namespace Ruhe.Web.UI.Controls {
 		protected override void AddAttributesToRender(HtmlTextWriter writer) {
 			base.AddAttributesToRender(writer);
 			if (!WebUtilities.BrowserIsInternetExplorer) {
-				writer.AddAttribute(HtmlTextWriterAttribute.Style, "width:" + Width.ToString());
+				writer.AddAttribute(HtmlTextWriterAttribute.Style, "width:" + Width);
 			}
 			if (!TextMode.Equals(TextBoxMode.MultiLine)) {
 				writer.AddAttribute("size", Width.Value.ToString());
