@@ -2,8 +2,6 @@ using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
 	public class InputPhoneNumber : InputTextBox {
-		public InputPhoneNumber() {}
-
 		protected override void CreateChildControls() {
 			base.CreateChildControls();
 

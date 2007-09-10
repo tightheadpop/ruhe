@@ -24,7 +24,7 @@ namespace Ruhe.Web.UI.Controls {
 			base.OnInit(e);
 			EnsureChildControls();
 			AssignIdsToChildControls();
-			DefaultValidatorConfigurator.InitializeValidators(this);
+			DefaultValidatorConfigurator.ConfigureValidators(this);
 		}
 
 		protected override void Render(HtmlTextWriter writer) {
@@ -36,8 +36,6 @@ namespace Ruhe.Web.UI.Controls {
 			RenderChildren(writer);
 			writer.RenderEndTag();
 		}
-
-		#region Child Controls
 
 		protected override ControlCollection CreateControlCollection() {
 			return new ControlCollection(this);
@@ -75,10 +73,6 @@ namespace Ruhe.Web.UI.Controls {
 			requiredLabel.ID = ID + "_required";
 			requiredValidator.ID = ID + "_requiredValidator";
 		}
-
-		#endregion
-
-		#region IInputControl Members
 
 		public string DefaultElementClientId {
 			get { return ClientID; }
@@ -133,10 +127,6 @@ namespace Ruhe.Web.UI.Controls {
 			}
 		}
 
-		#endregion
-
-		#region ILabeledControl Members
-
 		public string LabelText {
 			get { return StringUtilities.NullToEmpty((string) ViewState["LabelText"]); }
 			set { ViewState["LabelText"] = value; }
@@ -147,6 +137,5 @@ namespace Ruhe.Web.UI.Controls {
 			set { ViewState["FormatText"] = value; }
 		}
 
-		#endregion
 	}
 }

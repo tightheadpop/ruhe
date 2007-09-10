@@ -8,7 +8,7 @@ using Ruhe.Web.UI.Controls.Icons;
 
 namespace Ruhe.Web.UI {
 	public class DefaultValidatorConfigurator {
-		private static void InitializeValidator(BaseValidator validator, string errorMessage) {
+		private static void Configure(BaseValidator validator, string errorMessage) {
 			validator.PreRender += GetPreRenderDelegate(errorMessage);
 		}
 
@@ -35,11 +35,11 @@ namespace Ruhe.Web.UI {
 				};
 		}
 
-		public static void InitializeValidators(IInputControl control) {
+		public static void ConfigureValidators(IInputControl control) {
 			ArrayList validators = ControlUtilities.FindControlsRecursive((Control) control, typeof(BaseValidator));
 			foreach (BaseValidator validator in validators) {
 				validator.ControlToValidate = control.ValidatedControlId;
-				InitializeValidator(validator, control.ErrorMessage);
+				Configure(validator, control.ErrorMessage);
 			}
 		}
 

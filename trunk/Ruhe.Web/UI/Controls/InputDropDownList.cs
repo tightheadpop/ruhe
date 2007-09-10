@@ -26,7 +26,7 @@ namespace Ruhe.Web.UI.Controls {
 			base.OnInit(e);
 			EnsureChildControls();
 			AssignIdsToChildControls();
-			DefaultValidatorConfigurator.InitializeValidators(this);
+			DefaultValidatorConfigurator.ConfigureValidators(this);
 		}
 
 		[DefaultValue(true)]
