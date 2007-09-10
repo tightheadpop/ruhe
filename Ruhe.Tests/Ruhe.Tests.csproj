@@ -115,7 +115,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+    </None>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

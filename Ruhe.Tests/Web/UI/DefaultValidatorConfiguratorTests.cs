@@ -44,7 +44,7 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.ErrorMessage = "you're wrong";
 			NamingContainer container = new NamingContainer();
 			container.Controls.Add(inputTextBox);
-			DefaultValidatorConfigurator.InitializeValidators(inputTextBox);
+			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
 			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(inputTextBox, typeof(RequiredIcon)).Count);
 		}
 

@@ -1,7 +1,5 @@
 namespace Ruhe.Web.UI.Controls {
 	public class InputZipCode : InputTextBox {
-		public InputZipCode() {}
-
 		protected override void CreateChildControls() {
 			base.CreateChildControls();
 			ValidationExpression = @"\d{5}(-?\d{4})?";

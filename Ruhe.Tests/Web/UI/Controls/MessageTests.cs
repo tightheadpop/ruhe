@@ -59,55 +59,54 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void Visibility() {
-			AssertVisibility(messageWrapper1, true);
-			AssertVisibility(messageHeader1, true);
-			AssertVisibility(messageBody1, true);
-			AssertVisibility(dummyLink, true);
+		public void AllChildrenAreVisible() {
+			WebAssert.Visible(messageWrapper1);
+			WebAssert.Visible(messageHeader1);
+			WebAssert.Visible(messageBody1);
+			WebAssert.Visible(dummyLink);
 		}
 
 		[Test]
-		public void Containment() {
-			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
-			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1"));
-			AssertTrue(ControlTesterUtilities.HasChildElement(messageBody1, "message1_dummyLink"));
+		public void Layout() {
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1"));
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, "message1_dummyLink"));
 		}
 
 		[Test]
-		public void AddControlDynamically() {
+		public void ControlAddedDynamicallyIsRenderedInTheBody() {
 			addControl.Click();
-			AssertVisibility(added, true);
-			AssertTrue("the added control must appear inside the message body",
-			       ControlTesterUtilities.HasChildElement(messageBody1, "message1_added"));
+			WebAssert.Visible(added);
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, "message1_added"), "the added control must appear inside the message body");
 		}
 
 		[Test]
-		public void NoBodyContent() {
-			AssertVisibility(messageWrapper2, true);
-			AssertVisibility(messageHeader2, true);
-			AssertVisibility(messageBody2, false);
+		public void BodyPanelIsNotDisplayedWhenThereIsNoBodyContent() {
+			WebAssert.Visible(messageWrapper2);
+			WebAssert.Visible(messageHeader2);
+			WebAssert.NotVisible(messageBody2);
 		}
 
 		[Test]
-		public void NoHeaderContent() {
-			AssertVisibility(messageWrapper3, true);
-			AssertVisibility(messageHeader3, false);
-			AssertVisibility(messageBody3, true);
+		public void HeaderIsNotDisplayedWhenThereIsNoHeaderContent() {
+			WebAssert.Visible(messageWrapper3);
+			WebAssert.NotVisible(messageHeader3);
+			WebAssert.Visible(messageBody3);
 		}
 
 		[Test]
 		public void NoContent() {
-			AssertVisibility(messageWrapper4, false);
-			AssertVisibility(messageHeader4, false);
-			AssertVisibility(messageBody4, false);
+			WebAssert.NotVisible(messageWrapper4);
+			WebAssert.NotVisible(messageHeader4);
+			WebAssert.NotVisible(messageBody4);
 		}
 
 		[Test]
 		public void ClearedControlTree() {
-			AssertVisibility(messageWrapper5, true);
-			AssertVisibility(messageBody5, true);
-			AssertVisibility(messageHeader5, true);
-			AssertTrue(ControlTesterUtilities.HasChildElement(messageBody5, "message5_replacement"));
+			WebAssert.Visible(messageWrapper5);
+			WebAssert.Visible(messageBody5);
+			WebAssert.Visible(messageHeader5);
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody5, "message5_replacement"));
 		}
 	}
 }
