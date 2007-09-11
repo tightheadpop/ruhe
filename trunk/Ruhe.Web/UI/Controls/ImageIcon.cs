@@ -1,7 +1,7 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Ruhe.Web.UI.Controls.Icons {
+namespace Ruhe.Web.UI.Controls {
 	public abstract class ImageIcon : Image, IIcon {
 		public abstract string Name { get; }
 		public abstract string Description { get; }

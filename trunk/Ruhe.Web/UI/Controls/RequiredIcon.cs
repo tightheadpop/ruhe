@@ -1,6 +1,6 @@
 using System.Web.UI;
 
-namespace Ruhe.Web.UI.Controls.Icons {
+namespace Ruhe.Web.UI.Controls {
 	public class RequiredIcon : ImageIcon {
 		public RequiredIcon() {}
 

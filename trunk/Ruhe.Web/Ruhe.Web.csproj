@@ -99,9 +99,6 @@
     <Compile Include="QueryStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\ClientEvent.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="UI\CompositeControl.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -117,19 +114,19 @@
     <Compile Include="UI\Controls\EntryForm.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Icons\ErrorIcon.cs">
+    <Compile Include="UI\Controls\ErrorIcon.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Icons\IIcon.cs">
+    <Compile Include="UI\Controls\IIcon.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Icons\ImageIcon.cs">
+    <Compile Include="UI\Controls\ImageIcon.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Icons\Legend.cs">
+    <Compile Include="UI\Controls\Legend.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Icons\RequiredIcon.cs">
+    <Compile Include="UI\Controls\RequiredIcon.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\IInputControl.cs">

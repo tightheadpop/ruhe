@@ -1,4 +1,4 @@
-namespace Ruhe.Web.UI.Controls.Icons {
+namespace Ruhe.Web.UI.Controls {
 	public interface IIcon {
 		string Name { get; }
 		string Description { get; }
