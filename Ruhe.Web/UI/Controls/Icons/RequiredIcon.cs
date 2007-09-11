@@ -2,12 +2,9 @@ using System.Web.UI;
 
 namespace Ruhe.Web.UI.Controls.Icons {
 	public class RequiredIcon : ImageIcon {
-		public RequiredIcon() {
-			ImageUrl = "~/images/required.gif";
-		}
-		public RequiredIcon(string toolTip) : base(toolTip) {
-			ImageUrl = "~/images/required.gif";
-		}
+		public RequiredIcon() {}
+
+		public RequiredIcon(string toolTip) : base(toolTip) {}
 
 		public override string Name {
 			get { return "Required"; }
@@ -22,6 +19,11 @@ namespace Ruhe.Web.UI.Controls.Icons {
 			writer.RenderBeginTag(HtmlTextWriterTag.Span);
 			base.Render(writer);
 			writer.RenderEndTag();
+		}
+
+		protected override void CreateChildControls() {
+			base.CreateChildControls();
+			ImageUrl = Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.required.gif");
 		}
 	}
 }
