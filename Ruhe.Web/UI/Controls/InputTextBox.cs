@@ -2,7 +2,6 @@ using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common;
-using Ruhe.Web.UI.Controls.Icons;
 
 namespace Ruhe.Web.UI.Controls {
 	public class InputTextBox : TextBox, IInputControl {

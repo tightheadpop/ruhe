@@ -1,11 +1,9 @@
-using System.Web.UI;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.TestExtensions;
 using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
-using Ruhe.Web.UI.Controls.Icons;
 
 namespace Ruhe.Tests.Web.UI {
 	[TestFixture]
@@ -42,12 +40,8 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.ID = "foo";
 			inputTextBox.LabelText = "Field Name";
 			inputTextBox.ErrorMessage = "you're wrong";
-			NamingContainer container = new NamingContainer();
-			container.Controls.Add(inputTextBox);
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
 			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(inputTextBox, typeof(RequiredIcon)).Count);
 		}
-
-		private class NamingContainer : Control, INamingContainer {}
 	}
 }

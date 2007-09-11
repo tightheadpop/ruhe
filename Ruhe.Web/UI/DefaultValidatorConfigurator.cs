@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Web.UI.Controls;
-using Ruhe.Web.UI.Controls.Icons;
 
 namespace Ruhe.Web.UI {
 	public class DefaultValidatorConfigurator {
@@ -20,7 +19,7 @@ namespace Ruhe.Web.UI {
 					string errorIconHoverHelp = errorMessage + ".";
 					string summaryMessage;
 					string summaryClickFocusElementClientId;
-					Control controlToValidate = validator.NamingContainer.FindControl(validator.ControlToValidate);
+					Control controlToValidate = validator.FindControl(validator.ControlToValidate);
 					summaryMessage = GetValidationSummaryErrorMessage(controlToValidate, errorMessage);
 					summaryClickFocusElementClientId = GetClientId(controlToValidate);
 					validator.Controls.Clear();
@@ -32,6 +31,7 @@ namespace Ruhe.Web.UI {
 					validator.ForeColor = Color.Empty;
 					validator.CssClass = "validation";
 					validator.EnableViewState = false;
+					validator.SetFocusOnError = true;
 				};
 		}
 

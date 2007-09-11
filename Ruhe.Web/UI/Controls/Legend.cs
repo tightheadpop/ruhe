@@ -3,7 +3,7 @@ using System.Collections;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Ruhe.Web.UI.Controls.Icons {
+namespace Ruhe.Web.UI.Controls {
 	public class Legend : Control {
 		private SortedList controlList;
 
