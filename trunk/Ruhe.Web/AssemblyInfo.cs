@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Web.UI;
 //
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -13,6 +14,8 @@ using System.Reflection;
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 
+[assembly: WebResource("Ruhe.Web.Resources.error.gif", "img/gif")]
+[assembly: WebResource("Ruhe.Web.Resources.required.gif", "img/gif")]
 //
 // Version information for an assembly consists of the following four values:
 //
