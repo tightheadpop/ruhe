@@ -88,5 +88,32 @@ namespace Ruhe.Web.UI.Controls {
 				}
 			}
 		}
+
+		protected override void OnPreRender(EventArgs e) {
+			base.OnPreRender(e);
+			RegisterClientScript();
+		}
+
+		private void RegisterClientScript() {
+			Page.ClientScript.RegisterClientScriptResource(GetType(), "Ruhe.Web.Resources.ruhe.js");
+			Page.ClientScript.RegisterStartupScript(GetType(), ClientID, string.Format(@"
+var {0} = document.getElementById('{0}');
+{0}.FILTER = {1};
+{0}.onkeypress = Ruhe_KeyPressFilter;
+", ClientID, GetKeystrokeFilter()), true);
+		}
+
+		private string GetKeystrokeFilter() {
+			if (NumericFormat == NumericFormat.Integer) {
+				return @"/\d/";
+			}
+			return @"
+	function(input){
+		if(input.value.indexOf('.') >= 0)
+			return /[\d]/;
+		else
+			return /[\d.]/;
+	}";
+		}
 	}
 }
