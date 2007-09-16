@@ -16,6 +16,7 @@ using System.Web.UI;
 
 [assembly: WebResource("Ruhe.Web.Resources.error.gif", "img/gif")]
 [assembly: WebResource("Ruhe.Web.Resources.required.gif", "img/gif")]
+[assembly: WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
 //
 // Version information for an assembly consists of the following four values:
 //
