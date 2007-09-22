@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.IO;
-using System.Web;
 using System.Web.UI;
 
 namespace Ruhe.Web.UI {
