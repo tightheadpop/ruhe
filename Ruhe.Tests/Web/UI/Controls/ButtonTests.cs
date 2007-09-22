@@ -1,4 +1,5 @@
 using NUnit.Extensions.Asp;
+using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.TestExtensions;
 using Ruhe.Web.UI.Controls;
@@ -8,12 +9,18 @@ namespace Ruhe.Tests.Web.UI.Controls {
 	public class ButtonTests : WebFormTestCase {
 		private HtmlTagTester button1;
 		private HtmlTagTester button2;
+		private LabelTester result;
+		private ButtonTester clickableButton1;
+		private ButtonTester clickableButton2;
 
 		protected override void SetUp() {
 			base.SetUp();
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Button)));
 			button1 = new HtmlTagTester(".//button[@id='button1']", "button1 tag");
 			button2 = new HtmlTagTester(".//button[@id='button2']", "button2 tag");
+			result = new LabelTester("result");
+			clickableButton1 = new ButtonTester("button1");
+			clickableButton2 = new ButtonTester("button2");
 		}
 
 		[Test]
@@ -39,6 +46,18 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		public void RendersTextWithoutAccessKey() {
 			Assert.IsFalse(button2.HasAttribute("accesskey"));
 			Assert.AreEqual("Click Here", button2.InnerHtml);
+		}
+
+		[Test]
+		public void ButtonClickEventIsNotRaisedIfButtonCausesValidationAndPageIsNotValid() {
+			clickableButton1.Click();
+			Assert.IsEmpty(result.Text);
+		}
+
+		[Test]
+		public void ButtonClickEventIsRaisedIfButtonDoesNotCauseValidation() {
+			clickableButton2.Click();
+			Assert.IsNotEmpty(result.Text);
 		}
 	}
 }
