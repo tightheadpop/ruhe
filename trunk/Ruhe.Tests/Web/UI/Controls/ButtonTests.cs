@@ -5,13 +5,13 @@ using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
 	[TestFixture]
-	public class InputButtonTests : WebFormTestCase {
+	public class ButtonTests : WebFormTestCase {
 		private HtmlTagTester button1;
 		private HtmlTagTester button2;
 
 		protected override void SetUp() {
 			base.SetUp();
-			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputButton)));
+			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Button)));
 			button1 = new HtmlTagTester(".//button[@id='button1']", "button1 tag");
 			button2 = new HtmlTagTester(".//button[@id='button2']", "button2 tag");
 		}
