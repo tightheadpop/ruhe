@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using Ruhe.Common;
 
 namespace Ruhe.Web.UI.Controls {
-	public class InputButton : Button, ILabeledControl {
+	public class Button : System.Web.UI.WebControls.Button, ILabeledControl {
 		private string beforeAccessKey;
 		private string afterAccessKey;
 

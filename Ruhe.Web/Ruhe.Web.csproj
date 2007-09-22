@@ -138,7 +138,7 @@
     <Compile Include="UI\Controls\ILayoutContainer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\InputButton.cs">
+    <Compile Include="UI\Controls\Button.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\InputCheckBox.cs">
