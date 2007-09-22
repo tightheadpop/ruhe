@@ -58,5 +58,11 @@ namespace Ruhe.Web.UI.Controls {
 			}
 			base.OnPreRender(e);
 		}
+
+		protected override void OnClick(EventArgs e) {
+			if (CausesValidation && !Page.IsValid)
+				return;
+			base.OnClick(e);
+		}
 	}
 }
