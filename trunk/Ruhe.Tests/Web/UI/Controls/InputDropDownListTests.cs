@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using System.Xml;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Extensions.Asp.HtmlTester;
@@ -11,7 +10,6 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
 	[TestFixture]
 	public class InputDropDownListTests : WebFormTestCase {
-		private XmlDocument xmlDocument;
 		private string baseUrl;
 
 		protected override void SetUp() {
@@ -21,8 +19,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		private void LoadPage(string pageName) {
 			Browser.GetPage(baseUrl + pageName);
-			xmlDocument = new XmlDocument();
-			xmlDocument.LoadXml(Browser.CurrentPageText);
 		}
 
 		[Test]
