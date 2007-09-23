@@ -39,6 +39,7 @@ namespace Ruhe.Web.UI {
 			ArrayList validators = ControlUtilities.FindControlsRecursive((Control) control, typeof(BaseValidator));
 			foreach (BaseValidator validator in validators) {
 				validator.ControlToValidate = control.ValidatedControlId;
+				validator.ValidationGroup = control.ValidationGroup;
 				Configure(validator, control.ErrorMessage);
 			}
 		}

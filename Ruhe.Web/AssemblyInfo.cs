@@ -14,8 +14,10 @@ using System.Web.UI;
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 
-[assembly: WebResource("Ruhe.Web.Resources.error.gif", "img/gif")]
-[assembly: WebResource("Ruhe.Web.Resources.required.gif", "img/gif")]
+[assembly: WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
+[assembly: WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
+[assembly: WebResource("Ruhe.Web.Resources.save.png", "image/png")]
+[assembly: WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
 [assembly: WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
 //
 // Version information for an assembly consists of the following four values:

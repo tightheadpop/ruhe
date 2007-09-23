@@ -32,6 +32,7 @@ namespace Ruhe.Web.UI.Controls {
 			if (StringUtilities.AreNotEmpty(ImageUrl)) {
 				Image image = new Image();
 				image.ImageUrl = ImageUrl;
+				ConfigureImage(image);
 				image.RenderControl(writer);
 			}
 			writer.WriteEncodedText(beforeAccessKey);
@@ -42,6 +43,11 @@ namespace Ruhe.Web.UI.Controls {
 				writer.RenderEndTag();
 			}
 			writer.WriteEncodedText(afterAccessKey);
+		}
+
+		protected virtual void ConfigureImage(Image image) {
+			image.ImageAlign = ImageAlign.AbsMiddle;
+			image.Style[HtmlTextWriterStyle.MarginRight] = "5px";
 		}
 
 		protected override void OnPreRender(EventArgs e) {

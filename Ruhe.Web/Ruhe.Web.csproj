@@ -189,9 +189,12 @@
     <Compile Include="UI\Controls\NonBreakingSpace.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\ResetButton.cs" />
+    <Compile Include="UI\Controls\SaveButton.cs" />
     <Compile Include="UI\Controls\SectionHeader.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\ValidationSummary.cs" />
     <Compile Include="UI\DefaultValidatorConfigurator.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -208,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ruhe.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\reset.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

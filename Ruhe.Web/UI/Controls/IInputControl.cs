@@ -6,6 +6,7 @@ namespace Ruhe.Web.UI.Controls {
 		//string Value { get; set; }
 		bool ReadOnly { get; set; }
 		bool Required { get; set; }
+		string ValidationGroup { get; set; }
 		bool EnableClientScript { get; set; }
 		void Clear();
 	}
