@@ -3,9 +3,6 @@ using Ruhe.Common;
 
 namespace Ruhe.Web.UI.Controls {
 	public class InputCheckBox : CheckBox, IInputControl {
-		public InputCheckBox() {}
-
-		#region IInputControl Members
 
 		public string DefaultElementClientId {
 			get { return ClientID; }
@@ -59,10 +56,6 @@ namespace Ruhe.Web.UI.Controls {
 			Checked = false;
 		}
 
-		#endregion
-
-		#region ILabeledControl Members
-
 		public virtual string LabelText {
 			get {
 				EnsureChildControls();
@@ -84,7 +77,5 @@ namespace Ruhe.Web.UI.Controls {
 				ViewState["FormatText"] = value;
 			}
 		}
-
-		#endregion
 	}
 }

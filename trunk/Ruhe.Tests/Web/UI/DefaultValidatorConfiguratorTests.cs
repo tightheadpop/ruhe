@@ -1,3 +1,4 @@
+using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
@@ -42,6 +43,17 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.ErrorMessage = "you're wrong";
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
 			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(inputTextBox, typeof(RequiredIcon)).Count);
+		}
+
+		[Test]
+		public void SetsValidationGroupOnAllChildValidators() {
+			InputTextBox inputTextBox = new InputTextBox();
+			inputTextBox.ValidationGroup = "myGroup";
+			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
+
+			foreach (BaseValidator validator in ControlUtilities.FindControlsRecursive(inputTextBox, typeof(BaseValidator))) {
+				Assert.AreEqual("myGroup", validator.ValidationGroup);
+			}
 		}
 	}
 }
