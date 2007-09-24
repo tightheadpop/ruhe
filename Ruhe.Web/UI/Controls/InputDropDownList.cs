@@ -56,18 +56,6 @@ namespace Ruhe.Web.UI.Controls {
 			}
 		}
 
-		[DefaultValue(true)]
-		public bool IsSingleItemReadOnly {
-			get {
-				EnsureChildControls();
-				return Convert.ToBoolean(ViewState["IsSingleItemReadOnly"]);
-			}
-			set {
-				EnsureChildControls();
-				ViewState["IsSingleItemReadOnly"] = value;
-			}
-		}
-
 		public string FormatText {
 			get {
 				EnsureChildControls();
@@ -184,7 +172,7 @@ namespace Ruhe.Web.UI.Controls {
 			get {
 				EnsureChildControls();
 				return Convert.ToBoolean(ViewState["ReadOnly"]) ||
-				       Items.Count == 1 && IsSingleItemReadOnly ||
+				       Items.Count == 1 ||
 				       Items.Count == 0;
 			}
 			set {
@@ -215,7 +203,6 @@ namespace Ruhe.Web.UI.Controls {
 			ErrorMessage = "Please select a value.";
 			Required = false;
 			ReadOnly = false;
-			IsSingleItemReadOnly = true;
 		}
 
 		protected override void AddAttributesToRender(HtmlTextWriter writer) {
