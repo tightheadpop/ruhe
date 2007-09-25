@@ -1,7 +1,5 @@
 <%@ Page AutoEventWireup="true" CodeFile="ButtonTests.aspx.cs" Inherits="Web_UI_Controls_ButtonTests" Language="C#" %>
-<%@ Register Assembly="Ruhe.Web" Namespace="Ruhe.Web.UI.Controls" TagPrefix="ruhe" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>Untitled Page</title>
