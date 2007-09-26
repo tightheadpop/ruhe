@@ -28,14 +28,14 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void NotRequired() {
+		public void RequiredMarkerIsNotVisibleWhenControlIsNotRequired() {
 			LoadPage("InputDropDownNotRequired.aspx");
 			HtmlControlTester img = new HtmlImageTester("DropDownTest_required");
 			WebAssert.NotVisible(img);
 		}
 
 		[Test]
-		public void Required() {
+		public void RequiredMarkerIsVisibleWhenControlIsRequired() {
 			LoadPage("InputDropDownRequired.aspx");
 			HtmlControlTester img = new HtmlImageTester("DropDownTest_required");
 			WebAssert.Visible(img);
@@ -69,7 +69,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void SelectByValueTwice() {
+		public void SelectByValueDeselectsPreviouslySelectedItem() {
 			InputDropDownList list = new InputDropDownList();
 			string[] items = {"alpha", "bravo", "charlie"};
 			list.DataSource = items;
@@ -85,7 +85,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void SelectByValueNotInList() {
+		public void SelectByValueDoesNotFailWhenValueIsNotInList() {
 			InputDropDownList list = new InputDropDownList();
 			string[] items = {"alpha", "bravo", "charlie"};
 			list.DataSource = items;
@@ -116,7 +116,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void ReadOnlySingleValue() {
+		public void IsReadOnlyWhenOnlyASingleValue() {
 			LoadPage("InputDropDownReadOnly.aspx");
 
 			LabelTester readOnlyListLabel = new LabelTester("readOnlyList_readOnly", CurrentWebForm);
@@ -128,7 +128,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void ReadOnlyTrueMultipleValues() {
+		public void ReadOnlyRendersAsLabel() {
 			LoadPage("InputDropDownReadOnly.aspx");
 
 			LabelTester readOnlyListLabel = new LabelTester("readOnlyTrueListMultiItem_readOnly", CurrentWebForm);
@@ -140,7 +140,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void ReadOnlyFalseMultipleValues() {
+		public void ReadOnlyFalseRendersAsNormal() {
 			LoadPage("InputDropDownReadOnly.aspx");
 
 			DropDownListTester readOnlyList = new DropDownListTester("readOnlyFalseListMultiItem", CurrentWebForm);
@@ -152,7 +152,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void ReadOnlyMultipleValueToSingleValue() {
+		public void BecomesReadOnlyWhenThereIsASingleValue() {
 			LoadPage("InputDropDownAutoPostBackDisplay.aspx");
 
 			DropDownListTester firstList = new DropDownListTester("firstDropDownList", CurrentWebForm);
@@ -177,7 +177,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		}
 
 		[Test]
-		public void ReadOnlySingleValueToMultipleValue() {
+		public void BecomesNonReadOnlyWhenSingleValueBecomesMultipleValues() {
 			LoadPage("InputDropDownAutoPostBackDisplay.aspx");
 
 			DropDownListTester thirdList = new DropDownListTester("thirdDropDownList", CurrentWebForm);
