@@ -95,6 +95,7 @@
     <Reference Include="System.Web">
       <Name>System.Web</Name>
     </Reference>
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -177,6 +178,7 @@
     <Compile Include="Web\UI\Controls\MessageTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\UpdateLabelTests.cs" />
     <Compile Include="Web\UI\DefaultValidatorConfiguratorTests.cs">
       <SubType>Code</SubType>
     </Compile>

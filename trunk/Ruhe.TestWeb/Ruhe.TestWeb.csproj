@@ -30,13 +30,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\System.Web.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Extensions">
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
@@ -44,6 +46,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax.Master.cs">
+      <DependentUpon>Ajax.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax.Master.designer.cs">
+      <DependentUpon>Ajax.Master</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -157,6 +166,13 @@
     <Compile Include="Web\UI\Controls\MessageTests.aspx.designer.cs">
       <DependentUpon>MessageTests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.designer.cs">
+      <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.master" />
@@ -183,6 +199,10 @@
       <Project>{8262DC2E-A3BB-4999-9F70-97E268C2EB71}</Project>
       <Name>Ruhe.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ajax.Master" />
+    <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />

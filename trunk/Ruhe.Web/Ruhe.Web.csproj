@@ -83,6 +83,11 @@
     <Reference Include="System.Web">
       <Name>System.Web</Name>
     </Reference>
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\System.Web.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <ProjectReference Include="..\Ruhe.Common\Ruhe.Common.csproj">
       <Name>Ruhe.Common</Name>
       <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
@@ -194,6 +199,7 @@
     <Compile Include="UI\Controls\SectionHeader.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\UpdateLabel.cs" />
     <Compile Include="UI\Controls\ValidationSummary.cs" />
     <Compile Include="UI\DefaultValidatorConfigurator.cs">
       <SubType>Code</SubType>
