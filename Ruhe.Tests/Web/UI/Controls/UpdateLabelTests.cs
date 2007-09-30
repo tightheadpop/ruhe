@@ -18,13 +18,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		[Test]
 		public void EmitsStyleScript() {
-			StringAssert.Contains("document.getElementById('ajax_content_updateLabel').style.display = 'inline';", Browser.CurrentPageText);
+			StringAssert.Contains(IdFor.It("updateLabel", "document.getElementById('{0}').style.display = 'inline';"), Browser.CurrentPageText);
 		}
 
 		protected override void SetUp() {
 			base.SetUp();
-			saveButton = new ButtonTester("ajax_content_saveButton");
-			proof = new LabelTester("ajax_content_proof");
+			saveButton = new ButtonTester(IdFor.It("saveButton"));
+			proof = new LabelTester(IdFor.It("proof"));
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(UpdateLabel)));
 		}
 	}

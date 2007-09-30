@@ -60,13 +60,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MasterPage.master.cs">
-      <DependentUpon>MasterPage.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPage.master.designer.cs">
-      <DependentUpon>MasterPage.master</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sample.aspx.cs">
       <DependentUpon>Sample.aspx</DependentUpon>
@@ -175,7 +168,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MasterPage.master" />
     <Content Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx" />
     <Content Include="Web\UI\Controls\ButtonTests.aspx" />
     <Content Include="Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx" />

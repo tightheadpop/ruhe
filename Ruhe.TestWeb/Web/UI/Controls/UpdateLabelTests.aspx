@@ -1,6 +1,7 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UpdateLabelTests.aspx.cs" Inherits="Ruhe.TestWeb.Web.UI.Controls.UpdateLabelTests" MasterPageFile="~/Ajax.Master" %>
+<%@ Page Language="C#" AutoEventWireup="true" Codebehind="UpdateLabelTests.aspx.cs" Inherits="Ruhe.TestWeb.Web.UI.Controls.UpdateLabelTests" MasterPageFile="~/Ajax.Master" %>
+
 <asp:Content ContentPlaceHolderID="content" runat="server">
-	<ruhe:UpdateLabel id="updateLabel" runat="server">
+	<ruhe:UpdateLabel ID="updateLabel" runat="server">
 		<ContentTemplate>
 			<asp:Label ID="proof" runat="server" />
 			<ruhe:SaveButton ID="saveButton" runat="server" OnClick="saveButton_Click" />

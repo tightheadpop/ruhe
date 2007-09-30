@@ -16,9 +16,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		protected override void SetUp() {
 			base.SetUp();
 			url = ControlTesterUtilities.GetUrlPath(typeof(LinkButton));
-			target = new LabelTester("target", CurrentWebForm);
-			button = new ButtonTester("linkButton_button", CurrentWebForm);
-			link = new LinkButtonTester("linkButton", CurrentWebForm);
+			target = new LabelTester(IdFor.It("target"));
+			button = new ButtonTester(IdFor.It("linkButton_button"));
+			link = new LinkButtonTester(IdFor.It("linkButton"));
 
 			Browser.GetPage(url);
 		}
