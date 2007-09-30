@@ -158,7 +158,7 @@ namespace Ruhe.Web.UI.Controls {
 			}
 			set {
 				EnsureChildControls();
-				foreach (BaseValidator validator in ControlUtilities.FindRecursive(this, typeof(BaseValidator))) {
+				foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(this)) {
 					validator.EnableClientScript = value;
 				}
 			}

@@ -43,7 +43,7 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.LabelText = "Field Name";
 			inputTextBox.ErrorMessage = "you're wrong";
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
-			Assert.AreEqual(1, ControlUtilities.FindRecursive(inputTextBox, typeof(RequiredIcon)).Count);
+			Assert.AreEqual(1, ControlUtilities.FindRecursive<RequiredIcon>(inputTextBox).Count);
 		}
 
 		[Test]
@@ -51,7 +51,7 @@ namespace Ruhe.Tests.Web.UI {
 			InputTextBox inputTextBox = new InputTextBox();
 			inputTextBox.ID = "foo";
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
-			foreach (BaseValidator validator in ControlUtilities.FindRecursive(inputTextBox, typeof(BaseValidator))) {
+			foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(inputTextBox)) {
 				ValidatorCalloutExtender extender = ControlUtilities.FindRecursive(inputTextBox, validator.ID + "_callout") as ValidatorCalloutExtender;
 				Assert.IsNotNull(extender);
 				Assert.AreEqual(validator.ID, extender.TargetControlID);
@@ -64,7 +64,7 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.ValidationGroup = "myGroup";
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
 
-			foreach (BaseValidator validator in ControlUtilities.FindRecursive(inputTextBox, typeof(BaseValidator))) {
+			foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(inputTextBox)) {
 				Assert.AreEqual("myGroup", validator.ValidationGroup);
 			}
 		}

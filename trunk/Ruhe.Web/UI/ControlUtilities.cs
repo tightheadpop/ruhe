@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Web.UI;
 
 namespace Ruhe.Web.UI {
@@ -15,13 +14,13 @@ namespace Ruhe.Web.UI {
 			return null;
 		}
 
-		public static ArrayList FindRecursive(Control parent, Type childTypeToFind) {
-			ArrayList result = new ArrayList();
-			if (childTypeToFind.IsInstanceOfType(parent)) {
-				result.Add(parent);
+		public static List<T> FindRecursive<T>(Control parent) {
+			List<T> result = new List<T>();
+			if (typeof(T).IsInstanceOfType(parent)) {
+				result.Add((T) (object) parent);
 			}
 			foreach (Control child in parent.Controls) {
-				result.AddRange(FindRecursive(child, childTypeToFind));
+				result.AddRange(FindRecursive<T>(child));
 			}
 			return result;
 		}

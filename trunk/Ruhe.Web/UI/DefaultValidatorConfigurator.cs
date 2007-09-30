@@ -38,7 +38,7 @@ namespace Ruhe.Web.UI {
 		}
 
 		public static void ConfigureValidators(IInputControl inputControl) {
-			foreach (BaseValidator validator in ControlUtilities.FindRecursive((Control) inputControl, typeof(BaseValidator))) {
+			foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
 				validator.ControlToValidate = inputControl.ValidatedControlId;
 				validator.ValidationGroup = inputControl.ValidationGroup;
 				Configure(validator, inputControl.ErrorMessage);
