@@ -194,6 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ajax.Master" />
+    <Content Include="images\INFO.ICO" />
+    <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
