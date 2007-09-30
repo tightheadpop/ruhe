@@ -1,5 +1,3 @@
 namespace Ruhe.TestExtensions {
-	public static class ControlAssert {
-		
-	}
+    public static class ControlAssert {}
 }
