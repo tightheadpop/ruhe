@@ -19,6 +19,15 @@
 public partial class Sample {
     
     /// <summary>
+    /// confirmationMessage control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Ruhe.Web.UI.Controls.Message confirmationMessage;
+    
+    /// <summary>
     /// name control.
     /// </summary>
     /// <remarks>
@@ -44,4 +53,13 @@ public partial class Sample {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Ruhe.Web.UI.Controls.InputNumber age;
+    
+    /// <summary>
+    /// saveButton control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Ruhe.Web.UI.Controls.SaveButton saveButton;
 }

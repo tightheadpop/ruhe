@@ -1,0 +1,67 @@
+body
+{
+	font-size: 10pt;
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	color: Black;
+	background-color: White;
+}
+.validation-error
+{
+	background-color: lightyellow;
+}
+.label.left:after
+{
+	content: expression(innerText.length > 0 ? ":" : '');
+}
+.label.above 
+{
+	content: ":";
+}
+.confirmation.wrapper 
+{
+	border: solid 1px gold;
+	margin-bottom: 2em;
+	-moz-border-radius: 10px;
+	max-width: 30em;
+	margin-left: 20px;
+	margin-top: 2em;
+}
+.confirmation.wrapper .header
+{
+	-moz-border-radius: 10px;
+	background-color: lightyellow;
+	border: 1px solid gold;
+	font-weight: bold;
+	font-variant: small-caps;
+	padding: 0.5em;
+	vertical-align: middle;
+	position: relative;
+	right: 20px;
+	top: -1em;
+	margin-bottom: -1em;
+}
+.confirmation.wrapper .header:before
+{
+	content: url('images/info.ico');
+}
+.confirmation.wrapper .body
+{
+	padding: 0.5em;
+}
+fieldset 
+{
+	position: relative;
+	-moz-border-radius: 10px;
+}
+legend 
+{
+	font-weight: bold;
+}
+.format 
+{
+	color: Gray;
+}
+td 
+{
+	padding-bottom: 5px;
+}

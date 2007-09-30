@@ -5,6 +5,15 @@ using System.Web.UI.WebControls;
 using Ruhe.Common;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// This button class supports rich HTML content, limited currently to a single image.
+    /// <para>It only raises its Click event when the page is valid, provided this button causes validation.</para>
+    /// </summary>
+    /// <remarks>
+    /// Due to a defect in InternetExplorer, you will need to set validateRequest="false"
+    /// in your web.config setting in order to use this class. In IE, the HTML content of the button
+    /// is submitted as the value, rather than the 'value' attribute.
+    /// </remarks>
     public class Button : System.Web.UI.WebControls.Button, ILabeledControl {
         private string beforeAccessKey;
         private string afterAccessKey;
