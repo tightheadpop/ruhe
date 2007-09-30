@@ -3,33 +3,27 @@ using System.Collections;
 using System.Web.UI;
 
 namespace Ruhe.Web.UI {
-	public sealed class ControlUtilities {
-		private ControlUtilities() {}
-
-		public static Control FindControlRecursive(Control parent, string childId) {
+	public class ControlUtilities {
+		public static Control FindRecursive(Control parent, string childId) {
 			if (parent.ID == childId)
 				return parent;
 			foreach (Control child in parent.Controls) {
-				Control result = FindControlRecursive(child, childId);
+				Control result = FindRecursive(child, childId);
 				if (result != null)
 					return result;
 			}
 			return null;
 		}
 
-		public static ArrayList FindControlsRecursive(Control parent, Type childTypeToFind) {
+		public static ArrayList FindRecursive(Control parent, Type childTypeToFind) {
 			ArrayList result = new ArrayList();
 			if (childTypeToFind.IsInstanceOfType(parent)) {
 				result.Add(parent);
 			}
 			foreach (Control child in parent.Controls) {
-				result.AddRange(FindControlsRecursive(child, childTypeToFind));
+				result.AddRange(FindRecursive(child, childTypeToFind));
 			}
 			return result;
-		}
-
-		public static string GetRandomName() {
-			return "x" + Guid.NewGuid().ToString().Replace("-", String.Empty);
 		}
 	}
 }

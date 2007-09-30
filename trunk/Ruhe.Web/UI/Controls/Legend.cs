@@ -24,7 +24,7 @@ namespace Ruhe.Web.UI.Controls {
 		}
 
 		private void RegisterIcons() {
-			foreach (IIcon icon in ControlUtilities.FindControlsRecursive(Page, typeof(IIcon))) {
+			foreach (IIcon icon in ControlUtilities.FindRecursive(Page, typeof(IIcon))) {
 				if (((Control) icon).Visible) {
 					Add(icon);
 				}
