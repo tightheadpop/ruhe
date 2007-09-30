@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using NUnit.Framework;
@@ -39,20 +40,18 @@ namespace Ruhe.Tests.Web.UI {
 
 		[Test]
 		public void FindByType() {
-			ArrayList result = ControlUtilities.FindRecursive(parentControl, typeof(Panel));
+			List<Panel> result = ControlUtilities.FindRecursive<Panel>(parentControl);
+			Assert.AreEqual(3, result.Count);
 			Assert.IsTrue(result.Contains(parentControl), "result set does not contain parent panel");
 			Assert.IsTrue(result.Contains(firstChild), "result set does not contain first child panel");
 			Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child panel");
-			Assert.IsFalse(result.Contains(grandChild), "result contains non-panel control");
 		}
 
 		[Test]
 		public void FindByInterface() {
-			ArrayList result = ControlUtilities.FindRecursive(parentControl, typeof(INamingContainer));
+			List<INamingContainer> result = ControlUtilities.FindRecursive<INamingContainer>(parentControl);
+			Assert.AreEqual(1, result.Count);
 			Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child INamingContainer");
-			Assert.IsFalse(result.Contains(parentControl), "result contains non-namingcontainer parent control");
-			Assert.IsFalse(result.Contains(firstChild), "result contains non-namingcontainer first child control");
-			Assert.IsFalse(result.Contains(grandChild), "result contains non-namingcontainer grandchild control");
 		}
 
 		private class GenericNamingContainer : Panel, INamingContainer {}

@@ -31,7 +31,7 @@ namespace Ruhe.Web.UI.Controls {
 		}
 
 		public void ClearFormControls() {
-			foreach (IInputControl control in ControlUtilities.FindRecursive(this, typeof(IInputControl))) {
+			foreach (IInputControl control in ControlUtilities.FindRecursive<IInputControl>(this)) {
 				control.Clear();
 			}
 		}
@@ -122,15 +122,13 @@ namespace Ruhe.Web.UI.Controls {
 			labelCell.RenderEndTag(writer);
 		}
 
-		private void RenderFormatLabel(Control control, HtmlTextWriter writer) {
-			EncodedLabel formatLabel;
-			string formatText;
-			formatLabel = new EncodedLabel();
+		private static void RenderFormatLabel(Control control, HtmlTextWriter writer) {
+			EncodedLabel formatLabel = new EncodedLabel();
 			formatLabel.CssClass = "format";
 
 			ILabeledControl labeledControl = control as ILabeledControl;
 			if (labeledControl != null) {
-				formatText = labeledControl.FormatText;
+				string formatText = labeledControl.FormatText;
 				if (formatText.Length > 0) {
 					formatLabel.Text = formatText;
 				}
@@ -168,7 +166,7 @@ namespace Ruhe.Web.UI.Controls {
 			row.RenderEndTag(writer);
 		}
 
-		private void RenderHeaderRow(Control control, HtmlTextWriter writer) {
+		private static void RenderHeaderRow(Control control, HtmlTextWriter writer) {
 			TableRow row = new TableRow();
 
 			TableCell cell = new TableCell();
@@ -196,7 +194,7 @@ namespace Ruhe.Web.UI.Controls {
 
 		#endregion
 
-		private bool IsControlNonEmpty(Control control) {
+		private static bool IsControlNonEmpty(Control control) {
 			return control is ILabeledControl ||
 			       control is WebControl ||
 			       control is LiteralControl && ((LiteralControl) control).Text.Trim().Length > 0;
