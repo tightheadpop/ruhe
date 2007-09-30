@@ -1,10 +1,12 @@
 using System.Reflection;
 using System.Web.UI;
+
 //
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
+
 [assembly : AssemblyTitle("")]
 [assembly : AssemblyDescription("")]
 [assembly : AssemblyConfiguration("")]
@@ -13,12 +15,11 @@ using System.Web.UI;
 [assembly : AssemblyCopyright("")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
-
-[assembly: WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
-[assembly: WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
-[assembly: WebResource("Ruhe.Web.Resources.save.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
+[assembly : WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
+[assembly : WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
+[assembly : WebResource("Ruhe.Web.Resources.save.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
 //
 // Version information for an assembly consists of the following four values:
 //
@@ -61,6 +62,7 @@ using System.Web.UI;
 //   (*) Delay Signing is an advanced option - see the Microsoft .NET Framework
 //       documentation for more information on this.
 //
+
 [assembly : AssemblyDelaySign(false)]
 [assembly : AssemblyKeyFile("")]
 [assembly : AssemblyKeyName("")]

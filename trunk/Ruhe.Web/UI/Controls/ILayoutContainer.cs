@@ -1,5 +1,5 @@
 namespace Ruhe.Web.UI.Controls {
-	public interface ILayoutContainer {
-		bool IsLayoutContainer { get; set; }
-	}
+    public interface ILayoutContainer {
+        bool IsLayoutContainer { get; set; }
+    }
 }
