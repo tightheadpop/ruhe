@@ -120,9 +120,6 @@
     <Compile Include="UI\Controls\EncodedLabel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Controls\EntryForm.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="UI\Controls\ErrorIcon.cs">
       <SubType>Code</SubType>
     </Compile>
