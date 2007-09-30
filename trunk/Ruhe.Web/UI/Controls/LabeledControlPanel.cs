@@ -111,7 +111,7 @@ namespace Ruhe.Web.UI.Controls {
 			labelCell.RenderEndTag(writer);
 		}
 
-		private void RenderFormatLabel(Control control, HtmlTextWriter writer) {
+		private static void RenderFormatLabel(Control control, HtmlTextWriter writer) {
 			EncodedLabel formatLabel = new EncodedLabel();
 			formatLabel.CssClass = "format";
 
@@ -155,7 +155,7 @@ namespace Ruhe.Web.UI.Controls {
 			row.RenderEndTag(writer);
 		}
 
-		private void RenderHeaderRow(Control control, HtmlTextWriter writer) {
+		private static void RenderHeaderRow(Control control, HtmlTextWriter writer) {
 			TableRow row = new TableRow();
 
 			TableCell cell = new TableCell();
@@ -183,7 +183,7 @@ namespace Ruhe.Web.UI.Controls {
 
 		#endregion
 
-		private bool IsControlNonEmpty(Control control) {
+		private static bool IsControlNonEmpty(Control control) {
 			return control is ILabeledControl ||
 			       control is WebControl ||
 			       control is LiteralControl && ((LiteralControl) control).Text.Trim().Length > 0;

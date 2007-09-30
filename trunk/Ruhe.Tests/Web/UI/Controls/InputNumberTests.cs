@@ -16,10 +16,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
 		protected override void SetUp() {
 			base.SetUp();
 
-			inputNumber = new TextBoxTester("inputNumber", CurrentWebForm);
-			submitButton = new ButtonTester("submitButton", CurrentWebForm);
-			formatErrorMessage = new LabelTester("inputNumber_numericValidator", CurrentWebForm);
-			rangeErrorMessage = new LabelTester("inputNumber_rangeValidator", CurrentWebForm);
+			inputNumber = new TextBoxTester(IdFor.It("inputNumber"));
+			submitButton = new ButtonTester(IdFor.It("submitButton"));
+			formatErrorMessage = new LabelTester(IdFor.It("inputNumber_numericValidator"));
+			rangeErrorMessage = new LabelTester(IdFor.It("inputNumber_rangeValidator"));
 		}
 
 		[Test]

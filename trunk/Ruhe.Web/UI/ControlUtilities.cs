@@ -32,10 +32,8 @@ namespace Ruhe.Web.UI {
 			return "x" + Guid.NewGuid().ToString().Replace("-", String.Empty);
 		}
 
-		public static void SetInitialFocus(Control container, Type typeOfFirstControlToRecieveFocus) {
-			ArrayList controls = FindControlsRecursive(container, typeOfFirstControlToRecieveFocus);
-			if (controls.Count > 0)
-				container.Page.SetFocus((Control) controls[0]);
+		public static T FindFirst<T>(Control parent) where T : Control {
+			return default(T);
 		}
 	}
 }

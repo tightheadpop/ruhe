@@ -17,8 +17,8 @@ namespace Ruhe.Tests.Extensions {
 		[Test]
 		public void HasChildElement() {
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Message)));
-			PanelTester messageWrapper1 = new PanelTester("message1_wrapper", CurrentWebForm);
-			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
+			PanelTester messageWrapper1 = new PanelTester(IdFor.It("message1_wrapper"));
+			AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor.It("message1_header")));
 		}
 
 		[Test]

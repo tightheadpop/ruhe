@@ -20,13 +20,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		protected override void SetUp() {
 			base.SetUp();
-			testBox = new TextBoxTester("master_body_testBox", CurrentWebForm);
-			aspxRequired = new TextBoxTester("master_body_aspxRequired", CurrentWebForm);
-			submitButton = new ButtonTester("master_body_submitButton", CurrentWebForm);
-			summary = new ValidationSummaryTester("master_body_summary", CurrentWebForm);
-			readOnly = new LabelTester("master_body_testBox_readOnly", CurrentWebForm);
-			resultLabel = new LabelTester("master_body_result", CurrentWebForm);
-			requiredImage = new HtmlImageTester("master_body_testBox_requiredLabel");
+			testBox = new TextBoxTester(IdFor.It("testBox"));
+			aspxRequired = new TextBoxTester(IdFor.It("aspxRequired"));
+			submitButton = new ButtonTester(IdFor.It("submitButton"));
+			summary = new ValidationSummaryTester(IdFor.It("summary"));
+			readOnly = new LabelTester(IdFor.It("testBox_readOnly"));
+			resultLabel = new LabelTester(IdFor.It("result"));
+			requiredImage = new HtmlImageTester(IdFor.It("testBox_requiredLabel"));
 		}
 
 		[Test]

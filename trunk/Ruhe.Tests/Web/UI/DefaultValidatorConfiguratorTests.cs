@@ -1,4 +1,5 @@
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
@@ -14,8 +15,8 @@ namespace Ruhe.Tests.Web.UI {
 
 		private void LoadPage() {
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputTextBox)) + "?Required=on");
-			summary = new ValidationSummaryTester("master_body_summary");
-			submitButton = new ButtonTester("master_body_submitButton");
+			summary = new ValidationSummaryTester(IdFor.It("summary"));
+			submitButton = new ButtonTester(IdFor.It("submitButton"));
 		}
 
 		[Test]
@@ -32,7 +33,7 @@ namespace Ruhe.Tests.Web.UI {
 		[Test]
 		public void GeneratedValidationSummaryJavaScriptUsesCorrectClientId() {
 			LoadPage();
-			StringAssert.Contains("document.getElementById(&quot;master_body_testBox&quot;).focus();", Browser.CurrentPageText);
+			StringAssert.Contains(IdFor.It("testBox", "document.getElementById(&quot;{0}&quot;).focus();"), Browser.CurrentPageText);
 		}
 
 		[Test]
@@ -43,6 +44,16 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.ErrorMessage = "you're wrong";
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
 			Assert.AreEqual(1, ControlUtilities.FindControlsRecursive(inputTextBox, typeof(RequiredIcon)).Count);
+		}
+
+		[Test]
+		public void EachValidatorHasValidatorExtender() {
+			InputTextBox inputTextBox = new InputTextBox();
+			inputTextBox.ID = "foo";
+			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
+			foreach (BaseValidator validator in ControlUtilities.FindControlsRecursive(inputTextBox, typeof(BaseValidator))) {
+				Assert.IsTrue(ControlUtilities.FindControlRecursive(inputTextBox, validator.ID + "_callout") is ValidatorCalloutExtender);
+			}
 		}
 
 		[Test]

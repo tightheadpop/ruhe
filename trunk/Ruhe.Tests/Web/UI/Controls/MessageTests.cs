@@ -32,28 +32,28 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		protected override void SetUp() {
 			base.SetUp();
-			messageWrapper1 = new PanelTester("message1_wrapper", CurrentWebForm);
-			messageHeader1 = new PanelTester("message1_header", CurrentWebForm);
-			messageBody1 = new PanelTester("message1", CurrentWebForm);
-			dummyLink = new LinkButtonTester("message1_dummyLink", CurrentWebForm);
-			addControl = new ButtonTester("addControl", CurrentWebForm);
-			added = new LabelTester("message1_added", CurrentWebForm);
+			messageWrapper1 = new PanelTester(IdFor.It("message1_wrapper"));
+			messageHeader1 = new PanelTester(IdFor.It("message1_header"));
+			messageBody1 = new PanelTester(IdFor.It("message1"));
+			dummyLink = new LinkButtonTester(IdFor.It("message1_dummyLink"));
+			addControl = new ButtonTester(IdFor.It("addControl"));
+			added = new LabelTester(IdFor.It("message1_added"));
 
-			messageWrapper2 = new PanelTester("message2_wrapper", CurrentWebForm);
-			messageHeader2 = new PanelTester("message2_header", CurrentWebForm);
-			messageBody2 = new PanelTester("message2", CurrentWebForm);
+			messageWrapper2 = new PanelTester(IdFor.It("message2_wrapper"));
+			messageHeader2 = new PanelTester(IdFor.It("message2_header"));
+			messageBody2 = new PanelTester(IdFor.It("message2"));
 
-			messageWrapper3 = new PanelTester("message3_wrapper", CurrentWebForm);
-			messageHeader3 = new PanelTester("message3_header", CurrentWebForm);
-			messageBody3 = new PanelTester("message3", CurrentWebForm);
+			messageWrapper3 = new PanelTester(IdFor.It("message3_wrapper"));
+			messageHeader3 = new PanelTester(IdFor.It("message3_header"));
+			messageBody3 = new PanelTester(IdFor.It("message3"));
 
-			messageWrapper4 = new PanelTester("message4_wrapper", CurrentWebForm);
-			messageHeader4 = new PanelTester("message4_header", CurrentWebForm);
-			messageBody4 = new PanelTester("message4", CurrentWebForm);
+			messageWrapper4 = new PanelTester(IdFor.It("message4_wrapper"));
+			messageHeader4 = new PanelTester(IdFor.It("message4_header"));
+			messageBody4 = new PanelTester(IdFor.It("message4"));
 
-			messageWrapper5 = new PanelTester("message5_wrapper", CurrentWebForm);
-			messageHeader5 = new PanelTester("message5_header", CurrentWebForm);
-			messageBody5 = new PanelTester("message5", CurrentWebForm);
+			messageWrapper5 = new PanelTester(IdFor.It("message5_wrapper"));
+			messageHeader5 = new PanelTester(IdFor.It("message5_header"));
+			messageBody5 = new PanelTester(IdFor.It("message5"));
 
 			Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Message)));
 		}
@@ -68,16 +68,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
 		[Test]
 		public void Layout() {
-			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1_header"));
-			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, "message1"));
-			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, "message1_dummyLink"));
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor.It("message1_header")));
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor.It("message1")));
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor.It("message1_dummyLink")));
 		}
 
 		[Test]
 		public void ControlAddedDynamicallyIsRenderedInTheBody() {
 			addControl.Click();
 			WebAssert.Visible(added);
-			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, "message1_added"), "the added control must appear inside the message body");
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor.It("message1_added")), "the added control must appear inside the message body");
 		}
 
 		[Test]
@@ -106,7 +106,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 			WebAssert.Visible(messageWrapper5);
 			WebAssert.Visible(messageBody5);
 			WebAssert.Visible(messageHeader5);
-			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody5, "message5_replacement"));
+			Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody5, IdFor.It("message5_replacement")));
 		}
 	}
 }
