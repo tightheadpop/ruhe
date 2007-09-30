@@ -31,9 +31,5 @@ namespace Ruhe.Web.UI {
 		public static string GetRandomName() {
 			return "x" + Guid.NewGuid().ToString().Replace("-", String.Empty);
 		}
-
-		public static T FindFirst<T>(Control parent) where T : Control {
-			return default(T);
-		}
 	}
 }
