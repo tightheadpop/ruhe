@@ -21,7 +21,7 @@ namespace Ruhe.Web.UI.Controls {
 		}
 
 		public void ClearFormControls() {
-			foreach (IInputControl control in ControlUtilities.FindControlsRecursive(this, typeof(IInputControl))) {
+			foreach (IInputControl control in ControlUtilities.FindRecursive(this, typeof(IInputControl))) {
 				control.Clear();
 			}
 		}

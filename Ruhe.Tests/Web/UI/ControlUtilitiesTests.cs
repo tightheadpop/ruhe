@@ -32,14 +32,14 @@ namespace Ruhe.Tests.Web.UI {
 
 		[Test]
 		public void FindByIdAcrossNamingContainers() {
-			Control result = ControlUtilities.FindControlRecursive(parentControl, "grandchild");
+			Control result = ControlUtilities.FindRecursive(parentControl, "grandchild");
 			Assert.AreEqual(grandChild, result, "should find exactly one grand child based on id");
-			Assert.IsNull(ControlUtilities.FindControlRecursive(parentControl, "not gonna find it"), "found non-existent control");
+			Assert.IsNull(ControlUtilities.FindRecursive(parentControl, "not gonna find it"), "found non-existent control");
 		}
 
 		[Test]
 		public void FindByType() {
-			ArrayList result = ControlUtilities.FindControlsRecursive(parentControl, typeof(Panel));
+			ArrayList result = ControlUtilities.FindRecursive(parentControl, typeof(Panel));
 			Assert.IsTrue(result.Contains(parentControl), "result set does not contain parent panel");
 			Assert.IsTrue(result.Contains(firstChild), "result set does not contain first child panel");
 			Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child panel");
@@ -48,7 +48,7 @@ namespace Ruhe.Tests.Web.UI {
 
 		[Test]
 		public void FindByInterface() {
-			ArrayList result = ControlUtilities.FindControlsRecursive(parentControl, typeof(INamingContainer));
+			ArrayList result = ControlUtilities.FindRecursive(parentControl, typeof(INamingContainer));
 			Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child INamingContainer");
 			Assert.IsFalse(result.Contains(parentControl), "result contains non-namingcontainer parent control");
 			Assert.IsFalse(result.Contains(firstChild), "result contains non-namingcontainer first child control");
