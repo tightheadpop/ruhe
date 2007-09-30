@@ -52,7 +52,9 @@ namespace Ruhe.Tests.Web.UI {
 			inputTextBox.ID = "foo";
 			DefaultValidatorConfigurator.ConfigureValidators(inputTextBox);
 			foreach (BaseValidator validator in ControlUtilities.FindControlsRecursive(inputTextBox, typeof(BaseValidator))) {
-				Assert.IsTrue(ControlUtilities.FindControlRecursive(inputTextBox, validator.ID + "_callout") is ValidatorCalloutExtender);
+				ValidatorCalloutExtender extender = ControlUtilities.FindControlRecursive(inputTextBox, validator.ID + "_callout") as ValidatorCalloutExtender;
+				Assert.IsNotNull(extender);
+				Assert.AreEqual(validator.ID, extender.TargetControlID);
 			}
 		}
 
