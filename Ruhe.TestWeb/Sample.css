@@ -7,19 +7,11 @@ body
 }
 .validation-error
 {
-	background-color: lightyellow;
-}
-.label.left:after
-{
-	content: expression(innerText.length > 0 ? ":" : '');
-}
-.label.above 
-{
-	content: ":";
+	background-color: gold;
 }
 .confirmation.wrapper 
 {
-	border: solid 1px gold;
+	border: solid 2px black;
 	margin-bottom: 2em;
 	-moz-border-radius: 10px;
 	max-width: 30em;
@@ -29,8 +21,8 @@ body
 .confirmation.wrapper .header
 {
 	-moz-border-radius: 10px;
-	background-color: lightyellow;
-	border: 1px solid gold;
+	background-color: gold;
+	border: 2px solid black;
 	font-weight: bold;
 	font-variant: small-caps;
 	padding: 0.5em;
@@ -52,16 +44,18 @@ fieldset
 {
 	position: relative;
 	-moz-border-radius: 10px;
+	max-width: 50%;
+	border: 2px solid black;
 }
 legend 
 {
+	padding: 5px;
 	font-weight: bold;
+	border: 2px solid black;
+	-moz-border-radius: 10px;
+	background-color: #DDD;
 }
 .format 
 {
 	color: Gray;
-}
-td 
-{
-	padding-bottom: 5px;
 }

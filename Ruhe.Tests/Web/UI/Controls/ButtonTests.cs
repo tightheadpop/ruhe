@@ -38,7 +38,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void RendersTextWithAccessKey() {
-            Assert.AreEqual("S", button1.Attribute("accesskey"));
+            Assert.AreEqual("s", button1.Attribute("accesskey"));
             StringAssert.Contains("<span style=\"text-decoration:underline;\">S</span>ubmit", button1.InnerHtml);
         }
 
