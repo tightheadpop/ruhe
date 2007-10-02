@@ -180,6 +180,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\Controls\UpdateLabelTests.cs" />
+    <Compile Include="Web\UI\Controls\ValidationSummaryTests.cs" />
     <Compile Include="Web\UI\DefaultValidatorConfiguratorTests.cs">
       <SubType>Code</SubType>
     </Compile>

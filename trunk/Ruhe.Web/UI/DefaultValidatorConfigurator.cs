@@ -1,4 +1,3 @@
-using System;
 using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,7 +12,7 @@ namespace Ruhe.Web.UI {
             string errorIconHoverHelp = errorMessage + ".";
             validator.Controls.Add(new ErrorIcon(errorIconHoverHelp));
             SetDefaultProperties(validator);
-            validator.PreRender += SetValidatorSummaryErrorMessage(errorMessage);
+            validator.ErrorMessage = errorIconHoverHelp;
         }
 
         private static void SetDefaultProperties(BaseValidator validator) {
@@ -24,18 +23,15 @@ namespace Ruhe.Web.UI {
             validator.SetFocusOnError = true;
         }
 
-        private static EventHandler SetValidatorSummaryErrorMessage(string errorMessage) {
-            return
-                delegate(object sender, EventArgs e) {
-                    BaseValidator validator = (BaseValidator) sender;
-                    Control controlToValidate = validator.FindControl(validator.ControlToValidate);
-                    string summaryMessage = CreateValidationSummaryErrorMessage(controlToValidate, errorMessage);
-                    string summaryClickFocusElementClientId = GetClientId(controlToValidate);
-                    validator.ErrorMessage = string.Format("<a href='javascript:document.getElementById(&quot;{0}&quot;).focus();'>{1}</a>",
-                                                           summaryClickFocusElementClientId,
-                                                           summaryMessage);
-                };
-        }
+//        private static void SetValidatorSummaryErrorMessage(BaseValidator validator, string errorMessage) {
+//            Control controlToValidate = validator.FindControl(validator.ControlToValidate);
+//            string summaryMessage = CreateValidationSummaryErrorMessage(controlToValidate, errorMessage);
+//            validator.ErrorMessage = summaryMessage;
+//                    string summaryClickFocusElementClientId = GetClientId(controlToValidate);
+//                    validator.ErrorMessage = string.Format("<a href='javascript:document.getElementById(&quot;{0}&quot;).focus();'>{1}</a>",
+//                                                           summaryClickFocusElementClientId,
+//                                                           summaryMessage);
+//        }
 
         public static void ConfigureValidators(IInputControl inputControl) {
             foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
@@ -54,30 +50,30 @@ namespace Ruhe.Web.UI {
             ((Control) control).Controls.Add(calloutExtender);
         }
 
-        private static string CreateValidationSummaryErrorMessage(Control controlToValidate, string errorMessage) {
-            string fieldName = String.Empty;
-            string returnValue;
-            if (controlToValidate is IInputControl) {
-                fieldName = ((IInputControl) controlToValidate).LabelText.Trim();
-            }
-            if (fieldName.Length > 0) {
-                returnValue = string.Format("{0} in the {1} field.", errorMessage, fieldName);
-            }
-            else {
-                returnValue = errorMessage + ".";
-            }
-            return returnValue;
-        }
+//        private static string CreateValidationSummaryErrorMessage(Control controlToValidate, string errorMessage) {
+//            string fieldName = String.Empty;
+//            string returnValue;
+//            if (controlToValidate is IInputControl) {
+//                fieldName = ((IInputControl) controlToValidate).LabelText.Trim();
+//            }
+//            if (fieldName.Length > 0) {
+//                returnValue = string.Format("{0} in the {1} field.", errorMessage, fieldName);
+//            }
+//            else {
+//                returnValue = errorMessage + ".";
+//            }
+//            return returnValue;
+//        }
 
-        private static string GetClientId(Control control) {
-            string clientId;
-            if (control is IInputControl) {
-                clientId = ((IInputControl) control).DefaultElementClientId;
-            }
-            else {
-                clientId = control.ClientID;
-            }
-            return clientId;
-        }
+//        private static string GetClientId(Control control) {
+//            string clientId;
+//            if (control is IInputControl) {
+//                clientId = ((IInputControl) control).DefaultElementClientId;
+//            }
+//            else {
+//                clientId = control.ClientID;
+//            }
+//            return clientId;
+//        }
     }
 }

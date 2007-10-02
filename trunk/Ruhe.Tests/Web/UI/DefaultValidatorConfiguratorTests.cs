@@ -20,23 +20,6 @@ namespace Ruhe.Tests.Web.UI {
         }
 
         [Test]
-        public void ErrorMessagesAreConfiguredProperly() {
-            LoadPage();
-            submitButton.Click();
-
-            string errorMessage = summary.Messages[0];
-            StringAssert.Contains("in the testBox field.", errorMessage, "the field's label text should be used in completing the validation message that appears in the summary");
-            StringAssert.StartsWith("<a ", errorMessage, "The error message should start with a link");
-            StringAssert.Contains("you're wrong", errorMessage, "The error message should include the original error message");
-        }
-
-        [Test]
-        public void GeneratedValidationSummaryJavaScriptUsesCorrectClientId() {
-            LoadPage();
-            StringAssert.Contains(IdFor.It("testBox", "document.getElementById(&quot;{0}&quot;).focus();"), Browser.CurrentPageText);
-        }
-
-        [Test]
         public void RequiredValidatorHasRequiredIcon() {
             InputTextBox inputTextBox = new InputTextBox();
             inputTextBox.ID = "foo";

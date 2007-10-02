@@ -17,6 +17,7 @@ namespace Ruhe.Web.UI.Controls {
     public class Button : System.Web.UI.WebControls.Button, ILabeledControl {
         private string beforeAccessKey;
         private string afterAccessKey;
+        private string shortcutCharacter;
 
         public string LabelText {
             get { return StringUtilities.NullToEmpty((string) ViewState["LabelText"]); }
@@ -48,7 +49,7 @@ namespace Ruhe.Web.UI.Controls {
             if (StringUtilities.AreNotEmpty(AccessKey)) {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.TextDecoration, "underline");
                 writer.RenderBeginTag(HtmlTextWriterTag.Span);
-                writer.WriteEncodedText(AccessKey);
+                writer.WriteEncodedText(shortcutCharacter);
                 writer.RenderEndTag();
             }
             writer.WriteEncodedText(afterAccessKey);
@@ -61,8 +62,9 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void OnPreRender(EventArgs e) {
             Match match = Regex.Match(Text, @"(.*?)&(\w)(.*)");
-            AccessKey = match.Groups[2].Value;
-            if (StringUtilities.AreNotEmpty(AccessKey)) {
+            shortcutCharacter = match.Groups[2].Value;
+            if (StringUtilities.AreNotEmpty(shortcutCharacter)) {
+                AccessKey = shortcutCharacter.ToLower();
                 beforeAccessKey = match.Groups[1].Value;
                 afterAccessKey = match.Groups[3].Value;
             }

@@ -9,8 +9,8 @@
 		<ruhe:InputEmailAddress ID="email" runat="server" Required="true" />
 		<ruhe:InputNumber LabelText="Your Age" NumericFormat="Integer" ID="age" runat="server" />
 		<ruhe:ControlGroup runat="server">
-			<ruhe:SaveButton ID="saveButton" runat="server" OnClick="saveButton_Click"/>
-			<ruhe:ResetButton runat="server" />
+			<ruhe:SaveButton ID="saveButton" runat="server" OnClick="Save"/>
+			<ruhe:CancelButton runat="server" OnClick="Cancel" />
 		</ruhe:ControlGroup>
 	</ruhe:LabeledControlPanel>
 </asp:Content>

@@ -2,7 +2,6 @@ using System;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Common;
 using Ruhe.TestExtensions;
 using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
@@ -93,14 +92,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void ControlCollection() {
             InputTextBox box = new InputTextBox();
             AssertTrue(box.Controls[0] != null);
-        }
-
-        [Test]
-        public void ErrorMessageFromValidatorController() {
-            LoadPage("Required");
-            submitButton.Click();
-
-            AssertTrue(StringUtilities.Contains(summary.Messages[0], "in the testBox field."));
         }
 
         [Test]
