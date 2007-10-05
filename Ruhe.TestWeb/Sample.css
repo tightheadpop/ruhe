@@ -20,7 +20,7 @@ body
 }
 .confirmation.wrapper .header
 {
-	-moz-border-radius: 10px;
+	-moz-border-radius: 15px;
 	background-color: gold;
 	border: 2px solid black;
 	font-weight: bold;
@@ -43,7 +43,7 @@ body
 fieldset 
 {
 	position: relative;
-	-moz-border-radius: 10px;
+	-moz-border-radius: 15px;
 	max-width: 50%;
 	border: 2px solid black;
 }
@@ -52,8 +52,9 @@ legend
 	padding: 5px;
 	font-weight: bold;
 	border: 2px solid black;
-	-moz-border-radius: 10px;
-	background-color: #DDD;
+	border-top: 0px;
+	border-bottom: 0px;
+	-moz-border-radius: 15px;
 }
 .format 
 {

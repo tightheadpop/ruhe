@@ -32,28 +32,28 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         protected override void SetUp() {
             base.SetUp();
-            messageWrapper1 = new PanelTester(IdFor.It("message1_wrapper"));
+            messageWrapper1 = new PanelTester(IdFor.It("message1"));
             messageHeader1 = new PanelTester(IdFor.It("message1_header"));
-            messageBody1 = new PanelTester(IdFor.It("message1"));
+            messageBody1 = new PanelTester(IdFor.It("message1_body"));
             dummyLink = new LinkButtonTester(IdFor.It("message1_dummyLink"));
             addControl = new ButtonTester(IdFor.It("addControl"));
             added = new LabelTester(IdFor.It("message1_added"));
 
-            messageWrapper2 = new PanelTester(IdFor.It("message2_wrapper"));
+            messageWrapper2 = new PanelTester(IdFor.It("message2"));
             messageHeader2 = new PanelTester(IdFor.It("message2_header"));
-            messageBody2 = new PanelTester(IdFor.It("message2"));
+            messageBody2 = new PanelTester(IdFor.It("message2_body"));
 
-            messageWrapper3 = new PanelTester(IdFor.It("message3_wrapper"));
+            messageWrapper3 = new PanelTester(IdFor.It("message3"));
             messageHeader3 = new PanelTester(IdFor.It("message3_header"));
-            messageBody3 = new PanelTester(IdFor.It("message3"));
+            messageBody3 = new PanelTester(IdFor.It("message3_body"));
 
-            messageWrapper4 = new PanelTester(IdFor.It("message4_wrapper"));
+            messageWrapper4 = new PanelTester(IdFor.It("message4"));
             messageHeader4 = new PanelTester(IdFor.It("message4_header"));
-            messageBody4 = new PanelTester(IdFor.It("message4"));
+            messageBody4 = new PanelTester(IdFor.It("message4_body"));
 
-            messageWrapper5 = new PanelTester(IdFor.It("message5_wrapper"));
+            messageWrapper5 = new PanelTester(IdFor.It("message5"));
             messageHeader5 = new PanelTester(IdFor.It("message5_header"));
-            messageBody5 = new PanelTester(IdFor.It("message5"));
+            messageBody5 = new PanelTester(IdFor.It("message5_body"));
 
             Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Message)));
         }
