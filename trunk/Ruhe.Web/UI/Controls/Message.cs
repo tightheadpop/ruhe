@@ -14,7 +14,7 @@ namespace Ruhe.Web.UI.Controls {
     }
 
     public class Message : Panel, INamingContainer {
-        protected Panel wrapper;
+        protected Panel body;
         protected Panel header;
 
         public Message() {
@@ -33,7 +33,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            wrapper = new Panel();
+            body = new Panel();
             header = new Panel();
         }
 
@@ -43,26 +43,25 @@ namespace Ruhe.Web.UI.Controls {
                 header.Controls.Add(new LiteralControl(HttpUtility.HtmlEncode(HeaderText)));
             header.Visible = header.HasControls();
             bool bodyIsVisible = Visible && HasControls();
-            wrapper.Visible = bodyIsVisible || header.Visible;
-            CssClass = "body";
-
-            if (wrapper.Visible) {
-                RenderBeginWrapper(writer);
+            if (bodyIsVisible || header.Visible) {
+                string oldClass = CssClass;
+                CssClass += Type.ToString().ToLower() + " wrapper";
+                body.CssClass = "body";
+                header.CssClass = "header";
+                RenderBeginTag(writer);
                 RenderHeader(writer);
                 if (bodyIsVisible)
-                    base.Render(writer);
-                RenderEndWrapper(writer);
+                    RenderBody(writer);
+                RenderEndTag(writer);
+                CssClass = oldClass;
             }
         }
 
-        private void RenderBeginWrapper(HtmlTextWriter writer) {
-            wrapper.ID = UniqueID + "_wrapper";
-            wrapper.CssClass = Type.ToString().ToLower() + " wrapper";
-            wrapper.RenderBeginTag(writer);
-        }
-
-        private void RenderEndWrapper(HtmlTextWriter writer) {
-            wrapper.RenderEndTag(writer);
+        private void RenderBody(HtmlTextWriter writer) {
+            body.ID = UniqueID + "_body";
+            body.RenderBeginTag(writer);
+            RenderContents(writer);
+            body.RenderEndTag(writer);
         }
 
         private void RenderHeader(HtmlTextWriter writer) {
