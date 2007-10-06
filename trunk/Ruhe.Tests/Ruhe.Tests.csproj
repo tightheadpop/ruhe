@@ -161,6 +161,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\Controls\ButtonTests.cs" />
+    <Compile Include="Web\UI\Controls\InputDateTests.cs" />
     <Compile Include="Web\UI\Controls\InputDropDownListTests.cs">
       <SubType>Code</SubType>
     </Compile>
