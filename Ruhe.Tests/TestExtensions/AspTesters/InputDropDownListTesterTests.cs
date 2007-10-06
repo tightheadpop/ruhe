@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Ruhe.TestExtensions;
 using Ruhe.TestExtensions.AspTesters;
 
-namespace Ruhe.Tests.Extensions.AspTesters {
+namespace Ruhe.Tests.TestExtensions.AspTesters {
     public class InputDropDownListTesterTests : WebFormTestCase {
         private InputDropDownListTester dropDownList;
 

@@ -9,7 +9,8 @@ body
 {
 	background-color: gold;
 }
-.confirmation.wrapper 
+ .
+.confirmation.wrapper
 {
 	border: solid 2px black;
 	margin-bottom: 2em;
@@ -18,6 +19,7 @@ body
 	margin-left: 20px;
 	margin-top: 2em;
 }
+ .
 .confirmation.wrapper .header
 {
 	-moz-border-radius: 15px;
@@ -32,22 +34,24 @@ body
 	top: -1em;
 	margin-bottom: -1em;
 }
+ .
 .confirmation.wrapper .header:before
 {
-	content: url('images/info.ico');
+	content: url( 'images/info.ico' );
 }
+ .
 .confirmation.wrapper .body
 {
 	padding: 0.5em;
 }
-fieldset 
+fieldset
 {
 	position: relative;
 	-moz-border-radius: 15px;
 	max-width: 50%;
 	border: 2px solid black;
 }
-legend 
+legend
 {
 	padding: 5px;
 	font-weight: bold;
@@ -56,7 +60,11 @@ legend
 	border-bottom: 0px;
 	-moz-border-radius: 15px;
 }
-.format 
+.format
 {
 	color: Gray;
+}
+.labeled
+{
+	white-space: nowrap;
 }
