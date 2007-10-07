@@ -61,7 +61,7 @@ public partial class Sample {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Ruhe.Web.UI.Controls.InputNumber age;
+    protected global::Ruhe.Web.UI.Controls.InputInteger age;
     
     /// <summary>
     /// saveButton control.
