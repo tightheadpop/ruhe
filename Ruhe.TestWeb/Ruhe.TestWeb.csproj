@@ -177,6 +177,13 @@
     <Compile Include="Web\UI\Controls\MessageTests.aspx.designer.cs">
       <DependentUpon>MessageTests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\Controls\RadioButtonListTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>RadioButtonListTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\RadioButtonListTests.aspx.designer.cs">
+      <DependentUpon>RadioButtonListTests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
@@ -216,6 +223,7 @@
     <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\InputDateTests.aspx" />
     <Content Include="Web\UI\Controls\InputIntegerTests.aspx" />
+    <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

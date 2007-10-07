@@ -136,6 +136,7 @@
     <Compile Include="UI\Controls\Legend.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\RadioButtonList.cs" />
     <Compile Include="UI\Controls\RequiredIcon.cs">
       <SubType>Code</SubType>
     </Compile>

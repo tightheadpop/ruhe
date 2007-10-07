@@ -11,4 +11,8 @@ public partial class Sample : Page {
     protected void Cancel(object sender, EventArgs e) {
         Response.Redirect("Sample.aspx");
     }
+
+    protected void changed(object sender, EventArgs e) {
+        target.Text = DateTime.Now.ToString();
+    }
 }

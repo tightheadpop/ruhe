@@ -1,6 +1,6 @@
 using NUnit.Extensions.Asp;
 using NUnit.Framework;
-using Ruhe.Common;
+using Ruhe.Common.Utilities;
 using Ruhe.TestExtensions;
 using Ruhe.Web.UI.Controls;
 
