@@ -182,6 +182,7 @@
     <Compile Include="Web\UI\Controls\MessageTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\RadioButtonListTests.cs" />
     <Compile Include="Web\UI\Controls\UpdateLabelTests.cs" />
     <Compile Include="Web\UI\Controls\ValidationSummaryTests.cs" />
     <Compile Include="Web\UI\DefaultValidatorConfiguratorTests.cs">

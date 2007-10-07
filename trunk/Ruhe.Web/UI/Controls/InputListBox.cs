@@ -1,7 +1,7 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputListBox : ListBox, IInputControl {

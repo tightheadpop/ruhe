@@ -9,7 +9,6 @@ body
 {
 	background-color: gold;
 }
- .
 .confirmation.wrapper
 {
 	border: solid 2px black;
@@ -19,7 +18,6 @@ body
 	margin-left: 20px;
 	margin-top: 2em;
 }
- .
 .confirmation.wrapper .header
 {
 	-moz-border-radius: 15px;
@@ -34,12 +32,10 @@ body
 	top: -1em;
 	margin-bottom: -1em;
 }
- .
 .confirmation.wrapper .header:before
 {
 	content: url( 'images/info.ico' );
 }
- .
 .confirmation.wrapper .body
 {
 	padding: 0.5em;
