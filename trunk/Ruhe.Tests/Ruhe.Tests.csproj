@@ -165,6 +165,7 @@
     <Compile Include="Web\UI\Controls\InputDropDownListTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\InputIntegerTests.cs" />
     <Compile Include="Web\UI\Controls\InputNumberTests.cs">
       <SubType>Code</SubType>
     </Compile>

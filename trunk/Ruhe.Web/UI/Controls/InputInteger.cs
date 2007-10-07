@@ -2,7 +2,7 @@ using System;
 using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
-    public class InputNumber : InputTextBox {
+    public class InputInteger : InputTextBox {
         private CompareValidator numericValidator;
         private RangeValidator rangeValidator;
 
@@ -10,12 +10,8 @@ namespace Ruhe.Web.UI.Controls {
             base.CreateChildControls();
             CreateNumericValidator();
             CreateRangeValidator();
-            SetNumericDataType(ValidationDataType.Double);
-        }
-
-        private void SetNumericDataType(ValidationDataType dataType) {
             rangeValidator.Type =
-                numericValidator.Type = dataType;
+                numericValidator.Type = ValidationDataType.Integer;
         }
 
         protected override void AssignIdsToChildControls() {
@@ -87,17 +83,8 @@ namespace Ruhe.Web.UI.Controls {
 var {0} = document.getElementById('{0}');
 {0}.FILTER = {1};
 {0}.onkeypress = Ruhe_KeyPressFilter;
-", ClientID, GetKeystrokeFilter()), true);
+", ClientID, @"/\d/"), true);
         }
 
-        private static string GetKeystrokeFilter() {
-            return @"
-	function(input){
-		if(input.value.indexOf('.') >= 0)
-			return /[\d]/;
-		else
-			return /[\d.]/;
-	}";
-        }
     }
 }

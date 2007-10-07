@@ -8,6 +8,7 @@ using Ruhe.Common;
 namespace Ruhe.TestExtensions {
     //TODO move to Ruhe.Tests as helper class specific to this project
     public class ControlTesterUtilities {
+        //TODO use generics to match test case class to aspx path
         public static string GetUrlPath(Type controlType) {
             string path = StringUtilities.RemovePrefix(controlType.FullName, @"\w+\.").Replace(".", "/");
             return String.Format("{0}{1}Tests.aspx", TestSite, path);
