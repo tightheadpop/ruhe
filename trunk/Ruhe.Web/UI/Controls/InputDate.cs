@@ -18,7 +18,7 @@ namespace Ruhe.Web.UI.Controls {
             get { return "null"; }
         }
 
-        protected override string Convert(DateTime? value) {
+        protected override string Adapt(DateTime? value) {
             return value.HasValue ? value.Value.ToString(DatePattern) : string.Empty;
         }
 
@@ -26,7 +26,16 @@ namespace Ruhe.Web.UI.Controls {
             get { return Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern; }
         }
 
-        protected override DateTime? Convert(string value) {
+        public bool DefaultToToday {
+            get { return Convert.ToBoolean(ViewState["DefaultToToday"]); }
+            set {
+                ViewState["DefaultToToday"] = value;
+                if (!Value.HasValue && value)
+                    Value = DateTime.Today;
+            }
+        }
+
+        protected override DateTime? Adapt(string value) {
             return StringUtilities.IsEmpty(value) ? (DateTime?) null : DateTime.Parse(value, Thread.CurrentThread.CurrentUICulture.DateTimeFormat);
         }
 

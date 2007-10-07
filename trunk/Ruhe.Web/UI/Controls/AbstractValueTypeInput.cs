@@ -7,19 +7,19 @@ namespace Ruhe.Web.UI.Controls {
         private RangeValidator rangeValidator;
 
         public virtual Nullable<T> Value {
-            get { return Convert(Text); }
-            set { Text = value.HasValue ? Convert(value) : string.Empty; }
+            get { return Adapt(Text); }
+            set { Text = value.HasValue ? Adapt(value) : string.Empty; }
         }
 
         public virtual Nullable<T> MinimumValue {
             get {
                 EnsureChildControls();
-                return Convert(rangeValidator.MinimumValue);
+                return Adapt(rangeValidator.MinimumValue);
             }
             set {
                 EnsureChildControls();
                 if (value.HasValue) {
-                    rangeValidator.MinimumValue = Convert(value);
+                    rangeValidator.MinimumValue = Adapt(value);
                     rangeValidator.Visible = true;
                     compareValidator.Visible = false;
                 }
@@ -33,12 +33,12 @@ namespace Ruhe.Web.UI.Controls {
         public virtual Nullable<T> MaximumValue {
             get {
                 EnsureChildControls();
-                return Convert(rangeValidator.MaximumValue);
+                return Adapt(rangeValidator.MaximumValue);
             }
             set {
                 EnsureChildControls();
                 if (value.HasValue) {
-                    rangeValidator.MaximumValue = Convert(value);
+                    rangeValidator.MaximumValue = Adapt(value);
                     rangeValidator.Visible = true;
                     compareValidator.Visible = false;
                 }
@@ -95,11 +95,11 @@ var {0} = document.getElementById('{0}');
 
         protected abstract string KeystrokeFilter { get; }
 
-        protected virtual T? Convert(string value) {
+        protected virtual T? Adapt(string value) {
             return value == string.Empty ? null : (T?)System.Convert.ChangeType(value, typeof(T));
         }
 
-        protected virtual string Convert(T? value) {
+        protected virtual string Adapt(T? value) {
             return value.ToString();
         }
 
