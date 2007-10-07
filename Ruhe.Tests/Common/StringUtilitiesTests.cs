@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
@@ -84,6 +84,13 @@ namespace Ruhe.Tests.Common {
             Assert.AreEqual("\"foo,bar\"", StringUtilities.CsvQuote("foo,bar"), "should wrap in quotes if a comma is present");
             Assert.AreEqual("\"\"\"foo,bar\"\"\"", StringUtilities.CsvQuote("\"foo,bar\""),
                             "should esacpe double quotes by doubling them");
+        }
+
+        [Test]
+        public void IsEmpty() {
+            Assert.IsTrue(StringUtilities.IsEmpty(null));
+            Assert.IsTrue(StringUtilities.IsEmpty(string.Empty));
+            Assert.IsFalse(StringUtilities.IsEmpty("foo"));
         }
     }
 }
