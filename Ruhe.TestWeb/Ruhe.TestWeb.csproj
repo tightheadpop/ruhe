@@ -128,6 +128,13 @@
     <Compile Include="Web\UI\Controls\InputDropDownRequired.aspx.designer.cs">
       <DependentUpon>InputDropDownRequired.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\Controls\InputIntegerTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>InputIntegerTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputIntegerTests.aspx.designer.cs">
+      <DependentUpon>InputIntegerTests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web\UI\Controls\InputNumberTests.aspx.cs">
       <DependentUpon>InputNumberTests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,6 +215,7 @@
     <Content Include="images\INFO.ICO" />
     <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\InputDateTests.aspx" />
+    <Content Include="Web\UI\Controls\InputIntegerTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
