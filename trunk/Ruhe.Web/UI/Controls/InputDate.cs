@@ -19,7 +19,11 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override string Convert(DateTime? value) {
-            return value.HasValue ? value.Value.ToString(Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern) : string.Empty;
+            return value.HasValue ? value.Value.ToString(DatePattern) : string.Empty;
+        }
+
+        private static string DatePattern {
+            get { return Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern; }
         }
 
         protected override DateTime? Convert(string value) {
@@ -47,7 +51,7 @@ namespace Ruhe.Web.UI.Controls {
 
         private CalendarExtender CreateCalendarExtender() {
             calendar = new CalendarExtender();
-            calendar.Format = Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern;
+            calendar.Format = DatePattern;
             return calendar;
         }
 
