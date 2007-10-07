@@ -154,6 +154,7 @@
     <Compile Include="Web\QueryStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\AbstractValueTypeInputTests.cs" />
     <Compile Include="Web\UI\Controls\AllLiteralControlTests.cs">
       <SubType>Code</SubType>
     </Compile>

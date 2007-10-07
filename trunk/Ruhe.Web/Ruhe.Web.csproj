@@ -111,6 +111,7 @@
     <Compile Include="UI\CompositeControl.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\AbstractValueTypeInput.cs" />
     <Compile Include="UI\Controls\BreakingSpace.cs">
       <SubType>Code</SubType>
     </Compile>

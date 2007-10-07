@@ -17,8 +17,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
             Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputNumber)));
             inputNumber = new TextBoxTester(IdFor.It("inputNumber"));
             submitButton = new ButtonTester(IdFor.It("submitButton"));
-            formatErrorMessage = new LabelTester(IdFor.It("inputNumber_numericValidator"));
-            rangeErrorMessage = new LabelTester(IdFor.It("inputNumber_rangeValidator"));
+            formatErrorMessage = new LabelTester(IdFor.It("inputNumber_compare"));
+            rangeErrorMessage = new LabelTester(IdFor.It("inputNumber_range"));
         }
 
         [Test]
