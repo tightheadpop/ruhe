@@ -8,7 +8,7 @@ namespace Ruhe.Web.UI.Controls {
 
         public virtual Nullable<T> Value {
             get { return Convert(Text); }
-            set { Text = value.HasValue ? value.ToString() : string.Empty; }
+            set { Text = value.HasValue ? Convert(value) : string.Empty; }
         }
 
         public virtual Nullable<T> MinimumValue {
@@ -19,7 +19,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 if (value.HasValue) {
-                    rangeValidator.MinimumValue = value.ToString();
+                    rangeValidator.MinimumValue = Convert(value);
                     rangeValidator.Visible = true;
                     compareValidator.Visible = false;
                 }
@@ -38,7 +38,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 if (value.HasValue) {
-                    rangeValidator.MaximumValue = value.ToString();
+                    rangeValidator.MaximumValue = Convert(value);
                     rangeValidator.Visible = true;
                     compareValidator.Visible = false;
                 }
@@ -95,8 +95,12 @@ var {0} = document.getElementById('{0}');
 
         protected abstract string KeystrokeFilter { get; }
 
-        private static T? Convert(string value) {
+        protected virtual T? Convert(string value) {
             return value == string.Empty ? null : (T?)System.Convert.ChangeType(value, typeof(T));
+        }
+
+        protected virtual string Convert(T? value) {
+            return value.ToString();
         }
 
     }

@@ -1,12 +1,30 @@
 using System;
+using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
-    public class InputDate : InputTextBox {
+    public class InputDate : AbstractValueTypeInput<DateTime> {
         private CalendarExtender calendar;
         private Image image;
+
+        protected override ValidationDataType ValidationDataType {
+            get { return ValidationDataType.Date; }
+        }
+
+        protected override string KeystrokeFilter {
+            get { return "null"; }
+        }
+
+        protected override string Convert(DateTime? value) {
+            return value.HasValue ? value.Value.ToString(Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern) : string.Empty;
+        }
+
+        protected override DateTime? Convert(string value) {
+            return StringUtilities.IsEmpty(value) ? (DateTime?) null : DateTime.Parse(value, Thread.CurrentThread.CurrentUICulture.DateTimeFormat);
+        }
 
         protected override void CreateChildControls() {
             Controls.Add(CreateCalendarButton());
@@ -29,7 +47,7 @@ namespace Ruhe.Web.UI.Controls {
 
         private CalendarExtender CreateCalendarExtender() {
             calendar = new CalendarExtender();
-            calendar.Format = "MM/dd/yyyy";
+            calendar.Format = Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern;
             return calendar;
         }
 

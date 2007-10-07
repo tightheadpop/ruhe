@@ -1,3 +1,4 @@
+using System;
 using NUnit.Extensions.Asp;
 using NUnit.Framework;
 using Ruhe.TestExtensions;
@@ -25,6 +26,22 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void TextBoxIsReadOnlyUntilIWorkOutValidation() {
             Assert.AreEqual("readonly", dateBox.Attribute("readonly"));
+        }
+
+        [Test]
+        public void DefaultValueIsNull() {
+            InputDate input = new InputDate();
+            input.Text = string.Empty;
+            Assert.IsNull(input.Value);
+        }
+
+        [Test]
+        public void NonNullValueCanBeConvertedToDateTime() {
+            InputDate input = new InputDate();
+            DateTime expected = new DateTime(2002, 10, 21);
+            input.Value = expected;
+            Assert.AreEqual("10/21/2002", input.Text);
+            Assert.AreEqual(expected, input.Value);
         }
     }
 }

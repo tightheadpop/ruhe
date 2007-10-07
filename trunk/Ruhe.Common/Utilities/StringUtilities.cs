@@ -2,16 +2,16 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Ruhe.Common {
+namespace Ruhe.Common.Utilities {
     public sealed class StringUtilities {
         private StringUtilities() {}
 
         public static string NullToEmpty(string value) {
-            return value == null ? string.Empty : value;
+            return value ?? string.Empty;
         }
 
         public static string NullToEmpty(DBNull notGonnaUseIt) {
-            return String.Empty;
+            return string.Empty;
         }
 
         public static bool Contains(string searchIn, string subString) {
@@ -19,20 +19,20 @@ namespace Ruhe.Common {
         }
 
         public static bool Compare(string string1, string string2) {
-            return String.Compare(string1, string2, true) == 0;
+            return string.Compare(string1, string2, true) == 0;
         }
 
         public static bool IsNumeric(string value) {
             double number;
-            return Double.TryParse(value, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number);
+            return double.TryParse(value, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number);
         }
 
         public static string RemovePrefix(string stringToTrim, string prefixPattern) {
-            return Regex.Replace(stringToTrim, "^" + prefixPattern, String.Empty, RegexOptions.IgnoreCase);
+            return Regex.Replace(stringToTrim, "^" + prefixPattern, string.Empty, RegexOptions.IgnoreCase);
         }
 
         public static string RemoveSuffix(string stringToTrim, string suffixPattern) {
-            return Regex.Replace(stringToTrim, suffixPattern + "$", String.Empty, RegexOptions.IgnoreCase);
+            return Regex.Replace(stringToTrim, suffixPattern + "$", string.Empty, RegexOptions.IgnoreCase);
         }
 
         public static string ForcePrefix(string prefix, string stringToAlter) {
@@ -65,12 +65,12 @@ namespace Ruhe.Common {
                 return masterString.Substring(0, masterString.ToLower().LastIndexOf(token.ToLower()));
             }
             else {
-                return String.Empty;
+                return string.Empty;
             }
         }
 
         public static string Repeat(string s, int count) {
-            return String.Join(s, new string[count + 1]);
+            return string.Join(s, new string[count + 1]);
         }
 
         public static bool IsInList(string s, params string[] list) {
@@ -83,7 +83,7 @@ namespace Ruhe.Common {
 
         public static string TrimToEmpty(string s) {
             if (s == null) {
-                return String.Empty;
+                return string.Empty;
             }
             return s.Trim();
         }
@@ -112,11 +112,15 @@ namespace Ruhe.Common {
 
         public static bool AreNotEmpty(params string[] values) {
             foreach (string value in values) {
-                if (TrimToEmpty(value) == String.Empty) {
+                if (TrimToEmpty(value) == string.Empty) {
                     return false;
                 }
             }
             return true;
+        }
+
+        public static bool IsEmpty(string s) {
+            return TrimToEmpty(s) == string.Empty;
         }
     }
 }
