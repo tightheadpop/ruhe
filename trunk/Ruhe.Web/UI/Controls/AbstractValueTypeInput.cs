@@ -7,14 +7,14 @@ namespace Ruhe.Web.UI.Controls {
         private RangeValidator rangeValidator;
 
         public virtual Nullable<T> Value {
-            get { return Text == string.Empty ? null : (T?) Convert.ChangeType(Text, typeof(T)); }
+            get { return Convert(Text); }
             set { Text = value.HasValue ? value.ToString() : string.Empty; }
         }
 
         public virtual Nullable<T> MinimumValue {
             get {
                 EnsureChildControls();
-                return (T?) Convert.ChangeType(rangeValidator.MinimumValue, typeof(T));
+                return Convert(rangeValidator.MinimumValue);
             }
             set {
                 EnsureChildControls();
@@ -24,7 +24,6 @@ namespace Ruhe.Web.UI.Controls {
                     compareValidator.Visible = false;
                 }
                 else {
-                    rangeValidator.MinimumValue = string.Empty;
                     rangeValidator.Visible = false;
                     compareValidator.Visible = true;
                 }
@@ -34,7 +33,7 @@ namespace Ruhe.Web.UI.Controls {
         public virtual Nullable<T> MaximumValue {
             get {
                 EnsureChildControls();
-                return (T?) Convert.ChangeType(rangeValidator.MaximumValue, typeof(T));
+                return Convert(rangeValidator.MaximumValue);
             }
             set {
                 EnsureChildControls();
@@ -44,7 +43,6 @@ namespace Ruhe.Web.UI.Controls {
                     compareValidator.Visible = false;
                 }
                 else {
-                    rangeValidator.MaximumValue = string.Empty;
                     rangeValidator.Visible = false;
                     compareValidator.Visible = true;
                 }
@@ -96,5 +94,10 @@ var {0} = document.getElementById('{0}');
         }
 
         protected abstract string KeystrokeFilter { get; }
+
+        private static T? Convert(string value) {
+            return value == string.Empty ? null : (T?)System.Convert.ChangeType(value, typeof(T));
+        }
+
     }
 }

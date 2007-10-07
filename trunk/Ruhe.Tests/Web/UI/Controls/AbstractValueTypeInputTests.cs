@@ -22,5 +22,15 @@ namespace Ruhe.Tests.Web.UI.Controls {
             input.Value = 1.2;
             Assert.AreEqual(1.2, input.Value);
         }
+
+        [Test]
+        public void DefaultMinimumValueIsNull() {
+            Assert.IsNull(new InputNumber().MinimumValue);
+        }
+
+        [Test]
+        public void DefaultMaximumValueIsNull() {
+            Assert.IsNull(new InputNumber().MaximumValue);
+        }
     }
 }

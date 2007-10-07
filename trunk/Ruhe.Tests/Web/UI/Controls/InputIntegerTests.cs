@@ -41,6 +41,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             submitButton.Click();
             WebAssert.NotVisible(formatErrorMessage);
         }
+
         [Test]
         public void InvalidBeyondUpperBoundOfRange() {
             inputNumber.Text = "25";
@@ -53,7 +54,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
             inputNumber.Text = "-1";
             submitButton.Click();
             WebAssert.Visible(rangeErrorMessage);
-            
         }
 
         [Test]
@@ -70,7 +70,5 @@ namespace Ruhe.Tests.Web.UI.Controls {
             WebAssert.Visible(rangeErrorMessage);
             WebAssert.NotVisible(formatErrorMessage);
         }
-
-
     }
 }

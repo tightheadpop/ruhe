@@ -8,7 +8,7 @@
 		<ruhe:InputTextBox LabelText="Name" ID="name" runat="server" Required="true" />
 		<ruhe:InputEmailAddress ID="email" runat="server" Required="true" />
 		<ruhe:InputDate ID="dateOfBirth" LabelText="DOB" Required="true" runat="server" />
-		<ruhe:InputNumber LabelText="Your Age" NumericFormat="Integer" ID="age" runat="server" />
+		<ruhe:InputInteger LabelText="Your Age" ID="age" runat="server" />
 		<ruhe:ControlGroup runat="server">
 			<ruhe:SaveButton ID="saveButton" runat="server" OnClick="Save"/>
 			<ruhe:CancelButton runat="server" OnClick="Cancel" />
