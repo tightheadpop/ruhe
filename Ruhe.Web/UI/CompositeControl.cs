@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Web.UI;
-using Ruhe.Common;
+using Ruhe.Common.Utilities;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
