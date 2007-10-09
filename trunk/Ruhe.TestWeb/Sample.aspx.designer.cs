@@ -64,6 +64,15 @@ public partial class Sample {
     protected global::Ruhe.Web.UI.Controls.InputInteger age;
     
     /// <summary>
+    /// height control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Ruhe.Web.UI.Controls.InputNumber height;
+    
+    /// <summary>
     /// saveButton control.
     /// </summary>
     /// <remarks>

@@ -8,13 +8,9 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override string KeystrokeFilter {
             get {
-                return @"
-	function(input){
-		if(input.value.indexOf('.') >= 0)
-			return /[\d]/;
-		else
-			return /[\d.]/;
-	}";
+                if (!MinimumValue.HasValue || MinimumValue < 0)
+                    return "Ruhe$NUMBER";
+                return "Ruhe$POSITIVE_NUMBER";
             }
         }
     }
