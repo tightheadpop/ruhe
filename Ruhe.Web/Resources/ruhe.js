@@ -79,3 +79,31 @@ function Ruhe_KeyPressFilter(oEvent) {
 	}
 	return true;
 };
+
+/* keystroke filters */
+var Ruhe$POSITIVE_INTEGER = /\d/;
+var Ruhe$INTEGER = 	function(){
+    if (document.selection) {
+        var currentRange = document.selection.createRange();
+        var wholeRange = this.createTextRange();
+        if (currentRange.compareEndPoints('StartToStart', wholeRange) > 0)
+            return /[\d]/;
+    }
+    return /[\d-]/;
+};
+var Ruhe$NUMBER = function(){
+    if (document.selection) {
+        var currentRange = document.selection.createRange();
+        var wholeRange = this.createTextRange();
+        if (currentRange.compareEndPoints('StartToStart', wholeRange) < 1)
+            return /[\d\.\-]/;
+    }
+    if(this.value.indexOf('.') >= 0)
+        return /[\d]/;
+    return /[\d\.]/;
+};
+var Ruhe$POSITIVE_NUMBER = function(){
+    if(this.value.indexOf('.') >= 0)
+        return /[\d]/;
+    return /[\d.]/;
+};

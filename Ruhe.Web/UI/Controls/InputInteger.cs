@@ -9,18 +9,8 @@ namespace Ruhe.Web.UI.Controls {
         protected override string KeystrokeFilter {
             get {
                 if (!MinimumValue.HasValue || MinimumValue < 0)
-                    return @"
-	function(input){
-        if (!document.selection)
-            return /[\d-]/;
-        var currentRange = document.selection.createRange();
-        var wholeRange = this.createTextRange();
-        if (currentRange.compareEndPoints('StartToStart', wholeRange) > 0)
-	        return /[\d]/;
-		return /[\d-]/;
-	}";
-                else
-                    return @"/\d/";
+                    return "Ruhe$INTEGER";
+                return "Ruhe$POSITIVE_INTEGER";
             }
         }
 
