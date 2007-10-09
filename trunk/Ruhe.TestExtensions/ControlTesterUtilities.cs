@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Web.UI;
 using NUnit.Extensions.Asp;
-using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.TestExtensions {
     //TODO move to Ruhe.Tests as helper class specific to this project
