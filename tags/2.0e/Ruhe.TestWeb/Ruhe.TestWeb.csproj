@@ -1,0 +1,253 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8645D657-2B79-49E9-86B3-4EB59B65A3D6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ruhe.TestWeb</RootNamespace>
+    <AssemblyName>Ruhe.TestWeb</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=1.0.10920.32880, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\System.Web.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.aspx" />
+    <Content Include="Sample.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ajax.Master.cs">
+      <DependentUpon>Ajax.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax.Master.designer.cs">
+      <DependentUpon>Ajax.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sample.aspx.cs">
+      <DependentUpon>Sample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sample.aspx.designer.cs">
+      <DependentUpon>Sample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.cs">
+      <DependentUpon>InputDropDownListTesterTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.designer.cs">
+      <DependentUpon>InputDropDownListTesterTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\ButtonTests.aspx.cs">
+      <DependentUpon>ButtonTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\ButtonTests.aspx.designer.cs">
+      <DependentUpon>ButtonTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDateTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>InputDateTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDateTests.aspx.designer.cs">
+      <DependentUpon>InputDateTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx.cs">
+      <DependentUpon>InputDropDownAutoPostBackDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx.designer.cs">
+      <DependentUpon>InputDropDownAutoPostBackDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownNotRequired.aspx.cs">
+      <DependentUpon>InputDropDownNotRequired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownNotRequired.aspx.designer.cs">
+      <DependentUpon>InputDropDownNotRequired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownPostBackIsolation.aspx.cs">
+      <DependentUpon>InputDropDownPostBackIsolation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownPostBackIsolation.aspx.designer.cs">
+      <DependentUpon>InputDropDownPostBackIsolation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownReadOnly.aspx.cs">
+      <DependentUpon>InputDropDownReadOnly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownReadOnly.aspx.designer.cs">
+      <DependentUpon>InputDropDownReadOnly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownRequired.aspx.cs">
+      <DependentUpon>InputDropDownRequired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputDropDownRequired.aspx.designer.cs">
+      <DependentUpon>InputDropDownRequired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputIntegerTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>InputIntegerTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputIntegerTests.aspx.designer.cs">
+      <DependentUpon>InputIntegerTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputNumberTests.aspx.cs">
+      <DependentUpon>InputNumberTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputNumberTests.aspx.designer.cs">
+      <DependentUpon>InputNumberTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputTextBoxReadOnly.aspx.cs">
+      <DependentUpon>InputTextBoxReadOnly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputTextBoxReadOnly.aspx.designer.cs">
+      <DependentUpon>InputTextBoxReadOnly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputTextBoxTests.aspx.cs">
+      <DependentUpon>InputTextBoxTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputTextBoxTests.aspx.designer.cs">
+      <DependentUpon>InputTextBoxTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\LabeledControlPanelTests.aspx.cs">
+      <DependentUpon>LabeledControlPanelTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\LabeledControlPanelTests.aspx.designer.cs">
+      <DependentUpon>LabeledControlPanelTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\LinkButtonTests.aspx.cs">
+      <DependentUpon>LinkButtonTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\LinkButtonTests.aspx.designer.cs">
+      <DependentUpon>LinkButtonTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\MessageTests.aspx.cs">
+      <DependentUpon>MessageTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\MessageTests.aspx.designer.cs">
+      <DependentUpon>MessageTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\RadioButtonListTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>RadioButtonListTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\RadioButtonListTests.aspx.designer.cs">
+      <DependentUpon>RadioButtonListTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.designer.cs">
+      <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx" />
+    <Content Include="Web\UI\Controls\ButtonTests.aspx" />
+    <Content Include="Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx" />
+    <Content Include="Web\UI\Controls\InputDropDownNotRequired.aspx" />
+    <Content Include="Web\UI\Controls\InputDropDownPostBackIsolation.aspx" />
+    <Content Include="Web\UI\Controls\InputDropDownReadOnly.aspx" />
+    <Content Include="Web\UI\Controls\InputDropDownRequired.aspx" />
+    <Content Include="Web\UI\Controls\InputNumberTests.aspx" />
+    <Content Include="Web\UI\Controls\InputTextBoxReadOnly.aspx" />
+    <Content Include="Web\UI\Controls\InputTextBoxTests.aspx" />
+    <Content Include="Web\UI\Controls\LabeledControlPanelTests.aspx" />
+    <Content Include="Web\UI\Controls\LinkButtonTests.aspx" />
+    <Content Include="Web\UI\Controls\MessageTests.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ruhe.Common\Ruhe.Common.csproj">
+      <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
+      <Name>Ruhe.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ruhe.Web\Ruhe.Web.csproj">
+      <Project>{8262DC2E-A3BB-4999-9F70-97E268C2EB71}</Project>
+      <Name>Ruhe.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ajax.Master" />
+    <Content Include="images\INFO.ICO" />
+    <Content Include="Sample.css" />
+    <Content Include="Web\UI\Controls\InputDateTests.aspx" />
+    <Content Include="Web\UI\Controls\InputIntegerTests.aspx" />
+    <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
+    <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49573</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
