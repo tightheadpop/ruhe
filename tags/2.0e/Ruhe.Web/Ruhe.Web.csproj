@@ -1,0 +1,246 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8262DC2E-A3BB-4999-9F70-97E268C2EB71}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Ruhe.Web</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ruhe.Web</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=1.0.10920.32880, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\System.Web.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <ProjectReference Include="..\Ruhe.Common\Ruhe.Common.csproj">
+      <Name>Ruhe.Common</Name>
+      <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileStreamer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QueryStringBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\CompositeControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\AbstractValueTypeInput.cs" />
+    <Compile Include="UI\Controls\BreakingSpace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CancelButton.cs" />
+    <Compile Include="UI\Controls\ControlGroup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\EncodedLabel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ErrorIcon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\IIcon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ImageIcon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputDate.cs" />
+    <Compile Include="UI\Controls\InputInteger.cs" />
+    <Compile Include="UI\Controls\Legend.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\RadioButtonList.cs" />
+    <Compile Include="UI\Controls\RequiredIcon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\IInputControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ILabeledControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ILayoutContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Button.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputCheckBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputCheckBoxList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputDropDownList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputEmailAddress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputListBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputPhoneExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputPhoneNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputTextBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\InputZipCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\LabeledControlPanel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\LabelPosition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\LineBreak.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\LinkButton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Message.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\NonBreakingSpace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ResetButton.cs" />
+    <Compile Include="UI\Controls\SaveButton.cs" />
+    <Compile Include="UI\Controls\SectionHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\UpdateLabel.cs" />
+    <Compile Include="UI\Controls\ValidationSummary.cs" />
+    <Compile Include="UI\DefaultValidatorConfigurator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ControlUtilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebUtilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\error.gif" />
+    <EmbeddedResource Include="Resources\required.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ruhe.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\calendar.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

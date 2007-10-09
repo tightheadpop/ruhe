@@ -1,0 +1,66 @@
+body
+{
+	font-size: 10pt;
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	color: Black;
+	background-color: White;
+}
+.validation-error
+{
+	background-color: gold;
+}
+.confirmation.wrapper
+{
+	border: solid 2px black;
+	margin-bottom: 2em;
+	-moz-border-radius: 10px;
+	max-width: 30em;
+	margin-left: 20px;
+	margin-top: 2em;
+}
+.confirmation.wrapper .header
+{
+	-moz-border-radius: 15px;
+	background-color: gold;
+	border: 2px solid black;
+	font-weight: bold;
+	font-variant: small-caps;
+	padding: 0.5em;
+	vertical-align: middle;
+	position: relative;
+	right: 20px;
+	top: -1em;
+	margin-bottom: -1em;
+}
+.confirmation.wrapper .header:before
+{
+	content: url( 'images/info.ico' );
+}
+.confirmation.wrapper .body
+{
+	padding: 0.5em;
+}
+fieldset
+{
+	position: relative;
+	-moz-border-radius: 15px;
+	max-width: 50%;
+	border: 2px solid black;
+}
+legend
+{
+	padding: 5px;
+	font-weight: bold;
+	border: 2px solid black;
+	border-top: 0px;
+	border-bottom: 0px;
+	-moz-border-radius: 15px;
+}
+.format
+{
+	color: Gray;
+}
+.labeled
+{
+	white-space: nowrap;
+}
