@@ -7,7 +7,7 @@
 	<ruhe:LabeledControlPanel runat="server" GroupingText="Sample Form">
 		<ruhe:InputTextBox LabelText="Name" ID="name" runat="server" Required="true" />
 		<ruhe:InputEmailAddress ID="email" runat="server" Required="true" />
-		<ruhe:InputDate ID="dateOfBirth" LabelText="DOB" Required="true" runat="server" />
+		<ruhe:InputDate ID="date" LabelText="Date" Required="true" runat="server" DefaultToToday="true" />
 		<ruhe:InputInteger LabelText="Your Age" ID="age" runat="server" />
 		<ruhe:InputNumber id="height" LabelText="Height (m)" runat="server" />
 		<ruhe:ControlGroup runat="server">

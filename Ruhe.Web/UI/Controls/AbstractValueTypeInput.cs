@@ -87,21 +87,18 @@ namespace Ruhe.Web.UI.Controls {
         private void RegisterClientScript() {
             Page.ClientScript.RegisterClientScriptResource(GetType(), "Ruhe.Web.Resources.ruhe.js");
             Page.ClientScript.RegisterStartupScript(GetType(), ClientID, string.Format(@"
-var {0} = document.getElementById('{0}');
-{0}.FILTER = {1};
-{0}.onkeypress = Ruhe_KeyPressFilter;
+document.getElementById('{0}').onkeypress = Ruhe_KeyPressFilter({1});
 ", ClientID, KeystrokeFilter), true);
         }
 
         protected abstract string KeystrokeFilter { get; }
 
         protected virtual T? Adapt(string value) {
-            return value == string.Empty ? null : (T?)System.Convert.ChangeType(value, typeof(T));
+            return value == string.Empty ? null : (T?) Convert.ChangeType(value, typeof(T));
         }
 
         protected virtual string Adapt(T? value) {
             return value.ToString();
         }
-
     }
 }
