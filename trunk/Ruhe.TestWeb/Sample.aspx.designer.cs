@@ -46,13 +46,13 @@ public partial class Sample {
     protected global::Ruhe.Web.UI.Controls.InputEmailAddress email;
     
     /// <summary>
-    /// dateOfBirth control.
+    /// date control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Ruhe.Web.UI.Controls.InputDate dateOfBirth;
+    protected global::Ruhe.Web.UI.Controls.InputDate date;
     
     /// <summary>
     /// age control.

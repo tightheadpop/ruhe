@@ -15,14 +15,18 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override string KeystrokeFilter {
-            get { return "null"; }
+            get { return "Ruhe$DATE"; }
         }
 
         protected override string Adapt(DateTime? value) {
             return value.HasValue ? value.Value.ToString(DatePattern) : string.Empty;
         }
 
-        private static string DatePattern {
+        protected override DateTime? Adapt(string value) {
+            return StringUtilities.IsEmpty(value) ? (DateTime?) null : DateTime.Parse(value, Thread.CurrentThread.CurrentUICulture.DateTimeFormat);
+        }
+
+        protected virtual string DatePattern {
             get { return Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern; }
         }
 
@@ -35,19 +39,19 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        protected override DateTime? Adapt(string value) {
-            return StringUtilities.IsEmpty(value) ? (DateTime?) null : DateTime.Parse(value, Thread.CurrentThread.CurrentUICulture.DateTimeFormat);
+        public override bool ReadOnly {
+            get { return base.ReadOnly; }
+            set {
+                EnsureChildControls();
+                base.ReadOnly = value;
+                image.Visible = !value;
+            }
         }
 
         protected override void CreateChildControls() {
             Controls.Add(CreateCalendarButton());
             base.CreateChildControls();
             Controls.Add(CreateCalendarExtender());
-        }
-
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            base.AddAttributesToRender(writer);
-            writer.AddAttribute(HtmlTextWriterAttribute.ReadOnly, "readonly");
         }
 
         private Image CreateCalendarButton() {
@@ -71,6 +75,12 @@ namespace Ruhe.Web.UI.Controls {
             calendar.PopupButtonID = image.ID;
             calendar.PopupPosition = CalendarPosition.BottomLeft;
             base.OnLoad(e);
+        }
+
+        protected override void OnPreRender(EventArgs e) {
+            base.OnPreRender(e);
+            Page.ClientScript.RegisterStartupScript(GetType(), "date-format", 
+                string.Format("var Ruhe$DATE_FORMAT = \"{0}\";", DatePattern), true);
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class InputDateTests : WebFormTestCase {
         private HtmlImageTester calendar;
-        private HtmlTagTester dateBox;
+        private HtmlImageTester readonlyCalendar;
 
         private void LoadPage() {
             Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputDate)));
             calendar = new HtmlImageTester(IdFor.It("date_calendar"));
-            dateBox = new HtmlTagTester(IdFor.It("date"));
+            readonlyCalendar = new HtmlImageTester(IdFor.It("readonly_calendar"));
         }
 
         [Test]
@@ -24,9 +24,21 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void TextBoxIsReadOnlyUntilIWorkOutValidation() {
+        public void DoesNotHaveCalendarImageWhenReadOnly() {
             LoadPage();
-            Assert.AreEqual("readonly", dateBox.Attribute("readonly"));
+            WebAssert.NotVisible(readonlyCalendar);
+        }
+
+        [Test]
+        public void EmitsKeystrokeFilterScript() {
+            LoadPage();
+            Assert.IsTrue(Browser.CurrentPageText.Contains("Ruhe$DATE"));
+        }
+
+        [Test]
+        public void EmitsUsersDateFormat() {
+            LoadPage();
+            Assert.IsTrue(Browser.CurrentPageText.Contains("var Ruhe$DATE_FORMAT = "));
         }
 
         [Test]

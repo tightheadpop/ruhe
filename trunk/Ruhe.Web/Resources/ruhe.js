@@ -59,25 +59,30 @@ function Ruhe_PropertyOn(/* attribute list */) {
 	return !!isOn;
 };
 
-function Ruhe_KeyPressFilter(oEvent) {
-	var keyEnter = 13, keyNewLine = 10, keyTab = 9, keyBackspace = 8, keyNull = 0, keyDelete = 0, keyEscape = 27;
-	var filter = Ruhe_GetProperty(this, 'FILTER');
-	if (Ruhe_PropertyOn(filter)){
-		if (filter.constructor !== RegExp)
-			filter = new RegExp(filter);
-		oEvent = oEvent || window.event;
-		
-		var keyCode = keyNull;
-		if (Ruhe_HasValue(oEvent.charCode))
-			keyCode = oEvent.charCode;
-		else
-			keyCode = oEvent.keyCode;
+function Ruhe_KeyPressFilter(regex) {
+    if (regex == null)
+        return function(){};
+    return function(oEvent) {
+	    var keyEnter = 13, keyNewLine = 10, keyTab = 9, keyBackspace = 8, keyNull = 0, keyDelete = 0, keyEscape = 27;
+	    this.FILTER = regex;
+	    var filter = Ruhe_GetProperty(this, 'FILTER');
+	    if (Ruhe_PropertyOn(filter)){
+		    if (filter.constructor !== RegExp)
+			    filter = new RegExp(filter);
+		    oEvent = oEvent || window.event;
+    		
+		    var keyCode = keyNull;
+		    if (Ruhe_HasValue(oEvent.charCode))
+			    keyCode = oEvent.charCode;
+		    else
+			    keyCode = oEvent.keyCode;
 
-		if(![keyNull, keyTab, keyEnter, keyNewLine, keyBackspace, keyDelete, keyEscape].contains(keyCode)
-				&& !filter.test(String.fromCharCode(keyCode)))
-			return false;
-	}
-	return true;
+		    if(![keyNull, keyTab, keyEnter, keyNewLine, keyBackspace, keyDelete, keyEscape].contains(keyCode)
+				    && !filter.test(String.fromCharCode(keyCode)))
+			    return false;
+	    }
+	    return true;
+	};
 };
 
 /* keystroke filters */
@@ -107,3 +112,4 @@ var Ruhe$POSITIVE_NUMBER = function(){
         return /[\d]/;
     return /[\d.]/;
 };
+var Ruhe$DATE = /[\d\/]/;
