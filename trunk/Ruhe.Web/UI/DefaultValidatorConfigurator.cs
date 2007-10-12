@@ -5,7 +5,16 @@ using AjaxControlToolkit;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
-    public class DefaultValidatorConfigurator {
+    public class DefaultValidatorConfigurator : IValidatorConfigurator {
+        public void Configure(IInputControl inputControl) {
+            foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
+                validator.ControlToValidate = inputControl.ValidatedControlId;
+                validator.ValidationGroup = inputControl.ValidationGroup;
+                Configure(validator, inputControl.ErrorMessage);
+                AddValidatorExtender(inputControl, validator);
+            }
+        }
+
         private static void Configure(BaseValidator validator, string errorMessage) {
             errorMessage = errorMessage.TrimEnd('.');
             validator.Controls.Clear();
@@ -23,25 +32,6 @@ namespace Ruhe.Web.UI {
             validator.SetFocusOnError = true;
         }
 
-//        private static void SetValidatorSummaryErrorMessage(BaseValidator validator, string errorMessage) {
-//            Control controlToValidate = validator.FindControl(validator.ControlToValidate);
-//            string summaryMessage = CreateValidationSummaryErrorMessage(controlToValidate, errorMessage);
-//            validator.ErrorMessage = summaryMessage;
-//                    string summaryClickFocusElementClientId = GetClientId(controlToValidate);
-//                    validator.ErrorMessage = string.Format("<a href='javascript:document.getElementById(&quot;{0}&quot;).focus();'>{1}</a>",
-//                                                           summaryClickFocusElementClientId,
-//                                                           summaryMessage);
-//        }
-
-        public static void ConfigureValidators(IInputControl inputControl) {
-            foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
-                validator.ControlToValidate = inputControl.ValidatedControlId;
-                validator.ValidationGroup = inputControl.ValidationGroup;
-                Configure(validator, inputControl.ErrorMessage);
-                AddValidatorExtender(inputControl, validator);
-            }
-        }
-
         private static void AddValidatorExtender(IInputControl control, BaseValidator validator) {
             ValidatorCalloutExtender calloutExtender = new ValidatorCalloutExtender();
             calloutExtender.ID = validator.ID + "_callout";
@@ -50,30 +40,5 @@ namespace Ruhe.Web.UI {
             ((Control) control).Controls.Add(calloutExtender);
         }
 
-//        private static string CreateValidationSummaryErrorMessage(Control controlToValidate, string errorMessage) {
-//            string fieldName = String.Empty;
-//            string returnValue;
-//            if (controlToValidate is IInputControl) {
-//                fieldName = ((IInputControl) controlToValidate).LabelText.Trim();
-//            }
-//            if (fieldName.Length > 0) {
-//                returnValue = string.Format("{0} in the {1} field.", errorMessage, fieldName);
-//            }
-//            else {
-//                returnValue = errorMessage + ".";
-//            }
-//            return returnValue;
-//        }
-
-//        private static string GetClientId(Control control) {
-//            string clientId;
-//            if (control is IInputControl) {
-//                clientId = ((IInputControl) control).DefaultElementClientId;
-//            }
-//            else {
-//                clientId = control.ClientID;
-//            }
-//            return clientId;
-//        }
     }
 }

@@ -213,6 +213,7 @@
     <Compile Include="UI\ControlUtilities.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\IValidatorConfigurator.cs" />
     <Compile Include="WebUtilities.cs">
       <SubType>Code</SubType>
     </Compile>

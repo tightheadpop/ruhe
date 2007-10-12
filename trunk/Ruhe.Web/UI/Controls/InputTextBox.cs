@@ -32,7 +32,7 @@ namespace Ruhe.Web.UI.Controls {
             base.OnInit(e);
             EnsureChildControls();
             AssignIdsToChildControls();
-            DefaultValidatorConfigurator.ConfigureValidators(this);
+            new DefaultValidatorConfigurator().Configure(this);
         }
 
         public override string ID {
