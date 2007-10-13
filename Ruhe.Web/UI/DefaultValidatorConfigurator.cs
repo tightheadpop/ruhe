@@ -10,13 +10,13 @@ namespace Ruhe.Web.UI {
             foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
                 validator.ControlToValidate = inputControl.ValidatedControlId;
                 validator.ValidationGroup = inputControl.ValidationGroup;
-                Configure(validator, inputControl.ErrorMessage);
-                AddValidatorExtender(inputControl, validator);
+                ConfigureEach(validator, inputControl);
+                AddValidatorExtender(validator, inputControl);
             }
         }
 
-        private static void Configure(BaseValidator validator, string errorMessage) {
-            errorMessage = errorMessage.TrimEnd('.');
+        protected virtual void ConfigureEach(BaseValidator validator, IInputControl control) {
+            string errorMessage = control.ErrorMessage.TrimEnd('.');
             validator.Controls.Clear();
             string errorIconHoverHelp = errorMessage + ".";
             validator.Controls.Add(new ErrorIcon(errorIconHoverHelp));
@@ -24,7 +24,7 @@ namespace Ruhe.Web.UI {
             validator.ErrorMessage = errorIconHoverHelp;
         }
 
-        private static void SetDefaultProperties(BaseValidator validator) {
+        protected virtual void SetDefaultProperties(BaseValidator validator) {
             validator.Display = ValidatorDisplay.Dynamic;
             validator.ForeColor = Color.Empty;
             validator.CssClass = "validation";
@@ -32,7 +32,7 @@ namespace Ruhe.Web.UI {
             validator.SetFocusOnError = true;
         }
 
-        private static void AddValidatorExtender(IInputControl control, Control validator) {
+        protected virtual void AddValidatorExtender(BaseValidator validator, IInputControl control) {
             ValidatorCalloutExtender calloutExtender = new ValidatorCalloutExtender();
             calloutExtender.ID = validator.ID + "_callout";
             calloutExtender.TargetControlID = validator.ID;
