@@ -81,6 +81,8 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -92,6 +94,7 @@
       <HintPath>..\bin\System.Web.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xml" />
     <ProjectReference Include="..\Ruhe.Common\Ruhe.Common.csproj">
       <Name>Ruhe.Common</Name>
       <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
@@ -102,6 +105,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Configuration\ValidatorConfiguratorConfigurationElement.cs" />
     <Compile Include="FileStreamer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -214,6 +218,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\IValidatorConfigurator.cs" />
+    <Compile Include="Configuration\RuheConfigurationSection.cs" />
+    <Compile Include="Configuration\ValidatorConfiguratorFactory.cs" />
     <Compile Include="WebUtilities.cs">
       <SubType>Code</SubType>
     </Compile>

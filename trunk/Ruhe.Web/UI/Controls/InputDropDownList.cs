@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputDropDownList : DropDownList, IInputControl {
@@ -25,7 +26,7 @@ namespace Ruhe.Web.UI.Controls {
             base.OnInit(e);
             EnsureChildControls();
             AssignIdsToChildControls();
-            new DefaultValidatorConfigurator().Configure(this);
+            ValidatorConfiguratorFactory.Create().Configure(this);
         }
 
         [DefaultValue(true)]
@@ -96,7 +97,8 @@ namespace Ruhe.Web.UI.Controls {
         public short Size {
             get { return Convert.ToInt16(ViewState["Size"]); }
             set {
-                if (value < 1) throw new ArgumentOutOfRangeException("Size", "Size must be greater than or equal to 1.");
+                if (value < 1)
+                    throw new ArgumentException("Size must be greater than or equal to 1.");
                 ViewState["Size"] = value;
             }
         }

@@ -2,6 +2,7 @@ using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputTextBox : TextBox, IInputControl {
@@ -32,7 +33,7 @@ namespace Ruhe.Web.UI.Controls {
             base.OnInit(e);
             EnsureChildControls();
             AssignIdsToChildControls();
-            new DefaultValidatorConfigurator().Configure(this);
+            ValidatorConfiguratorFactory.Create().Configure(this);
         }
 
         public override string ID {
