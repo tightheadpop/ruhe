@@ -32,7 +32,7 @@ namespace Ruhe.Web.UI {
             validator.SetFocusOnError = true;
         }
 
-        private static void AddValidatorExtender(IInputControl control, BaseValidator validator) {
+        private static void AddValidatorExtender(IInputControl control, Control validator) {
             ValidatorCalloutExtender calloutExtender = new ValidatorCalloutExtender();
             calloutExtender.ID = validator.ID + "_callout";
             calloutExtender.TargetControlID = validator.ID;

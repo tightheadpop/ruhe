@@ -89,6 +89,7 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
@@ -116,8 +117,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-    </None>
+    <EmbeddedResource Include="Ruhe.Tests.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +150,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TestExtensions\HtmlTesters\HtmlImageTester.cs" />
+    <Compile Include="Web\Configuration\RuheConfigurationSectionTests.cs" />
+    <Compile Include="Web\Configuration\ValidatorConfiguratorConfigurationElementTests.cs" />
     <Compile Include="Web\FileStreamerTests.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -191,11 +195,13 @@
     <Compile Include="Web\UI\ControlUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\Configuration\ValidatorConfiguratorFactoryTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>copy "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
