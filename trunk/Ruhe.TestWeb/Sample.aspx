@@ -10,6 +10,7 @@
 		<ruhe:InputDate ID="date" LabelText="Date" Required="true" runat="server" DefaultToToday="true" />
 		<ruhe:InputInteger LabelText="Your Age" ID="age" runat="server" />
 		<ruhe:InputNumber id="height" LabelText="Height (m)" runat="server" />
+		<ruhe:InputTextBox ID="comments" LabelText="Comments" runat="server" MaxLength="30" TextMode="MultiLine" />
 		<ruhe:ControlGroup runat="server">
 			<ruhe:SaveButton ID="saveButton" runat="server" OnClick="Save"/>
 			<ruhe:CancelButton runat="server" OnClick="Cancel" />
