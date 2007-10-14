@@ -9,7 +9,7 @@ For release 2.0, only the ValidatorConfigurator is configurable. Future releases
 You are able to provide an alternate validator configurator to the Ruhe controls. The purpose of the configurator is to isolate all common setup code for validators for a site or application. The 2.0 release only enables the use of the configurator for the built-in IInputControl classes.
 
 To configure a different class (other than the DefaultValidatorConfigurator), you will need to add the _ruhe_ section to your Web.Config. The class you specify must implement the IValidatorConfigurator interface. Extending the DefaultValidatorConfigurator is recommended at this point.
-
+{{{
   <configSections>
     <section name="ruhe" type="Ruhe.Web.Configuration.RuheConfigurationSection, Ruhe.Web"/>
     ...
@@ -18,3 +18,4 @@ To configure a different class (other than the DefaultValidatorConfigurator), yo
   <ruhe>
     <validatorConfigurator type="Full.Name.Of.Class, Assembly.Name"/>
   </ruhe>
+}}}
