@@ -1,0 +1,15 @@
+#The future of Ruhe
+might get to some of this stuff
+
+= Soon =
+  * Implement paste filtering for InputInteger, InputNumber, InputDate
+  * Finish type filtering for InputDate
+  * ensure correct postback behavior of Button in IE
+  * Rejigger AbstractValueTypeInput to use TypeConverters
+  * Implement an easy confirmation/error mechanism (similar to Sails flash)
+
+= Preferred =
+  * NanoWar-style support for Pico or Castle container in ASP.NET web forms
+
+= Some day =
+  * make validators work with Ajax callbacks
