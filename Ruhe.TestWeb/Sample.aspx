@@ -1,4 +1,5 @@
 <%@ Page Language="C#" AutoEventWireup="true" Inherits="Sample" Codebehind="Sample.aspx.cs" MasterPageFile="~/Ajax.Master" %>
+<%@ Register Src="~/AnotherLayoutContainer.ascx" TagName="AnotherLayoutContainer" TagPrefix="test" %>
 
 <asp:Content ContentPlaceHolderID="content" runat="server">
     <ruhe:Message ID="confirmationMessage" Visible="false" Type="Confirmation" runat="server" HeaderText="Confirmation" EnableViewState="false">
@@ -11,6 +12,7 @@
 		<ruhe:InputInteger LabelText="Your Age" ID="age" runat="server" />
 		<ruhe:InputNumber id="height" LabelText="Height (m)" runat="server" />
 		<ruhe:InputTextBox ID="comments" LabelText="Comments" runat="server" MaxLength="30" TextMode="MultiLine" />
+        <test:AnotherLayoutContainer ID="AnotherLayoutContainer1" runat="server" />
 		<ruhe:ControlGroup runat="server">
 			<ruhe:SaveButton ID="saveButton" runat="server" OnClick="Save"/>
 			<ruhe:CancelButton runat="server" OnClick="Cancel" />

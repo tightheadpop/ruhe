@@ -44,8 +44,7 @@ fieldset
 {
 	position: relative;
 	-moz-border-radius: 15px;
-	max-width: 50%;
-	border: 2px solid black;
+	border: 1px solid black;
 }
 legend
 {
