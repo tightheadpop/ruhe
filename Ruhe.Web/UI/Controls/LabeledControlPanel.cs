@@ -112,7 +112,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private static void RenderFormatLabel(Control control, HtmlTextWriter writer) {
-            EncodedLabel formatLabel = new EncodedLabel();
+            Label formatLabel = new Label();
             formatLabel.CssClass = "format";
 
             ILabeledControl labeledControl = control as ILabeledControl;
