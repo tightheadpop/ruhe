@@ -2,6 +2,6 @@
 
 <asp:Content ContentPlaceHolderID="content" runat="server">
 	<ruhe:LabeledControlPanel ID="panel" runat="Server" LabelPosition="Left">
-		<ruhe:InputTextBox ID="textbox" runat="server" FormatText="(format)" LabelText="label" />
+		<ruhe:InputTextBox ID="textbox" runat="server" FormatText="(&amp;times;10&lt;sup&gt;6&lt;/sup&gt;)" LabelText="label" />
 	</ruhe:LabeledControlPanel>
 </asp:Content>
