@@ -82,6 +82,15 @@ public partial class Sample {
     protected global::Ruhe.Web.UI.Controls.InputTextBox comments;
     
     /// <summary>
+    /// AnotherLayoutContainer1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Ruhe.TestWeb.AnotherLayoutContainer AnotherLayoutContainer1;
+    
+    /// <summary>
     /// saveButton control.
     /// </summary>
     /// <remarks>

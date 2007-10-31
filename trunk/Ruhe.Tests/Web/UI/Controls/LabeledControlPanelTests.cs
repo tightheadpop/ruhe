@@ -20,13 +20,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void LabelLeftLayoutAndCssClasses() {
+        public void LabelLeftLayoutAndCssClassesIncludingLayoutContainer() {
             Browser.GetPage(url);
 
             Assert.IsTrue(table.Visible);
-            Assert.AreEqual(1, table.Children("tr").Length, "should have one row of output");
+            Assert.AreEqual(3, table.Children("tr").Length, "should have one row of output");
             HtmlTagTester[] cells = table.ChildrenByXPath(".//td");
-            Assert.AreEqual(2, cells.Length, "should have 2 cells");
+            Assert.AreEqual(6, cells.Length, "should have 2 cells");
             Assert.AreEqual(1, cells[0].ChildrenByXPath(IdFor.It("textbox_label", ".//span[@id='{0}']")).Length, "first cell should contain the label");
             Assert.AreEqual(1, cells[1].ChildrenByXPath(IdFor.It("textbox_format", ".//span[@id='{0}']")).Length, "second cell should contain the format text");
             Assert.AreEqual(1, cells[1].ChildrenByXPath(IdFor.It("textbox", ".//input[@id='{0}']")).Length, "second cell should contain the control");
@@ -41,7 +41,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void LabelAboveLayoutAndCssClasses() {
             Browser.GetPage(url + "?Above=on");
 
-            Assert.AreEqual(2, table.Children("tr").Length, "should have two rows of output");
+            Assert.AreEqual(6, table.Children("tr").Length, "should have two rows of output for each control");
             Assert.AreEqual(1, table.ChildrenByXPath(IdFor.It("textbox_label", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "label should be in the first row");
             Assert.AreEqual(1, table.ChildrenByXPath(IdFor.It("textbox_format", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "format text should be in the first row");
             Assert.AreEqual(1, table.ChildrenByXPath(IdFor.It("textbox", "tr[2]/td[1]//input[@id = \"{0}\"]")).Length, "control should be in the second row");
@@ -55,6 +55,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void PermitsSuperTypeTextInFormat() {
             Browser.GetPage(url);
             Assert.AreEqual("(×10<sup>6</sup>)", format.Text, "should parse input and emit as HTML");
+        }
+
+        [Test]
+        public void SupportsUserControlAsLayoutContainer() {
+            Browser.GetPage(url);
+            WebAssert.Visible(new TextBoxTester(IdFor.It("userControl_anotherTextBox")));
+            WebAssert.Visible(new TextBoxTester(IdFor.It("userControl_anotherDate")));
         }
     }
 }

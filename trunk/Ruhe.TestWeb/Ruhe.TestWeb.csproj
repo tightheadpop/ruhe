@@ -57,6 +57,13 @@
     <Compile Include="Ajax.Master.designer.cs">
       <DependentUpon>Ajax.Master</DependentUpon>
     </Compile>
+    <Compile Include="AnotherLayoutContainer.ascx.cs">
+      <DependentUpon>AnotherLayoutContainer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnotherLayoutContainer.ascx.designer.cs">
+      <DependentUpon>AnotherLayoutContainer.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -219,6 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ajax.Master" />
+    <Content Include="AnotherLayoutContainer.ascx" />
     <Content Include="images\INFO.ICO" />
     <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\InputDateTests.aspx" />

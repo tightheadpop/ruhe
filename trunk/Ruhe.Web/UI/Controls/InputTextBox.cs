@@ -24,9 +24,8 @@ namespace Ruhe.Web.UI.Controls {
         private void SetDefaults() {
             Required = false;
             ReadOnly = false;
-            ValidationExpression = String.Empty;
+            ValidationExpression = string.Empty;
             ErrorMessage = "Please enter a valid value.";
-            Width = new Unit(10, UnitType.Em);
         }
 
         protected override void OnInit(EventArgs e) {
@@ -94,7 +93,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 regexValidator.ValidationExpression = value;
-                regexValidator.Visible = regexValidator.Enabled = (value != String.Empty);
+                regexValidator.Visible = regexValidator.Enabled = (value != string.Empty);
             }
         }
 
@@ -166,7 +165,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public virtual void Clear() {
-            Text = String.Empty;
+            Text = string.Empty;
         }
 
         public override ControlCollection Controls {
