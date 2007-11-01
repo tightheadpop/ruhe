@@ -6,6 +6,10 @@ using AjaxControlToolkit;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Provides a simplified user input that respects the user's culture settings.
+    /// Includes a pop-up calendar for input using the mouse.
+    /// </summary>
     public class InputDate : AbstractValueTypeInput<DateTime> {
         private CalendarExtender calendar;
         private Image image;

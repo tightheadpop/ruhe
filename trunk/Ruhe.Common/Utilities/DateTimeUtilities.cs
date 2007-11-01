@@ -1,13 +1,16 @@
 using System;
 using Microsoft.VisualBasic;
 
-namespace Ruhe.Common {
+namespace Ruhe.Common.Utilities {
     public enum RoundingOption {
         Up,
         Down
     }
 
-    public abstract class DateTimeUtilities {
+    /// <summary>
+    /// Function bucket providing common DateTime utility methods
+    /// </summary>
+    public class DateTimeUtilities {
         public static DateTime GetFirstDayOfWeek(DateTime dateTime) {
             return dateTime.AddDays((int) dateTime.DayOfWeek * -1);
         }
@@ -16,21 +19,9 @@ namespace Ruhe.Common {
             return GetFirstDayOfWeek(dateTime).AddDays(6);
         }
 
-        //this is here so we don't have to set the system clock back
-        //for testing purposes we can hard code a date.
-        public static DateTime CurrentDateTime {
-            get { return DateTime.Now; }
-        }
-
-        //TODO: use regex here
         public static bool IsDate(string date) {
-            try {
-                DateTime.Parse(date);
-            }
-            catch {
-                return false;
-            }
-            return true;
+            DateTime result;
+            return DateTime.TryParse(date, out result);
         }
 
         public static long DifferenceInMonths(DateTime date1, DateTime date2) {

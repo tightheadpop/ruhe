@@ -15,8 +15,8 @@ namespace Ruhe.Common.Utilities {
             return (string) First((object[]) collection);
         }
 
-        public static object First(ICollection list) {
-            return First(new ArrayList(list).ToArray());
+        public static object First(ICollection collection) {
+            return First(new ArrayList(collection).ToArray());
         }
     }
 }

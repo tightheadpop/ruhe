@@ -5,6 +5,9 @@ using System.Web.UI.WebControls;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Provides a well-formed, tabular layout for child controls
+    /// </summary>
     public class LabeledControlPanel : Panel, ILabeledControl, ILayoutContainer {
         public LabeledControlPanel() {
             LabelPosition = LabelPosition.Left;

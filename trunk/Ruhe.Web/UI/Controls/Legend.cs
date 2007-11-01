@@ -4,8 +4,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Auto-discovers all IIcons in a <see cref="Page"/> and renders a
+    /// table of descriptions for each type found.
+    /// </summary>
     public class Legend : Control {
-        private SortedList controlList;
+        private readonly SortedList controlList;
 
         public Legend() {
             controlList = new SortedList();
