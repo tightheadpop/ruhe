@@ -6,6 +6,12 @@ using Ruhe.Common.Utilities;
 using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Extended <see cref="DropDownList"/> that includes built-in validation
+    /// and extra features.
+    /// <para>A list with only one value is displayed as a <see cref="Label"/>,
+    /// giving the user a visual cue that there are no options</para>
+    /// </summary>
     public class InputDropDownList : DropDownList, IInputControl {
         private EncodedLabel readOnlyLabel;
         private RequiredIcon requiredLabel;
@@ -45,6 +51,11 @@ namespace Ruhe.Web.UI.Controls {
             SelectByValue(String.Empty);
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this control should emit
+        /// and blank <see cref="ListItem"/> before other items. The blank item
+        /// is not displayed unless there is at least one other <see cref="ListItem"/>.
+        /// </summary>
         [DefaultValue(false)]
         public bool InitialBlank {
             get {
@@ -57,6 +68,9 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// See <see cref="ILabeledControl.FormatText"/>
+        /// </summary>
         public string FormatText {
             get {
                 EnsureChildControls();
@@ -68,6 +82,9 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// See <see cref="ILabeledControl.LabelText"/>
+        /// </summary>
         public string LabelText {
             get {
                 EnsureChildControls();
@@ -79,6 +96,10 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// Gets or sets the text displayed to the user when the list contains no
+        /// <see cref="ListItem"/>s.
+        /// </summary>
         public string EmptyText {
             get {
                 EnsureChildControls();
@@ -103,26 +124,62 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// See <see cref="IInputControl.ValidatedControlId"/>
+        /// </summary>
         public string ValidatedControlId {
             get { return ID; }
         }
 
+        /// <summary>
+        /// Selects the first <see cref="ListItem"/> with a 
+        /// <see cref="ListItem.Value"/> equal to <c>value</c>.
+        /// </summary>
+        /// <param name="value">The integer value of the <see cref="ListItem"/> to select</param>
         public void SelectByValue(int value) {
             SelectByValue(Convert.ToString(value));
         }
 
+        /// <summary>
+        /// Selects the first <see cref="ListItem"/> with a 
+        /// <see cref="ListItem.Value"/> equal to <c>value</c>.
+        /// </summary>
+        /// <param name="value">The long value of the <see cref="ListItem"/> to select</param>
+        public void SelectByValue(long value) {
+            SelectByValue(Convert.ToString(value));
+        }
+
+        /// <summary>
+        /// Selects the first <see cref="ListItem"/> with a 
+        /// <see cref="ListItem.Value"/> equal to <c>value</c>.
+        /// </summary>
+        /// <param name="value">The <see cref="Guid"/> value of the <see cref="ListItem"/> to select</param>
+        public void SelectByValue(Guid value) {
+            SelectByValue(Convert.ToString(value));
+        }
+
+        /// <summary>
+        /// Selects the first <see cref="ListItem"/> with a 
+        /// <see cref="ListItem.Value"/> equal to <c>value</c>.
+        /// </summary>
+        /// <param name="value">The string value of the <see cref="ListItem"/> to select</param>
         public void SelectByValue(string value) {
             SelectedIndex = Items.IndexOf(Items.FindByValue(value));
         }
 
-        public void SelectByValue(Guid value) {
-            SelectByValue(value.ToString());
-        }
-
+        /// <summary>
+        /// Selects the first <see cref="ListItem"/> with 
+        /// <see cref="ListItem.Text"/> equal to <c>text</c>.
+        /// </summary>
+        /// <param name="text">The text of the <see cref="ListItem"/> to select</param>
         public void SelectByText(string text) {
             SelectedIndex = Items.IndexOf(Items.FindByText(text));
         }
 
+        /// <summary>
+        /// Gets or sets the currently selected <see cref="ListItem"/>
+        /// based on its <see cref="ListItem.Text"/>.
+        /// </summary>
         public string SelectedText {
             get {
                 string result = String.Empty;
@@ -135,6 +192,12 @@ namespace Ruhe.Web.UI.Controls {
             set { SelectByText(value); }
         }
 
+        /// <summary>
+        /// Convenience method for binding a datasource to the control
+        /// </summary>
+        /// <param name="dataSource">the datasource to assign to <see cref="BaseDataBoundControl.DataSource"/></param>
+        /// <param name="textField">the name of the <see cref="ListControl.DataTextField"/> to use in binding</param>
+        /// <param name="valueField">the name of the <see cref="ListControl.DataValueField"/> to use in binding</param>
         public virtual void BindList(object dataSource, string textField, string valueField) {
             DataSource = dataSource;
             DataTextField = textField;
@@ -142,14 +205,29 @@ namespace Ruhe.Web.UI.Controls {
             DataBind();
         }
 
+        /// <summary>
+        /// Convenience method for binding a datasource to the control
+        /// </summary>
+        /// <param name="dataSource">the datasource to assign to <see cref="BaseDataBoundControl.DataSource"/></param>
         public virtual void BindList(object dataSource) {
             BindList(dataSource, DataTextField, DataValueField);
         }
 
+        /// <summary>
+        /// Adds another <see cref="ListItem"/> to the dropdown as the first item.
+        /// </summary>
+        /// <param name="initialValue">the <see cref="ListItem.Text"/> and <see cref="ListItem.Value"/> of the <see cref="ListItem"/></param>
+        /// <param name="selected">whether the item is selected initially</param>
         public void AddInitialValueToList(string initialValue, bool selected) {
             AddInitialValueToList(initialValue, initialValue, selected);
         }
 
+        /// <summary>
+        /// Adds another <see cref="ListItem"/> to the dropdown as the first item.
+        /// </summary>
+        /// <param name="initialText">the <see cref="ListItem.Text"/> of the <see cref="ListItem"/></param>
+        /// <param name="initialValue">the <see cref="ListItem.Value"/> of the <see cref="ListItem"/></param>
+        /// <param name="selected">whether the item is selected initially</param>
         public void AddInitialValueToList(string initialText, string initialValue, bool selected) {
             ListItem item = new ListItem(initialText, initialValue);
             Items.Insert(0, item);
@@ -169,6 +247,10 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// See <see cref="IInputControl.ReadOnly"/>. When true, the <see cref="SelectedText"/>
+        /// is rendered as a <see cref="Label"/>.
+        /// </summary>
         [DefaultValue(false)]
         public bool ReadOnly {
             get {

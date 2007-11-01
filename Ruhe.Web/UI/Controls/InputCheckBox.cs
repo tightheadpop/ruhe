@@ -2,6 +2,9 @@ using System.Web.UI.WebControls;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Under development
+    /// </summary>
     public class InputCheckBox : CheckBox, IInputControl {
         public string DefaultElementClientId {
             get { return ClientID; }

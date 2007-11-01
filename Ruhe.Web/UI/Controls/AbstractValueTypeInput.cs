@@ -2,15 +2,25 @@ using System;
 using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Base class providing support for converting user input into a specified value type.
+    /// </summary>
+    /// <typeparam name="T">A value type (struct) that represents user input</typeparam>
     public abstract class AbstractValueTypeInput<T> : InputTextBox where T : struct {
         private CompareValidator compareValidator;
         private RangeValidator rangeValidator;
 
+        /// <summary>
+        /// Gets or sets the typed value for user input
+        /// </summary>
         public virtual Nullable<T> Value {
             get { return Adapt(Text); }
             set { Text = value.HasValue ? Adapt(value) : string.Empty; }
         }
 
+        /// <summary>
+        /// Gets or sets the minimum value of type T for user input
+        /// </summary>
         public virtual Nullable<T> MinimumValue {
             get {
                 EnsureChildControls();
@@ -30,6 +40,9 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// Gets or sets the maximum value of type T for user input
+        /// </summary>
         public virtual Nullable<T> MaximumValue {
             get {
                 EnsureChildControls();

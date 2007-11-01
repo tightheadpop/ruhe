@@ -1,6 +1,9 @@
 using System.IO;
 
-namespace Ruhe.Common {
+namespace Ruhe.Common.Utilities {
+    /// <summary>
+    /// Function bucket providing common file utility methods
+    /// </summary>
     public class FileUtilities {
         private FileUtilities() {}
 

@@ -6,6 +6,9 @@ using Ruhe.Common;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// Under development.
+    /// </summary>
     public class InputCheckBoxList : CheckBoxList, IInputControl {
         private IList selectedDataSource;
 

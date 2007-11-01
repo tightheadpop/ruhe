@@ -5,6 +5,9 @@ using Ruhe.Common.Utilities;
 using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
+    /// <summary>
+    /// TextBox providing built-in validation
+    /// </summary>
     public class InputTextBox : TextBox, IInputControl {
         private RequiredIcon requiredLabel;
         private RequiredFieldValidator requiredValidator;
@@ -63,6 +66,11 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        /// <summary>
+        /// See <see cref="IInputControl.ReadOnly"/>. Gets or sets a value indicating 
+        /// whether the contents of the control can be changed.
+        /// If true, the <see cref="Text"/> is displayed as a <see cref="Label"/>.
+        /// </summary>
         public override bool ReadOnly {
             get {
                 EnsureChildControls();

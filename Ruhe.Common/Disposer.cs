@@ -1,20 +1,15 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Ruhe.Common {
+    /// <summary>
+    /// Utility for disposing cleanly of items
+    /// </summary>
     public class Disposer {
         private static readonly string[] DisposingMethods = new string[] {"Flush", "Close", "Dispose"};
         private Disposer() {}
-
-        /// <summary>
-        /// Handles common clean up tasks, squelching exceptions.
-        /// </summary>
-        public static void DisposeOf(object obj) {
-            if (obj != null) {
-                InvokeDisposingMethods(obj);
-            }
-        }
 
         /// <summary>
         /// Handles common clean up tasks, squelching exceptions.
@@ -27,7 +22,9 @@ namespace Ruhe.Common {
                 return;
             }
             foreach (object thing in stuff) {
-                DisposeOf(thing);
+                if (thing != null) {
+                    InvokeDisposingMethods(thing);
+                }
             }
         }
 
@@ -43,13 +40,15 @@ namespace Ruhe.Common {
             return (MethodInfo[]) methods.ToArray(typeof(MethodInfo));
         }
 
-        private static void Invoke(object obj, MethodInfo[] methods) {
+        private static void Invoke(object obj, IEnumerable<MethodInfo> methods) {
             foreach (MethodInfo method in methods) {
                 if (method != null) {
                     try {
                         method.Invoke(obj, null);
                     }
-                    catch {}
+                    catch (Exception) {
+                        //do nothing
+                    }
                 }
             }
         }

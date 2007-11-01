@@ -3,11 +3,20 @@ using System.Collections;
 using System.Reflection;
 
 namespace Ruhe.Common {
+    /// <summary>
+    /// Function bucket providing quick access to System.Reflection actions
+    /// </summary>
     public class Reflector {
         private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy;
 
         private Reflector() {}
 
+        /// <summary>
+        /// Sets a property's value on an object
+        /// </summary>
+        /// <param name="obj">the object to operate on</param>
+        /// <param name="propertyName">the property to set</param>
+        /// <param name="propertyValue">the value to assign to the property</param>
         public static void SetPropertyValue(object obj, string propertyName, object propertyValue) {
             PropertyInfo property = GetProperty(obj, propertyName);
             object value = propertyValue;
@@ -17,6 +26,12 @@ namespace Ruhe.Common {
             property.SetValue(obj, value, null);
         }
 
+        /// <summary>
+        /// Converts input to specified Enum value
+        /// </summary>
+        /// <param name="value">input to convert</param>
+        /// <param name="enumerationType">the enumeration defining the desired value</param>
+        /// <returns>a single value defined in given enumeration</returns>
         public static object ConvertToEnum(object value, Type enumerationType) {
             if (value.GetType().IsInstanceOfType(enumerationType))
                 return value;
@@ -31,20 +46,45 @@ namespace Ruhe.Common {
             return enumerationValue;
         }
 
+        /// <summary>
+        /// Determines if a given Type implements a specified interface
+        /// </summary>
+        /// <param name="implementingType">the Type to examine</param>
+        /// <param name="interfaceType">the interface that it might implement</param>
+        /// <returns>true if <c>implementingType</c> implements <c>interfaceType</c></returns>
         public static bool ImplementsInterface(Type implementingType, Type interfaceType) {
             return implementingType.GetInterface(interfaceType.FullName) != null;
         }
 
+        /// <summary>
+        /// Gets the value of a property from a given object
+        /// </summary>
+        /// <param name="obj">the object to examine</param>
+        /// <param name="propertyName">the property to query</param>
+        /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
         public static object GetPropertyValue(object obj, string propertyName) {
             PropertyInfo property = GetProperty(obj, propertyName);
             return property.GetValue(obj, null);
         }
 
+        /// <summary>
+        /// Gets the value of a property from a given object
+        /// </summary>
+        /// <param name="obj">the object to examine</param>
+        /// <param name="propertyName">the property to query</param>
+        /// <param name="flags">BindingFlags to use in finding the property</param>
+        /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
         public static object GetPropertyValue(object obj, string propertyName, BindingFlags flags) {
             PropertyInfo property = GetProperty(obj, propertyName, flags);
             return property.GetValue(obj, null);
         }
 
+        /// <summary>
+        /// Gets the value of a field from a given object
+        /// </summary>
+        /// <param name="obj">the object to examine</param>
+        /// <param name="fieldName">the field to query</param>
+        /// <returns>the value of <c>fieldName</c> on <c>obj</c></returns>
         public static object GetFieldValue(object obj, string fieldName) {
             return GetField(obj, fieldName).GetValue(obj);
         }

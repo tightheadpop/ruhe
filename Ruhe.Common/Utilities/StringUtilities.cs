@@ -3,7 +3,10 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Ruhe.Common.Utilities {
-    public sealed class StringUtilities {
+    /// <summary>
+    /// Function bucket providing common string utility methods
+    /// </summary>
+    public class StringUtilities {
         private StringUtilities() {}
 
         public static string NullToEmpty(string value) {

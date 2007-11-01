@@ -1,9 +1,13 @@
 using System.Text;
 
 namespace Ruhe.Common {
+    /// <summary>
+    /// Wraps a StringBuilder instance, providing a specified delimiter
+    /// between appended values.
+    /// </summary>
     public class DelimitedStringBuilder {
-        private StringBuilder builder;
-        private string delimiter;
+        private readonly StringBuilder builder;
+        private readonly string delimiter;
 
         public DelimitedStringBuilder(string delimiter) {
             builder = new StringBuilder();
