@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]

@@ -38,7 +38,7 @@ namespace Ruhe.TestExtensions {
         }
 
         private class GeneralControlTester : ControlTester {
-            public GeneralControlTester(string id, ControlTester container) : base(id, container) {}
+            public GeneralControlTester(string id, Tester container) : base(id, container) {}
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Ruhe.Tests.TestExtensions {
         [Test]
         public void GetUrlPathAccessesConfigFile() {
             AssertTrue(ControlTesterUtilities.GetUrlPath(typeof(EncodedLabel))
-                           .Equals("http://localhost/ruhe/Web/UI/Controls/EncodedLabelTests.aspx"));
+                           .EndsWith("/Web/UI/Controls/EncodedLabelTests.aspx"));
         }
 
         [Test]
