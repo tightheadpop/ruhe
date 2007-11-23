@@ -3,21 +3,20 @@ using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Extensions.Asp.HtmlTester;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputDropDownListTests : WebFormTestCase {
+    public class InputDropDownListTests : RuheWebTest<InputDropDownList> {
         private string baseUrl;
 
         protected override void SetUp() {
             base.SetUp();
-            baseUrl = Regex.Replace(ControlTesterUtilities.GetUrlPath(typeof(InputDropDownList)), "(.*/).*", "$1");
+            baseUrl = Regex.Replace(GetUrlPath<InputDropDownList>(), "(.*/).*", "$1");
         }
 
-        private void LoadPage(string pageName) {
+        private void LoadOtherPage(string pageName) {
             Browser.GetPage(baseUrl + pageName);
         }
 
@@ -29,14 +28,14 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void RequiredMarkerIsNotVisibleWhenControlIsNotRequired() {
-            LoadPage("InputDropDownNotRequired.aspx");
+            LoadOtherPage("InputDropDownNotRequired.aspx");
             HtmlControlTester img = new HtmlImageTester(IdFor.It("DropDownTest_required"));
             WebAssert.NotVisible(img);
         }
 
         [Test]
         public void RequiredMarkerIsVisibleWhenControlIsRequired() {
-            LoadPage("InputDropDownRequired.aspx");
+            LoadOtherPage("InputDropDownRequired.aspx");
             HtmlControlTester img = new HtmlImageTester(IdFor.It("DropDownTest_required"));
             WebAssert.Visible(img);
         }
@@ -99,7 +98,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void PostBackIsolation() {
-            LoadPage("InputDropDownPostBackIsolation.aspx");
+            LoadOtherPage("InputDropDownPostBackIsolation.aspx");
 
             DropDownListTester dropDownList1 = new DropDownListTester(IdFor.It("DropDownList1"));
             TextBoxTester byProduct1 = new TextBoxTester(IdFor.It("ByProduct1"));
@@ -117,7 +116,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void IsReadOnlyWhenOnlyASingleValue() {
-            LoadPage("InputDropDownReadOnly.aspx");
+            LoadOtherPage("InputDropDownReadOnly.aspx");
 
             LabelTester readOnlyListLabel = new LabelTester(IdFor.It("readOnlyList_readOnly"));
             DropDownListTester readOnlyList = new DropDownListTester(IdFor.It("readOnlyList"));
@@ -129,7 +128,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ReadOnlyRendersAsLabel() {
-            LoadPage("InputDropDownReadOnly.aspx");
+            LoadOtherPage("InputDropDownReadOnly.aspx");
 
             LabelTester readOnlyListLabel = new LabelTester(IdFor.It("readOnlyTrueListMultiItem_readOnly"));
             DropDownListTester readOnlyList = new DropDownListTester(IdFor.It("readOnlyTrueListMultiItem"));
@@ -141,7 +140,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ReadOnlyFalseRendersAsNormal() {
-            LoadPage("InputDropDownReadOnly.aspx");
+            LoadOtherPage("InputDropDownReadOnly.aspx");
 
             DropDownListTester readOnlyList = new DropDownListTester(IdFor.It("readOnlyFalseListMultiItem"));
             LabelTester readOnlyListLabel = new LabelTester(IdFor.It("readOnlyFalseListMultiItem_readOnly"));
@@ -153,7 +152,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void BecomesReadOnlyWhenThereIsASingleValue() {
-            LoadPage("InputDropDownAutoPostBackDisplay.aspx");
+            LoadOtherPage("InputDropDownAutoPostBackDisplay.aspx");
 
             DropDownListTester firstList = new DropDownListTester(IdFor.It("firstDropDownList"));
             DropDownListTester secondList = new DropDownListTester(IdFor.It("secondDropDownList"));
@@ -178,7 +177,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void BecomesNonReadOnlyWhenSingleValueBecomesMultipleValues() {
-            LoadPage("InputDropDownAutoPostBackDisplay.aspx");
+            LoadOtherPage("InputDropDownAutoPostBackDisplay.aspx");
 
             DropDownListTester thirdList = new DropDownListTester(IdFor.It("thirdDropDownList"));
             DropDownListTester fourthList = new DropDownListTester(IdFor.It("fourthDropDownList"));

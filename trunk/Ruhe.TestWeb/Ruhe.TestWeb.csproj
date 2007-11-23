@@ -248,11 +248,10 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49573</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>4268</DevelopmentServerPort>
+          <DevelopmentServerVPath>/Ruhe.TestWeb</DevelopmentServerVPath>
+          <IISUrl>http://localhost/Ruhe.TestWeb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
         </WebProjectProperties>
       </FlavorProperties>

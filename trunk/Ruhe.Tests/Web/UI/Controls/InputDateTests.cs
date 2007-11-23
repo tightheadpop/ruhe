@@ -1,43 +1,42 @@
 using System;
 using NUnit.Extensions.Asp;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputDateTests : WebFormTestCase {
+    public class InputDateTests : RuheWebTest<InputDate> {
         private HtmlImageTester calendar;
         private HtmlImageTester readonlyCalendar;
 
-        private void LoadPage() {
-            Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputDate)));
+        private void LoadTestPage() {
+            LoadPage();
             calendar = new HtmlImageTester(IdFor.It("date_calendar"));
             readonlyCalendar = new HtmlImageTester(IdFor.It("readonly_calendar"));
         }
 
         [Test]
         public void HasCalendarImage() {
-            LoadPage();
+            LoadTestPage();
             WebAssert.Visible(calendar);
         }
 
         [Test]
         public void DoesNotHaveCalendarImageWhenReadOnly() {
-            LoadPage();
+            LoadTestPage();
             WebAssert.NotVisible(readonlyCalendar);
         }
 
         [Test]
         public void EmitsKeystrokeFilterScript() {
-            LoadPage();
+            LoadTestPage();
             Assert.IsTrue(Browser.CurrentPageText.Contains("Ruhe$DATE"));
         }
 
         [Test]
         public void EmitsUsersDateFormat() {
-            LoadPage();
+            LoadTestPage();
             Assert.IsTrue(Browser.CurrentPageText.Contains("var Ruhe$DATE_FORMAT = "));
         }
 

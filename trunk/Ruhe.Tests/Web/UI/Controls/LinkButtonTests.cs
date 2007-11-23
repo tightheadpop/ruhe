@@ -2,25 +2,22 @@ using System;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class LinkButtonTests : WebFormTestCase {
-        private string url;
+    public class LinkButtonTests : RuheWebTest<LinkButton> {
         private LabelTester target;
         private ButtonTester button;
         private LinkButtonTester link;
 
         protected override void SetUp() {
             base.SetUp();
-            url = ControlTesterUtilities.GetUrlPath(typeof(LinkButton));
             target = new LabelTester(IdFor.It("target"));
             button = new ButtonTester(IdFor.It("linkButton_button"));
             link = new LinkButtonTester(IdFor.It("linkButton"));
 
-            Browser.GetPage(url);
+            LoadPage();
         }
 
         [Test]

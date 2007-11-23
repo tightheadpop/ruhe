@@ -1,12 +1,11 @@
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class ButtonTests : WebFormTestCase {
+    public class ButtonTests : RuheWebTest<Button> {
         private HtmlTagTester button1;
         private HtmlTagTester button2;
         private LabelTester result;
@@ -15,7 +14,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         protected override void SetUp() {
             base.SetUp();
-            Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Button)));
+            LoadPage();
             button1 = new HtmlTagTester(IdFor.It("button1", ".//button[@id='{0}']"), "button1 tag");
             button2 = new HtmlTagTester(IdFor.It("button2", ".//button[@id='{0}']"), "button2 tag");
             result = new LabelTester(IdFor.It("result"));
