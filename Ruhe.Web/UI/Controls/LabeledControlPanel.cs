@@ -74,7 +74,7 @@ namespace Ruhe.Web.UI.Controls {
                     if (control is SectionHeader) {
                         RenderHeaderRow(control, writer);
                     }
-                    else if (control.Visible && IsControlNonEmpty(control)) {
+                    else if (control.Visible && IsNotEmptyLiteral(control)) {
                         RenderRow(control, writer);
                     }
                 }
@@ -186,10 +186,13 @@ namespace Ruhe.Web.UI.Controls {
 
         #endregion
 
-        private static bool IsControlNonEmpty(Control control) {
-            return control is ILabeledControl ||
-                   control is WebControl ||
-                   control is LiteralControl && ((LiteralControl) control).Text.Trim().Length > 0;
+        /// <summary>
+        /// The ASPX parser sees whitespace as an empty literal control.
+        /// </summary>
+        private static bool IsNotEmptyLiteral(Control control) {
+            if (control is LiteralControl)
+                return ((LiteralControl) control).Text.Trim().Length > 0;
+            return true;
         }
 
         #region ILayoutContainer Members
