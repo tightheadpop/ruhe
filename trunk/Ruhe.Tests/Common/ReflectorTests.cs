@@ -109,6 +109,7 @@ namespace Ruhe.Tests.Common {
         public void ConvertToEnum() {
             Assert.AreEqual(TestEnum.Tchotchke, Reflector.ConvertToEnum("Tchotchke", typeof(TestEnum)));
             Assert.AreEqual(TestEnum.Dingsbums, Reflector.ConvertToEnum(1, typeof(TestEnum)));
+            Assert.AreEqual(TestEnum.Tchotchke, Reflector.ConvertToEnum<TestEnum>("Tchotchke"));
         }
 
         public enum TestEnum {
