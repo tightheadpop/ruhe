@@ -2,13 +2,12 @@ using System;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputTextBoxTests : WebFormTestCase {
+    public class InputTextBoxTests : RuheWebTest<InputTextBox> {
         private TextBoxTester testBox;
         private TextBoxTester aspxRequired;
         private ButtonTester submitButton;
@@ -102,15 +101,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
             submitButton.Click();
             AssertTrue(summary.Messages.Length == 1);
-        }
-
-        private void LoadPage() {
-            LoadPage(string.Empty);
-        }
-
-        private void LoadPage(string option) {
-            string url = ControlTesterUtilities.GetUrlPath(typeof(InputTextBox));
-            Browser.GetPage(string.Format("{0}?{1}=on", url, option));
         }
     }
 }

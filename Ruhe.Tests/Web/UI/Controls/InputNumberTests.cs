@@ -1,12 +1,11 @@
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputNumberTests : WebFormTestCase {
+    public class InputNumberTests : RuheWebTest<InputNumber> {
         private TextBoxTester inputNumber;
         private ButtonTester submitButton;
         private LabelTester formatErrorMessage;
@@ -14,7 +13,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         protected override void SetUp() {
             base.SetUp();
-            Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputNumber)));
+            LoadPage();
             inputNumber = new TextBoxTester(IdFor.It("inputNumber"));
             submitButton = new ButtonTester(IdFor.It("submitButton"));
             formatErrorMessage = new LabelTester(IdFor.It("inputNumber_compare"));

@@ -2,26 +2,23 @@ using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Common.Utilities;
-using Ruhe.TestExtensions;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class LabeledControlPanelTests : WebFormTestCase {
-        private string url;
+    public class LabeledControlPanelTests : RuheWebTest<LabeledControlPanel> {
         private HtmlTagTester table;
         private LabelTester format;
 
         protected override void SetUp() {
             base.SetUp();
-            url = ControlTesterUtilities.GetUrlPath(typeof(LabeledControlPanel));
             table = new HtmlTagTester(IdFor.It("panel_layoutTable"));
             format = new LabelTester(IdFor.It("textbox_format"));
         }
 
         [Test]
         public void LabelLeftLayoutAndCssClassesIncludingLayoutContainer() {
-            Browser.GetPage(url);
+            LoadPage();
 
             Assert.IsTrue(table.Visible);
             Assert.AreEqual(3, table.Children("tr").Length, "should have one row of output");
@@ -39,7 +36,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void LabelAboveLayoutAndCssClasses() {
-            Browser.GetPage(url + "?Above=on");
+            LoadPage("Above");
 
             Assert.AreEqual(6, table.Children("tr").Length, "should have two rows of output for each control");
             Assert.AreEqual(1, table.ChildrenByXPath(IdFor.It("textbox_label", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "label should be in the first row");
@@ -53,13 +50,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void PermitsSuperTypeTextInFormat() {
-            Browser.GetPage(url);
+            LoadPage();
             Assert.AreEqual("(×10<sup>6</sup>)", format.Text, "should parse input and emit as HTML");
         }
 
         [Test]
         public void SupportsUserControlAsLayoutContainer() {
-            Browser.GetPage(url);
+            LoadPage();
             WebAssert.Visible(new TextBoxTester(IdFor.It("userControl_anotherTextBox")));
             WebAssert.Visible(new TextBoxTester(IdFor.It("userControl_anotherDate")));
         }

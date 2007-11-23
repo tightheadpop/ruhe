@@ -6,7 +6,7 @@ using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class MessageTests : WebFormTestCase {
+    public class MessageTests : RuheWebTest<Message> {
         protected PanelTester messageWrapper1;
         protected PanelTester messageHeader1;
         protected PanelTester messageBody1;
@@ -55,7 +55,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             messageHeader5 = new PanelTester(IdFor.It("message5_header"));
             messageBody5 = new PanelTester(IdFor.It("message5_body"));
 
-            Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(Message)));
+            LoadPage();
         }
 
         [Test]

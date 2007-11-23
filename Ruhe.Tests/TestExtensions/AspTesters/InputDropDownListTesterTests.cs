@@ -1,15 +1,15 @@
 using NUnit.Extensions.Asp;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
 using Ruhe.TestExtensions.AspTesters;
+using Ruhe.Tests.Web.UI.Controls;
 
 namespace Ruhe.Tests.TestExtensions.AspTesters {
-    public class InputDropDownListTesterTests : WebFormTestCase {
+    public class InputDropDownListTesterTests : RuheWebTest<InputDropDownListTester> {
         private InputDropDownListTester dropDownList;
 
         [Test]
         public void SelectByValue() {
-            Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputDropDownListTester)));
+            LoadPage();
             dropDownList = new InputDropDownListTester(IdFor.It("dropDownList"));
             dropDownList.SelectByValue("two");
             Assert.AreEqual(2, dropDownList.SelectedIndex);
