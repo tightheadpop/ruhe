@@ -46,6 +46,10 @@ namespace Ruhe.Common {
             return enumerationValue;
         }
 
+        public static T ConvertToEnum<T>(string value) {
+            return (T) Enum.Parse(typeof(T), value);
+        }
+
         /// <summary>
         /// Determines if a given Type implements a specified interface
         /// </summary>
