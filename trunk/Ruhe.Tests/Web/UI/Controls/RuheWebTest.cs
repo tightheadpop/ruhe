@@ -1,23 +1,15 @@
 using System.Text.RegularExpressions;
 using NUnit.Extensions.Asp;
 using NUnit.Framework;
-using Ruhe.Common;
 using Ruhe.Common.Utilities;
 using Ruhe.TestExtensions;
-using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     public class RuheWebTest<T> : WebFormTestCase {
-        private AspNetDevelopmentServer server;
-
         [TestFixtureSetUp]
         public virtual void TestFixtureSetUp() {
             //launches at http://localhost:4269/Ruhe.TestWeb
-            server = new AspNetDevelopmentServer(4269, TestWebPath, "Ruhe.TestWeb");
-        }
-
-        ~RuheWebTest() {
-            Disposer.DisposeOf(server);
+            new AspNetDevelopmentServer(4269, TestWebPath, "Ruhe.TestWeb");
         }
 
         private string TestWebPath {
@@ -27,17 +19,25 @@ namespace Ruhe.Tests.Web.UI.Controls {
             }
         }
 
+        protected static string IdFor(string partialId) {
+            return Tests.IdFor.It(partialId);
+        }
+
         protected static string GetUrlPath<R>() {
             string subPath = StringUtilities.RemovePrefix(typeof(R).FullName, @"\w+\.").Replace(".", "/");
             return string.Format("{0}{1}Tests.aspx", "http://localhost:4269/Ruhe.TestWeb/", subPath);
         }
 
-        protected void LoadPage() {
+        protected virtual void LoadPage() {
             Browser.GetPage(GetUrlPath<T>());
         }
 
-        protected void LoadPage(string option) {
+        protected virtual void LoadPageWithOption(string option) {
             Browser.GetPage(string.Format("{0}?{1}=on", GetUrlPath<T>(), option));
+        }
+
+        protected virtual void LoadPageWithSuffix(string suffix) {
+            Browser.GetPage(GetUrlPath<T>().Replace("Tests.aspx", suffix + ".aspx"));
         }
     }
 }

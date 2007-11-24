@@ -18,13 +18,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         protected override void SetUp() {
             base.SetUp();
-            testBox = new TextBoxTester(IdFor.It("testBox"));
-            aspxRequired = new TextBoxTester(IdFor.It("aspxRequired"));
-            submitButton = new ButtonTester(IdFor.It("submitButton"));
-            summary = new ValidationSummaryTester(IdFor.It("summary"));
-            readOnly = new LabelTester(IdFor.It("testBox_readOnly"));
-            resultLabel = new LabelTester(IdFor.It("result"));
-            requiredImage = new HtmlImageTester(IdFor.It("testBox_requiredLabel"));
+            testBox = new TextBoxTester(IdFor("testBox"));
+            aspxRequired = new TextBoxTester(IdFor("aspxRequired"));
+            submitButton = new ButtonTester(IdFor("submitButton"));
+            summary = new ValidationSummaryTester(IdFor("summary"));
+            readOnly = new LabelTester(IdFor("testBox_readOnly"));
+            resultLabel = new LabelTester(IdFor("result"));
+            requiredImage = new HtmlImageTester(IdFor("testBox_requiredLabel"));
         }
 
         [Test]
@@ -35,13 +35,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void RequiredIndicatorAppearsWhenFieldIsRequired() {
-            LoadPage("Required");
+            LoadPageWithOption("Required");
             WebAssert.Visible(requiredImage);
         }
 
         [Test]
         public void InvalidFieldStopsProcessingOfClickEventHandler() {
-            LoadPage("Required");
+            LoadPageWithOption("Required");
             submitButton.Click();
             Assert.AreEqual(String.Empty, resultLabel.Text, "click handler was executed after failed validation");
         }
@@ -60,7 +60,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             // expression in page = \d{3}
             string[] badValues = new string[] {"12", "1234", "a123", "abc"};
 
-            LoadPage("Regex");
+            LoadPageWithOption("Regex");
 
             foreach (string badValue in badValues) {
                 testBox.Text = badValue;
@@ -82,7 +82,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ReadOnly() {
-            LoadPage("ReadOnly");
+            LoadPageWithOption("ReadOnly");
             WebAssert.NotVisible(testBox);
             WebAssert.Visible(readOnly);
         }
@@ -95,7 +95,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void MarkerIsVisibleWhenRequiredIsSetInAspxFile() {
-            LoadPage("AspxRequired");
+            LoadPageWithOption("AspxRequired");
             AssertVisibility(aspxRequired, true);
             AssertVisibility(testBox, false);
 

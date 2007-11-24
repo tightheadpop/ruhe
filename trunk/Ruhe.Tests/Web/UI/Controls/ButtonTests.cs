@@ -15,11 +15,11 @@ namespace Ruhe.Tests.Web.UI.Controls {
         protected override void SetUp() {
             base.SetUp();
             LoadPage();
-            button1 = new HtmlTagTester(IdFor.It("button1", ".//button[@id='{0}']"), "button1 tag");
-            button2 = new HtmlTagTester(IdFor.It("button2", ".//button[@id='{0}']"), "button2 tag");
-            result = new LabelTester(IdFor.It("result"));
-            clickableButton1 = new ButtonTester(IdFor.It("button1"));
-            clickableButton2 = new ButtonTester(IdFor.It("button2"));
+            button1 = new HtmlTagTester(Tests.IdFor.Format("button1", ".//button[@id='{0}']"), "button1 tag");
+            button2 = new HtmlTagTester(Tests.IdFor.Format("button2", ".//button[@id='{0}']"), "button2 tag");
+            result = new LabelTester(IdFor("result"));
+            clickableButton1 = new ButtonTester(IdFor("button1"));
+            clickableButton2 = new ButtonTester(IdFor("button2"));
         }
 
         [Test]

@@ -1,5 +1,4 @@
 using System.Web.UI.WebControls;
-using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.TestExtensions;
@@ -18,8 +17,8 @@ namespace Ruhe.Tests.TestExtensions {
         [Test]
         public void HasChildElement() {
             Browser.GetPage(GetUrlPath<Message>());
-            PanelTester messageWrapper1 = new PanelTester(IdFor.It("message1"));
-            AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor.It("message1_header")));
+            PanelTester messageWrapper1 = new PanelTester(IdFor("message1"));
+            AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1_header")));
         }
 
         [Test]

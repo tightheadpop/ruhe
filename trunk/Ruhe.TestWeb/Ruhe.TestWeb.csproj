@@ -135,6 +135,27 @@
     <Compile Include="Web\UI\Controls\InputDropDownRequired.aspx.designer.cs">
       <DependentUpon>InputDropDownRequired.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumInvalidEnumType.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>InputEnumInvalidEnumType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumInvalidEnumType.aspx.designer.cs">
+      <DependentUpon>InputEnumInvalidEnumType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumMissingEnumType.aspx.cs">
+      <DependentUpon>InputEnumMissingEnumType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumMissingEnumType.aspx.designer.cs">
+      <DependentUpon>InputEnumMissingEnumType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumTests.aspx.cs">
+      <DependentUpon>InputEnumTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumTests.aspx.designer.cs">
+      <DependentUpon>InputEnumTests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web\UI\Controls\InputIntegerTests.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>InputIntegerTests.aspx</DependentUpon>
@@ -230,6 +251,9 @@
     <Content Include="images\INFO.ICO" />
     <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\InputDateTests.aspx" />
+    <Content Include="Web\UI\Controls\InputEnumInvalidEnumType.aspx" />
+    <Content Include="Web\UI\Controls\InputEnumMissingEnumType.aspx" />
+    <Content Include="Web\UI\Controls\InputEnumTests.aspx" />
     <Content Include="Web\UI\Controls\InputIntegerTests.aspx" />
     <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />

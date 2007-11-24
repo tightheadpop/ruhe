@@ -29,14 +29,14 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void RequiredMarkerIsNotVisibleWhenControlIsNotRequired() {
             LoadOtherPage("InputDropDownNotRequired.aspx");
-            HtmlControlTester img = new HtmlImageTester(IdFor.It("DropDownTest_required"));
+            HtmlControlTester img = new HtmlImageTester(IdFor("DropDownTest_required"));
             WebAssert.NotVisible(img);
         }
 
         [Test]
         public void RequiredMarkerIsVisibleWhenControlIsRequired() {
             LoadOtherPage("InputDropDownRequired.aspx");
-            HtmlControlTester img = new HtmlImageTester(IdFor.It("DropDownTest_required"));
+            HtmlControlTester img = new HtmlImageTester(IdFor("DropDownTest_required"));
             WebAssert.Visible(img);
         }
 
@@ -100,9 +100,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void PostBackIsolation() {
             LoadOtherPage("InputDropDownPostBackIsolation.aspx");
 
-            DropDownListTester dropDownList1 = new DropDownListTester(IdFor.It("DropDownList1"));
-            TextBoxTester byProduct1 = new TextBoxTester(IdFor.It("ByProduct1"));
-            TextBoxTester byProduct2 = new TextBoxTester(IdFor.It("ByProduct2"));
+            DropDownListTester dropDownList1 = new DropDownListTester(IdFor("DropDownList1"));
+            TextBoxTester byProduct1 = new TextBoxTester(IdFor("ByProduct1"));
+            TextBoxTester byProduct2 = new TextBoxTester(IdFor("ByProduct2"));
 
             AssertEquals(byProduct1.Text, "did not fire");
             AssertEquals(byProduct2.Text, "did not fire");
@@ -118,8 +118,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void IsReadOnlyWhenOnlyASingleValue() {
             LoadOtherPage("InputDropDownReadOnly.aspx");
 
-            LabelTester readOnlyListLabel = new LabelTester(IdFor.It("readOnlyList_readOnly"));
-            DropDownListTester readOnlyList = new DropDownListTester(IdFor.It("readOnlyList"));
+            LabelTester readOnlyListLabel = new LabelTester(IdFor("readOnlyList_readOnly"));
+            DropDownListTester readOnlyList = new DropDownListTester(IdFor("readOnlyList"));
 
             AssertVisibility(readOnlyListLabel, true);
             AssertVisibility(readOnlyList, false);
@@ -130,8 +130,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void ReadOnlyRendersAsLabel() {
             LoadOtherPage("InputDropDownReadOnly.aspx");
 
-            LabelTester readOnlyListLabel = new LabelTester(IdFor.It("readOnlyTrueListMultiItem_readOnly"));
-            DropDownListTester readOnlyList = new DropDownListTester(IdFor.It("readOnlyTrueListMultiItem"));
+            LabelTester readOnlyListLabel = new LabelTester(IdFor("readOnlyTrueListMultiItem_readOnly"));
+            DropDownListTester readOnlyList = new DropDownListTester(IdFor("readOnlyTrueListMultiItem"));
 
             AssertVisibility(readOnlyListLabel, true);
             AssertVisibility(readOnlyList, false);
@@ -142,8 +142,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void ReadOnlyFalseRendersAsNormal() {
             LoadOtherPage("InputDropDownReadOnly.aspx");
 
-            DropDownListTester readOnlyList = new DropDownListTester(IdFor.It("readOnlyFalseListMultiItem"));
-            LabelTester readOnlyListLabel = new LabelTester(IdFor.It("readOnlyFalseListMultiItem_readOnly"));
+            DropDownListTester readOnlyList = new DropDownListTester(IdFor("readOnlyFalseListMultiItem"));
+            LabelTester readOnlyListLabel = new LabelTester(IdFor("readOnlyFalseListMultiItem_readOnly"));
 
             AssertVisibility(readOnlyList, true);
             AssertTrue(readOnlyList.Items.Count > 1);
@@ -154,10 +154,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void BecomesReadOnlyWhenThereIsASingleValue() {
             LoadOtherPage("InputDropDownAutoPostBackDisplay.aspx");
 
-            DropDownListTester firstList = new DropDownListTester(IdFor.It("firstDropDownList"));
-            DropDownListTester secondList = new DropDownListTester(IdFor.It("secondDropDownList"));
-            LabelTester firstLabel = new LabelTester(IdFor.It("firstDropDownList_readOnly"));
-            LabelTester secondLabel = new LabelTester(IdFor.It("secondDropDownList_readOnly"));
+            DropDownListTester firstList = new DropDownListTester(IdFor("firstDropDownList"));
+            DropDownListTester secondList = new DropDownListTester(IdFor("secondDropDownList"));
+            LabelTester firstLabel = new LabelTester(IdFor("firstDropDownList_readOnly"));
+            LabelTester secondLabel = new LabelTester(IdFor("secondDropDownList_readOnly"));
 
             AssertVisibility(firstList, true);
             AssertTrue(firstList.Items.Count > 1);
@@ -179,10 +179,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void BecomesNonReadOnlyWhenSingleValueBecomesMultipleValues() {
             LoadOtherPage("InputDropDownAutoPostBackDisplay.aspx");
 
-            DropDownListTester thirdList = new DropDownListTester(IdFor.It("thirdDropDownList"));
-            DropDownListTester fourthList = new DropDownListTester(IdFor.It("fourthDropDownList"));
-            LabelTester thirdLabel = new LabelTester(IdFor.It("thirdDropDownList_readOnly"));
-            LabelTester fourthLabel = new LabelTester(IdFor.It("fourthDropDownList_readOnly"));
+            DropDownListTester thirdList = new DropDownListTester(IdFor("thirdDropDownList"));
+            DropDownListTester fourthList = new DropDownListTester(IdFor("fourthDropDownList"));
+            LabelTester thirdLabel = new LabelTester(IdFor("thirdDropDownList_readOnly"));
+            LabelTester fourthLabel = new LabelTester(IdFor("fourthDropDownList_readOnly"));
 
             AssertVisibility(thirdList, true);
             AssertTrue(thirdList.Items.Count > 1);

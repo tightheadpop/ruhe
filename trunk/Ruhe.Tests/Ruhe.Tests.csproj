@@ -132,6 +132,7 @@
     <Compile Include="Common\DisposeTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\QuickTests.cs" />
     <Compile Include="Common\ReflectorTests.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -167,6 +168,8 @@
     <Compile Include="Web\UI\Controls\InputDropDownListTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\InputEnumTests.cs" />
+    <Compile Include="Web\UI\Controls\InputEnumWebTests.cs" />
     <Compile Include="Web\UI\Controls\InputIntegerTests.cs" />
     <Compile Include="Web\UI\Controls\InputNumberTests.cs">
       <SubType>Code</SubType>

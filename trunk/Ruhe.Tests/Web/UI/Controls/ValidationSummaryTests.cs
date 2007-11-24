@@ -12,8 +12,8 @@
 //
 //        private void LoadPage() {
 //            Browser.GetPage(ControlTesterUtilities.GetUrlPath(typeof(InputTextBox)) + "?Required=on");
-//            summary = new ValidationSummaryTester(IdFor.It("summary"));
-//            submitButton = new ButtonTester(IdFor.It("submitButton"));
+//            summary = new ValidationSummaryTester(IdFor("summary"));
+//            submitButton = new ButtonTester(IdFor("submitButton"));
 //        }
 //
 //        [Test]
@@ -30,7 +30,7 @@
 //        [Test]
 //        public void GeneratedValidationSummaryJavaScriptUsesCorrectClientId() {
 //            LoadPage();
-//            StringAssert.Contains(IdFor.It("testBox", "document.getElementById(&quot;{0}&quot;).focus();"), Browser.CurrentPageText);
+//            StringAssert.Contains(IdFor("testBox", "document.getElementById(&quot;{0}&quot;).focus();"), Browser.CurrentPageText);
 //        }
 //
 //    }

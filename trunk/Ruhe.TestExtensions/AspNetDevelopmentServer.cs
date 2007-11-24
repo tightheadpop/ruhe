@@ -32,7 +32,8 @@ namespace Ruhe.TestExtensions {
 
         public void Dispose() {
             //taskkill /IM webdev.webserver.exe
-            developmentServerProcess.Kill();
+            if (developmentServerProcess != null)
+                developmentServerProcess.Kill();
         }
     }
 }

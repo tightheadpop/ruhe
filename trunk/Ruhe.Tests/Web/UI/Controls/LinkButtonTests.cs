@@ -13,9 +13,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         protected override void SetUp() {
             base.SetUp();
-            target = new LabelTester(IdFor.It("target"));
-            button = new ButtonTester(IdFor.It("linkButton_button"));
-            link = new LinkButtonTester(IdFor.It("linkButton"));
+            target = new LabelTester(IdFor("target"));
+            button = new ButtonTester(IdFor("linkButton_button"));
+            link = new LinkButtonTester(IdFor("linkButton"));
 
             LoadPage();
         }

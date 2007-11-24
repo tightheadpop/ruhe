@@ -86,12 +86,13 @@
     <Compile Include="DelimitedStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Disposer.cs">
+    <Compile Include="DisposeOf.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Quick.cs" />
     <Compile Include="Reflector.cs">
       <SubType>Code</SubType>
     </Compile>

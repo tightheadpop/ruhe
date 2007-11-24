@@ -12,8 +12,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         private void LoadTestPage() {
             LoadPage();
-            calendar = new HtmlImageTester(IdFor.It("date_calendar"));
-            readonlyCalendar = new HtmlImageTester(IdFor.It("readonly_calendar"));
+            calendar = new HtmlImageTester(IdFor("date_calendar"));
+            readonlyCalendar = new HtmlImageTester(IdFor("readonly_calendar"));
         }
 
         [Test]

@@ -10,7 +10,7 @@ namespace Ruhe.Tests.TestExtensions.AspTesters {
         [Test]
         public void SelectByValue() {
             LoadPage();
-            dropDownList = new InputDropDownListTester(IdFor.It("dropDownList"));
+            dropDownList = new InputDropDownListTester(IdFor("dropDownList"));
             dropDownList.SelectByValue("two");
             Assert.AreEqual(2, dropDownList.SelectedIndex);
         }

@@ -10,19 +10,19 @@ namespace Ruhe.Tests.Common {
         [Test]
         public void DisposeOfIDisposable() {
             Foo disposable = new Foo();
-            Disposer.DisposeOf(disposable);
+            DisposeOf.These(disposable);
             Assert.IsTrue(disposable.Disposed);
         }
 
         [Test]
         public void DisposeOfNullThrowsNoException() {
-            Disposer.DisposeOf(null);
+            DisposeOf.These(null);
         }
 
         [Test]
         public void DisposeOfClosesAndDisposes() {
             FooConnection foo = new FooConnection();
-            Disposer.DisposeOf(foo);
+            DisposeOf.These(foo);
             Assert.IsTrue(foo.Closed);
             Assert.IsTrue(foo.Disposed);
         }
@@ -30,14 +30,14 @@ namespace Ruhe.Tests.Common {
         [Test]
         public void DisposeOfFlushesAndCloses() {
             FooWriter writer = new FooWriter();
-            Disposer.DisposeOf(writer);
+            DisposeOf.These(writer);
             Assert.IsTrue(writer.Flushed);
             Assert.IsTrue(writer.Closed);
         }
 
         [Test]
         public void DisposingSquelchesExceptions() {
-            Disposer.DisposeOf(new ExceptionThrowingDisposable());
+            DisposeOf.These(new ExceptionThrowingDisposable());
         }
 
         #region Test Classes

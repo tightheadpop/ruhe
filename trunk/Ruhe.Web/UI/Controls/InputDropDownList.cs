@@ -68,9 +68,6 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        /// <summary>
-        /// See <see cref="ILabeledControl.FormatText"/>
-        /// </summary>
         public string FormatText {
             get {
                 EnsureChildControls();
@@ -82,9 +79,6 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        /// <summary>
-        /// See <see cref="ILabeledControl.LabelText"/>
-        /// </summary>
         public string LabelText {
             get {
                 EnsureChildControls();
