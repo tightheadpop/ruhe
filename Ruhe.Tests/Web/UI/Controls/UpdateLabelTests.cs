@@ -1,4 +1,3 @@
-using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Web.UI.Controls;
@@ -17,13 +16,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void EmitsStyleScript() {
-            StringAssert.Contains(IdFor.It("updateLabel", "document.getElementById('{0}').style.display = 'inline';"), Browser.CurrentPageText);
+            StringAssert.Contains(Tests.IdFor.Format("updateLabel", "document.getElementById('{0}').style.display = 'inline';"), Browser.CurrentPageText);
         }
 
         protected override void SetUp() {
             base.SetUp();
-            saveButton = new ButtonTester(IdFor.It("saveButton"));
-            proof = new LabelTester(IdFor.It("proof"));
+            saveButton = new ButtonTester(IdFor("saveButton"));
+            proof = new LabelTester(IdFor("proof"));
             LoadPage();
         }
     }

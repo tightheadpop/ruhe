@@ -14,10 +14,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
         protected override void SetUp() {
             base.SetUp();
             LoadPage();
-            inputNumber = new TextBoxTester(IdFor.It("inputNumber"));
-            submitButton = new ButtonTester(IdFor.It("submitButton"));
-            formatErrorMessage = new LabelTester(IdFor.It("inputNumber_compare"));
-            rangeErrorMessage = new LabelTester(IdFor.It("inputNumber_range"));
+            inputNumber = new TextBoxTester(IdFor("inputNumber"));
+            submitButton = new ButtonTester(IdFor("submitButton"));
+            formatErrorMessage = new LabelTester(IdFor("inputNumber_compare"));
+            rangeErrorMessage = new LabelTester(IdFor("inputNumber_range"));
         }
 
         [Test]

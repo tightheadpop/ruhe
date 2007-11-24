@@ -7,9 +7,9 @@ namespace Ruhe.Common {
     /// <summary>
     /// Utility for disposing cleanly of items
     /// </summary>
-    public class Disposer {
+    public class DisposeOf {
         private static readonly string[] DisposingMethods = new string[] {"Flush", "Close", "Dispose"};
-        private Disposer() {}
+        private DisposeOf() {}
 
         /// <summary>
         /// Handles common clean up tasks, squelching exceptions.
@@ -17,7 +17,7 @@ namespace Ruhe.Common {
         /// <remarks>
         /// Flush, Close, Dispose, in that order.
         /// </remarks>
-        public static void DisposeOf(params object[] stuff) {
+        public static void These(params object[] stuff) {
             if (stuff == null) {
                 return;
             }

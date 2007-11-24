@@ -134,6 +134,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\InputDate.cs" />
+    <Compile Include="UI\Controls\InputEnum.cs" />
     <Compile Include="UI\Controls\InputInteger.cs" />
     <Compile Include="UI\Controls\Legend.cs">
       <SubType>Code</SubType>
