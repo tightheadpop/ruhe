@@ -2,9 +2,7 @@
 <%@ Register Src="~/AnotherLayoutContainer.ascx" TagName="AnotherLayoutContainer" TagPrefix="test" %>
 
 <asp:Content ContentPlaceHolderID="content" runat="server">
-    <ruhe:Message ID="confirmationMessage" Visible="false" Type="Confirmation" runat="server" HeaderText="Confirmation" EnableViewState="false">
-        Thank you for submitting.
-    </ruhe:Message>
+    <ruhe:Message ID="confirmationMessage" FlashHost="true" runat="server" />
 	<ruhe:LabeledControlPanel runat="server" GroupingText="Sample Form">
 		<ruhe:InputTextBox LabelText="Name" ID="name" runat="server" Required="true" />
 		<ruhe:InputEmailAddress ID="email" runat="server" Required="true" />
