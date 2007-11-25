@@ -183,6 +183,7 @@
     <Compile Include="Web\UI\Controls\LinkButtonTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\MessageFlashTests.cs" />
     <Compile Include="Web\UI\Controls\MessageTests.cs">
       <SubType>Code</SubType>
     </Compile>
