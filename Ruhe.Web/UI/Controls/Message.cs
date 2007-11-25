@@ -39,6 +39,18 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void Render(HtmlTextWriter writer) {
             EnsureChildControls();
+
+            FlashTransferObject? flashMessage = FlashMessage;
+            if (FlashHost) {
+                if (!flashMessage.HasValue) return;
+                Controls.Clear();
+                Controls.Add(new LiteralControl(flashMessage.Value.Message));
+                if (flashMessage.Value.Type.HasValue)
+                    Type = flashMessage.Value.Type.Value;
+                if (!string.IsNullOrEmpty(flashMessage.Value.HeaderText))
+                    HeaderText = flashMessage.Value.HeaderText;
+            }
+
             if (HeaderText.Length > 0)
                 header.Controls.Add(new LiteralControl(HttpUtility.HtmlEncode(HeaderText)));
             header.Visible = header.HasControls();
@@ -68,6 +80,49 @@ namespace Ruhe.Web.UI.Controls {
             header.ID = UniqueID + "_header";
             header.CssClass = "header";
             header.RenderControl(writer);
+        }
+
+        public bool FlashHost {
+            get { return Convert.ToBoolean(ViewState["FlashHost"]); }
+            set { ViewState["FlashHost"] = value; }
+        }
+
+        private FlashTransferObject? FlashMessage {
+            get {
+                FlashTransferObject? flashMessage = (FlashTransferObject?) Page.Session["Flash"];
+                FlashMessage = null;
+                return flashMessage;
+            }
+            set { Page.Session["Flash"] = value; }
+        }
+
+        public static void Flash(string message) {
+            Flash(message, null);
+        }
+
+        public static void Flash(string message, MessageType? messageType) {
+            Flash(message, messageType, null);
+        }
+
+        public static void Flash(string message, MessageType? messageType, string headerText) {
+            HttpContext context = HttpContext.Current;
+            if (context == null)
+                throw new InvalidOperationException("Flash can only be used in a web context");
+
+            context.Session["Flash"] = new FlashTransferObject(message, messageType, headerText);
+        }
+
+        [Serializable]
+        private struct FlashTransferObject {
+            public string Message;
+            public MessageType? Type;
+            public string HeaderText;
+
+            public FlashTransferObject(string message, MessageType? type, string headerText) {
+                Message = message;
+                Type = type;
+                HeaderText = headerText;
+            }
         }
     }
 }

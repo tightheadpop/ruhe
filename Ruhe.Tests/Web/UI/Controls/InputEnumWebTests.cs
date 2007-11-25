@@ -1,5 +1,4 @@
 using System;
-using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Common;
@@ -11,28 +10,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
         private DropDownListTester noInitialBlank;
         private DropDownListTester initialBlank;
         private readonly int NumberOfMonths = Enum.GetNames(typeof(Month)).Length;
-
-        [Test]
-        public void EnumTypeShouldBeSetAtDesignTime() {
-            try {
-                LoadPageWithSuffix("MissingEnumType");
-                Assert.Fail("Expected ArgumentNullException");
-            }
-            catch (HttpClient.AspServerException e) {
-                StringAssert.Contains(typeof(ArgumentNullException).Name, e.Message);
-            }
-        }
-
-        [Test]
-        public void EnumTypeMustBeATypeNameOfAnEnum() {
-            try {
-                LoadPageWithSuffix("InvalidEnumType");
-                Assert.Fail("Expected ArgumentException");
-            }
-            catch (HttpClient.AspServerException e) {
-                StringAssert.Contains(typeof(ArgumentException).Name, e.Message);
-            }
-        }
 
         [Test]
         public void PopulatesDropDown() {
