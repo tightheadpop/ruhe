@@ -7,7 +7,7 @@ might get to some of this stuff
   * Add multiple column support for LabeledControlPanel
   * ensure correct postback behavior of Button in IE
   * Rejigger AbstractValueTypeInput to use TypeConverters
-  * Implement an easy confirmation/error mechanism (similar to Sails/Rails flash)
+  * ~~Implement an easy confirmation/error mechanism (similar to Sails/Rails flash)~~
   * Provide a default stylesheet for Ruhe controls that is easily overriden by a custom stylesheet
 
 = Preferred =
