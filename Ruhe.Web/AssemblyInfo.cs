@@ -15,6 +15,7 @@ using System.Web.UI;
 [assembly : AssemblyCopyright("")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
+
 [assembly : WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
 [assembly : WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
 [assembly : WebResource("Ruhe.Web.Resources.save.png", "image/png")]
@@ -33,7 +34,7 @@ using System.Web.UI;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly : AssemblyVersion("2.0.*")]
+[assembly : AssemblyVersion("2.1.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
