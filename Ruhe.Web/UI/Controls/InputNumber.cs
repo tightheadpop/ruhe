@@ -1,3 +1,4 @@
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
@@ -12,6 +13,13 @@ namespace Ruhe.Web.UI.Controls {
                     return "Ruhe$NUMBER";
                 return "Ruhe$POSITIVE_NUMBER";
             }
+        }
+
+        protected override void Render(HtmlTextWriter writer) {
+            string oldCssClass = CssClass;
+            CssClass = (CssClass + " numeric").Trim();
+            base.Render(writer);
+            CssClass = oldCssClass;
         }
     }
 }

@@ -211,9 +211,6 @@ namespace Ruhe.Web.UI.Controls {
             if (!WebUtilities.BrowserIsInternetExplorer) {
                 writer.AddAttribute(HtmlTextWriterAttribute.Style, "width:" + Width);
             }
-            if (!TextMode.Equals(TextBoxMode.MultiLine)) {
-                writer.AddAttribute("size", Width.Value.ToString());
-            }
             if (MaxLength > 0 && TextMode.Equals(TextBoxMode.MultiLine)) {
                 #region Create scripts
 
