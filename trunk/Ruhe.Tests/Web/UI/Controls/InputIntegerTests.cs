@@ -69,5 +69,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
             WebAssert.Visible(rangeErrorMessage);
             WebAssert.NotVisible(formatErrorMessage);
         }
+
+        [Test]
+        public void HasNumericCssClass() {
+            StringAssert.Contains("class=\"numeric\"", Browser.CurrentPageText);
+        }
     }
 }
