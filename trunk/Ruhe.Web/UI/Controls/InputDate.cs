@@ -30,6 +30,7 @@ namespace Ruhe.Web.UI.Controls {
             return StringUtilities.IsEmpty(value) ? (DateTime?) null : DateTime.Parse(value, Thread.CurrentThread.CurrentUICulture.DateTimeFormat);
         }
 
+        //TODO enable configurable pattern
         protected virtual string DatePattern {
             get { return Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern; }
         }

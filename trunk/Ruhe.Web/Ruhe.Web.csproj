@@ -204,6 +204,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\ResetButton.cs" />
+    <Compile Include="UI\Controls\RuheScriptReference.cs" />
     <Compile Include="UI\Controls\SaveButton.cs" />
     <Compile Include="UI\Controls\SectionHeader.cs">
       <SubType>Code</SubType>
