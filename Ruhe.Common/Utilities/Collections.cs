@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 namespace Ruhe.Common.Utilities {
@@ -17,6 +18,14 @@ namespace Ruhe.Common.Utilities {
 
         public static object First(ICollection collection) {
             return First(new ArrayList(collection).ToArray());
+        }
+
+        public static T First<T>(IEnumerable collection, Predicate<T> predicate) {
+            foreach (object item in collection) {
+                if (Reflector.IsA<T>(item) && predicate((T) item))
+                    return (T) item;
+            }
+            return default(T);
         }
     }
 }

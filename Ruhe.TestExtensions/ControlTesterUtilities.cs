@@ -6,7 +6,7 @@ namespace Ruhe.TestExtensions {
     //TODO move to Ruhe.Tests as helper class specific to this project
     public class ControlTesterUtilities {
         public static bool HasChildElement(ControlTester tester, string id) {
-            return new GeneralControlTester(id, tester).Visible;
+            return new WebControlTester(id, tester).Visible;
         }
 
         public static string GetHtml(Control control) {
@@ -14,10 +14,6 @@ namespace Ruhe.TestExtensions {
             HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
             control.RenderControl(htmlTextWriter);
             return stringWriter.ToString();
-        }
-
-        private class GeneralControlTester : ControlTester {
-            public GeneralControlTester(string id, Tester container) : base(id, container) {}
         }
     }
 }

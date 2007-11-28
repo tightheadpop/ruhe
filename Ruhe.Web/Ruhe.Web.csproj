@@ -110,6 +110,7 @@
     <Compile Include="QueryStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WebResourceLoader.cs" />
     <Compile Include="UI\CompositeControl.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -220,6 +221,7 @@
     <Compile Include="UI\IValidatorConfigurator.cs" />
     <Compile Include="Configuration\RuheConfigurationSection.cs" />
     <Compile Include="Configuration\ValidatorConfiguratorFactory.cs" />
+    <Compile Include="UI\Require.cs" />
     <Compile Include="WebUtilities.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -242,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ruhe.css" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
