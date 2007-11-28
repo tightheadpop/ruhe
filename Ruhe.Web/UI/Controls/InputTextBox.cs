@@ -208,9 +208,6 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
             base.AddAttributesToRender(writer);
-            if (!WebUtilities.BrowserIsInternetExplorer) {
-                writer.AddAttribute(HtmlTextWriterAttribute.Style, "width:" + Width);
-            }
             if (MaxLength > 0 && TextMode.Equals(TextBoxMode.MultiLine)) {
                 #region Create scripts
 
