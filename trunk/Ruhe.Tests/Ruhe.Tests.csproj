@@ -136,6 +136,7 @@
     <Compile Include="Common\ReflectorTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\WebResourceLoaderTests.cs" />
     <Compile Include="Common\StringUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -198,6 +199,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\Configuration\ValidatorConfiguratorFactoryTests.cs" />
+    <Compile Include="Web\UI\RequireTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ResourceLoaderTarget.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

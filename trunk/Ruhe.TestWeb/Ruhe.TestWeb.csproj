@@ -212,6 +212,13 @@
     <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.designer.cs">
       <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\RequireTests.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>RequireTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\RequireTests.aspx.designer.cs">
+      <DependentUpon>RequireTests.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx" />
@@ -249,6 +256,7 @@
     <Content Include="Web\UI\Controls\MessageFlash.aspx" />
     <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
+    <Content Include="Web\UI\RequireTests.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Reflection;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using NUnit.Framework;
 using Ruhe.Common;
 
@@ -103,6 +105,12 @@ namespace Ruhe.Tests.Common {
         public void Implements() {
             Assert.IsTrue(Reflector.ImplementsInterface(typeof(TestObject), typeof(IDisposable)));
             Assert.IsFalse(Reflector.ImplementsInterface(typeof(TestObject), typeof(IList)));
+        }
+
+        [Test]
+        public void IsA() {
+            Assert.IsTrue(Reflector.IsA<Control>(new Literal()));
+            Assert.IsFalse(Reflector.IsA<Literal>(new Control()));
         }
 
         [Test]

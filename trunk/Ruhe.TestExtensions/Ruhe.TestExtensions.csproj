@@ -115,6 +115,7 @@
     <Compile Include="ControlTesterUtilities.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WebControlTester.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

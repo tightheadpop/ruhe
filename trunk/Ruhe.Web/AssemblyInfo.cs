@@ -23,6 +23,7 @@ using System.Web.UI;
 [assembly: WebResource("Ruhe.Web.Resources.calendar.png", "image/png")]
 [assembly: WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
 [assembly : WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
+[assembly : WebResource("Ruhe.Web.Resources.ruhe.css", "text/css")]
 //
 // Version information for an assembly consists of the following four values:
 //

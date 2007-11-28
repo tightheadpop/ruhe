@@ -1,0 +1,10 @@
+.labeledControlPanel .label {
+    white-space: nowrap;
+}
+.labeledControlPanel .label.left {
+    vertical-align: top;
+    padding-top: 0.3em;
+}
+.labeledControlPanel .labeled {
+    white-space: nowrap;
+}
