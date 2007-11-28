@@ -59,12 +59,3 @@ legend
 {
 	color: Gray;
 }
-.label.left 
-{
-	vertical-align: top;
-	padding-top: 0.3em;
-}
-.labeled
-{
-	white-space: nowrap;
-}

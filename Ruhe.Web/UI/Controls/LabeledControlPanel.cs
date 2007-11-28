@@ -35,6 +35,11 @@ namespace Ruhe.Web.UI.Controls {
             base.AddAttributesToRender(writer);
         }
 
+        protected override void OnPreRender(EventArgs e) {
+            Require.DefaultStyleSheet(GetType(), "ruhe.css");
+            base.OnPreRender(e);
+        }
+
         protected override void Render(HtmlTextWriter writer) {
             RenderBeginTag(writer);
             RenderContents(writer);
