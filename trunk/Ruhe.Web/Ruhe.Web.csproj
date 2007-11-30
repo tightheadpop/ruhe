@@ -248,6 +248,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ruhe.css" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\maxlength.htc" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

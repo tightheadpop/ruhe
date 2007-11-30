@@ -26,5 +26,6 @@ namespace Ruhe.Tests.Web.UI {
             LoadPage();
             Assert.IsFalse(Regex.IsMatch(Browser.CurrentPageText, "<link.*<link"));
         }
+
     }
 }

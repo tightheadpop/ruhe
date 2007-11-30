@@ -8,3 +8,4 @@
 .labeledControlPanel .labeled {
     white-space: nowrap;
 }
+TEXTAREA { behavior: url(<%= WebResource("Ruhe.Web.Resources.maxlength.htc") %>); }
