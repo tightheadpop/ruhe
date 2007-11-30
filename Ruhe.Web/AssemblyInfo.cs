@@ -15,15 +15,15 @@ using System.Web.UI;
 [assembly : AssemblyCopyright("")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
-
 [assembly : WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
 [assembly : WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
 [assembly : WebResource("Ruhe.Web.Resources.save.png", "image/png")]
 [assembly : WebResource("Ruhe.Web.Resources.cancel.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.calendar.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.calendar.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
 [assembly : WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
-[assembly : WebResource("Ruhe.Web.Resources.ruhe.css", "text/css")]
+[assembly: WebResource("Ruhe.Web.Resources.maxlength.htc", "text/x-component")]
+[assembly : WebResource("Ruhe.Web.Resources.ruhe.css", "text/css", PerformSubstitution = true)]
 //
 // Version information for an assembly consists of the following four values:
 //

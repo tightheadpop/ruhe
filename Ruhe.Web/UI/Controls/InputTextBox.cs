@@ -209,33 +209,7 @@ namespace Ruhe.Web.UI.Controls {
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
             base.AddAttributesToRender(writer);
             if (MaxLength > 0 && TextMode.Equals(TextBoxMode.MultiLine)) {
-                #region Create scripts
-
-                string keyPressScript = @"
-if(maxLength && value.length > maxLength-1){
-		event.returnValue = false;
-		maxLength = parseInt(maxLength);
-}";
-
-                string beforePasteScript = @"
-if(maxLength)
-		event.returnValue = false;";
-
-                string pasteScript = @"
-if(maxLength){
-	event.returnValue = false;
-	var textRange = document.selection.createRange();
-	var insertLength = maxLength - value.length + textRange.text.length;
-	var textToPaste = window.clipboardData.getData(""Text"").substr(0, insertLength);
-	textRange.text = textToPaste;
-}";
-
-                #endregion
-
-                writer.AddAttribute("onkeypress", keyPressScript);
-                writer.AddAttribute("onbeforepaste", beforePasteScript);
-                writer.AddAttribute("onpaste", pasteScript);
-                writer.AddAttribute("maxLength", MaxLength.ToString());
+                writer.AddAttribute("maxlength", MaxLength.ToString());
             }
         }
 
