@@ -7,7 +7,7 @@ using Ruhe.Common;
 namespace Ruhe.Web.UI {
     public class Require {
         public static void DefaultStyleSheet(Type type, string name) {
-            string registrationKey = "stylesheet" + name;
+            string registrationKey = "stylesheet-" + name;
             Page page = GetPage();
             if (!page.ClientScript.IsStartupScriptRegistered(type, registrationKey)) {
                 page.ClientScript.RegisterStartupScript(type, registrationKey, string.Empty);

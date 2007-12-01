@@ -193,6 +193,11 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        protected override void OnPreRender(EventArgs e) {
+            base.OnPreRender(e);
+            Require.DefaultStyleSheet(typeof(Require), "ruhe.css");
+        }
+
         protected override void Render(HtmlTextWriter writer) {
             EnsureChildControls();
             requiredLabel.Visible = Required && !ReadOnly;
