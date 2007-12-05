@@ -123,6 +123,7 @@
     <Compile Include="Common\CollectionsTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\DateRangeTests.cs" />
     <Compile Include="Common\DateTimeUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
