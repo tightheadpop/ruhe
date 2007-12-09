@@ -1,0 +1,5 @@
+<%@ Page MasterPageFile="~/Ajax.Master" Language="C#" AutoEventWireup="true" CodeBehind="InputDateRangeTests.aspx.cs" Inherits="Ruhe.TestWeb.Web.UI.Controls.InputDateRangeTests" %>
+
+<asp:Content ContentPlaceHolderID="content" runat="server">
+    <ruhe:InputDateRange id="input" runat="server" />
+</asp:Content>

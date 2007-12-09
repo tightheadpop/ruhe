@@ -52,6 +52,8 @@ namespace Ruhe.Web.UI.Controls {
             requiredValidator.ID = ID + "_requiredValidator";
             readOnlyLabel.ID = ID + "_readOnly";
             regexValidator.ID = ID + "_regexValidator";
+            requiredValidator.ControlToValidate = ID;
+            regexValidator.ControlToValidate = ID;
         }
 
         public virtual bool Required {

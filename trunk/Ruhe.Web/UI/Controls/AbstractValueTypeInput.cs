@@ -1,4 +1,5 @@
 using System;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
@@ -13,7 +14,7 @@ namespace Ruhe.Web.UI.Controls {
         /// <summary>
         /// Gets or sets the typed value for user input
         /// </summary>
-        public virtual Nullable<T> Value {
+        public virtual T? Value {
             get { return Adapt(Text); }
             set { Text = value.HasValue ? Adapt(value) : string.Empty; }
         }
@@ -21,7 +22,7 @@ namespace Ruhe.Web.UI.Controls {
         /// <summary>
         /// Gets or sets the minimum value of type T for user input
         /// </summary>
-        public virtual Nullable<T> MinimumValue {
+        public virtual T? MinimumValue {
             get {
                 EnsureChildControls();
                 return Adapt(rangeValidator.MinimumValue);
@@ -32,8 +33,7 @@ namespace Ruhe.Web.UI.Controls {
                     rangeValidator.MinimumValue = Adapt(value);
                     rangeValidator.Visible = true;
                     compareValidator.Visible = false;
-                }
-                else {
+                } else {
                     rangeValidator.Visible = false;
                     compareValidator.Visible = true;
                 }
@@ -43,7 +43,7 @@ namespace Ruhe.Web.UI.Controls {
         /// <summary>
         /// Gets or sets the maximum value of type T for user input
         /// </summary>
-        public virtual Nullable<T> MaximumValue {
+        public virtual T? MaximumValue {
             get {
                 EnsureChildControls();
                 return Adapt(rangeValidator.MaximumValue);
@@ -54,8 +54,7 @@ namespace Ruhe.Web.UI.Controls {
                     rangeValidator.MaximumValue = Adapt(value);
                     rangeValidator.Visible = true;
                     compareValidator.Visible = false;
-                }
-                else {
+                } else {
                     rangeValidator.Visible = false;
                     compareValidator.Visible = true;
                 }
@@ -76,6 +75,8 @@ namespace Ruhe.Web.UI.Controls {
             base.AssignIdsToChildControls();
             compareValidator.ID = ID + "_compare";
             rangeValidator.ID = ID + "_range";
+            compareValidator.ControlToValidate = ID;
+            rangeValidator.ControlToValidate = ID;
         }
 
         private void CreateNumericValidator() {
@@ -95,6 +96,12 @@ namespace Ruhe.Web.UI.Controls {
         protected override void OnPreRender(EventArgs e) {
             base.OnPreRender(e);
             RegisterClientScript();
+        }
+
+        protected override void Render(HtmlTextWriter writer) {
+            writer.RenderBeginTag(HtmlTextWriterTag.Nobr);
+            base.Render(writer);
+            writer.RenderEndTag();
         }
 
         private void RegisterClientScript() {

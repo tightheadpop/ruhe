@@ -16,6 +16,7 @@ namespace Ruhe.Common {
                 this.start = start;
                 this.end = end;
             } else {
+                //TODO throw exeception when End precedes Start
                 this.start = null;
                 this.end = null;
             }

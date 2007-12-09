@@ -8,7 +8,6 @@ namespace Ruhe.Web.UI {
     public class DefaultValidatorConfigurator : IValidatorConfigurator {
         public void Configure(IInputControl inputControl) {
             foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
-                validator.ControlToValidate = inputControl.ValidatedControlId;
                 validator.ValidationGroup = inputControl.ValidationGroup;
                 ConfigureEach(validator, inputControl);
                 AddValidatorExtender(validator, inputControl);

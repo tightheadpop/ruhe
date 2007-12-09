@@ -110,6 +110,7 @@
     <Compile Include="QueryStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\InputDateRange.cs" />
     <Compile Include="WebResourceLoader.cs" />
     <Compile Include="UI\CompositeControl.cs">
       <SubType>Code</SubType>
@@ -154,9 +155,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\Button.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UI\Controls\InputCheckBox.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\InputCheckBoxList.cs">
