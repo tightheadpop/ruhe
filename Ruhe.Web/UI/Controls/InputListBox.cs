@@ -69,9 +69,10 @@ namespace Ruhe.Web.UI.Controls {
             Controls.Add(requiredValidator);
         }
 
-        private void AssignIdsToChildControls() {
+        protected virtual void AssignIdsToChildControls() {
             requiredLabel.ID = ID + "_required";
             requiredValidator.ID = ID + "_requiredValidator";
+            requiredValidator.ControlToValidate = ID;
         }
 
         public string DefaultElementClientId {

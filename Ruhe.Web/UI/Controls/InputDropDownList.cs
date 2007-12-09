@@ -313,11 +313,12 @@ namespace Ruhe.Web.UI.Controls {
             writer.RenderEndTag();
         }
 
-        private void AssignIdsToChildControls() {
+        protected virtual void AssignIdsToChildControls() {
             string baseId = ID + "_";
             requiredLabel.ID = baseId + "required";
             readOnlyLabel.ID = baseId + "readOnly";
             requiredValidator.ID = baseId + "requiredValidator";
+            requiredValidator.ControlToValidate = ID;
         }
 
         private void CreateReadOnlyLabel() {
@@ -328,7 +329,6 @@ namespace Ruhe.Web.UI.Controls {
         private void CreateRequiredLabel() {
             requiredLabel = new RequiredIcon();
             requiredValidator = new RequiredFieldValidator();
-
             Controls.Add(new BreakingSpace());
             Controls.Add(requiredLabel);
             Controls.Add(new BreakingSpace());

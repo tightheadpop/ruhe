@@ -137,6 +137,7 @@
     <Compile Include="Common\ReflectorTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\Controls\InputDateRangeTests.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
     <Compile Include="Common\StringUtilitiesTests.cs">
       <SubType>Code</SubType>
