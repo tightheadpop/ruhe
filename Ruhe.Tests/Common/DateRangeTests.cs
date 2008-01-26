@@ -8,32 +8,35 @@ namespace Ruhe.Tests.Common {
 		private readonly DateRange parentRange = new DateRange(new DateTime(2004, 1, 1), DateTime.Today);
 
 		[Test]
+        [ExpectedException(typeof(ArgumentException))]
 		public void ThrowsExceptionWhenEndDatePrecedesStartDate() {
-		    DateRange range = new DateRange(DateTime.Today.AddDays(4), DateTime.Today);
-            Assert.IsTrue(range.IsNull);
+		    new DateRange(DateTime.Today.AddDays(4), DateTime.Today);
 		}
 
 	    [Test]
-		public void IsNullIsTrueIfBothEndsOfRangeAreNull() {
-			DateRange empty = DateRange.Null;
-			Assert.AreEqual(true, empty.IsNull, "IsNull");
-			Assert.AreEqual(false, empty.IsNotNull, "IsNotNull");
-			Assert.AreEqual(false, empty.Start.HasValue, "Start.IsNull");
-			Assert.AreEqual(false, empty.End.HasValue, "End.IsNull");
-		}
+        [ExpectedException(typeof(ArgumentException))]
+	    public void ValidatesThatStartDateHasNoTimeUnits() {
+	        DateRange.StartingOn(DateTime.Today.AddMilliseconds(1));
+	    }
+
+	    [Test]
+        [ExpectedException(typeof(ArgumentException))]
+	    public void ValidatesThatEndDateHasNoTimeUnits() {
+	        DateRange.EndingOn(DateTime.Today.AddMilliseconds(1));
+	    }
 
 		[Test]
-		public void StartingOn() {
+		public void StartingOnHasANullEndDate() {
 			DateRange range = DateRange.StartingOn(new DateTime(2004, 1, 1));
-			Assert.AreEqual(new DateTime(2004, 1, 1), range.Start.Value);
-			Assert.AreEqual(null, range.End);
+			Assert.AreEqual(new DateTime(2004, 1, 1), range.Start);
+			Assert.AreEqual(DateTime.MaxValue.Date, range.End);
 		}
 
 		[Test]
-		public void EndingOn() {
+		public void EndingOnHasANullStartDate() {
 			DateRange range = DateRange.EndingOn(new DateTime(2009, 12, 1));
-			Assert.AreEqual(new DateTime(2009, 12, 1), range.End.Value);
-            Assert.AreEqual(null, range.Start);
+			Assert.AreEqual(new DateTime(2009, 12, 1), range.End);
+            Assert.AreEqual(DateTime.MinValue.Date, range.Start);
 		}
 
 		[Test]
@@ -41,9 +44,8 @@ namespace Ruhe.Tests.Common {
 			DateRange range = new DateRange(new DateTime(2005, 1, 1), DateTime.Today);
 			Assert.IsTrue(range.Includes(DateTime.Today), "boundary end");
 			Assert.IsTrue(range.Includes(new DateTime(2005, 1, 1)), "boundary begin");
-			Assert.IsFalse(range.Includes(new DateTime(2004, 1, 1)), "boundary prior");
+			Assert.IsFalse(range.Includes(new DateTime(2004, 12, 31)), "boundary prior");
 			Assert.IsFalse(range.Includes(DateTime.Today.AddDays(1)), "boundary after");
-            Assert.IsFalse(range.Includes(null), "includes Null");
 		}
 
 		[Test]
@@ -56,11 +58,6 @@ namespace Ruhe.Tests.Common {
 		public void IncludesOverlappingRange() {
 			DateRange overlappingRange = new DateRange(new DateTime(2003, 1, 1), new DateTime(2005, 1, 1));
 			Assert.IsFalse(parentRange.Includes(overlappingRange));
-		}
-
-		[Test]
-		public void IncludesNull() {
-			Assert.IsFalse(parentRange.Includes(DateRange.Null));
 		}
 
 		[Test]
@@ -104,11 +101,6 @@ namespace Ruhe.Tests.Common {
 		}
 
 		[Test]
-		public void OverlapsNull() {
-			Assert.IsFalse(parentRange.Overlaps(DateRange.Null));
-		}
-
-		[Test]
 		public void OverlapsEternity() {
 			Assert.IsTrue(parentRange.Overlaps(DateRange.Eternity));
 		}
@@ -122,16 +114,17 @@ namespace Ruhe.Tests.Common {
 
 		[Test]
 		public void GetGapBetween() {
-			DateRange other = DateRange.StartingOn(new DateTime(2009, 1, 1));
-			DateRange gap = parentRange.GetGapBetween(other);
-			Assert.AreEqual(DateTime.Today.AddDays(1), gap.Start.Value);
-			Assert.AreEqual(new DateTime(2008, 12, 31), gap.End.Value);
+		    DateTime yearFromToday = DateTime.Today.AddYears(1);
+		    DateRange other = DateRange.StartingOn(yearFromToday);
+			DateRange? gap = parentRange.GetGap(other);
+			Assert.AreEqual(DateTime.Today, gap.Value.Start);
+			Assert.AreEqual(yearFromToday, gap.Value.End);
 		}
 
 		[Test]
-		public void GetGapBetweenOverlappingRanges() {
-			DateRange gap = parentRange.GetGapBetween(DateRange.StartingOn(DateTime.Today));
-			Assert.AreEqual(DateRange.Null, gap);
+		public void GetGapBetweenOverlappingRangesIsNull() {
+			DateRange? gap = parentRange.GetGap(DateRange.StartingOn(DateTime.Today));
+			Assert.AreEqual(null, gap);
 		}
 
 		[Test]
@@ -139,6 +132,7 @@ namespace Ruhe.Tests.Common {
 			DateRange ending = DateRange.EndingOn(new DateTime(2004, 1, 1));
 			DateRange starting = DateRange.StartingOn(new DateTime(2004, 1, 2));
 			Assert.IsTrue(starting.Abuts(ending));
+			Assert.IsTrue(ending.Abuts(starting));
 		}
 
 		[Test]
@@ -155,13 +149,6 @@ namespace Ruhe.Tests.Common {
 			DateRange high = DateRange.StartingOn(DateTime.Today);
 			DateRange low = DateRange.EndingOn(DateTime.Today);
 			Assert.AreEqual(1, high.CompareTo(low));
-		}
-
-		[Test]
-		public void CompareToNulls() {
-			Assert.AreEqual(1, DateRange.StartingOn(DateTime.Today).CompareTo(DateRange.Null));
-			Assert.AreEqual(-1, DateRange.Null.CompareTo(DateRange.StartingOn(DateTime.Today)));
-			Assert.AreEqual(0, DateRange.Null.CompareTo(DateRange.Null));
 		}
 
 		//iscoontiguous

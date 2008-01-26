@@ -96,15 +96,27 @@ namespace Ruhe.Web.UI.Controls {
             set { throw new NotImplementedException(); }
         }
 
-        public DateRange DateRange {
+        public DateRange? DateRange {
             get {
                 EnsureChildControls();
-                return new DateRange(fromDate.Value, toDate.Value);
+                if (fromDate.Value.HasValue && toDate.Value.HasValue)
+                    return new DateRange(fromDate.Value.Value, toDate.Value.Value);
+                if (fromDate.Value.HasValue)
+                    return Common.DateRange.StartingOn(fromDate.Value.Value);
+                if (toDate.Value.HasValue)
+                    return Common.DateRange.EndingOn(toDate.Value.Value);
+                return null;
             }
             set {
                 EnsureChildControls();
-                fromDate.Value = value.Start;
-                toDate.Value = value.End;
+                if (value.HasValue && value.Value.Start != DateTime.MinValue.Date)
+                    fromDate.Value = value.Value.Start;
+                else
+                    fromDate.Value = null;
+                if (value.HasValue && value.Value.End != DateTime.MaxValue.Date)
+                    toDate.Value = value.Value.End;
+                else
+                    toDate.Value = null;
             }
         }
 
