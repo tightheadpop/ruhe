@@ -59,6 +59,16 @@ function Ruhe_PropertyOn(/* attribute list */) {
 	return !!isOn;
 };
 
+function Ruhe_EvaluateInputDateIsValid(value) {
+    if (value == null || value.trim().length == 0)
+        return true;
+    try {
+        return Date.parseLocale(value) != null;
+    } catch (e) {
+        return false;
+    }
+};
+
 function Ruhe_KeyPressFilter(regex) {
     if (regex == null)
         return function(){};
@@ -112,4 +122,3 @@ var Ruhe$POSITIVE_NUMBER = function(){
         return /[\d]/;
     return /[\d.]/;
 };
-var Ruhe$DATE = /[\d\/]/;

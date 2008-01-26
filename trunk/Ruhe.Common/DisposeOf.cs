@@ -46,7 +46,7 @@ namespace Ruhe.Common {
                     try {
                         method.Invoke(obj, null);
                     }
-                    catch (Exception) {
+                    catch {
                         //do nothing
                     }
                 }
