@@ -19,7 +19,6 @@ namespace Ruhe.Web.UI.Controls {
         protected override void CreateChildControls() {
             base.CreateChildControls();
             CreateInputContainer();
-            CreateFromLabel();
             CreateStartDate();
             CreateToLabel();
             CreateEndDate();
@@ -48,15 +47,12 @@ namespace Ruhe.Web.UI.Controls {
 
         private void CreateToLabel() {
             inputContainer.Controls.Add(new LiteralControl("to"));
+            inputContainer.Controls.Add(new NonBreakingSpace());
         }
 
         private void CreateStartDate() {
             fromDate = new InputDate();
             inputContainer.Controls.Add(fromDate);
-        }
-
-        private void CreateFromLabel() {
-            inputContainer.Controls.Add(new LiteralControl("from"));
         }
 
         private void CreateInputContainer() {
