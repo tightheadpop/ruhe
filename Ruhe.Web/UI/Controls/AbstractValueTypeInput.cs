@@ -105,10 +105,12 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void RegisterClientScript() {
-            Page.ClientScript.RegisterClientScriptResource(typeof(RuheScriptReference), "Ruhe.Web.Resources.ruhe.js");
-            Page.ClientScript.RegisterStartupScript(GetType(), ClientID, string.Format(@"
+            if (Visible && !ReadOnly) {
+                Page.ClientScript.RegisterClientScriptResource(typeof(RuheScriptReference), "Ruhe.Web.Resources.ruhe.js");
+                Page.ClientScript.RegisterStartupScript(GetType(), ClientID, string.Format(@"
 document.getElementById('{0}').onkeypress = Ruhe_KeyPressFilter({1});
 ", ClientID, KeystrokeFilter), true);
+            }
         }
 
         protected abstract string KeystrokeFilter { get; }
