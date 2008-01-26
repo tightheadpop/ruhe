@@ -9,6 +9,7 @@
 		<ruhe:InputDate ID="date" LabelText="Date" Required="true" runat="server" DefaultToToday="true" />
 		<ruhe:InputInteger LabelText="Your Age" ID="age" runat="server" />
 		<ruhe:InputNumber id="height" LabelText="Height (m)" runat="server" />
+		<ruhe:InputDateRange id="range" LabelText="Date Range" runat="server" />
 		<ruhe:InputTextBox ID="comments" LabelText="Comments" runat="server" MaxLength="30" TextMode="MultiLine" />
         <test:AnotherLayoutContainer ID="AnotherLayoutContainer1" runat="server" />
 		<ruhe:ControlGroup runat="server">

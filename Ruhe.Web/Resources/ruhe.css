@@ -9,3 +9,6 @@
     white-space: nowrap;
 }
 TEXTAREA { behavior: url(<%= WebResource("Ruhe.Web.Resources.maxlength.htc") %>); }
+
+/* fixes issue with calendar extender in InputDateRange */
+.ajax__calendar { display: inline; }
