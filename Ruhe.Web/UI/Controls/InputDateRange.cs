@@ -99,13 +99,7 @@ namespace Ruhe.Web.UI.Controls {
         public DateRange? DateRange {
             get {
                 EnsureChildControls();
-                if (fromDate.Value.HasValue && toDate.Value.HasValue)
-                    return new DateRange(fromDate.Value.Value, toDate.Value.Value);
-                if (fromDate.Value.HasValue)
-                    return Common.DateRange.StartingOn(fromDate.Value.Value);
-                if (toDate.Value.HasValue)
-                    return Common.DateRange.EndingOn(toDate.Value.Value);
-                return null;
+                return Common.DateRange.Create(fromDate.Value, toDate.Value);
             }
             set {
                 EnsureChildControls();

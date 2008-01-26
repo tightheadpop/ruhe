@@ -117,9 +117,29 @@ namespace Ruhe.Tests.Common {
 		    DateTime yearFromToday = DateTime.Today.AddYears(1);
 		    DateRange other = DateRange.StartingOn(yearFromToday);
 			DateRange? gap = parentRange.GetGap(other);
-			Assert.AreEqual(DateTime.Today, gap.Value.Start);
-			Assert.AreEqual(yearFromToday, gap.Value.End);
+			Assert.AreEqual(DateTime.Today.AddDays(1), gap.Value.Start);
+			Assert.AreEqual(yearFromToday.AddDays(-1), gap.Value.End);
 		}
+
+	    [Test]
+	    public void CreatesNullIfBothStartAndEndAreNull() {
+	        Assert.IsNull(DateRange.Create(null, null));
+	    }
+
+	    [Test]
+	    public void CreatesStartingOnIfEndIsNull() {
+	        Assert.AreEqual(DateRange.StartingOn(DateTime.Today), DateRange.Create(DateTime.Today, null));
+	    }
+
+	    [Test]
+	    public void CreatesEndingOnIfStartIsNull() {
+	        Assert.AreEqual(DateRange.EndingOn(DateTime.Today), DateRange.Create(null, DateTime.Today));
+	    }
+
+	    [Test]
+	    public void CreatesRange() {
+	        Assert.AreEqual(parentRange, DateRange.Create(parentRange.Start, parentRange.End));
+	    }
 
 		[Test]
 		public void GetGapBetweenOverlappingRangesIsNull() {

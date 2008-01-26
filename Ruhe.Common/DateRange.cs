@@ -152,5 +152,15 @@ namespace Ruhe.Common {
             else
                 return End.CompareTo(range.End);
         }
+
+        public static DateRange? Create(DateTime? start, DateTime? end) {
+            if (start.HasValue && end.HasValue)
+                return new DateRange(start.Value, end.Value);
+            if (start.HasValue)
+                return StartingOn(start.Value);
+            if (end.HasValue)
+                return EndingOn(end.Value);
+            return null;
+        }
     }
 }
