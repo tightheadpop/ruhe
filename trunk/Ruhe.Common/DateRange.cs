@@ -2,61 +2,41 @@ using System;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Common {
+    /// <remarks>
+    /// Assumes a date precision (without reference to time) for the DateTime end points.
+    /// </remarks>
     public struct DateRange : IComparable, IEquatable<DateRange>, IComparable<DateRange> {
-        private DateTime? start;
-        private DateTime? end;
+        private DateTime start;
+        private DateTime end;
 
-        public static readonly DateRange Null = new DateRange(null, null);
+        public static readonly DateRange Eternity = new DateRange(DateTime.MinValue.Date, DateTime.MaxValue.Date);
 
-        public static readonly DateRange Eternity = new DateRange(DateTime.MinValue, DateTime.MaxValue);
+        //TODO: don't accept nullables?
+        public DateRange(DateTime start, DateTime end) {
+            if (start.TimeOfDay.TotalMilliseconds > 0)
+                throw new ArgumentException("DateRange requires date precision, but the Start date has reference to time of day.");
+            if (end.TimeOfDay.TotalMilliseconds > 0)
+                throw new ArgumentException("DateRange requires date precision, but the End date has reference to time of day.");
+            if (start > end)
+                throw new ArgumentException("Start of date range must be on or before end.");
 
-        public DateRange(DateTime? start, DateTime? end) {
-            //return Null if start is after end
-            if (!start.HasValue || !end.HasValue || start.Value <= end.Value) {
-                this.start = start;
-                this.end = end;
-            } else {
-                //TODO throw exeception when End precedes Start
-                this.start = null;
-                this.end = null;
-            }
+            this.start = start;
+            this.end = end;
         }
 
-        public DateTime? Start {
+        public DateTime Start {
             get { return start; }
         }
 
-        public DateTime? End {
+        public DateTime End {
             get { return end; }
         }
 
-        public bool IsNull {
-            get { return !Start.HasValue && !End.HasValue; }
-        }
-
-        public bool IsNotNull {
-            get { return !IsNull; }
-        }
-
-        public bool Includes(DateTime? date) {
-            if (!date.HasValue || IsNull) {
-                return false;
-            } else if (!Start.HasValue) {
-                return date.Value <= End.Value;
-            } else if (!End.HasValue) {
-                return date.Value >= Start.Value;
-            }
-            return date.Value >= Start.Value && date.Value <= End.Value;
+        public bool Includes(DateTime date) {
+            return date >= Start && date <= End;
         }
 
         public bool Includes(DateRange range) {
-            if (IsNull || range.IsNull) {
-                return false;
-            } else if (!range.Start.HasValue) {
-                return !Start.HasValue && End.HasValue && range.End.Value <= End.Value;
-            } else if (!range.End.HasValue) {
-                return !End.HasValue && Start.HasValue && range.Start.Value >= Start.Value;
-            }
             return Includes(range.Start) && Includes(range.End);
         }
 
@@ -65,7 +45,7 @@ namespace Ruhe.Common {
         }
 
         public bool Abuts(DateRange range) {
-            return !Overlaps(range) && GetGapBetween(range).IsNull;
+            return !Overlaps(range) && !GetGap(range).HasValue;
         }
 
         /// <summary>
@@ -79,9 +59,9 @@ namespace Ruhe.Common {
                 return Equals(Combine(ranges));
         }
 
-        public DateRange GetGapBetween(DateRange range) {
+        public DateRange? GetGap(DateRange range) {
             if (Overlaps(range)) {
-                return Null;
+                return null;
             }
             DateRange lower, higher;
             if (CompareTo(range) < 0) {
@@ -91,14 +71,16 @@ namespace Ruhe.Common {
                 lower = range;
                 higher = this;
             }
-            return new DateRange(lower.End.Value.AddDays(1), higher.Start.Value.AddDays(-1));
+            if (lower.End.AddDays(1) >= higher.Start.AddDays(-1))
+                return null;
+            return new DateRange(lower.End.AddDays(1), higher.Start.AddDays(-1));
         }
 
-        public static bool operator == (DateRange a, DateRange b) {
+        public static bool operator ==(DateRange a, DateRange b) {
             return a.Equals(b);
         }
 
-        public static bool operator != (DateRange a, DateRange b) {
+        public static bool operator !=(DateRange a, DateRange b) {
             return !a.Equals(b);
         }
 
@@ -123,25 +105,23 @@ namespace Ruhe.Common {
             if (StringUtilities.NullToEmpty(format) == string.Empty) {
                 format = "d";
             }
-            if (IsNull) {
-                return String.Empty;
-            } else if (this == Eternity) {
+            if (this == Eternity) {
                 return "infinite";
-            } else if (!Start.HasValue) {
-                return "to " + End.Value.ToString(format);
-            } else if (!End.HasValue) {
-                return "from " + Start.Value.ToString(format);
+            } else if (Start == DateTime.MinValue.Date) {
+                return "to " + End.ToString(format);
+            } else if (End == DateTime.MaxValue.Date) {
+                return "from " + Start.ToString(format);
             } else {
-                return String.Format("{0} to {1}", Start.Value.ToString(format), End.Value.ToString(format));
+                return String.Format("{0} to {1}", Start.ToString(format), End.ToString(format));
             }
         }
 
-        public static DateRange StartingOn(DateTime? start) {
-            return new DateRange(start, null);
+        public static DateRange StartingOn(DateTime start) {
+            return new DateRange(start, DateTime.MaxValue.Date);
         }
 
-        public static DateRange EndingOn(DateTime? end) {
-            return new DateRange(null, end);
+        public static DateRange EndingOn(DateTime end) {
+            return new DateRange(DateTime.MinValue.Date, end);
         }
 
         public static bool IsContiguous(params DateRange[] ranges) {
@@ -167,23 +147,10 @@ namespace Ruhe.Common {
         }
 
         public int CompareTo(DateRange range) {
-            if (IsNull && range.IsNull)
-                return 0;
-            if (IsNull && !range.IsNull)
-                return -1;
-            if (!IsNull && range.IsNull)
-                return 1;
-
-            DateTime thisStart, rangeStart, thisEnd, rangeEnd;
-            thisStart = (!Start.HasValue) ? DateTime.MinValue : Start.Value;
-            thisEnd = (!End.HasValue) ? DateTime.MaxValue : End.Value;
-            rangeStart = (!range.Start.HasValue) ? DateTime.MinValue : range.Start.Value;
-            rangeEnd = (!range.End.HasValue) ? DateTime.MaxValue : range.End.Value;
-
-            if (thisStart != rangeStart)
-                return thisStart.CompareTo(rangeStart);
+            if (Start != range.Start)
+                return Start.CompareTo(range.Start);
             else
-                return thisEnd.CompareTo(rangeEnd);
+                return End.CompareTo(range.End);
         }
     }
 }

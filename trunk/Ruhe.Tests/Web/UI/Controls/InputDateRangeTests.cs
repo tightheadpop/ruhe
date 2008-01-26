@@ -14,5 +14,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
             Assert.AreEqual(oneWeek, input.DateRange);
         }
+
+        [Test]
+        public void InitialValueIsNull() {
+            Assert.IsNull(new InputDateRange().DateRange);
+        }
     }
 }
