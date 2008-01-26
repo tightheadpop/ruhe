@@ -14,20 +14,10 @@ namespace Ruhe.Web.UI.Controls {
     /// in your web.config setting in order to use this class. In IE, the HTML content of the button
     /// is submitted as the value, rather than the 'value' attribute.
     /// </remarks>
-    public class Button : System.Web.UI.WebControls.Button, ILabeledControl {
+    public class Button : GrayButton {
         private string beforeAccessKey;
         private string afterAccessKey;
         private string shortcutCharacter;
-
-        public string LabelText {
-            get { return StringUtilities.NullToEmpty((string) ViewState["LabelText"]); }
-            set { ViewState["LabelText"] = value; }
-        }
-
-        public string FormatText {
-            get { return StringUtilities.NullToEmpty((string) ViewState["FormatText"]); }
-            set { ViewState["FormatText"] = value; }
-        }
 
         public string ImageUrl {
             get { return (string) ViewState["ImageUrl"]; }
@@ -74,12 +64,6 @@ namespace Ruhe.Web.UI.Controls {
                 afterAccessKey = string.Empty;
             }
             base.OnPreRender(e);
-        }
-
-        protected override void OnClick(EventArgs e) {
-            if (CausesValidation && !Page.IsValid)
-                return;
-            base.OnClick(e);
         }
     }
 }
