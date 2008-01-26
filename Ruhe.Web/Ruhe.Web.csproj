@@ -110,6 +110,7 @@
     <Compile Include="QueryStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\GrayButton.cs" />
     <Compile Include="UI\Controls\InputDateRange.cs" />
     <Compile Include="WebResourceLoader.cs" />
     <Compile Include="UI\CompositeControl.cs">
