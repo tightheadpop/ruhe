@@ -73,11 +73,13 @@ namespace Ruhe.Web.UI.Controls {
 
         private void CreateGroupValidator() {
             groupValidator = new OrGroupValidator();
+            inputContainer.Controls.Add(new BreakingSpace());
             inputContainer.Controls.Add(groupValidator);
         }
 
         private void CreateRangeValidator() {
             rangeValidator = new InputDateRangeValidator();
+            inputContainer.Controls.Add(new BreakingSpace());
             inputContainer.Controls.Add(rangeValidator);
         }
 
