@@ -174,6 +174,20 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        public override string ValidationGroup {
+            get {
+                EnsureChildControls();
+                return base.ValidationGroup;
+            }
+            set {
+                EnsureChildControls();
+                base.ValidationGroup = value;
+                foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(this)) {
+                    validator.ValidationGroup = value;
+                }
+            }
+        }
+
         public virtual void Clear() {
             Text = string.Empty;
         }

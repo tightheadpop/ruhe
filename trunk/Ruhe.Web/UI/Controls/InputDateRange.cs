@@ -103,13 +103,27 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public string ValidationGroup {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get {
+                EnsureChildControls();
+                return fromDate.ValidationGroup;
+            }
+            set {
+                EnsureChildControls();
+                fromDate.ValidationGroup = value;
+                toDate.ValidationGroup = value;
+            }
         }
 
         public bool EnableClientScript {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get {
+                EnsureChildControls();
+                return fromDate.EnableClientScript;
+            }
+            set {
+                EnsureChildControls();
+                fromDate.EnableClientScript = value;
+                toDate.EnableClientScript = value;
+            }
         }
 
         public DateRange? DateRange {
