@@ -71,6 +71,15 @@ function Ruhe_EvaluateInputDateIsValid(validator) {
     }
 };
 
+function Ruhe_OrGroupValidatorEvaluateIsValid(validator) {
+    controlList = validator.grouptovalidate.split(',');
+    for (i = 0; i < controlList.length; i++) {
+		if (!!ValidatorGetValue(controlList[i]))
+		    return true;
+	}
+    return false;
+};
+
 function Ruhe_KeyPressFilter(regex) {
     if (regex == null)
         return function(){};

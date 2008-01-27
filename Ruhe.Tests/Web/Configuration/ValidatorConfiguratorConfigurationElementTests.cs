@@ -1,3 +1,4 @@
+using System.Web.UI.WebControls;
 using NUnit.Framework;
 using Ruhe.Web.Configuration;
 using Ruhe.Web.UI;
@@ -19,7 +20,8 @@ namespace Ruhe.Tests.Web.Configuration {
         }
 
         private class TestValidatorConfigurator : IValidatorConfigurator {
-            public void Configure(IInputControl inputControl) {}
+            public void ConfigureControl(IInputControl inputControl) {}
+            public void ConfigureValidator(BaseValidator validator, IInputControl control) {}
         }
     }
 }

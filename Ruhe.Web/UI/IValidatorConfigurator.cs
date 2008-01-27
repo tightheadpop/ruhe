@@ -1,7 +1,9 @@
+using System.Web.UI.WebControls;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
     public interface IValidatorConfigurator {
-        void Configure(IInputControl inputControl);
+        void ConfigureControl(IInputControl inputControl);
+        void ConfigureValidator(BaseValidator validator, IInputControl control);
     }
 }

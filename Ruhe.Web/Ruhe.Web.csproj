@@ -116,6 +116,7 @@
     <Compile Include="UI\Controls\InputDateValidator.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\OrGroupValidator.cs" />
     <Compile Include="WebResourceLoader.cs" />
     <Compile Include="UI\CompositeControl.cs">
       <SubType>Code</SubType>

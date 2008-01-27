@@ -12,12 +12,22 @@ namespace Ruhe.Web.UI.Controls {
         private PlaceHolder inputContainer;
         private Label readOnlyLabel;
         private RequiredIcon requiredLabel;
+        private OrGroupValidator groupValidator;
+
+        protected override void OnInit(EventArgs e) {
+            base.OnInit(e);
+            EnsureChildControls();
+            AssignIdsToChildControls();
+            ValidatorConfiguratorFactory.Create().ConfigureValidator(groupValidator, this);
+        }
 
         protected virtual void AssignIdsToChildControls() {
             fromDate.ID = ID + "_from";
             toDate.ID = ID + "_to";
             readOnlyLabel.ID = ID + "_readOnly";
-            requiredLabel.ID = ID + "_required";
+            requiredLabel.ID = ID + "_requiredLabel";
+            groupValidator.ID = ID + "_groupValidator";
+            groupValidator.GroupToValidate = new string[] {fromDate.ID, toDate.ID};
         }
 
         protected override void CreateChildControls() {
@@ -27,10 +37,11 @@ namespace Ruhe.Web.UI.Controls {
             CreateToLabel();
             CreateEndDate();
             CreateRequiredLabel();
+            CreateRequiredValidator();
             CreateReadOnlyLabel();
-            AssignIdsToChildControls();
             ReadOnly = false;
             Required = false;
+            ErrorMessage = "Please enter a date range.";
         }
 
         public override string ID {
@@ -52,6 +63,11 @@ namespace Ruhe.Web.UI.Controls {
             requiredLabel.EnableViewState = false;
             inputContainer.Controls.Add(new BreakingSpace());
             inputContainer.Controls.Add(requiredLabel);
+        }
+
+        private void CreateRequiredValidator() {
+            groupValidator = new OrGroupValidator();
+            inputContainer.Controls.Add(groupValidator);
         }
 
         private void CreateEndDate() {
@@ -116,6 +132,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 requiredLabel.Visible = value;
+                groupValidator.Enabled = groupValidator.Visible = value;
             }
         }
 
@@ -128,6 +145,7 @@ namespace Ruhe.Web.UI.Controls {
                 EnsureChildControls();
                 fromDate.ValidationGroup = value;
                 toDate.ValidationGroup = value;
+                groupValidator.ValidationGroup = value;
             }
         }
 
@@ -140,6 +158,7 @@ namespace Ruhe.Web.UI.Controls {
                 EnsureChildControls();
                 fromDate.EnableClientScript = value;
                 toDate.EnableClientScript = value;
+                groupValidator.EnableClientScript = value;
             }
         }
 
@@ -169,8 +188,8 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void Render(HtmlTextWriter writer) {
             EnsureChildControls();
-            readOnlyLabel.Text = DateRange.HasValue ? DateRange.Value.ToString(RuheConfigurationSection.GetCurrent().DateFormat.Value) : string.Empty;
-//            requiredLabel.Visible = Required && !ReadOnly;
+            if (ReadOnly)
+                readOnlyLabel.Text = DateRange.HasValue ? DateRange.Value.ToString(RuheConfigurationSection.GetCurrent().DateFormat.Value) : string.Empty;
 
             writer.RenderBeginTag(HtmlTextWriterTag.Nobr);
             base.Render(writer);
