@@ -11,9 +11,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
         private TextBoxTester from;
         private TextBoxTester to;
         private LabelTester inputReadOnlyLabel;
+        private LabelTester inputRequiredLabel;
+
         private TextBoxTester readOnlyFrom;
         private TextBoxTester readOnlyTo;
         private LabelTester readOnlyLabel;
+        private LabelTester readOnlyRequiredLabel;
 
         [Test]
         public void GetAndSetDateRangeValue() {
@@ -30,18 +33,20 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void HasTwoTextBoxes() {
+        public void WhenRequired() {
             LoadPage();
             WebAssert.Visible(from);
             WebAssert.Visible(to);
             WebAssert.NotVisible(inputReadOnlyLabel);
+            WebAssert.Visible(inputRequiredLabel);
         }
 
         [Test]
-        public void DateRangeToStringIsDisplayedForReadOnlyControl() {
+        public void WhenReadOnly() {
             LoadPage();
             WebAssert.NotVisible(readOnlyFrom);
             WebAssert.NotVisible(readOnlyTo);
+            WebAssert.NotVisible(readOnlyRequiredLabel);
             WebAssert.Visible(readOnlyLabel);
             DateRange expected = new DateRange(DateTime.Today, DateTime.Today.AddDays(3));
             Assert.AreEqual(expected.ToString(GlobalDatePattern), readOnlyLabel.Text);
@@ -52,10 +57,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
             from = new TextBoxTester(IdFor("input_from"));
             to = new TextBoxTester(IdFor("input_to"));
             inputReadOnlyLabel = new LabelTester(IdFor("input_readOnly"));
+            inputRequiredLabel = new LabelTester(IdFor("input_required"));
 
             readOnlyFrom = new TextBoxTester(IdFor("readOnlyInput_from"));
             readOnlyTo = new TextBoxTester(IdFor("readOnlyInput_to"));
             readOnlyLabel = new LabelTester(IdFor("readOnlyInput_readOnly"));
+            readOnlyRequiredLabel = new LabelTester(IdFor("readOnlyInput_required"));
         }
     }
 }

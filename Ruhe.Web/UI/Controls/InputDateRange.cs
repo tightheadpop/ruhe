@@ -11,11 +11,13 @@ namespace Ruhe.Web.UI.Controls {
         private InputDate toDate;
         private PlaceHolder inputContainer;
         private Label readOnlyLabel;
+        private RequiredIcon requiredLabel;
 
         protected virtual void AssignIdsToChildControls() {
             fromDate.ID = ID + "_from";
             toDate.ID = ID + "_to";
             readOnlyLabel.ID = ID + "_readOnly";
+            requiredLabel.ID = ID + "_required";
         }
 
         protected override void CreateChildControls() {
@@ -24,9 +26,11 @@ namespace Ruhe.Web.UI.Controls {
             CreateStartDate();
             CreateToLabel();
             CreateEndDate();
+            CreateRequiredLabel();
             CreateReadOnlyLabel();
             AssignIdsToChildControls();
             ReadOnly = false;
+            Required = false;
         }
 
         public override string ID {
@@ -41,6 +45,13 @@ namespace Ruhe.Web.UI.Controls {
         private void CreateReadOnlyLabel() {
             readOnlyLabel = new Label();
             Controls.Add(readOnlyLabel);
+        }
+
+        private void CreateRequiredLabel() {
+            requiredLabel = new RequiredIcon();
+            requiredLabel.EnableViewState = false;
+            inputContainer.Controls.Add(new BreakingSpace());
+            inputContainer.Controls.Add(requiredLabel);
         }
 
         private void CreateEndDate() {
@@ -98,8 +109,14 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public bool Required {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get {
+                EnsureChildControls();
+                return requiredLabel.Visible;
+            }
+            set {
+                EnsureChildControls();
+                requiredLabel.Visible = value;
+            }
         }
 
         public string ValidationGroup {
