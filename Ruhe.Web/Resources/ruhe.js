@@ -59,11 +59,13 @@ function Ruhe_PropertyOn(/* attribute list */) {
 	return !!isOn;
 };
 
-function Ruhe_EvaluateInputDateIsValid(value) {
+function Ruhe_EvaluateInputDateIsValid(validator) {
+    var control = $get(validator.controltovalidate);
+    var value = control.value;
     if (value == null || value.trim().length == 0)
         return true;
     try {
-        return Date.parseLocale(value) != null;
+        return Date.parseLocale(value, control.datePattern) != null;
     } catch (e) {
         return false;
     }
