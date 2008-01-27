@@ -47,10 +47,14 @@ namespace Ruhe.Web.UI.Controls {
 
         public virtual string DatePattern {
             get {
+                EnsureChildControls();
                 return (string) ViewState["DatePattern"]
                        ?? RuheConfigurationSection.GetCurrent().DateFormat.Value;
             }
-            set { ViewState["DatePattern"] = value; }
+            set {
+                EnsureChildControls();
+                ViewState["DatePattern"] = value;
+            }
         }
 
         public bool DefaultToToday {

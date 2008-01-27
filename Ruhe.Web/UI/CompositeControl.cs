@@ -5,7 +5,7 @@ using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
     [ToolboxItem(false)]
-    public abstract class CompositeControl : Control, ILabeledControl, INamingContainer {
+    public abstract class CompositeControl : Control, ILabeledControl {
         public override ControlCollection Controls {
             get {
                 EnsureChildControls();
