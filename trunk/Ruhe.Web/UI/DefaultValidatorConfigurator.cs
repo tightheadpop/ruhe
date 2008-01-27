@@ -6,15 +6,15 @@ using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
     public class DefaultValidatorConfigurator : IValidatorConfigurator {
-        public void Configure(IInputControl inputControl) {
+        public virtual void ConfigureControl(IInputControl inputControl) {
             foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
                 validator.ValidationGroup = inputControl.ValidationGroup;
-                ConfigureEach(validator, inputControl);
+                ConfigureValidator(validator, inputControl);
                 AddValidatorExtender(validator, inputControl);
             }
         }
 
-        protected virtual void ConfigureEach(BaseValidator validator, IInputControl control) {
+        public virtual void ConfigureValidator(BaseValidator validator, IInputControl control) {
             string errorMessage = control.ErrorMessage.TrimEnd('.');
             validator.Controls.Clear();
             string errorIconHoverHelp = errorMessage + ".";

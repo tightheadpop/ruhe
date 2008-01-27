@@ -2,7 +2,6 @@ using System.Configuration;
 using NUnit.Framework;
 using Ruhe.Web.Configuration;
 using Ruhe.Web.UI;
-using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.Configuration {
     [TestFixture]
@@ -31,10 +30,14 @@ namespace Ruhe.Tests.Web.Configuration {
             config.Save(ConfigurationSaveMode.Full);
         }
 
-        private class TestConfigurator : IValidatorConfigurator {
-            public void Configure(IInputControl inputControl) {
-                throw new System.NotImplementedException();
-            }
-        }
+//        private class TestConfigurator : IValidatorConfigurator {
+//            public void ConfigureControl(IInputControl inputControl) {
+//                throw new System.NotImplementedException();
+//            }
+//
+//            public void ConfigureValidator(BaseValidator validator, IInputControl control) {
+//                throw new System.NotImplementedException();
+//            }
+//        }
     }
 }

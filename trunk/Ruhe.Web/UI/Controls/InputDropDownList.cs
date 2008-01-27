@@ -32,7 +32,7 @@ namespace Ruhe.Web.UI.Controls {
             base.OnInit(e);
             EnsureChildControls();
             AssignIdsToChildControls();
-            ValidatorConfiguratorFactory.Create().Configure(this);
+            ValidatorConfiguratorFactory.Create().ConfigureControl(this);
         }
 
         [DefaultValue(true)]
