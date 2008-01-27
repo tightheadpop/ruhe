@@ -38,6 +38,5 @@ namespace Ruhe.Web.UI {
             calloutExtender.HighlightCssClass = "validation-error";
             ((Control) control).Controls.Add(calloutExtender);
         }
-
     }
 }
