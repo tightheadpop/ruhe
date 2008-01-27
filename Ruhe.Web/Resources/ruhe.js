@@ -61,18 +61,32 @@ function Ruhe_PropertyOn(/* attribute list */) {
 
 function Ruhe_EvaluateInputDateIsValid(validator) {
     var control = $get(validator.controltovalidate);
-    var value = control.value;
-    if (value == null || value.trim().length == 0)
+    var value = ValidatorGetValue(validator.controltovalidate);
+    if (!value)
         return true;
+    return Ruhe_GetDate(value, control.datePattern) != null;
+};
+
+function Ruhe_GetDate(input, format) {
     try {
-        return Date.parseLocale(value, control.datePattern) != null;
+        return Date.parseLocale(input, format);
     } catch (e) {
-        return false;
+        return null;
     }
 };
 
+function Ruhe_EvaluateInputDateRangeIsValid(validator) {
+    var toDate = $get(validator.controltovalidate);
+    var fromDate = $get(toDate.id.replace(/_to$/, "_from"));
+    if (!toDate.value && !fromDate.value)
+        return true;
+    var to = Ruhe_GetDate(toDate.value, toDate.datePattern);
+    var from = Ruhe_GetDate(fromDate.value, fromDate.datePattern);
+    return to == null || from == null || from <= to;
+};
+
 function Ruhe_OrGroupValidatorEvaluateIsValid(validator) {
-    controlList = validator.grouptovalidate.split(',');
+    var controlList = validator.grouptovalidate.split(',');
     for (i = 0; i < controlList.length; i++) {
 		if (!!ValidatorGetValue(controlList[i]))
 		    return true;
