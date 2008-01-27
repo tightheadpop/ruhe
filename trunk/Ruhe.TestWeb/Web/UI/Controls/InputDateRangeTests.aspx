@@ -2,4 +2,5 @@
 
 <asp:Content ContentPlaceHolderID="content" runat="server">
     <ruhe:InputDateRange id="input" runat="server" />
+    <ruhe:InputDateRange id="readOnlyInput" ReadOnly="true" runat="server" />
 </asp:Content>

@@ -6,6 +6,8 @@ using Ruhe.TestExtensions;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     public class RuheWebTest<T> : WebFormTestCase {
+        protected string GlobalDatePattern = "dd-MMM-yyyy";
+
         [TestFixtureSetUp]
         public virtual void TestFixtureSetUp() {
             //launches at http://localhost:4269/Ruhe.TestWeb

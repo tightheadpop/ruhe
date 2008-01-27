@@ -2,6 +2,8 @@ using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common;
+using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputDateRange : CompositeControl, IInputControl {
@@ -13,7 +15,7 @@ namespace Ruhe.Web.UI.Controls {
         protected virtual void AssignIdsToChildControls() {
             fromDate.ID = ID + "_from";
             toDate.ID = ID + "_to";
-            readOnlyLabel.ID = ID + "_readonly";
+            readOnlyLabel.ID = ID + "_readOnly";
         }
 
         protected override void CreateChildControls() {
@@ -24,6 +26,7 @@ namespace Ruhe.Web.UI.Controls {
             CreateEndDate();
             CreateReadOnlyLabel();
             AssignIdsToChildControls();
+            ReadOnly = false;
         }
 
         public override string ID {
@@ -68,17 +71,30 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public string ValidatedControlId {
-            get { throw new NotImplementedException(); }
+            get { return toDate.ID; }
         }
 
         public string ErrorMessage {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get {
+                EnsureChildControls();
+                return StringUtilities.NullToEmpty((string) ViewState["ErrorMessage"]);
+            }
+            set {
+                EnsureChildControls();
+                ViewState["ErrorMessage"] = value;
+            }
         }
 
         public bool ReadOnly {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get {
+                EnsureChildControls();
+                return readOnlyLabel.Visible;
+            }
+            set {
+                EnsureChildControls();
+                readOnlyLabel.Visible = value;
+                inputContainer.Visible = !value;
+            }
         }
 
         public bool Required {
@@ -118,6 +134,16 @@ namespace Ruhe.Web.UI.Controls {
             EnsureChildControls();
             fromDate.Clear();
             toDate.Clear();
+        }
+
+        protected override void Render(HtmlTextWriter writer) {
+            EnsureChildControls();
+            readOnlyLabel.Text = DateRange.HasValue ? DateRange.Value.ToString(RuheConfigurationSection.GetCurrent().DateFormat.Value) : string.Empty;
+//            requiredLabel.Visible = Required && !ReadOnly;
+
+            writer.RenderBeginTag(HtmlTextWriterTag.Nobr);
+            base.Render(writer);
+            writer.RenderEndTag();
         }
     }
 }
