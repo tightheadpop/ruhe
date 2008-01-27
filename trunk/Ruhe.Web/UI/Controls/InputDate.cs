@@ -1,9 +1,10 @@
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
-using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -13,9 +14,16 @@ namespace Ruhe.Web.UI.Controls {
     public class InputDate : AbstractValueTypeInput<DateTime> {
         private CalendarExtender calendar;
         private Image image;
+        private InputDateValidator dateValidator;
+
+        protected override void AssignIdsToChildControls() {
+            base.AssignIdsToChildControls();
+            dateValidator.ID = ID + "_dateValidator";
+            dateValidator.ControlToValidate = ID;
+        }
 
         protected override ValidationDataType ValidationDataType {
-            get { return ValidationDataType.Date; }
+            get { return ValidationDataType.String; }
         }
 
         protected override string KeystrokeFilter {
@@ -27,12 +35,22 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override DateTime? Adapt(string value) {
-            return StringUtilities.IsEmpty(value) ? (DateTime?) null : DateTime.Parse(value, Thread.CurrentThread.CurrentUICulture.DateTimeFormat);
+            if (string.IsNullOrEmpty(value))
+                return null;
+            else {
+                DateTime result;
+                if (DateTime.TryParseExact(value, DatePattern, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
+                    return result;
+                return null;
+            }
         }
 
-        //TODO enable configurable pattern
-        protected virtual string DatePattern {
-            get { return Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern; }
+        public virtual string DatePattern {
+            get {
+                return (string) ViewState["DatePattern"]
+                       ?? RuheConfigurationSection.GetCurrent().DateFormat.Value;
+            }
+            set { ViewState["DatePattern"] = value; }
         }
 
         public bool DefaultToToday {
@@ -56,7 +74,13 @@ namespace Ruhe.Web.UI.Controls {
         protected override void CreateChildControls() {
             Controls.Add(CreateCalendarButton());
             base.CreateChildControls();
+            Controls.Add(CreateDateValidator());
             Controls.Add(CreateCalendarExtender());
+        }
+
+        private InputDateValidator CreateDateValidator() {
+            dateValidator = new InputDateValidator();
+            return dateValidator;
         }
 
         private Image CreateCalendarButton() {
@@ -84,8 +108,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void OnPreRender(EventArgs e) {
             base.OnPreRender(e);
-            Page.ClientScript.RegisterStartupScript(GetType(), "date-format", 
-                string.Format("var Ruhe$DATE_FORMAT = \"{0}\";", DatePattern), true);
+            Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", DatePattern);
         }
     }
 }

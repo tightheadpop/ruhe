@@ -82,14 +82,12 @@ namespace Ruhe.Web.UI.Controls {
         private void CreateNumericValidator() {
             compareValidator = new CompareValidator();
             compareValidator.Operator = ValidationCompareOperator.DataTypeCheck;
-            compareValidator.ID = "compare";
             Controls.Add(compareValidator);
         }
 
         private void CreateRangeValidator() {
             rangeValidator = new RangeValidator();
             rangeValidator.Visible = false;
-            rangeValidator.ID = "range";
             Controls.Add(rangeValidator);
         }
 

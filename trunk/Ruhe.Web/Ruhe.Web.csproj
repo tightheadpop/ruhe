@@ -103,6 +103,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Configuration\DateFormatConfigurationElement.cs" />
     <Compile Include="Configuration\ValidatorConfiguratorConfigurationElement.cs" />
     <Compile Include="FileStreamer.cs">
       <SubType>Code</SubType>
@@ -112,6 +113,9 @@
     </Compile>
     <Compile Include="UI\Controls\GrayButton.cs" />
     <Compile Include="UI\Controls\InputDateRange.cs" />
+    <Compile Include="UI\Controls\InputDateValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="WebResourceLoader.cs" />
     <Compile Include="UI\CompositeControl.cs">
       <SubType>Code</SubType>

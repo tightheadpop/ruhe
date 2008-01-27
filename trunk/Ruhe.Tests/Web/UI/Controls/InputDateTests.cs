@@ -35,9 +35,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void EmitsUsersDateFormat() {
+        public void ValidatorIsPresent() {
             LoadTestPage();
-            Assert.IsTrue(Browser.CurrentPageText.Contains("var Ruhe$DATE_FORMAT = "));
+            StringAssert.Contains("date_dateValidator", Browser.CurrentPageText);
         }
 
         [Test]
@@ -48,12 +48,38 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
+        public void SettingDatePatternOverridesDefaultForThisInstance() {
+            string newFormat = "dd-MMM-yyyy";
+            InputDate input = new InputDate();
+            Assert.AreNotEqual(newFormat, input.DatePattern);
+            input.DatePattern = newFormat;
+            Assert.AreEqual(newFormat, input.DatePattern);
+        }
+
+        [Test]
         public void NonNullValueCanBeConvertedToDateTime() {
             InputDate input = new InputDate();
+            input.DatePattern = "MM/dd/yyyy";
             DateTime expected = new DateTime(2002, 10, 21);
             input.Value = expected;
             Assert.AreEqual("10/21/2002", input.Text);
             Assert.AreEqual(expected, input.Value);
+        }
+
+        [Test]
+        public void ParsesInvalidToNull() {
+            InputDate input = new InputDate();
+            input.DatePattern = "MM/dd/yyyy";
+            input.Text = "21/10/2002";
+            Assert.IsNull(input.Value);
+        }
+
+        [Test]
+        public void ParsesValidInputToDateTime() {
+            InputDate input = new InputDate();
+            input.DatePattern = "MM/dd/yyyy";
+            input.Text = "10/21/2002";
+            Assert.AreEqual(new DateTime(2002, 10, 21), input.Value);
         }
 
         [Test]
