@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="UI\Controls\GrayButton.cs" />
     <Compile Include="UI\Controls\InputDateRange.cs" />
+    <Compile Include="UI\Controls\InputDateRangeValidator.cs" />
     <Compile Include="UI\Controls\InputDateValidator.cs">
       <SubType>Code</SubType>
     </Compile>

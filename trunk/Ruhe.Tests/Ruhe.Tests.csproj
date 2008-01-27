@@ -138,6 +138,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\Controls\InputDateRangeTests.cs" />
+    <Compile Include="Web\UI\Controls\InputDateRangeValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
     <Compile Include="Common\StringUtilitiesTests.cs">

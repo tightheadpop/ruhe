@@ -13,12 +13,15 @@ namespace Ruhe.Web.UI.Controls {
         private Label readOnlyLabel;
         private RequiredIcon requiredLabel;
         private OrGroupValidator groupValidator;
+        private InputDateRangeValidator rangeValidator;
 
         protected override void OnInit(EventArgs e) {
             base.OnInit(e);
             EnsureChildControls();
             AssignIdsToChildControls();
-            ValidatorConfiguratorFactory.Create().ConfigureValidator(groupValidator, this);
+            IValidatorConfigurator configurator = ValidatorConfiguratorFactory.Create();
+            configurator.ConfigureValidator(groupValidator, this);
+            configurator.ConfigureValidator(rangeValidator, this);
         }
 
         protected virtual void AssignIdsToChildControls() {
@@ -28,6 +31,8 @@ namespace Ruhe.Web.UI.Controls {
             requiredLabel.ID = ID + "_requiredLabel";
             groupValidator.ID = ID + "_groupValidator";
             groupValidator.GroupToValidate = new string[] {fromDate.ID, toDate.ID};
+            rangeValidator.ID = ID + "_rangeValidator";
+            rangeValidator.ControlToValidate = toDate.ID;
         }
 
         protected override void CreateChildControls() {
@@ -37,11 +42,12 @@ namespace Ruhe.Web.UI.Controls {
             CreateToLabel();
             CreateEndDate();
             CreateRequiredLabel();
-            CreateRequiredValidator();
+            CreateGroupValidator();
+            CreateRangeValidator();
             CreateReadOnlyLabel();
             ReadOnly = false;
             Required = false;
-            ErrorMessage = "Please enter a date range.";
+            ErrorMessage = "Please enter a valid date range.";
         }
 
         public override string ID {
@@ -65,9 +71,14 @@ namespace Ruhe.Web.UI.Controls {
             inputContainer.Controls.Add(requiredLabel);
         }
 
-        private void CreateRequiredValidator() {
+        private void CreateGroupValidator() {
             groupValidator = new OrGroupValidator();
             inputContainer.Controls.Add(groupValidator);
+        }
+
+        private void CreateRangeValidator() {
+            rangeValidator = new InputDateRangeValidator();
+            inputContainer.Controls.Add(rangeValidator);
         }
 
         private void CreateEndDate() {
@@ -133,6 +144,7 @@ namespace Ruhe.Web.UI.Controls {
                 EnsureChildControls();
                 requiredLabel.Visible = value;
                 groupValidator.Enabled = groupValidator.Visible = value;
+                rangeValidator.Enabled = rangeValidator.Visible = value;
             }
         }
 
@@ -146,6 +158,7 @@ namespace Ruhe.Web.UI.Controls {
                 fromDate.ValidationGroup = value;
                 toDate.ValidationGroup = value;
                 groupValidator.ValidationGroup = value;
+                rangeValidator.ValidationGroup = value;
             }
         }
 
@@ -159,6 +172,7 @@ namespace Ruhe.Web.UI.Controls {
                 fromDate.EnableClientScript = value;
                 toDate.EnableClientScript = value;
                 groupValidator.EnableClientScript = value;
+                rangeValidator.EnableClientScript = value;
             }
         }
 

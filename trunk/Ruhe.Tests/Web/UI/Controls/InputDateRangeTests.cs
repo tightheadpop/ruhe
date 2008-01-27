@@ -13,6 +13,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         private LabelTester inputReadOnlyLabel;
         private LabelTester inputRequiredLabel;
         private ValidatorTester inputRequiredValidator;
+        private ValidatorTester inputRangeValidator;
 
         private TextBoxTester readOnlyFrom;
         private TextBoxTester readOnlyTo;
@@ -59,6 +60,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
             Assert.AreEqual(expected.ToString(GlobalDatePattern), readOnlyLabel.Text);
         }
 
+        [Test]
+        public void StartOccursAfterEnd() {
+            LoadPage();
+            from.Text = "01-Jan-2004";
+            to.Text = "31-Dec-2003";
+            WebAssert.NotVisible(inputRangeValidator);
+            submit.Click();
+            WebAssert.Visible(inputRangeValidator);
+        }
+
         protected override void SetUp() {
             base.SetUp();
             from = new TextBoxTester(IdFor("input_from"));
@@ -66,6 +77,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             inputReadOnlyLabel = new LabelTester(IdFor("input_readOnly"));
             inputRequiredLabel = new LabelTester(IdFor("input_requiredLabel"));
             inputRequiredValidator = new ValidatorTester(IdFor("input_groupValidator"));
+            inputRangeValidator = new ValidatorTester(IdFor("input_rangeValidator"));
 
             readOnlyFrom = new TextBoxTester(IdFor("readOnlyInput_from"));
             readOnlyTo = new TextBoxTester(IdFor("readOnlyInput_to"));
