@@ -112,6 +112,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Controls\BoundField.cs" />
+    <Compile Include="UI\Controls\DateBoundField.cs" />
     <Compile Include="UI\Controls\GrayButton.cs" />
     <Compile Include="UI\Controls\InputDateRange.cs" />
     <Compile Include="UI\Controls\InputDateRangeValidator.cs" />

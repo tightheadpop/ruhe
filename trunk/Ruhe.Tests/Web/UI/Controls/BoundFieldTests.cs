@@ -9,5 +9,17 @@ namespace Ruhe.Tests.Web.UI.Controls {
             LoadPage();
             StringAssert.Contains("hi, mom!".Length.ToString(), Browser.CurrentPageText);
         }
+
+        [Test]
+        public void DateBoundFieldAppliesConfiguredDateFormat() {
+            LoadPage();
+            StringAssert.Contains("09-Feb-2009", Browser.CurrentPageText);
+        }
+
+        [Test]
+        public void DateBoundFieldAppliesUserFormatIfProvided() {
+            LoadPage();
+            StringAssert.Contains("from 9/17/1983", Browser.CurrentPageText);
+        }
     }
 }

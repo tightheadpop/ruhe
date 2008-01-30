@@ -15,6 +15,14 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
             public string[] Bar {
                 get { return bar; }
             }
+
+            public DateTime Baz {
+                get { return new DateTime(2009, 2, 9); }
+            }
+
+            public DateRange Boz {
+                get { return DateRange.StartingOn(new DateTime(1983, 9, 17)); }
+            }
         }
     }
 }
