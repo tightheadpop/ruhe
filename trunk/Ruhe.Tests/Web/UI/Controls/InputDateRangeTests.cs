@@ -57,7 +57,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             WebAssert.NotVisible(readOnlyRequiredLabel);
             WebAssert.Visible(readOnlyLabel);
             DateRange expected = new DateRange(DateTime.Today, DateTime.Today.AddDays(3));
-            Assert.AreEqual(expected.ToString(GlobalDatePattern), readOnlyLabel.Text);
+            Assert.AreEqual(expected.ToString("M/d/yyyy"), readOnlyLabel.Text);
         }
 
         [Test]

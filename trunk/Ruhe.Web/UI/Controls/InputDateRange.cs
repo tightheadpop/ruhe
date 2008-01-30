@@ -150,6 +150,18 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        public string Format {
+            get {
+                EnsureChildControls();
+                return fromDate.Format;
+            }
+            set {
+                EnsureChildControls();
+                fromDate.Format = value;
+                toDate.Format = value;
+            }
+        }
+
         public string ValidationGroup {
             get {
                 EnsureChildControls();
@@ -205,7 +217,7 @@ namespace Ruhe.Web.UI.Controls {
         protected override void Render(HtmlTextWriter writer) {
             EnsureChildControls();
             if (ReadOnly)
-                readOnlyLabel.Text = DateRange.HasValue ? DateRange.Value.ToString(RuheConfigurationSection.GetCurrent().DateFormat.Value) : string.Empty;
+                readOnlyLabel.Text = DateRange.HasValue ? DateRange.Value.ToString(Format) : string.Empty;
 
             writer.RenderBeginTag(HtmlTextWriterTag.Nobr);
             base.Render(writer);

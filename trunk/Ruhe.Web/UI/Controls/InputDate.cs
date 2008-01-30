@@ -4,6 +4,7 @@ using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using Ruhe.Common.Utilities;
 using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
@@ -31,7 +32,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override string Adapt(DateTime? value) {
-            return value.HasValue ? value.Value.ToString(DatePattern) : string.Empty;
+            return value.HasValue ? value.Value.ToString(Format) : string.Empty;
         }
 
         protected override DateTime? Adapt(string value) {
@@ -39,21 +40,22 @@ namespace Ruhe.Web.UI.Controls {
                 return null;
             else {
                 DateTime result;
-                if (DateTime.TryParseExact(value, DatePattern, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
+                if (DateTime.TryParseExact(value, Format, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
                     return result;
                 return null;
             }
         }
 
-        public virtual string DatePattern {
+        public virtual string Format {
             get {
                 EnsureChildControls();
-                return (string) ViewState["DatePattern"]
+                return StringUtilities.TrimToNull((string) ViewState["Format"])
                        ?? RuheConfigurationSection.GetCurrent().DateFormat.Value;
             }
             set {
                 EnsureChildControls();
-                ViewState["DatePattern"] = value;
+                ViewState["Format"] = value;
+                calendar.Format = value;
             }
         }
 
@@ -97,7 +99,7 @@ namespace Ruhe.Web.UI.Controls {
 
         private CalendarExtender CreateCalendarExtender() {
             calendar = new CalendarExtender();
-            calendar.Format = DatePattern;
+            calendar.Format = Format;
             return calendar;
         }
 
@@ -110,9 +112,9 @@ namespace Ruhe.Web.UI.Controls {
             base.OnLoad(e);
         }
 
-        protected override void OnPreRender(EventArgs e) {
-            base.OnPreRender(e);
-            Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", DatePattern);
+        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            base.AddAttributesToRender(writer);
+            Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", Format);
         }
     }
 }
