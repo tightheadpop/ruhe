@@ -14,7 +14,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void InvalidInputIsCaught() {
-            input.DatePattern = "dd-MM-yyyy";
+            input.Format = "dd-MM-yyyy";
             input.Text = "12-31-2005";
             Assert.IsFalse(validator.Evaluate());
         }
