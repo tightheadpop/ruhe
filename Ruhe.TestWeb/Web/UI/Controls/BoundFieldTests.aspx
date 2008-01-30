@@ -12,6 +12,8 @@
         <asp:GridView ID="grid" runat="server" AutoGenerateColumns="false">
             <Columns>
                 <ruhe:BoundField HeaderText="Check this OGNL!" DataField="Bar[0].Length" />
+                <ruhe:DateBoundField HeaderText="Date with configured default" DataField="Baz" />
+                <ruhe:DateBoundField HeaderText="Date with user format" DataField="Boz" DataFormatString="{0:M/d/yyyy}" />
             </Columns>
         </asp:GridView>
     </div>
