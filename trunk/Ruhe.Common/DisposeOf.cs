@@ -8,8 +8,8 @@ namespace Ruhe.Common {
     /// Utility for disposing cleanly of items
     /// </summary>
     public class DisposeOf {
-        private static readonly string[] DisposingMethods = new string[] {"Flush", "Close", "Dispose"};
-        private DisposeOf() {}
+        private static readonly string[] DisposingMethods = new string[] { "Flush", "Close", "Dispose" };
+        private DisposeOf() { }
 
         /// <summary>
         /// Handles common clean up tasks, squelching exceptions.
@@ -18,12 +18,15 @@ namespace Ruhe.Common {
         /// Flush, Close, Dispose, in that order.
         /// </remarks>
         public static void These(params object[] stuff) {
-            if (stuff == null) {
+            These((IEnumerable)stuff);
+        }
+
+        public static void These(IEnumerable items) {
+            if (items == null)
                 return;
-            }
-            foreach (object thing in stuff) {
-                if (thing != null) {
-                    InvokeDisposingMethods(thing);
+            foreach (object item in items) {
+                if (item != null) {
+                    InvokeDisposingMethods(item);
                 }
             }
         }
@@ -32,12 +35,12 @@ namespace Ruhe.Common {
             Invoke(obj, GetDisposingMethods(obj));
         }
 
-        private static MethodInfo[] GetDisposingMethods(object obj) {
-            ArrayList methods = new ArrayList(DisposingMethods.Length);
+        private static IEnumerable<MethodInfo> GetDisposingMethods(object obj) {
+            List<MethodInfo> methods = new List<MethodInfo>(DisposingMethods.Length);
             foreach (string methodName in DisposingMethods) {
-                methods.Add(obj.GetType().GetMethod(methodName, new Type[] {}));
+                methods.Add(obj.GetType().GetMethod(methodName, new Type[] { }));
             }
-            return (MethodInfo[]) methods.ToArray(typeof(MethodInfo));
+            return methods;
         }
 
         private static void Invoke(object obj, IEnumerable<MethodInfo> methods) {

@@ -130,7 +130,7 @@
     <Compile Include="Common\DelimitedStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\DisposeTest.cs">
+    <Compile Include="Common\DisposeOfTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\QuickTests.cs" />

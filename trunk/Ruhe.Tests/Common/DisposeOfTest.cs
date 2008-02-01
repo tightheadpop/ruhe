@@ -6,7 +6,7 @@ using Ruhe.Common;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
-    public class DisposeTest {
+    public class DisposeOfTest {
         [Test]
         public void DisposeOfIDisposable() {
             Foo disposable = new Foo();
@@ -40,6 +40,17 @@ namespace Ruhe.Tests.Common {
             DisposeOf.These(new ExceptionThrowingDisposable());
         }
 
+        [Test]
+        public void DisposeOfCollectionOfStreamWritersCallsClose() {
+            FooWriter first = new FooWriter();
+            FooWriter second = new FooWriter();
+            DisposeOf.These(Quick.List(first, second));
+            Assert.IsTrue(first.Closed);
+            Assert.IsTrue(first.Disposed);
+            Assert.IsTrue(second.Closed);
+            Assert.IsTrue(second.Disposed);
+        }
+
         #region Test Classes
 
         private class ExceptionThrowingDisposable : IDisposable {
@@ -51,6 +62,7 @@ namespace Ruhe.Tests.Common {
         private class FooWriter : StreamWriter {
             private bool _closed;
             private bool _flushed;
+            public bool Disposed;
             public FooWriter() : base(new MemoryStream()) {}
 
             public bool Closed {
@@ -67,6 +79,11 @@ namespace Ruhe.Tests.Common {
 
             public override void Flush() {
                 _flushed = true;
+            }
+
+            protected override void Dispose(bool disposing) {
+                Disposed = true;
+                base.Dispose(disposing);
             }
         }
 
