@@ -102,7 +102,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 regexValidator.ValidationExpression = value;
-                regexValidator.Visible = regexValidator.Enabled = (value != string.Empty);
+                regexValidator.Visible = regexValidator.Enabled = !string.IsNullOrEmpty(value);
             }
         }
 

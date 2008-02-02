@@ -59,6 +59,11 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        public override string FormatText {
+            get { return base.FormatText ?? RuheConfiguration.DateFormatText; }
+            set { base.FormatText = value; }
+        }
+
         public bool DefaultToToday {
             get { return Convert.ToBoolean(ViewState["DefaultToToday"]); }
             set {

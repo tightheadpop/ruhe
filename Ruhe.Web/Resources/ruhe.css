@@ -8,6 +8,13 @@
 .labeledControlPanel .labeled {
     white-space: nowrap;
 }
+.labeledControlPanel .layoutTable {
+    border-width: 0px;
+}
+.labeledControlPanel .layoutTable TD, .labeledControlPanel .layoutTable TH {
+    padding: 2px;
+    margin: 0px;
+}
 TEXTAREA { behavior: url(<%= WebResource("Ruhe.Web.Resources.maxlength.htc") %>); }
 
 /* fixes issue with calendar extender in InputDateRange */

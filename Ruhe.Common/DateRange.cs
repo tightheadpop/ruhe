@@ -1,5 +1,4 @@
 using System;
-using Ruhe.Common.Utilities;
 
 namespace Ruhe.Common {
     /// <remarks>
@@ -102,7 +101,7 @@ namespace Ruhe.Common {
         }
 
         public string ToString(string format) {
-            if (StringUtilities.NullToEmpty(format) == string.Empty) {
+            if (string.IsNullOrEmpty(format)) {
                 format = "d";
             }
             if (this == Eternity) {
@@ -112,7 +111,7 @@ namespace Ruhe.Common {
             } else if (End == DateTime.MaxValue.Date) {
                 return "from " + Start.ToString(format);
             } else {
-                return String.Format("{0} to {1}", Start.ToString(format), End.ToString(format));
+                return string.Format("{0} to {1}", Start.ToString(format), End.ToString(format));
             }
         }
 
