@@ -212,6 +212,18 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        public Unit Width {
+            get {
+                EnsureChildControls();
+                return fromDate.Width;
+            }
+            set {
+                EnsureChildControls();
+                fromDate.Width = value;
+                toDate.Width = value;
+            }
+        }
+
         public void Clear() {
             EnsureChildControls();
             fromDate.Clear();
