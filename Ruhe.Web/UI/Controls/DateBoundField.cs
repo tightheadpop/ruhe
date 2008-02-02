@@ -6,7 +6,7 @@ namespace Ruhe.Web.UI.Controls {
         public override string DataFormatString {
             get {
                 return StringUtilities.TrimToNull((string)ViewState["Format"])
-                       ?? string.Format("{{0:{0}}}", RuheConfigurationSection.GetCurrent().DateFormat.Value);
+                       ?? string.Format("{{0:{0}}}", RuheConfiguration.DateFormat);
             }
             set { ViewState["DataFormatString"] = value; }
         }

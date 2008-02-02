@@ -203,7 +203,6 @@
     <Compile Include="Web\UI\ControlUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Configuration\ValidatorConfiguratorFactoryTests.cs" />
     <Compile Include="Web\UI\RequireTests.cs" />
   </ItemGroup>
   <ItemGroup>

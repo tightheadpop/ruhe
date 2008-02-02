@@ -50,7 +50,7 @@ namespace Ruhe.Web.UI.Controls {
             get {
                 EnsureChildControls();
                 return StringUtilities.TrimToNull((string) ViewState["Format"])
-                       ?? RuheConfigurationSection.GetCurrent().DateFormat.Value;
+                       ?? RuheConfiguration.DateFormat;
             }
             set {
                 EnsureChildControls();

@@ -104,6 +104,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\DateFormatConfigurationElement.cs" />
+    <Compile Include="Configuration\RuheConfiguration.cs" />
     <Compile Include="Configuration\ValidatorConfiguratorConfigurationElement.cs" />
     <Compile Include="FileStreamer.cs">
       <SubType>Code</SubType>
@@ -227,7 +228,6 @@
     </Compile>
     <Compile Include="UI\IValidatorConfigurator.cs" />
     <Compile Include="Configuration\RuheConfigurationSection.cs" />
-    <Compile Include="Configuration\ValidatorConfiguratorFactory.cs" />
     <Compile Include="UI\Require.cs" />
     <Compile Include="WebUtilities.cs">
       <SubType>Code</SubType>
