@@ -17,17 +17,17 @@ namespace Ruhe.Web.Configuration {
         public override ConfigurationElementCollectionType CollectionType {
             get { return ConfigurationElementCollectionType.AddRemoveClearMap; }
         }
-    }
 
-    public class ImageUrlElement : ConfigurationElement {
-        [ConfigurationProperty("control", IsRequired = true)]
-        public string Control {
-            get { return this["control"] as string; }
-        }
+        public class ImageUrlElement : ConfigurationElement {
+            [ConfigurationProperty("control", IsRequired = true)]
+            public string Control {
+                get { return this["control"] as string; }
+            }
 
-        [ConfigurationProperty("url", IsRequired = true)]
-        public string Url {
-            get { return this["url"] as string; }
+            [ConfigurationProperty("url", IsRequired = true)]
+            public string Url {
+                get { return this["url"] as string; }
+            }
         }
     }
 }
