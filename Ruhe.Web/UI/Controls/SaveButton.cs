@@ -1,4 +1,3 @@
-using Ruhe.Common.Utilities;
 using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
@@ -9,8 +8,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            ImageUrl = StringUtilities.TrimToNull(RuheConfiguration.ImageUrlFor<SaveButton>())
-                ?? Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.save.png");
+            ImageUrl = RuheConfiguration.ImageUrlFor<SaveButton>("save.png");
         }
     }
 }

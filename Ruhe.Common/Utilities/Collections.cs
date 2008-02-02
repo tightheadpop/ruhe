@@ -22,7 +22,7 @@ namespace Ruhe.Common.Utilities {
 
         public static T First<T>(IEnumerable collection, Predicate<T> predicate) {
             foreach (object item in collection) {
-                if (Reflector.IsA<T>(item) && predicate((T) item))
+                if (item is T && predicate((T) item))
                     return (T) item;
             }
             return default(T);

@@ -6,7 +6,7 @@ namespace Ruhe.Web.Configuration {
         public static IValidatorConfigurator ValidatorConfigurator {
             get {
                 RuheConfigurationSection section = RuheConfigurationSection.GetCurrent();
-                return (IValidatorConfigurator)Activator.CreateInstance(Type.GetType(section.ValidatorConfiguratorElement.Type));
+                return (IValidatorConfigurator) Activator.CreateInstance(Type.GetType(section.ValidatorConfiguratorElement.Type));
             }
         }
 
@@ -14,9 +14,12 @@ namespace Ruhe.Web.Configuration {
             get { return RuheConfigurationSection.GetCurrent().DateFormat.Value; }
         }
 
-        public static string ImageUrlFor<T>() {
+        public static string ImageUrlFor<T>(string defaultResourceName) {
             ImageUrlElement imageConfig = RuheConfigurationSection.GetCurrent().Images[typeof(T).Name];
-            return imageConfig == null ? null : imageConfig.Url;
+            if (imageConfig == null)
+                return WebResourceLoader.GetResourceUrl(typeof(T), defaultResourceName);
+            else
+                return imageConfig.Url;
         }
     }
 }
