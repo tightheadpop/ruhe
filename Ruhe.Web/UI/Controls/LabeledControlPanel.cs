@@ -2,6 +2,7 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ruhe.Common;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
@@ -14,12 +15,12 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public LabelPosition LabelPosition {
-            get { return (LabelPosition) Enum.Parse(typeof(LabelPosition), (string) ViewState["LabelPosition"], true); }
+            get { return Reflector.ConvertToEnum<LabelPosition>((string) ViewState["LabelPosition"]); }
             set { ViewState["LabelPosition"] = value.ToString(); }
         }
 
         public string HeaderText {
-            get { return StringUtilities.NullToEmpty((string) ViewState["HeaderText"]); }
+            get { return (string) ViewState["HeaderText"]; }
             set { ViewState["HeaderText"] = value; }
         }
 
@@ -87,13 +88,13 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void RenderNameLabelCell(Control control, HtmlTextWriter writer) {
-            string labelText = String.Empty;
+            string labelText = string.Empty;
             TableCell labelCell = new TableCell();
             labelCell.CssClass = "label " + LabelPosition.ToString().ToLower();
 
             ILabeledControl labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
-                labelText = labeledControl.LabelText.Trim();
+                labelText = StringUtilities.TrimToEmpty(labeledControl.LabelText);
                 labelText = (labelText == String.Empty) ? String.Empty : labelText + ":";
             }
             EncodedLabel nameLabel = new EncodedLabel(labelText);
@@ -125,7 +126,7 @@ namespace Ruhe.Web.UI.Controls {
 
             ILabeledControl labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
-                string formatText = labeledControl.FormatText;
+                string formatText = StringUtilities.TrimToEmpty(labeledControl.FormatText);
                 if (formatText.Length > 0) {
                     formatLabel.Text = formatText;
                 }
@@ -180,12 +181,12 @@ namespace Ruhe.Web.UI.Controls {
         #region ILabeledControl Members
 
         public string LabelText {
-            get { return StringUtilities.NullToEmpty((string) ViewState["LabelText"]); }
+            get { return (string) ViewState["LabelText"]; }
             set { ViewState["LabelText"] = value; }
         }
 
         public string FormatText {
-            get { return StringUtilities.NullToEmpty((string) ViewState["FormatText"]); }
+            get { return (string) ViewState["FormatText"]; }
             set { ViewState["FormatText"] = value; }
         }
 

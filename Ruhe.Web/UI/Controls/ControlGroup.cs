@@ -1,15 +1,12 @@
 using System;
 using System.Web.UI.WebControls;
-using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
     public class ControlGroup : PlaceHolder, ILabeledControl, ILayoutContainer {
-        #region ILabeledControl Members
-
         public virtual string LabelText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["LabelText"]);
+                return (string) ViewState["LabelText"];
             }
             set {
                 EnsureChildControls();
@@ -20,17 +17,13 @@ namespace Ruhe.Web.UI.Controls {
         public virtual string FormatText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["FormatText"]);
+                return (string) ViewState["FormatText"];
             }
             set {
                 EnsureChildControls();
                 ViewState["FormatText"] = value;
             }
         }
-
-        #endregion
-
-        #region ILayoutContainer Members
 
         public bool IsLayoutContainer {
             get {
@@ -42,7 +35,5 @@ namespace Ruhe.Web.UI.Controls {
                 ViewState["IsLayoutContainer"] = value;
             }
         }
-
-        #endregion
     }
 }

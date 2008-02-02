@@ -16,7 +16,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void EmitsStyleScript() {
-            StringAssert.Contains(Tests.IdFor.Format("updateLabel", "document.getElementById('{0}').style.display = 'inline';"), Browser.CurrentPageText);
+            StringAssert.Contains(Tests.IdFor.Format("updateLabel", "$get('{0}').style.display = 'inline';"), Browser.CurrentPageText);
         }
 
         protected override void SetUp() {

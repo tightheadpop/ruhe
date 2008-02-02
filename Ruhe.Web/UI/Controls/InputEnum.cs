@@ -11,8 +11,7 @@ namespace Ruhe.Web.UI.Controls {
     [Browsable(false)]
     [DesignTimeVisible(false)]
     public class InputEnumeration<T> : InputEnum where T : struct {
-        public InputEnumeration()
-            : base(typeof(T)) {
+        public InputEnumeration() : base(typeof(T)) {
             BindValues();
         }
 
@@ -52,12 +51,8 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public override string ID {
-            get {
-                return list.ID;
-            }
-            set {
-                list.ID = value;
-            }
+            get { return list.ID; }
+            set { list.ID = value; }
         }
 
         public override ControlCollection Controls {
