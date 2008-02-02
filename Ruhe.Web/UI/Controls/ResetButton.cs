@@ -1,4 +1,6 @@
 using System.Web.UI;
+using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
     public class ResetButton : Button {
@@ -10,7 +12,8 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            ImageUrl = Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.reset.png");
+            ImageUrl = StringUtilities.TrimToNull(RuheConfiguration.ImageUrlFor<ResetButton>())
+                ?? Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.reset.png");
         }
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {

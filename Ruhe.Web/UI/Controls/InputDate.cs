@@ -105,7 +105,8 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void OnLoad(EventArgs e) {
             image.ID = ID + "_calendar";
-            image.ImageUrl = Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.calendar.png");
+            image.ImageUrl = StringUtilities.TrimToNull(RuheConfiguration.ImageUrlFor<InputDate>())
+                ?? Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.calendar.png");
             calendar.TargetControlID = ID;
             calendar.PopupButtonID = image.ID;
             calendar.PopupPosition = CalendarPosition.BottomLeft;
