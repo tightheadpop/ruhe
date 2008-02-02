@@ -1,8 +1,10 @@
 using System;
+using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Common;
+using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
@@ -29,6 +31,17 @@ namespace Ruhe.Tests.Web.UI.Controls {
             input.DateRange = oneWeek;
 
             Assert.AreEqual(oneWeek, input.DateRange);
+        }
+
+        [Test]
+        public void SettingWidthActsOnChildInputDateControls() {
+            InputDateRange range = new InputDateRange();
+            Unit expected = Unit.Parse("8em");
+            range.Width = expected;
+            ControlUtilities.FindRecursive<InputDate>(range).ForEach(
+                delegate (InputDate date) {
+                    Assert.AreEqual(expected, date.Width);
+                });
         }
 
         [Test]
