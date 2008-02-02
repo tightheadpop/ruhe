@@ -79,14 +79,21 @@ namespace Ruhe.Web.UI.Controls {
                 EnsureChildControls();
                 base.ReadOnly = value;
                 image.Visible = !value;
+                calendar.EnabledOnClient = calendar.Enabled = !value;
+                dateValidator.Visible = dateValidator.Enabled = !value;
             }
         }
 
         protected override void CreateChildControls() {
             Controls.Add(CreateCalendarButton());
-            base.CreateChildControls();
+            //need to create dateValidator and calendar before calling base
+            //which sets ReadOnly
             Controls.Add(CreateDateValidator());
             Controls.Add(CreateCalendarExtender());
+            base.CreateChildControls();
+            //move controls to desired location
+            Controls.Add(dateValidator);
+            Controls.Add(calendar);
         }
 
         private InputDateValidator CreateDateValidator() {

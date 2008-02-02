@@ -9,11 +9,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
     public class InputDateTests : RuheWebTest<InputDate> {
         private HtmlImageTester calendar;
         private HtmlImageTester readonlyCalendar;
+        private HtmlTagTester readonlyDateValidator;
 
         private void LoadTestPage() {
             LoadPage();
             calendar = new HtmlImageTester(IdFor("date_calendar"));
-            readonlyCalendar = new HtmlImageTester(IdFor("readonly_calendar"));
+            readonlyCalendar = new HtmlImageTester(IdFor("readOnly_calendar"));
+            readonlyDateValidator = new HtmlTagTester(IdFor("readOnly_dateValidator"));
         }
 
         [Test]
@@ -26,6 +28,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void DoesNotHaveCalendarImageWhenReadOnly() {
             LoadTestPage();
             WebAssert.NotVisible(readonlyCalendar);
+        }
+
+        [Test]
+        public void DoesNotEmitValidatorWhenReadOnly() {
+            LoadTestPage();
+            WebAssert.NotVisible(readonlyDateValidator);
         }
 
         [Test]
