@@ -1,4 +1,6 @@
 using System.Web.UI;
+using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
     public class RequiredIcon : ImageIcon {
@@ -23,7 +25,8 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            ImageUrl = Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.required.gif");
+            ImageUrl = StringUtilities.TrimToNull(RuheConfiguration.ImageUrlFor<RequiredIcon>())
+                ?? Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.required.gif");
         }
     }
 }

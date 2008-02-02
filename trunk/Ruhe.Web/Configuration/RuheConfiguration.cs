@@ -13,5 +13,10 @@ namespace Ruhe.Web.Configuration {
         public static string DateFormat {
             get { return RuheConfigurationSection.GetCurrent().DateFormat.Value; }
         }
+
+        public static string ImageUrlFor<T>() {
+            ImageUrlElement imageConfig = RuheConfigurationSection.GetCurrent().Images[typeof(T).Name];
+            return imageConfig == null ? null : imageConfig.Url;
+        }
     }
 }

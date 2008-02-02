@@ -12,6 +12,11 @@ namespace Ruhe.Web.Configuration {
                 "dateFormat",
                 typeof(DateFormatConfigurationElement));
 
+        private static readonly ConfigurationProperty imagesElement =
+            new ConfigurationProperty(
+                "images",
+                typeof(ImageUrlConfigurationCollection));
+
         [ConfigurationProperty("validatorConfigurator")]
         public ValidatorConfiguratorConfigurationElement ValidatorConfiguratorElement {
             get { return (ValidatorConfiguratorConfigurationElement) base[configuratorElement]; }
@@ -20,6 +25,11 @@ namespace Ruhe.Web.Configuration {
         [ConfigurationProperty("dateFormat")]
         public DateFormatConfigurationElement DateFormat {
             get { return (DateFormatConfigurationElement) base[dateFormatElement]; }
+        }
+
+        [ConfigurationProperty("images")]
+        public ImageUrlConfigurationCollection Images {
+            get { return (ImageUrlConfigurationCollection)base[imagesElement]; }
         }
 
         public static RuheConfigurationSection GetCurrent() {

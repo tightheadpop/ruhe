@@ -1,3 +1,6 @@
+using Ruhe.Common.Utilities;
+using Ruhe.Web.Configuration;
+
 namespace Ruhe.Web.UI.Controls {
     public class ErrorIcon : ImageIcon {
         public ErrorIcon() {}
@@ -14,7 +17,8 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            ImageUrl = Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.error.gif");
+            ImageUrl = StringUtilities.TrimToNull(RuheConfiguration.ImageUrlFor<ErrorIcon>())
+                ?? Page.ClientScript.GetWebResourceUrl(GetType(), "Ruhe.Web.Resources.error.gif");
         }
     }
 }
