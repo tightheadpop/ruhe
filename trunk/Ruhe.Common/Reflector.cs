@@ -190,9 +190,5 @@ namespace Ruhe.Common {
             MethodInfo method = obj.GetType().GetMethod(methodName, Flags);
             return method.Invoke(obj, parameters);
         }
-
-        public static bool IsA<T>(object item) {
-            return typeof(T).IsAssignableFrom(item.GetType());
-        }
     }
 }

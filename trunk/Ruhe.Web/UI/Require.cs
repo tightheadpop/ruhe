@@ -2,7 +2,6 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-using Ruhe.Common;
 
 namespace Ruhe.Web.UI {
     public class Require {
@@ -19,7 +18,7 @@ namespace Ruhe.Web.UI {
                 stylesheetLink.Attributes["type"] = resource.ContentType;
 
                 foreach (Control control in page.Header.Controls) {
-                    if (Reflector.IsA<HtmlTitle>(control)) {
+                    if (control is HtmlTitle) {
                         page.Header.Controls.AddAt(page.Header.Controls.IndexOf(control) + 1, stylesheetLink);
                         return;
                     }
@@ -29,7 +28,7 @@ namespace Ruhe.Web.UI {
 
         private static Page GetPage() {
             HttpContext context = HttpContext.Current;
-            if (context == null || !Reflector.IsA<Page>(context.Handler))
+            if (context == null || !(context.Handler is Page))
                 throw new InvalidOperationException(typeof(Require).Name + " can only be used in the context of a Page.");
             return (Page) context.Handler;
         }

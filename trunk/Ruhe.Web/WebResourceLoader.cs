@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using System.Web.UI;
 using Ruhe.Common.Utilities;
 
@@ -15,6 +16,18 @@ namespace Ruhe.Web {
                 attributes,
                 delegate(WebResourceAttribute a) { return a.WebResource.EndsWith(partialName); }
                 );
+        }
+
+        public static string GetResourceUrl(Type typeInAssemblyWithResource, string partialName) {
+            Page page = GetPage();
+            return page.ClientScript.GetWebResourceUrl(typeInAssemblyWithResource, GetResource(typeInAssemblyWithResource, partialName).WebResource);
+        }
+
+        private static Page GetPage() {
+            HttpContext context = HttpContext.Current;
+            if (context == null || !(context.Handler is Page))
+                throw new InvalidOperationException(typeof(WebResourceLoader).Name + " can only be used in the context of a Page.");
+            return (Page) context.Handler;
         }
     }
 }
