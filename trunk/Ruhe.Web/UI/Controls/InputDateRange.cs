@@ -2,7 +2,6 @@ using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common;
-using Ruhe.Common.Utilities;
 using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
@@ -117,7 +116,7 @@ namespace Ruhe.Web.UI.Controls {
         public string ErrorMessage {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["ErrorMessage"]);
+                return (string) ViewState["ErrorMessage"];
             }
             set {
                 EnsureChildControls();

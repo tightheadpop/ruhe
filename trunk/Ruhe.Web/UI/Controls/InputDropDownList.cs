@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Common.Utilities;
 using Ruhe.Web.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
@@ -71,7 +70,7 @@ namespace Ruhe.Web.UI.Controls {
         public string FormatText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["FormatText"]);
+                return (string) ViewState["FormatText"];
             }
             set {
                 EnsureChildControls();
@@ -82,7 +81,7 @@ namespace Ruhe.Web.UI.Controls {
         public string LabelText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["LabelText"]);
+                return (string) ViewState["LabelText"];
             }
             set {
                 EnsureChildControls();
@@ -97,7 +96,7 @@ namespace Ruhe.Web.UI.Controls {
         public string EmptyText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["EmptyText"]);
+                return (string) ViewState["EmptyText"];
             }
             set {
                 EnsureChildControls();
@@ -233,7 +232,7 @@ namespace Ruhe.Web.UI.Controls {
         public string ErrorMessage {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["ErrorMessage"]);
+                return (string) ViewState["ErrorMessage"];
             }
             set {
                 EnsureChildControls();

@@ -2,7 +2,7 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Common.Utilities;
+using Ruhe.Common;
 
 namespace Ruhe.Web.UI.Controls {
     public enum MessageType {
@@ -22,12 +22,12 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public string HeaderText {
-            get { return StringUtilities.NullToEmpty((string) ViewState["headertext"]); }
+            get { return (string) ViewState["headertext"]; }
             set { ViewState["headertext"] = value; }
         }
 
         public MessageType Type {
-            get { return (MessageType) Enum.Parse(typeof(MessageType), (string) ViewState["type"]); }
+            get { return Reflector.ConvertToEnum<MessageType>(ViewState["type"]); }
             set { ViewState["type"] = value.ToString(); }
         }
 
@@ -51,7 +51,7 @@ namespace Ruhe.Web.UI.Controls {
                     HeaderText = flashMessage.Value.HeaderText;
             }
 
-            if (HeaderText.Length > 0)
+            if (!string.IsNullOrEmpty(HeaderText))
                 header.Controls.Add(new LiteralControl(HttpUtility.HtmlEncode(HeaderText)));
             header.Visible = header.HasControls();
             bool bodyIsVisible = Visible && HasControls();
@@ -114,9 +114,9 @@ namespace Ruhe.Web.UI.Controls {
 
         [Serializable]
         private struct FlashTransferObject {
-            public string Message;
+            public readonly string Message;
             public MessageType? Type;
-            public string HeaderText;
+            public readonly string HeaderText;
 
             public FlashTransferObject(string message, MessageType? type, string headerText) {
                 Message = message;

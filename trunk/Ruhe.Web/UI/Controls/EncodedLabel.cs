@@ -23,7 +23,7 @@ namespace Ruhe.Web.UI.Controls {
         public string LabelText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["LabelText"]);
+                return (string) ViewState["LabelText"];
             }
             set {
                 EnsureChildControls();
@@ -34,7 +34,7 @@ namespace Ruhe.Web.UI.Controls {
         public string FormatText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string) ViewState["FormatText"]);
+                return (string) ViewState["FormatText"];
             }
             set {
                 EnsureChildControls();
