@@ -161,6 +161,11 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        public override string FormatText {
+            get { return base.FormatText ?? RuheConfiguration.DateFormatText; }
+            set { base.FormatText = value; }
+        }
+
         public string ValidationGroup {
             get {
                 EnsureChildControls();

@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Web.UI;
-using Ruhe.Common.Utilities;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
@@ -16,7 +15,7 @@ namespace Ruhe.Web.UI {
         public virtual string LabelText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string)ViewState["LabelText"]);
+                return (string) ViewState["LabelText"];
             }
             set {
                 EnsureChildControls();
@@ -27,7 +26,7 @@ namespace Ruhe.Web.UI {
         public virtual string FormatText {
             get {
                 EnsureChildControls();
-                return StringUtilities.NullToEmpty((string)ViewState["FormatText"]);
+                return (string) ViewState["FormatText"];
             }
             set {
                 EnsureChildControls();

@@ -114,7 +114,7 @@ $get('{0}').onkeypress = Ruhe_KeyPressFilter({1});
         protected abstract string KeystrokeFilter { get; }
 
         protected virtual T? Adapt(string value) {
-            return value == string.Empty ? null : (T?) Convert.ChangeType(value, typeof(T));
+            return string.IsNullOrEmpty(value) ? null : (T?) Convert.ChangeType(value, typeof(T));
         }
 
         protected virtual string Adapt(T? value) {

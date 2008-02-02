@@ -1,5 +1,4 @@
 using System;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common;
@@ -17,11 +16,6 @@ namespace Ruhe.Web.UI.Controls {
         public LabelPosition LabelPosition {
             get { return Reflector.ConvertToEnum<LabelPosition>((string) ViewState["LabelPosition"]); }
             set { ViewState["LabelPosition"] = value.ToString(); }
-        }
-
-        public string HeaderText {
-            get { return (string) ViewState["HeaderText"]; }
-            set { ViewState["HeaderText"] = value; }
         }
 
         public void ClearFormControls() {
@@ -50,23 +44,15 @@ namespace Ruhe.Web.UI.Controls {
         protected override void RenderContents(HtmlTextWriter writer) {
             Table layoutTable = new Table();
 
+            layoutTable.CssClass = "layoutTable";
             layoutTable.ID = UniqueID + "_layoutTable";
-            layoutTable.BorderWidth = Unit.Pixel(0);
-            layoutTable.CellPadding = 0;
-            layoutTable.CellSpacing = 2;
 
             if (HasControls()) {
-                if (HeaderText != String.Empty) {
-                    writer.RenderBeginTag(HtmlTextWriterTag.Fieldset);
-                    writer.RenderBeginTag(HtmlTextWriterTag.Legend);
-                    writer.Write(HttpUtility.HtmlEncode(HeaderText));
-                    writer.RenderEndTag();
-                }
                 layoutTable.RenderBeginTag(writer);
 
                 ProcessControlRows(Controls, writer);
                 layoutTable.RenderEndTag(writer);
-                if (LabelText != String.Empty) {
+                if (!string.IsNullOrEmpty(LabelText)) {
                     writer.RenderEndTag();
                 }
             }
@@ -79,8 +65,7 @@ namespace Ruhe.Web.UI.Controls {
                 else {
                     if (control is SectionHeader) {
                         RenderHeaderRow(control, writer);
-                    }
-                    else if (control.Visible && IsNotEmptyLiteral(control)) {
+                    } else if (control.Visible && IsNotEmptyLiteral(control)) {
                         RenderRow(control, writer);
                     }
                 }
@@ -95,7 +80,7 @@ namespace Ruhe.Web.UI.Controls {
             ILabeledControl labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
                 labelText = StringUtilities.TrimToEmpty(labeledControl.LabelText);
-                labelText = (labelText == String.Empty) ? String.Empty : labelText + ":";
+                labelText = string.IsNullOrEmpty(labelText) ? string.Empty : labelText + ":";
             }
             EncodedLabel nameLabel = new EncodedLabel(labelText);
             nameLabel.ID = control.UniqueID.Replace(":", "_") + "_label";

@@ -175,7 +175,7 @@ namespace Ruhe.Web.UI.Controls {
         /// </summary>
         public string SelectedText {
             get {
-                string result = String.Empty;
+                string result = string.Empty;
                 if (SelectedItem != null) {
                     result = SelectedItem.Text;
                 }
