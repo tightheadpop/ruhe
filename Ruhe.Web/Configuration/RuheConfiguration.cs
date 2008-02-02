@@ -19,7 +19,7 @@ namespace Ruhe.Web.Configuration {
         }
 
         public static string ImageUrlFor<T>(string defaultResourceName) {
-            ImageUrlElement imageConfig = RuheConfigurationSection.GetCurrent().Images[typeof(T).Name];
+            ImageUrlConfigurationCollection.ImageUrlElement imageConfig = RuheConfigurationSection.GetCurrent().Images[typeof(T).Name];
             if (imageConfig == null)
                 return WebResourceLoader.GetResourceUrl(typeof(T), defaultResourceName);
             else
