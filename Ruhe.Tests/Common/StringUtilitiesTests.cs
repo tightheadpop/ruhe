@@ -78,6 +78,14 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
+        public void TrimToNull() {
+            Assert.IsNull(StringUtilities.TrimToNull(null));
+            Assert.IsNull(StringUtilities.TrimToNull(string.Empty));
+            Assert.IsNull(StringUtilities.TrimToNull(" "));
+            Assert.AreEqual("v", StringUtilities.TrimToNull(" v "));
+        }
+
+        [Test]
         public void CsvQuote() {
             Assert.AreEqual(String.Empty, StringUtilities.CsvQuote((string) null));
             Assert.AreEqual(String.Empty, StringUtilities.CsvQuote(String.Empty));

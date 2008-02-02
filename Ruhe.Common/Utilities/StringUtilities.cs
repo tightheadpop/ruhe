@@ -95,7 +95,10 @@ namespace Ruhe.Common.Utilities {
             if (s == null) {
                 return null;
             }
-            return s.Trim();
+            string result = s.Trim();
+            if (result == string.Empty)
+                return null;
+            return result;
         }
 
         public static string CsvQuote(string s) {
