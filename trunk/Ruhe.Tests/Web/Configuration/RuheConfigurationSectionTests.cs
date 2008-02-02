@@ -8,14 +8,14 @@ namespace Ruhe.Tests.Web.Configuration {
     public class RuheConfigurationSectionTests {
         [Test]
         public void AlwaysHasValidatorConfiguratorElement() {
-            Assert.IsNotNull(new RuheConfigurationSection().ValidatorConfiguratorElement);
+            Assert.IsNotNull(RuheConfiguration.ValidatorConfigurator);
         }
 
         [Test]
         public void DateFormatDefaultsToCurrentUIThreadShortDate() {
             CultureInfo cultureInfo = new CultureInfo("en-us");
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
-            Assert.AreEqual(cultureInfo.DateTimeFormat.ShortDatePattern, new RuheConfigurationSection().DateFormat.Value);
+            Assert.AreEqual(cultureInfo.DateTimeFormat.ShortDatePattern, RuheConfiguration.DateFormat);
         }
     }
 }
