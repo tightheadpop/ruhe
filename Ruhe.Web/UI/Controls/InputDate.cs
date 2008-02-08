@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -125,6 +126,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            CssClass = StringUtilities.ForceSuffix(Regex.Replace(CssClass, @"\binput-date\b", string.Empty), @" input-date").Trim();
             base.AddAttributesToRender(writer);
             Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", Format);
         }

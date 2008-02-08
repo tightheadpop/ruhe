@@ -15,6 +15,7 @@
     padding: 2px;
     margin: 0px;
 }
+.input-date { width: 8em; }
 TEXTAREA { behavior: url(<%= WebResource("Ruhe.Web.Resources.maxlength.htc") %>); }
 
 /* fixes issue with calendar extender in InputDateRange */
