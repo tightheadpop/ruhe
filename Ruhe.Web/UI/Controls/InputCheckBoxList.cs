@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common;
@@ -32,7 +33,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         //TODO: optionally add items that aren't in the list; otherwise, skip
-        public void SelectByList(IList dataList) {
+        public void SelectByList(IEnumerable dataList) {
             Clear();
             if (dataList != null) {
                 foreach (object dataElement in dataList) {
@@ -109,6 +110,33 @@ namespace Ruhe.Web.UI.Controls {
             }
             set {
                 // TODO:  Add InputCheckBoxList.EnableClientScript setter implementation
+            }
+        }
+
+        public List<string> SelectedValues {
+            get {
+                return SelectedItems.ConvertAll(
+                    new Converter<ListItem, string>(
+                        delegate(ListItem i) { return i.Value; }));
+            }
+        }
+
+        public List<ListItem> SelectedItems {
+            get {
+                List<ListItem> selectedItems = new List<ListItem>();
+                foreach (ListItem item in Items) {
+                    if (item.Selected)
+                        selectedItems.Add(item);
+                }
+                return selectedItems;
+            }
+        }
+
+        public List<int> SelectedIntValues {
+            get {
+                return SelectedItems.ConvertAll(
+                    new Converter<ListItem, int>(
+                        delegate(ListItem i) { return Convert.ToInt32(i.Value); }));
             }
         }
 
