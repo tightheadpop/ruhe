@@ -139,6 +139,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />
+    <Compile Include="Web\UI\Controls\InputCheckBoxListTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />

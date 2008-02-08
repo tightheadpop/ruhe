@@ -13,13 +13,6 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void IsIList() {
-            TestObject testObject = new TestObject();
-            PropertyInfo property = Reflector.GetProperty(testObject, "List");
-            Assert.IsTrue(Reflector.IsIList(property));
-        }
-
-        [Test]
         public void InvokePublicMethod() {
             TestObject testObject = new TestObject();
             object result = Reflector.InvokeMethod(testObject, "Get");

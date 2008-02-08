@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Reflection;
 
 namespace Ruhe.Common {
@@ -39,18 +38,17 @@ namespace Ruhe.Common {
             object enumerationValue = null;
             if (value is string) {
                 enumerationValue = Enum.Parse(enumerationType, (string) value, true);
-            }
-            else if (value is int) {
+            } else if (value is int) {
                 enumerationValue = Enum.Parse(enumerationType, Enum.GetName(enumerationType, value), true);
             }
             return enumerationValue;
         }
 
-        public static T ConvertToEnum<T>(string value) {
+        public static T ConvertToEnum<T>(string value) where T : struct {
             return (T) Enum.Parse(typeof(T), value);
         }
 
-        public static T ConvertToEnum<T>(object value) {
+        public static T ConvertToEnum<T>(object value) where T : struct {
             return ConvertToEnum<T>(Convert.ToString(value));
         }
 
@@ -180,10 +178,6 @@ namespace Ruhe.Common {
 
         public static bool HasAttribute(PropertyInfo property, Type attributeType) {
             return property.GetCustomAttributes(attributeType, true).Length > 0;
-        }
-
-        public static bool IsIList(PropertyInfo property) {
-            return (property.PropertyType == typeof(IList));
         }
 
         public static object InvokeMethod(object obj, string methodName) {
