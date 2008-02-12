@@ -36,7 +36,8 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void DisposingSquelchesExceptions() {
+        [ExpectedException(typeof(ApplicationException))]
+        public void DisposingDoesNotStifleExceptions() {
             DisposeOf.These(new ExceptionThrowingDisposable());
         }
 
