@@ -7,99 +7,29 @@ using Ruhe.Web.Configuration;
 namespace Ruhe.Web.UI.Controls {
     public class InputDateRange : CompositeControl, IInputControl {
         private InputDate fromDate;
-        private InputDate toDate;
+        private OrGroupValidator groupValidator;
         private PlaceHolder inputContainer;
+        private InputDateRangeValidator rangeValidator;
         private Label readOnlyLabel;
         private RequiredIcon requiredLabel;
-        private OrGroupValidator groupValidator;
-        private InputDateRangeValidator rangeValidator;
+        private InputDate toDate;
 
-        protected override void OnInit(EventArgs e) {
-            base.OnInit(e);
-            EnsureChildControls();
-            AssignIdsToChildControls();
-            IValidatorConfigurator configurator = RuheConfiguration.ValidatorConfigurator;
-            configurator.ConfigureValidator(groupValidator, this);
-            configurator.ConfigureValidator(rangeValidator, this);
-        }
-
-        protected virtual void AssignIdsToChildControls() {
-            fromDate.ID = ID + "_from";
-            toDate.ID = ID + "_to";
-            readOnlyLabel.ID = ID + "_readOnly";
-            requiredLabel.ID = ID + "_requiredLabel";
-            groupValidator.ID = ID + "_groupValidator";
-            groupValidator.GroupToValidate = new string[] {fromDate.ID, toDate.ID};
-            rangeValidator.ID = ID + "_rangeValidator";
-            rangeValidator.ControlToValidate = toDate.ID;
-        }
-
-        protected override void CreateChildControls() {
-            base.CreateChildControls();
-            CreateInputContainer();
-            CreateStartDate();
-            CreateToLabel();
-            CreateEndDate();
-            CreateRequiredLabel();
-            CreateGroupValidator();
-            CreateRangeValidator();
-            CreateReadOnlyLabel();
-            ReadOnly = false;
-            Required = false;
-            ErrorMessage = "Please enter a valid date range.";
-        }
-
-        public override string ID {
-            get { return base.ID; }
+        public DateRange? DateRange {
+            get {
+                EnsureChildControls();
+                return Common.DateRange.Create(fromDate.Value, toDate.Value);
+            }
             set {
                 EnsureChildControls();
-                base.ID = value;
-                AssignIdsToChildControls();
+                if (value.HasValue && value.Value.Start != DateTime.MinValue.Date)
+                    fromDate.Value = value.Value.Start;
+                else
+                    fromDate.Value = null;
+                if (value.HasValue && value.Value.End != DateTime.MaxValue.Date)
+                    toDate.Value = value.Value.End;
+                else
+                    toDate.Value = null;
             }
-        }
-
-        private void CreateReadOnlyLabel() {
-            readOnlyLabel = new Label();
-            Controls.Add(readOnlyLabel);
-        }
-
-        private void CreateRequiredLabel() {
-            requiredLabel = new RequiredIcon();
-            requiredLabel.EnableViewState = false;
-            inputContainer.Controls.Add(new BreakingSpace());
-            inputContainer.Controls.Add(requiredLabel);
-        }
-
-        private void CreateGroupValidator() {
-            groupValidator = new OrGroupValidator();
-            inputContainer.Controls.Add(new BreakingSpace());
-            inputContainer.Controls.Add(groupValidator);
-        }
-
-        private void CreateRangeValidator() {
-            rangeValidator = new InputDateRangeValidator();
-            inputContainer.Controls.Add(new BreakingSpace());
-            inputContainer.Controls.Add(rangeValidator);
-        }
-
-        private void CreateEndDate() {
-            toDate = new InputDate();
-            inputContainer.Controls.Add(toDate);
-        }
-
-        private void CreateToLabel() {
-            inputContainer.Controls.Add(new LiteralControl("to"));
-            inputContainer.Controls.Add(new NonBreakingSpace());
-        }
-
-        private void CreateStartDate() {
-            fromDate = new InputDate();
-            inputContainer.Controls.Add(fromDate);
-        }
-
-        private void CreateInputContainer() {
-            inputContainer = new PlaceHolder();
-            Controls.Add(inputContainer);
         }
 
         public string DefaultElementClientId {
@@ -109,8 +39,18 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public string ValidatedControlId {
-            get { return toDate.ID; }
+        public bool EnableClientScript {
+            get {
+                EnsureChildControls();
+                return fromDate.EnableClientScript;
+            }
+            set {
+                EnsureChildControls();
+                fromDate.EnableClientScript = value;
+                toDate.EnableClientScript = value;
+                groupValidator.EnableClientScript = value;
+                rangeValidator.EnableClientScript = value;
+            }
         }
 
         public string ErrorMessage {
@@ -121,6 +61,32 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 ViewState["ErrorMessage"] = value;
+            }
+        }
+
+        public string Format {
+            get {
+                EnsureChildControls();
+                return fromDate.Format;
+            }
+            set {
+                EnsureChildControls();
+                fromDate.Format = value;
+                toDate.Format = value;
+            }
+        }
+
+        public override string FormatText {
+            get { return base.FormatText ?? RuheConfiguration.DateFormatText; }
+            set { base.FormatText = value; }
+        }
+
+        public override string ID {
+            get { return base.ID; }
+            set {
+                EnsureChildControls();
+                base.ID = value;
+                AssignIdsToChildControls();
             }
         }
 
@@ -149,21 +115,8 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public string Format {
-            get {
-                EnsureChildControls();
-                return fromDate.Format;
-            }
-            set {
-                EnsureChildControls();
-                fromDate.Format = value;
-                toDate.Format = value;
-            }
-        }
-
-        public override string FormatText {
-            get { return base.FormatText ?? RuheConfiguration.DateFormatText; }
-            set { base.FormatText = value; }
+        public string ValidatedControlId {
+            get { return toDate.ID; }
         }
 
         public string ValidationGroup {
@@ -180,38 +133,6 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public bool EnableClientScript {
-            get {
-                EnsureChildControls();
-                return fromDate.EnableClientScript;
-            }
-            set {
-                EnsureChildControls();
-                fromDate.EnableClientScript = value;
-                toDate.EnableClientScript = value;
-                groupValidator.EnableClientScript = value;
-                rangeValidator.EnableClientScript = value;
-            }
-        }
-
-        public DateRange? DateRange {
-            get {
-                EnsureChildControls();
-                return Common.DateRange.Create(fromDate.Value, toDate.Value);
-            }
-            set {
-                EnsureChildControls();
-                if (value.HasValue && value.Value.Start != DateTime.MinValue.Date)
-                    fromDate.Value = value.Value.Start;
-                else
-                    fromDate.Value = null;
-                if (value.HasValue && value.Value.End != DateTime.MaxValue.Date)
-                    toDate.Value = value.Value.End;
-                else
-                    toDate.Value = null;
-            }
-        }
-
         public Unit Width {
             get {
                 EnsureChildControls();
@@ -224,10 +145,89 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        protected virtual void AssignIdsToChildControls() {
+            fromDate.ID = ID + "_from";
+            toDate.ID = ID + "_to";
+            readOnlyLabel.ID = ID + "_readOnly";
+            requiredLabel.ID = ID + "_requiredLabel";
+            groupValidator.ID = ID + "_groupValidator";
+            groupValidator.GroupToValidate = new string[] {fromDate.ID, toDate.ID};
+            rangeValidator.ID = ID + "_rangeValidator";
+            rangeValidator.ControlToValidate = toDate.ID;
+        }
+
         public void Clear() {
             EnsureChildControls();
             fromDate.Clear();
             toDate.Clear();
+        }
+
+        protected override void CreateChildControls() {
+            base.CreateChildControls();
+            CreateInputContainer();
+            CreateStartDate();
+            CreateToLabel();
+            CreateEndDate();
+            CreateRequiredLabel();
+            CreateGroupValidator();
+            CreateRangeValidator();
+            CreateReadOnlyLabel();
+            ReadOnly = false;
+            Required = false;
+            ErrorMessage = "Please enter a valid date range.";
+        }
+
+        private void CreateEndDate() {
+            toDate = new InputDate();
+            inputContainer.Controls.Add(toDate);
+        }
+
+        private void CreateGroupValidator() {
+            groupValidator = new OrGroupValidator();
+            inputContainer.Controls.Add(new BreakingSpace());
+            inputContainer.Controls.Add(groupValidator);
+        }
+
+        private void CreateInputContainer() {
+            inputContainer = new PlaceHolder();
+            Controls.Add(inputContainer);
+        }
+
+        private void CreateRangeValidator() {
+            rangeValidator = new InputDateRangeValidator();
+            inputContainer.Controls.Add(new BreakingSpace());
+            inputContainer.Controls.Add(rangeValidator);
+        }
+
+        private void CreateReadOnlyLabel() {
+            readOnlyLabel = new Label();
+            Controls.Add(readOnlyLabel);
+        }
+
+        private void CreateRequiredLabel() {
+            requiredLabel = new RequiredIcon();
+            requiredLabel.EnableViewState = false;
+            inputContainer.Controls.Add(new BreakingSpace());
+            inputContainer.Controls.Add(requiredLabel);
+        }
+
+        private void CreateStartDate() {
+            fromDate = new InputDate();
+            inputContainer.Controls.Add(fromDate);
+        }
+
+        private void CreateToLabel() {
+            inputContainer.Controls.Add(new LiteralControl("to"));
+            inputContainer.Controls.Add(new NonBreakingSpace());
+        }
+
+        protected override void OnInit(EventArgs e) {
+            base.OnInit(e);
+            EnsureChildControls();
+            AssignIdsToChildControls();
+            IValidatorConfigurator configurator = RuheConfiguration.ValidatorConfigurator;
+            configurator.ConfigureValidator(groupValidator, this);
+            configurator.ConfigureValidator(rangeValidator, this);
         }
 
         protected override void Render(HtmlTextWriter writer) {

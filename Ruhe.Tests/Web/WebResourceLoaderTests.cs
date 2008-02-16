@@ -2,7 +2,7 @@ using System.Web.UI;
 using NUnit.Framework;
 using Ruhe.Web;
 
-[assembly:WebResource("Ruhe.Tests.Resources.ResourceLoaderTarget.txt", "text/plain")]
+[assembly : WebResource("Ruhe.Tests.Resources.ResourceLoaderTarget.txt", "text/plain")]
 
 namespace Ruhe.Tests.Web {
     [TestFixture]

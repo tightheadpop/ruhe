@@ -20,6 +20,12 @@ namespace Ruhe.TestExtensions {
             developmentServerProcess.Start();
         }
 
+        public void Dispose() {
+            //taskkill /IM webdev.webserver.exe
+            if (developmentServerProcess != null)
+                developmentServerProcess.Kill();
+        }
+
         private static bool IsServerAlreadyStarted(int port) {
             try {
                 new TcpClient("localhost", port);
@@ -28,12 +34,6 @@ namespace Ruhe.TestExtensions {
             catch (SocketException) {
                 return false;
             }
-        }
-
-        public void Dispose() {
-            //taskkill /IM webdev.webserver.exe
-            if (developmentServerProcess != null)
-                developmentServerProcess.Kill();
         }
     }
 }

@@ -7,28 +7,75 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class MessageTests : RuheWebTest<Message> {
-        protected PanelTester messageWrapper1;
-        protected PanelTester messageHeader1;
-        protected PanelTester messageBody1;
-        protected LinkButtonTester dummyLink;
         protected ButtonTester addControl;
         protected LabelTester added;
-
-        protected PanelTester messageWrapper2;
-        protected PanelTester messageHeader2;
+        protected LinkButtonTester dummyLink;
+        protected PanelTester messageBody1;
         protected PanelTester messageBody2;
-
-        protected PanelTester messageWrapper3;
-        protected PanelTester messageHeader3;
         protected PanelTester messageBody3;
-
-        protected PanelTester messageWrapper4;
-        protected PanelTester messageHeader4;
         protected PanelTester messageBody4;
-
-        protected PanelTester messageWrapper5;
-        protected PanelTester messageHeader5;
         protected PanelTester messageBody5;
+        protected PanelTester messageHeader1;
+        protected PanelTester messageHeader2;
+        protected PanelTester messageHeader3;
+        protected PanelTester messageHeader4;
+        protected PanelTester messageHeader5;
+        protected PanelTester messageWrapper1;
+        protected PanelTester messageWrapper2;
+        protected PanelTester messageWrapper3;
+        protected PanelTester messageWrapper4;
+        protected PanelTester messageWrapper5;
+
+        [Test]
+        public void AllChildrenAreVisible() {
+            WebAssert.Visible(messageWrapper1);
+            WebAssert.Visible(messageHeader1);
+            WebAssert.Visible(messageBody1);
+            WebAssert.Visible(dummyLink);
+        }
+
+        [Test]
+        public void BodyPanelIsNotDisplayedWhenThereIsNoBodyContent() {
+            WebAssert.Visible(messageWrapper2);
+            WebAssert.Visible(messageHeader2);
+            WebAssert.NotVisible(messageBody2);
+        }
+
+        [Test]
+        public void ClearedControlTree() {
+            WebAssert.Visible(messageWrapper5);
+            WebAssert.Visible(messageBody5);
+            WebAssert.Visible(messageHeader5);
+            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody5, IdFor("message5_replacement")));
+        }
+
+        [Test]
+        public void ControlAddedDynamicallyIsRenderedInTheBody() {
+            addControl.Click();
+            WebAssert.Visible(added);
+            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor("message1_added")), "the added control must appear inside the message body");
+        }
+
+        [Test]
+        public void HeaderIsNotDisplayedWhenThereIsNoHeaderContent() {
+            WebAssert.Visible(messageWrapper3);
+            WebAssert.NotVisible(messageHeader3);
+            WebAssert.Visible(messageBody3);
+        }
+
+        [Test]
+        public void Layout() {
+            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1_header")));
+            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1")));
+            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor("message1_dummyLink")));
+        }
+
+        [Test]
+        public void NoContent() {
+            WebAssert.NotVisible(messageWrapper4);
+            WebAssert.NotVisible(messageHeader4);
+            WebAssert.NotVisible(messageBody4);
+        }
 
         protected override void SetUp() {
             base.SetUp();
@@ -56,57 +103,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
             messageBody5 = new PanelTester(IdFor("message5_body"));
 
             LoadPage();
-        }
-
-        [Test]
-        public void AllChildrenAreVisible() {
-            WebAssert.Visible(messageWrapper1);
-            WebAssert.Visible(messageHeader1);
-            WebAssert.Visible(messageBody1);
-            WebAssert.Visible(dummyLink);
-        }
-
-        [Test]
-        public void Layout() {
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1_header")));
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1")));
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor("message1_dummyLink")));
-        }
-
-        [Test]
-        public void ControlAddedDynamicallyIsRenderedInTheBody() {
-            addControl.Click();
-            WebAssert.Visible(added);
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor("message1_added")), "the added control must appear inside the message body");
-        }
-
-        [Test]
-        public void BodyPanelIsNotDisplayedWhenThereIsNoBodyContent() {
-            WebAssert.Visible(messageWrapper2);
-            WebAssert.Visible(messageHeader2);
-            WebAssert.NotVisible(messageBody2);
-        }
-
-        [Test]
-        public void HeaderIsNotDisplayedWhenThereIsNoHeaderContent() {
-            WebAssert.Visible(messageWrapper3);
-            WebAssert.NotVisible(messageHeader3);
-            WebAssert.Visible(messageBody3);
-        }
-
-        [Test]
-        public void NoContent() {
-            WebAssert.NotVisible(messageWrapper4);
-            WebAssert.NotVisible(messageHeader4);
-            WebAssert.NotVisible(messageBody4);
-        }
-
-        [Test]
-        public void ClearedControlTree() {
-            WebAssert.Visible(messageWrapper5);
-            WebAssert.Visible(messageBody5);
-            WebAssert.Visible(messageHeader5);
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody5, IdFor("message5_replacement")));
         }
     }
 }

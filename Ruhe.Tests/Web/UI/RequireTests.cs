@@ -8,12 +8,6 @@ namespace Ruhe.Tests.Web.UI {
     [TestFixture]
     public class RequireTests : RuheWebTest<Require> {
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void RequireDoesNotWorkInWithoutWebContext() {
-            Require.DefaultStyleSheet(GetType(), "doesn't matter");
-        }
-
-        [Test]
         public void IncludesStyleSheetBeforeOthers() {
             LoadPage();
             StringAssert.Contains("</title><link", Browser.CurrentPageText);
@@ -27,5 +21,10 @@ namespace Ruhe.Tests.Web.UI {
             Assert.IsFalse(Regex.IsMatch(Browser.CurrentPageText, "<link.*<link"));
         }
 
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RequireDoesNotWorkInWithoutWebContext() {
+            Require.DefaultStyleSheet(GetType(), "doesn't matter");
+        }
     }
 }

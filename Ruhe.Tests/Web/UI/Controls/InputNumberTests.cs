@@ -6,18 +6,22 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class InputNumberTests : RuheWebTest<InputNumber> {
-        private TextBoxTester inputNumber;
-        private ButtonTester submitButton;
         private LabelTester formatErrorMessage;
+        private TextBoxTester inputNumber;
         private LabelTester rangeErrorMessage;
+        private ButtonTester submitButton;
 
-        protected override void SetUp() {
-            base.SetUp();
-            LoadPage();
-            inputNumber = new TextBoxTester(IdFor("inputNumber"));
-            submitButton = new ButtonTester(IdFor("submitButton"));
-            formatErrorMessage = new LabelTester(IdFor("inputNumber_compare"));
-            rangeErrorMessage = new LabelTester(IdFor("inputNumber_range"));
+        [Test]
+        public void DoubleShowOnlyOneValidatorAtATime() {
+            inputNumber.Text = "sdf";
+            submitButton.Click();
+            WebAssert.NotVisible(formatErrorMessage);
+            WebAssert.Visible(rangeErrorMessage);
+        }
+
+        [Test]
+        public void HasNumericCssClass() {
+            StringAssert.Contains("class=\"numeric\"", Browser.CurrentPageText);
         }
 
         [Test]
@@ -34,17 +38,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
             WebAssert.NotVisible(formatErrorMessage);
         }
 
-        [Test]
-        public void DoubleShowOnlyOneValidatorAtATime() {
-            inputNumber.Text = "sdf";
-            submitButton.Click();
-            WebAssert.NotVisible(formatErrorMessage);
-            WebAssert.Visible(rangeErrorMessage);
-        }
-
-        [Test]
-        public void HasNumericCssClass() {
-            StringAssert.Contains("class=\"numeric\"", Browser.CurrentPageText);
+        protected override void SetUp() {
+            base.SetUp();
+            LoadPage();
+            inputNumber = new TextBoxTester(IdFor("inputNumber"));
+            submitButton = new ButtonTester(IdFor("submitButton"));
+            formatErrorMessage = new LabelTester(IdFor("inputNumber_compare"));
+            rangeErrorMessage = new LabelTester(IdFor("inputNumber_range"));
         }
     }
 }

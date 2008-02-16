@@ -12,17 +12,6 @@ namespace Ruhe.Web.UI {
             }
         }
 
-        public virtual string LabelText {
-            get {
-                EnsureChildControls();
-                return (string) ViewState["LabelText"];
-            }
-            set {
-                EnsureChildControls();
-                ViewState["LabelText"] = value;
-            }
-        }
-
         public virtual string FormatText {
             get {
                 EnsureChildControls();
@@ -31,6 +20,17 @@ namespace Ruhe.Web.UI {
             set {
                 EnsureChildControls();
                 ViewState["FormatText"] = value;
+            }
+        }
+
+        public virtual string LabelText {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["LabelText"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["LabelText"] = value;
             }
         }
     }

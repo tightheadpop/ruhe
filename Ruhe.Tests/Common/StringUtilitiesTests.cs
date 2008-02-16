@@ -6,10 +6,9 @@ namespace Ruhe.Tests.Common {
     [TestFixture]
     public class StringUtilitiesTests {
         [Test]
-        public void NullToEmpty() {
-            Assert.AreEqual(string.Empty, StringUtilities.NullToEmpty((string) null));
-            Assert.AreEqual(string.Empty, StringUtilities.NullToEmpty(string.Empty));
-            Assert.AreEqual("test", StringUtilities.NullToEmpty("test"));
+        public void Compare() {
+            Assert.IsTrue(StringUtilities.Compare("test", "TEST"));
+            Assert.IsFalse(StringUtilities.Compare("test", "rat"));
         }
 
         [Test]
@@ -19,9 +18,31 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void Compare() {
-            Assert.IsTrue(StringUtilities.Compare("test", "TEST"));
-            Assert.IsFalse(StringUtilities.Compare("test", "rat"));
+        public void CsvQuote() {
+            Assert.AreEqual(String.Empty, StringUtilities.CsvQuote((string) null));
+            Assert.AreEqual(String.Empty, StringUtilities.CsvQuote(String.Empty));
+            Assert.AreEqual("\"foo,bar\"", StringUtilities.CsvQuote("foo,bar"), "should wrap in quotes if a comma is present");
+            Assert.AreEqual("\"\"\"foo,bar\"\"\"", StringUtilities.CsvQuote("\"foo,bar\""),
+                            "should esacpe double quotes by doubling them");
+        }
+
+        [Test]
+        public void ForcePrefix() {
+            Assert.AreEqual("rattest", StringUtilities.ForcePrefix("rat", "test"));
+            Assert.AreEqual("rattest", StringUtilities.ForcePrefix("rat", "rattest"));
+        }
+
+        [Test]
+        public void ForceSuffix() {
+            Assert.AreEqual("rattest", StringUtilities.ForceSuffix("rat", "test"));
+            Assert.AreEqual("rattest", StringUtilities.ForceSuffix("rattest", "test"));
+        }
+
+        [Test]
+        public void IsEmpty() {
+            Assert.IsTrue(StringUtilities.IsEmpty(null));
+            Assert.IsTrue(StringUtilities.IsEmpty(string.Empty));
+            Assert.IsFalse(StringUtilities.IsEmpty("foo"));
         }
 
         [Test]
@@ -41,6 +62,13 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
+        public void NullToEmpty() {
+            Assert.AreEqual(string.Empty, StringUtilities.NullToEmpty((string) null));
+            Assert.AreEqual(string.Empty, StringUtilities.NullToEmpty(string.Empty));
+            Assert.AreEqual("test", StringUtilities.NullToEmpty("test"));
+        }
+
+        [Test]
         public void RemovePrefix() {
             Assert.AreEqual("test", StringUtilities.RemovePrefix("ratstest", "RAT."));
             Assert.AreEqual("ratstest", StringUtilities.RemovePrefix("ratstest", "test"));
@@ -50,18 +78,6 @@ namespace Ruhe.Tests.Common {
         public void RemoveSuffix() {
             Assert.AreEqual("test", StringUtilities.RemoveSuffix("testrat", "rAt"));
             Assert.AreEqual("testrat", StringUtilities.RemoveSuffix("testrat", "rrAt"));
-        }
-
-        [Test]
-        public void ForcePrefix() {
-            Assert.AreEqual("rattest", StringUtilities.ForcePrefix("rat", "test"));
-            Assert.AreEqual("rattest", StringUtilities.ForcePrefix("rat", "rattest"));
-        }
-
-        [Test]
-        public void ForceSuffix() {
-            Assert.AreEqual("rattest", StringUtilities.ForceSuffix("rat", "test"));
-            Assert.AreEqual("rattest", StringUtilities.ForceSuffix("rattest", "test"));
         }
 
         [Test]
@@ -83,22 +99,6 @@ namespace Ruhe.Tests.Common {
             Assert.IsNull(StringUtilities.TrimToNull(string.Empty));
             Assert.IsNull(StringUtilities.TrimToNull(" "));
             Assert.AreEqual("v", StringUtilities.TrimToNull(" v "));
-        }
-
-        [Test]
-        public void CsvQuote() {
-            Assert.AreEqual(String.Empty, StringUtilities.CsvQuote((string) null));
-            Assert.AreEqual(String.Empty, StringUtilities.CsvQuote(String.Empty));
-            Assert.AreEqual("\"foo,bar\"", StringUtilities.CsvQuote("foo,bar"), "should wrap in quotes if a comma is present");
-            Assert.AreEqual("\"\"\"foo,bar\"\"\"", StringUtilities.CsvQuote("\"foo,bar\""),
-                            "should esacpe double quotes by doubling them");
-        }
-
-        [Test]
-        public void IsEmpty() {
-            Assert.IsTrue(StringUtilities.IsEmpty(null));
-            Assert.IsTrue(StringUtilities.IsEmpty(string.Empty));
-            Assert.IsFalse(StringUtilities.IsEmpty("foo"));
         }
     }
 }

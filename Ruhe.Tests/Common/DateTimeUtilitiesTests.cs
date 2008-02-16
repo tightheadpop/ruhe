@@ -37,6 +37,20 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
+        public void GetNextDayOfWeek() {
+            DateTime expected = new DateTime(2005, 5, 9);
+
+            DateTime startingDate = new DateTime(2005, 5, 3);
+            Assert.AreEqual(expected, DateTimeUtilities.GetNextDayOfWeek(startingDate, DayOfWeek.Monday));
+
+            startingDate = new DateTime(2005, 5, 2);
+            Assert.AreEqual(expected, DateTimeUtilities.GetNextDayOfWeek(startingDate, DayOfWeek.Monday));
+
+            startingDate = new DateTime(2005, 5, 8);
+            Assert.AreEqual(expected, DateTimeUtilities.GetNextDayOfWeek(startingDate, DayOfWeek.Monday));
+        }
+
+        [Test]
         public void GetNthDayOfWeekInMonth() {
             DateTime May9th2005 = new DateTime(2005, 5, 9);
             Assert.AreEqual(May9th2005, DateTimeUtilities.GetNthDayOfWeekInMonth(2, DayOfWeek.Monday, Month.May, 2005));
@@ -49,20 +63,6 @@ namespace Ruhe.Tests.Common {
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetNthDayOfWeekInMonthOutOfRange() {
             DateTimeUtilities.GetNthDayOfWeekInMonth(-1, DayOfWeek.Sunday, Month.May, 2005);
-        }
-
-        [Test]
-        public void GetNextDayOfWeek() {
-            DateTime expected = new DateTime(2005, 5, 9);
-
-            DateTime startingDate = new DateTime(2005, 5, 3);
-            Assert.AreEqual(expected, DateTimeUtilities.GetNextDayOfWeek(startingDate, DayOfWeek.Monday));
-
-            startingDate = new DateTime(2005, 5, 2);
-            Assert.AreEqual(expected, DateTimeUtilities.GetNextDayOfWeek(startingDate, DayOfWeek.Monday));
-
-            startingDate = new DateTime(2005, 5, 8);
-            Assert.AreEqual(expected, DateTimeUtilities.GetNextDayOfWeek(startingDate, DayOfWeek.Monday));
         }
 
         [Test]

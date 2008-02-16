@@ -10,22 +10,6 @@ namespace Ruhe.Web {
         public QueryStringBuilder() : base() {}
         public QueryStringBuilder(string encodedInput) : this(Parse(encodedInput)) {}
 
-        public static QueryStringBuilder Parse(string encodedInput) {
-            QueryStringBuilder querystring = new QueryStringBuilder();
-            string name;
-            string value;
-            string[] nameAndValue;
-
-            foreach (string pair in encodedInput.Split("&".ToCharArray())) {
-                nameAndValue = pair.Split("=".ToCharArray(), 2);
-                name = HttpUtility.UrlDecode(nameAndValue[0]);
-                value = HttpUtility.UrlDecode(StringUtilities.NullToEmpty(nameAndValue[1]));
-
-                querystring.Add(name, value);
-            }
-            return querystring;
-        }
-
         public override void Add(string name, string value) {
             if (name == null) {
                 throw new ArgumentException("name cannot be null.", "name");
@@ -58,6 +42,22 @@ namespace Ruhe.Web {
             }
 
             return result.ToString();
+        }
+
+        public static QueryStringBuilder Parse(string encodedInput) {
+            QueryStringBuilder querystring = new QueryStringBuilder();
+            string name;
+            string value;
+            string[] nameAndValue;
+
+            foreach (string pair in encodedInput.Split("&".ToCharArray())) {
+                nameAndValue = pair.Split("=".ToCharArray(), 2);
+                name = HttpUtility.UrlDecode(nameAndValue[0]);
+                value = HttpUtility.UrlDecode(StringUtilities.NullToEmpty(nameAndValue[1]));
+
+                querystring.Add(name, value);
+            }
+            return querystring;
         }
     }
 }

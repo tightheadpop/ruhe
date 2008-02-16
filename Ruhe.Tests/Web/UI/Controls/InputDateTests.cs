@@ -11,41 +11,20 @@ namespace Ruhe.Tests.Web.UI.Controls {
         private HtmlImageTester readonlyCalendar;
         private HtmlTagTester readonlyDateValidator;
 
-        private void LoadTestPage() {
-            LoadPage();
-            calendar = new HtmlImageTester(IdFor("date_calendar"));
-            readonlyCalendar = new HtmlImageTester(IdFor("readOnly_calendar"));
-            readonlyDateValidator = new HtmlTagTester(IdFor("readOnly_dateValidator"));
+        [Test]
+        public void DefaultingValueToTodaySetsValue() {
+            InputDate input = new InputDate();
+            input.DefaultToToday = true;
+            Assert.AreEqual(DateTime.Today, input.Value);
         }
 
         [Test]
-        public void HasCalendarImage() {
-            LoadTestPage();
-            WebAssert.Visible(calendar);
-        }
-
-        [Test]
-        public void DoesNotHaveCalendarImageWhenReadOnly() {
-            LoadTestPage();
-            WebAssert.NotVisible(readonlyCalendar);
-        }
-
-        [Test]
-        public void DoesNotEmitValidatorWhenReadOnly() {
-            LoadTestPage();
-            WebAssert.NotVisible(readonlyDateValidator);
-        }
-
-        [Test]
-        public void EmitsKeystrokeFilterScript() {
-            LoadTestPage();
-            Assert.IsTrue(Browser.CurrentPageText.Contains("Ruhe$DATE"));
-        }
-
-        [Test]
-        public void ValidatorIsPresent() {
-            LoadTestPage();
-            StringAssert.Contains("date_dateValidator", Browser.CurrentPageText);
+        public void DefaultToTodayOnlySetsValueIfOneIsNotAlreadySet() {
+            InputDate input = new InputDate();
+            DateTime expected = new DateTime(2000, 1, 1);
+            input.Value = expected;
+            input.DefaultToToday = true;
+            Assert.AreEqual(expected, input.Value);
         }
 
         [Test]
@@ -56,12 +35,27 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void SettingDatePatternOverridesDefaultForThisInstance() {
-            string newFormat = "dd-MMM-yyyy";
-            InputDate input = new InputDate();
-            Assert.AreNotEqual(newFormat, input.Format);
-            input.Format = newFormat;
-            Assert.AreEqual(newFormat, input.Format);
+        public void DoesNotEmitValidatorWhenReadOnly() {
+            LoadTestPage();
+            WebAssert.NotVisible(readonlyDateValidator);
+        }
+
+        [Test]
+        public void DoesNotHaveCalendarImageWhenReadOnly() {
+            LoadTestPage();
+            WebAssert.NotVisible(readonlyCalendar);
+        }
+
+        [Test]
+        public void EmitsKeystrokeFilterScript() {
+            LoadTestPage();
+            Assert.IsTrue(Browser.CurrentPageText.Contains("Ruhe$DATE"));
+        }
+
+        [Test]
+        public void HasCalendarImage() {
+            LoadTestPage();
+            WebAssert.Visible(calendar);
         }
 
         [Test]
@@ -91,19 +85,25 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void DefaultingValueToTodaySetsValue() {
+        public void SettingDatePatternOverridesDefaultForThisInstance() {
+            string newFormat = "dd-MMM-yyyy";
             InputDate input = new InputDate();
-            input.DefaultToToday = true;
-            Assert.AreEqual(DateTime.Today, input.Value);
+            Assert.AreNotEqual(newFormat, input.Format);
+            input.Format = newFormat;
+            Assert.AreEqual(newFormat, input.Format);
         }
 
         [Test]
-        public void DefaultToTodayOnlySetsValueIfOneIsNotAlreadySet() {
-            InputDate input = new InputDate();
-            DateTime expected = new DateTime(2000, 1, 1);
-            input.Value = expected;
-            input.DefaultToToday = true;
-            Assert.AreEqual(expected, input.Value);
+        public void ValidatorIsPresent() {
+            LoadTestPage();
+            StringAssert.Contains("date_dateValidator", Browser.CurrentPageText);
+        }
+
+        private void LoadTestPage() {
+            LoadPage();
+            calendar = new HtmlImageTester(IdFor("date_calendar"));
+            readonlyCalendar = new HtmlImageTester(IdFor("readOnly_calendar"));
+            readonlyDateValidator = new HtmlTagTester(IdFor("readOnly_dateValidator"));
         }
     }
 }

@@ -10,15 +10,18 @@ namespace Ruhe.Tests.Common {
     [TestFixture]
     public class CollectionsTest {
         [Test]
-        public void FirstForObjectArray() {
-            Assert.AreEqual(1, Collections.First(new object[] {1, 2, 3}));
-            Assert.AreEqual(null, Collections.First(new object[] {}));
-        }
+        public void FindFirstTypeThatSatisfiesPredicate() {
+            ArrayList list = new ArrayList();
+            list.Add(new DateTime());
+            Literal expected = new Literal();
+            expected.ID = "expected";
+            list.Add(expected);
+            Literal notExpected = new Literal();
+            notExpected.ID = "notExpected";
+            list.Add(notExpected);
 
-        [Test]
-        public void FirstForStringArray() {
-            Assert.AreEqual("foo", Collections.First(new object[] {"foo", "bar", "baz"}));
-            Assert.AreEqual(null, Collections.First(new string[] {}));
+            Control actual = Collections.First<Control>(list, delegate(Control c) { return c.ID == "expected"; });
+            Assert.AreSame(expected, actual);
         }
 
         [Test]
@@ -32,18 +35,15 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void FindFirstTypeThatSatisfiesPredicate() {
-            ArrayList list = new ArrayList();
-            list.Add(new DateTime());
-            Literal expected = new Literal();
-            expected.ID = "expected";
-            list.Add(expected);
-            Literal notExpected = new Literal();
-            notExpected.ID = "notExpected";
-            list.Add(notExpected);
+        public void FirstForObjectArray() {
+            Assert.AreEqual(1, Collections.First(new object[] {1, 2, 3}));
+            Assert.AreEqual(null, Collections.First(new object[] {}));
+        }
 
-            Control actual = Collections.First<Control>(list, delegate(Control c) { return c.ID == "expected"; });
-            Assert.AreSame(expected, actual);
+        [Test]
+        public void FirstForStringArray() {
+            Assert.AreEqual("foo", Collections.First(new object[] {"foo", "bar", "baz"}));
+            Assert.AreEqual(null, Collections.First(new string[] {}));
         }
     }
 }

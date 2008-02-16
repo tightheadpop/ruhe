@@ -15,35 +15,15 @@ namespace Ruhe.Web.UI.Controls {
     /// </summary>
     public class InputDate : AbstractValueTypeInput<DateTime> {
         private CalendarExtender calendar;
-        private Image image;
         private InputDateValidator dateValidator;
+        private Image image;
 
-        protected override void AssignIdsToChildControls() {
-            base.AssignIdsToChildControls();
-            dateValidator.ID = ID + "_dateValidator";
-            dateValidator.ControlToValidate = ID;
-        }
-
-        protected override ValidationDataType ValidationDataType {
-            get { return ValidationDataType.String; }
-        }
-
-        protected override string KeystrokeFilter {
-            get { return "Ruhe$DATE"; }
-        }
-
-        protected override string Adapt(DateTime? value) {
-            return value.HasValue ? value.Value.ToString(Format) : string.Empty;
-        }
-
-        protected override DateTime? Adapt(string value) {
-            if (string.IsNullOrEmpty(value))
-                return null;
-            else {
-                DateTime result;
-                if (DateTime.TryParseExact(value, Format, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
-                    return result;
-                return null;
+        public bool DefaultToToday {
+            get { return Convert.ToBoolean(ViewState["DefaultToToday"]); }
+            set {
+                ViewState["DefaultToToday"] = value;
+                if (!Value.HasValue && value)
+                    Value = DateTime.Today;
             }
         }
 
@@ -65,13 +45,8 @@ namespace Ruhe.Web.UI.Controls {
             set { base.FormatText = value; }
         }
 
-        public bool DefaultToToday {
-            get { return Convert.ToBoolean(ViewState["DefaultToToday"]); }
-            set {
-                ViewState["DefaultToToday"] = value;
-                if (!Value.HasValue && value)
-                    Value = DateTime.Today;
-            }
+        protected override string KeystrokeFilter {
+            get { return "Ruhe$DATE"; }
         }
 
         public override bool ReadOnly {
@@ -83,6 +58,51 @@ namespace Ruhe.Web.UI.Controls {
                 calendar.EnabledOnClient = calendar.Enabled = !value;
                 dateValidator.Visible = dateValidator.Enabled = !value;
             }
+        }
+
+        protected override ValidationDataType ValidationDataType {
+            get { return ValidationDataType.String; }
+        }
+
+        protected override string Adapt(DateTime? value) {
+            return value.HasValue ? value.Value.ToString(Format) : string.Empty;
+        }
+
+        protected override DateTime? Adapt(string value) {
+            if (string.IsNullOrEmpty(value))
+                return null;
+            else {
+                DateTime result;
+                if (DateTime.TryParseExact(value, Format, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
+                    return result;
+                return null;
+            }
+        }
+
+        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            CssClass = StringUtilities.ForceSuffix(Regex.Replace(CssClass, @"\binput-date\b", string.Empty), @" input-date").Trim();
+            base.AddAttributesToRender(writer);
+            Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", Format);
+        }
+
+        protected override void AssignIdsToChildControls() {
+            base.AssignIdsToChildControls();
+            dateValidator.ID = ID + "_dateValidator";
+            dateValidator.ControlToValidate = ID;
+        }
+
+        private Image CreateCalendarButton() {
+            image = new Image();
+            image.AlternateText = "Select a date";
+            image.ImageAlign = ImageAlign.AbsMiddle;
+            image.Style[HtmlTextWriterStyle.Padding] = "3px";
+            return image;
+        }
+
+        private CalendarExtender CreateCalendarExtender() {
+            calendar = new CalendarExtender();
+            calendar.Format = Format;
+            return calendar;
         }
 
         protected override void CreateChildControls() {
@@ -102,20 +122,6 @@ namespace Ruhe.Web.UI.Controls {
             return dateValidator;
         }
 
-        private Image CreateCalendarButton() {
-            image = new Image();
-            image.AlternateText = "Select a date";
-            image.ImageAlign = ImageAlign.AbsMiddle;
-            image.Style[HtmlTextWriterStyle.Padding] = "3px";
-            return image;
-        }
-
-        private CalendarExtender CreateCalendarExtender() {
-            calendar = new CalendarExtender();
-            calendar.Format = Format;
-            return calendar;
-        }
-
         protected override void OnLoad(EventArgs e) {
             image.ID = ID + "_calendar";
             image.ImageUrl = RuheConfiguration.ImageUrlFor<InputDate>("calendar.png");
@@ -123,12 +129,6 @@ namespace Ruhe.Web.UI.Controls {
             calendar.PopupButtonID = image.ID;
             calendar.PopupPosition = CalendarPosition.BottomLeft;
             base.OnLoad(e);
-        }
-
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            CssClass = StringUtilities.ForceSuffix(Regex.Replace(CssClass, @"\binput-date\b", string.Empty), @" input-date").Trim();
-            base.AddAttributesToRender(writer);
-            Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", Format);
         }
     }
 }

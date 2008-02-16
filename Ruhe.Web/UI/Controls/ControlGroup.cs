@@ -3,17 +3,6 @@ using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
     public class ControlGroup : PlaceHolder, ILabeledControl, ILayoutContainer {
-        public virtual string LabelText {
-            get {
-                EnsureChildControls();
-                return (string) ViewState["LabelText"];
-            }
-            set {
-                EnsureChildControls();
-                ViewState["LabelText"] = value;
-            }
-        }
-
         public virtual string FormatText {
             get {
                 EnsureChildControls();
@@ -33,6 +22,17 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 ViewState["IsLayoutContainer"] = value;
+            }
+        }
+
+        public virtual string LabelText {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["LabelText"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["LabelText"] = value;
             }
         }
     }

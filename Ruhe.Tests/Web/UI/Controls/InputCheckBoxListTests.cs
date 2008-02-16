@@ -4,9 +4,20 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class InputCheckBoxListTests {
-        private InputCheckBoxList list;
         private Thing b;
         private Thing c;
+        private InputCheckBoxList list;
+
+        [SetUp]
+        public void SetUp() {
+            list = new InputCheckBoxList();
+            list.DataTextField = "Name";
+            list.DataValueField = "Value";
+            b = new Thing("b", 2);
+            c = new Thing("c", 3);
+            Thing a = new Thing("a", 1);
+            list.DataSource = new Thing[] {a, b, c};
+        }
 
         [Test]
         public void SelectByList() {
@@ -30,6 +41,14 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
+        public void SelectedIntValues() {
+            list.SelectedDataSource = new Thing[] {b, c};
+            list.DataBind();
+
+            Assert.AreEqual(new int[] {2, 3}, list.SelectedIntValues);
+        }
+
+        [Test]
         public void SelectedItems() {
             list.SelectedDataSource = new Thing[] {b, c};
             list.DataBind();
@@ -45,25 +64,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
             list.DataBind();
 
             Assert.AreEqual(new string[] {"2", "3"}, list.SelectedValues);
-        }
-
-        [Test]
-        public void SelectedIntValues() {
-            list.SelectedDataSource = new Thing[] {b, c};
-            list.DataBind();
-
-            Assert.AreEqual(new int[] {2, 3}, list.SelectedIntValues);
-        }
-
-        [SetUp]
-        public void SetUp() {
-            list = new InputCheckBoxList();
-            list.DataTextField = "Name";
-            list.DataValueField = "Value";
-            b = new Thing("b", 2);
-            c = new Thing("c", 3);
-            Thing a = new Thing("a", 1);
-            list.DataSource = new Thing[] {a, b, c};
         }
 
         private class Thing {

@@ -17,6 +17,11 @@ namespace Ruhe.Web.UI.Controls {
             set { selectedDataSource = value; }
         }
 
+        public override void DataBind() {
+            base.DataBind();
+            SelectByList(SelectedDataSource);
+        }
+
         protected override void Render(HtmlTextWriter writer) {
             writer.AddAttribute(HtmlTextWriterAttribute.Class, "scrollable");
             writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "7em");
@@ -25,11 +30,6 @@ namespace Ruhe.Web.UI.Controls {
             base.Render(writer);
 
             writer.RenderEndTag();
-        }
-
-        public override void DataBind() {
-            base.DataBind();
-            SelectByList(SelectedDataSource);
         }
 
         //TODO: optionally add items that aren't in the list; otherwise, skip
@@ -45,14 +45,14 @@ namespace Ruhe.Web.UI.Controls {
 
         #region ILabeledControl Members
 
-        public string LabelText {
-            get { return (string) ViewState["LabelText"]; }
-            set { ViewState["LabelText"] = value; }
-        }
-
         public string FormatText {
             get { return (string) ViewState["FormatText"]; }
             set { ViewState["FormatText"] = value; }
+        }
+
+        public string LabelText {
+            get { return (string) ViewState["LabelText"]; }
+            set { ViewState["LabelText"] = value; }
         }
 
         #endregion
@@ -66,10 +66,13 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public string ValidatedControlId {
+        public bool EnableClientScript {
             get {
-                // TODO:  Add InputCheckBoxList.ValidatedControlId getter implementation
-                return null;
+                // TODO:  Add InputCheckBoxList.EnableClientScript getter implementation
+                return false;
+            }
+            set {
+                // TODO:  Add InputCheckBoxList.EnableClientScript setter implementation
             }
         }
 
@@ -103,21 +106,11 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public bool EnableClientScript {
-            get {
-                // TODO:  Add InputCheckBoxList.EnableClientScript getter implementation
-                return false;
-            }
-            set {
-                // TODO:  Add InputCheckBoxList.EnableClientScript setter implementation
-            }
-        }
-
-        public List<string> SelectedValues {
+        public List<int> SelectedIntValues {
             get {
                 return SelectedItems.ConvertAll(
-                    new Converter<ListItem, string>(
-                        delegate(ListItem i) { return i.Value; }));
+                    new Converter<ListItem, int>(
+                        delegate(ListItem i) { return Convert.ToInt32(i.Value); }));
             }
         }
 
@@ -132,11 +125,18 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public List<int> SelectedIntValues {
+        public List<string> SelectedValues {
             get {
                 return SelectedItems.ConvertAll(
-                    new Converter<ListItem, int>(
-                        delegate(ListItem i) { return Convert.ToInt32(i.Value); }));
+                    new Converter<ListItem, string>(
+                        delegate(ListItem i) { return i.Value; }));
+            }
+        }
+
+        public string ValidatedControlId {
+            get {
+                // TODO:  Add InputCheckBoxList.ValidatedControlId getter implementation
+                return null;
             }
         }
 

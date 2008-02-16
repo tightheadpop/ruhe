@@ -7,13 +7,21 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class LabeledControlPanelTests : RuheWebTest<LabeledControlPanel> {
-        private HtmlTagTester table;
         private LabelTester format;
+        private HtmlTagTester table;
 
-        protected override void SetUp() {
-            base.SetUp();
-            table = new HtmlTagTester(IdFor("panel_layoutTable"));
-            format = new LabelTester(IdFor("textbox_format"));
+        [Test]
+        public void LabelAboveLayoutAndCssClasses() {
+            LoadPageWithOption("Above");
+
+            Assert.AreEqual(6, table.Children("tr").Length, "should have two rows of output for each control");
+            Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_label", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "label should be in the first row");
+            Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_format", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "format text should be in the first row");
+            Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox", "tr[2]/td[1]//input[@id = \"{0}\"]")).Length, "control should be in the second row");
+
+            HtmlTagTester[] cells = table.ChildrenByXPath(".//td");
+            Assert.IsTrue(StringUtilities.Contains(cells[0].Attribute("class"), "above"), "label cell css class should contain 'above'");
+            Assert.IsTrue(StringUtilities.Contains(cells[0].Attribute("class"), "label"), "label cell css class should contain 'label'");
         }
 
         [Test]
@@ -35,20 +43,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void LabelAboveLayoutAndCssClasses() {
-            LoadPageWithOption("Above");
-
-            Assert.AreEqual(6, table.Children("tr").Length, "should have two rows of output for each control");
-            Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_label", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "label should be in the first row");
-            Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_format", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "format text should be in the first row");
-            Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox", "tr[2]/td[1]//input[@id = \"{0}\"]")).Length, "control should be in the second row");
-
-            HtmlTagTester[] cells = table.ChildrenByXPath(".//td");
-            Assert.IsTrue(StringUtilities.Contains(cells[0].Attribute("class"), "above"), "label cell css class should contain 'above'");
-            Assert.IsTrue(StringUtilities.Contains(cells[0].Attribute("class"), "label"), "label cell css class should contain 'label'");
-        }
-
-        [Test]
         public void PermitsSuperTypeTextInFormat() {
             LoadPage();
             Assert.AreEqual("(×10<sup>6</sup>)", format.Text, "should parse input and emit as HTML");
@@ -59,6 +53,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
             LoadPage();
             WebAssert.Visible(new TextBoxTester(IdFor("userControl_anotherTextBox")));
             WebAssert.Visible(new TextBoxTester(IdFor("userControl_anotherDate")));
+        }
+
+        protected override void SetUp() {
+            base.SetUp();
+            table = new HtmlTagTester(IdFor("panel_layoutTable"));
+            format = new LabelTester(IdFor("textbox_format"));
         }
     }
 }

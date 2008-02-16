@@ -9,6 +9,14 @@ namespace Ruhe.Tests.TestExtensions {
     [TestFixture]
     public class ControlTesterUtilitiesTests : RuheWebTest<ControlTesterUtilitiesTests> {
         [Test]
+        public void GetHtmlFromControl() {
+            Label thing = new Label();
+            thing.Text = "thing";
+            string result = ControlTesterUtilities.GetHtml(thing);
+            Assert.AreEqual("<span>thing</span>", result, "Html output does not match");
+        }
+
+        [Test]
         public void GetUrlPathAccessesConfigFile() {
             AssertTrue(GetUrlPath<EncodedLabel>()
                            .EndsWith("/Web/UI/Controls/EncodedLabelTests.aspx"));
@@ -19,14 +27,6 @@ namespace Ruhe.Tests.TestExtensions {
             Browser.GetPage(GetUrlPath<Message>());
             PanelTester messageWrapper1 = new PanelTester(IdFor("message1"));
             AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1_header")));
-        }
-
-        [Test]
-        public void GetHtmlFromControl() {
-            Label thing = new Label();
-            thing.Text = "thing";
-            string result = ControlTesterUtilities.GetHtml(thing);
-            Assert.AreEqual("<span>thing</span>", result, "Html output does not match");
         }
     }
 }

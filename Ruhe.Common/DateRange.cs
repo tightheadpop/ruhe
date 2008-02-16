@@ -5,10 +5,9 @@ namespace Ruhe.Common {
     /// Assumes a date precision (without reference to time) for the DateTime end points.
     /// </remarks>
     public struct DateRange : IComparable, IEquatable<DateRange>, IComparable<DateRange> {
-        private DateTime start;
-        private DateTime end;
-
         public static readonly DateRange Eternity = new DateRange(DateTime.MinValue.Date, DateTime.MaxValue.Date);
+        private DateTime end;
+        private DateTime start;
 
         //TODO: don't accept nullables?
         public DateRange(DateTime start, DateTime end) {
@@ -23,39 +22,38 @@ namespace Ruhe.Common {
             this.end = end;
         }
 
-        public DateTime Start {
-            get { return start; }
-        }
-
         public DateTime End {
             get { return end; }
         }
 
-        public bool Includes(DateTime date) {
-            return date >= Start && date <= End;
-        }
-
-        public bool Includes(DateRange range) {
-            return Includes(range.Start) && Includes(range.End);
-        }
-
-        public bool Overlaps(DateRange range) {
-            return range.Includes(Start) || range.Includes(End) || Includes(range);
+        public DateTime Start {
+            get { return start; }
         }
 
         public bool Abuts(DateRange range) {
             return !Overlaps(range) && !GetGap(range).HasValue;
         }
 
-        /// <summary>
-        /// Determines whether the combination of date ranges effectively 
-        /// partitions the current date range.
-        /// </summary>
-        public bool IsPartitionedBy(params DateRange[] ranges) {
-            if (!IsContiguous(ranges))
-                return false;
+        public int CompareTo(object obj) {
+            if (!(obj is DateRange))
+                throw new ArgumentException("Must be of type DateRange.", "obj");
+            return CompareTo((DateRange) obj);
+        }
+
+        public int CompareTo(DateRange range) {
+            if (Start != range.Start)
+                return Start.CompareTo(range.Start);
             else
-                return Equals(Combine(ranges));
+                return End.CompareTo(range.End);
+        }
+
+        public bool Equals(DateRange dateRange) {
+            return Equals(start, dateRange.start) && Equals(end, dateRange.end);
+        }
+
+        public override bool Equals(object obj) {
+            if (!(obj is DateRange)) return false;
+            return Equals((DateRange) obj);
         }
 
         public DateRange? GetGap(DateRange range) {
@@ -75,25 +73,31 @@ namespace Ruhe.Common {
             return new DateRange(lower.End.AddDays(1), higher.Start.AddDays(-1));
         }
 
-        public static bool operator ==(DateRange a, DateRange b) {
-            return a.Equals(b);
-        }
-
-        public static bool operator !=(DateRange a, DateRange b) {
-            return !a.Equals(b);
-        }
-
-        public bool Equals(DateRange dateRange) {
-            return Equals(start, dateRange.start) && Equals(end, dateRange.end);
-        }
-
-        public override bool Equals(object obj) {
-            if (!(obj is DateRange)) return false;
-            return Equals((DateRange) obj);
-        }
-
         public override int GetHashCode() {
             return start.GetHashCode() + 29 * end.GetHashCode();
+        }
+
+        public bool Includes(DateTime date) {
+            return date >= Start && date <= End;
+        }
+
+        public bool Includes(DateRange range) {
+            return Includes(range.Start) && Includes(range.End);
+        }
+
+        /// <summary>
+        /// Determines whether the combination of date ranges effectively 
+        /// partitions the current date range.
+        /// </summary>
+        public bool IsPartitionedBy(params DateRange[] ranges) {
+            if (!IsContiguous(ranges))
+                return false;
+            else
+                return Equals(Combine(ranges));
+        }
+
+        public bool Overlaps(DateRange range) {
+            return range.Includes(Start) || range.Includes(End) || Includes(range);
         }
 
         public override string ToString() {
@@ -115,8 +119,21 @@ namespace Ruhe.Common {
             }
         }
 
-        public static DateRange StartingOn(DateTime start) {
-            return new DateRange(start, DateTime.MaxValue.Date);
+        public static DateRange Combine(params DateRange[] ranges) {
+            Array.Sort(ranges);
+            if (!IsContiguous(ranges))
+                throw new ArgumentException("Unable to combine ranges that are not contiguous.");
+            return new DateRange(ranges[0].Start, ranges[ranges.Length - 1].End);
+        }
+
+        public static DateRange? Create(DateTime? start, DateTime? end) {
+            if (start.HasValue && end.HasValue)
+                return new DateRange(start.Value, end.Value);
+            if (start.HasValue)
+                return StartingOn(start.Value);
+            if (end.HasValue)
+                return EndingOn(end.Value);
+            return null;
         }
 
         public static DateRange EndingOn(DateTime end) {
@@ -132,34 +149,16 @@ namespace Ruhe.Common {
             return true;
         }
 
-        public static DateRange Combine(params DateRange[] ranges) {
-            Array.Sort(ranges);
-            if (!IsContiguous(ranges))
-                throw new ArgumentException("Unable to combine ranges that are not contiguous.");
-            return new DateRange(ranges[0].Start, ranges[ranges.Length - 1].End);
+        public static DateRange StartingOn(DateTime start) {
+            return new DateRange(start, DateTime.MaxValue.Date);
         }
 
-        public int CompareTo(object obj) {
-            if (!(obj is DateRange))
-                throw new ArgumentException("Must be of type DateRange.", "obj");
-            return CompareTo((DateRange) obj);
+        public static bool operator ==(DateRange a, DateRange b) {
+            return a.Equals(b);
         }
 
-        public int CompareTo(DateRange range) {
-            if (Start != range.Start)
-                return Start.CompareTo(range.Start);
-            else
-                return End.CompareTo(range.End);
-        }
-
-        public static DateRange? Create(DateTime? start, DateTime? end) {
-            if (start.HasValue && end.HasValue)
-                return new DateRange(start.Value, end.Value);
-            if (start.HasValue)
-                return StartingOn(start.Value);
-            if (end.HasValue)
-                return EndingOn(end.Value);
-            return null;
+        public static bool operator !=(DateRange a, DateRange b) {
+            return !a.Equals(b);
         }
     }
 }

@@ -7,10 +7,10 @@ using Ruhe.Web.UI;
 namespace Ruhe.Tests.Web.UI {
     [TestFixture]
     public class ControlUtilitiesTests {
-        private Panel parentControl;
         private Panel firstChild;
-        private GenericNamingContainer secondChild;
         private Label grandChild;
+        private Panel parentControl;
+        private GenericNamingContainer secondChild;
 
         [SetUp]
         public void SetUp() {
@@ -38,19 +38,19 @@ namespace Ruhe.Tests.Web.UI {
         }
 
         [Test]
+        public void FindByInterface() {
+            List<INamingContainer> result = ControlUtilities.FindRecursive<INamingContainer>(parentControl);
+            Assert.AreEqual(1, result.Count);
+            Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child INamingContainer");
+        }
+
+        [Test]
         public void FindByType() {
             List<Panel> result = ControlUtilities.FindRecursive<Panel>(parentControl);
             Assert.AreEqual(3, result.Count);
             Assert.IsTrue(result.Contains(parentControl), "result set does not contain parent panel");
             Assert.IsTrue(result.Contains(firstChild), "result set does not contain first child panel");
             Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child panel");
-        }
-
-        [Test]
-        public void FindByInterface() {
-            List<INamingContainer> result = ControlUtilities.FindRecursive<INamingContainer>(parentControl);
-            Assert.AreEqual(1, result.Count);
-            Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child INamingContainer");
         }
 
         private class GenericNamingContainer : Panel, INamingContainer {}

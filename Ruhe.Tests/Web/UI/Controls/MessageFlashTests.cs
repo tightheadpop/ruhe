@@ -7,15 +7,8 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class MessageFlashTests : RuheWebTest<Message> {
-        private ButtonTester submit;
         private PanelTester body;
-
-        [Test]
-        public void FlashSurvivesRedirect() {
-            WebAssert.NotVisible(body);
-            submit.Click();
-            WebAssert.Visible(body);
-        }
+        private ButtonTester submit;
 
         [Test]
         public void FlashDoesNotSurviveReloadOnceShown() {
@@ -25,9 +18,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void UsesSpecifiedMessageType() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FlashIsNotUsableOutsideWebContext() {
+            Message.Flash("doesn't matter");
+        }
+
+        [Test]
+        public void FlashSurvivesRedirect() {
+            WebAssert.NotVisible(body);
             submit.Click();
-            StringAssert.Contains(MessageType.Confirmation.ToString().ToLower(), Browser.CurrentPageText);
+            WebAssert.Visible(body);
         }
 
         [Test]
@@ -37,9 +37,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void FlashIsNotUsableOutsideWebContext() {
-            Message.Flash("doesn't matter");
+        public void UsesSpecifiedMessageType() {
+            submit.Click();
+            StringAssert.Contains(MessageType.Confirmation.ToString().ToLower(), Browser.CurrentPageText);
         }
 
         protected override void SetUp() {

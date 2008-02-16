@@ -11,19 +11,6 @@ namespace Ruhe.Common.Utilities {
     /// Function bucket providing common DateTime utility methods
     /// </summary>
     public class DateTimeUtilities {
-        public static DateTime GetFirstDayOfWeek(DateTime dateTime) {
-            return dateTime.AddDays((int) dateTime.DayOfWeek * -1);
-        }
-
-        public static DateTime GetLastDayOfWeek(DateTime dateTime) {
-            return GetFirstDayOfWeek(dateTime).AddDays(6);
-        }
-
-        public static bool IsDate(string date) {
-            DateTime result;
-            return DateTime.TryParse(date, out result);
-        }
-
         public static long DifferenceInMonths(DateTime date1, DateTime date2) {
             return DifferenceInMonths(date1, date2, RoundingOption.Down);
         }
@@ -41,6 +28,21 @@ namespace Ruhe.Common.Utilities {
             return differenceInMonths;
         }
 
+        public static DateTime GetFirstDayOfWeek(DateTime dateTime) {
+            return dateTime.AddDays((int) dateTime.DayOfWeek * -1);
+        }
+
+        public static DateTime GetLastDayOfWeek(DateTime dateTime) {
+            return GetFirstDayOfWeek(dateTime).AddDays(6);
+        }
+
+        public static DateTime GetNextDayOfWeek(DateTime start, DayOfWeek dayOfWeek) {
+            if (dayOfWeek > start.DayOfWeek)
+                return start.AddDays(dayOfWeek - start.DayOfWeek);
+            else
+                return GetFirstDayOfWeek(start.AddDays(7)).AddDays((int) dayOfWeek);
+        }
+
         public static DateTime GetNthDayOfWeekInMonth(int n, DayOfWeek dayOfWeek, Month month, int year) {
             if (n <= 0)
                 throw new ArgumentOutOfRangeException("n", n, "n must be greater than zero");
@@ -52,15 +54,13 @@ namespace Ruhe.Common.Utilities {
             return result;
         }
 
-        public static DateTime GetNextDayOfWeek(DateTime start, DayOfWeek dayOfWeek) {
-            if (dayOfWeek > start.DayOfWeek)
-                return start.AddDays(dayOfWeek - start.DayOfWeek);
-            else
-                return GetFirstDayOfWeek(start.AddDays(7)).AddDays((int) dayOfWeek);
-        }
-
         public static DateTime GetPreviousDayOfWeek(DateTime start, DayOfWeek dayOfWeek) {
             return GetNextDayOfWeek(start.AddDays(-8), dayOfWeek);
+        }
+
+        public static bool IsDate(string date) {
+            DateTime result;
+            return DateTime.TryParse(date, out result);
         }
     }
 }

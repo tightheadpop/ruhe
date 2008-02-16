@@ -11,30 +11,6 @@ namespace Ruhe.Common {
         private static readonly string[] DisposingMethods = new string[] {"Flush", "Close", "Dispose"};
         private DisposeOf() {}
 
-        /// <summary>
-        /// Handles common clean up tasks, squelching exceptions.
-        /// </summary>
-        /// <remarks>
-        /// Flush, Close, Dispose, in that order.
-        /// </remarks>
-        public static void These(params object[] stuff) {
-            These((IEnumerable) stuff);
-        }
-
-        public static void These(IEnumerable items) {
-            if (items == null)
-                return;
-            foreach (object item in items) {
-                if (item != null) {
-                    InvokeDisposingMethods(item);
-                }
-            }
-        }
-
-        private static void InvokeDisposingMethods(object obj) {
-            Invoke(obj, GetDisposingMethods(obj));
-        }
-
         private static IEnumerable<MethodInfo> GetDisposingMethods(object obj) {
             List<MethodInfo> methods = new List<MethodInfo>(DisposingMethods.Length);
             foreach (string methodName in DisposingMethods) {
@@ -52,6 +28,30 @@ namespace Ruhe.Common {
                     catch (Exception e) {
                         throw e.InnerException;
                     }
+                }
+            }
+        }
+
+        private static void InvokeDisposingMethods(object obj) {
+            Invoke(obj, GetDisposingMethods(obj));
+        }
+
+        /// <summary>
+        /// Handles common clean up tasks, squelching exceptions.
+        /// </summary>
+        /// <remarks>
+        /// Flush, Close, Dispose, in that order.
+        /// </remarks>
+        public static void These(params object[] stuff) {
+            These((IEnumerable) stuff);
+        }
+
+        public static void These(IEnumerable items) {
+            if (items == null)
+                return;
+            foreach (object item in items) {
+                if (item != null) {
+                    InvokeDisposingMethods(item);
                 }
             }
         }
