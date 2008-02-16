@@ -1,6 +1,5 @@
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
-using NUnit.Extensions.Asp;
 using NUnit.Framework;
 using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
@@ -8,16 +7,6 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI {
     [TestFixture]
     public class DefaultValidatorConfiguratorTests : WebFormTestCase {
-        [Test]
-        public void RequiredValidatorHasRequiredIcon() {
-            InputTextBox inputTextBox = new InputTextBox();
-            inputTextBox.ID = "foo";
-            inputTextBox.LabelText = "Field Name";
-            inputTextBox.ErrorMessage = "you're wrong";
-            new DefaultValidatorConfigurator().ConfigureControl(inputTextBox);
-            Assert.AreEqual(1, ControlUtilities.FindRecursive<RequiredIcon>(inputTextBox).Count);
-        }
-
         [Test]
         public void EachValidatorHasValidatorExtender() {
             InputTextBox inputTextBox = new InputTextBox();
@@ -28,6 +17,16 @@ namespace Ruhe.Tests.Web.UI {
                 Assert.IsNotNull(extender);
                 Assert.AreEqual(validator.ID, extender.TargetControlID);
             }
+        }
+
+        [Test]
+        public void RequiredValidatorHasRequiredIcon() {
+            InputTextBox inputTextBox = new InputTextBox();
+            inputTextBox.ID = "foo";
+            inputTextBox.LabelText = "Field Name";
+            inputTextBox.ErrorMessage = "you're wrong";
+            new DefaultValidatorConfigurator().ConfigureControl(inputTextBox);
+            Assert.AreEqual(1, ControlUtilities.FindRecursive<RequiredIcon>(inputTextBox).Count);
         }
 
         [Test]

@@ -11,6 +11,11 @@ namespace Ruhe.Web.UI.Controls {
             get { return ClientID.Replace("_", ":"); }
         }
 
+        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            Style.Add("display", "none");
+            base.AddAttributesToRender(writer);
+        }
+
         protected override void OnPreRender(EventArgs e) {
             base.OnPreRender(e);
             Page.ClientScript.RegisterStartupScript(GetType(), ClientID + "accessibility",
@@ -19,11 +24,6 @@ namespace Ruhe.Web.UI.Controls {
 	document.getElementById('{0}').style.display = '';
 	document.getElementById('{1}').style.display = 'none';
 </script>", ClientID, ButtonClientID));
-        }
-
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            Style.Add("display", "none");
-            base.AddAttributesToRender(writer);
         }
 
         protected override void Render(HtmlTextWriter writer) {

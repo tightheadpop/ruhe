@@ -7,6 +7,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
         private InputDate input;
         private TestableValidator validator;
 
+        [SetUp]
+        public void SetUp() {
+            input = new InputDate();
+            validator = new TestableValidator();
+            validator.Input = input;
+        }
+
         [Test]
         public void EmptyValueIsValid() {
             Assert.IsTrue(validator.Evaluate());
@@ -17,13 +24,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
             input.Format = "dd-MM-yyyy";
             input.Text = "12-31-2005";
             Assert.IsFalse(validator.Evaluate());
-        }
-
-        [SetUp]
-        public void SetUp() {
-            input = new InputDate();
-            validator = new TestableValidator();
-            validator.Input = input;
         }
 
         private class TestableValidator : InputDateValidator {

@@ -8,33 +8,67 @@ namespace Ruhe.Web.UI.Controls {
     /// TextBox providing built-in validation
     /// </summary>
     public class InputTextBox : TextBox, IInputControl {
-        private RequiredIcon requiredLabel;
-        private RequiredFieldValidator requiredValidator;
         private EncodedLabel readOnlyLabel;
         private RegularExpressionValidator regexValidator;
+        private RequiredIcon requiredLabel;
+        private RequiredFieldValidator requiredValidator;
 
-        protected override void CreateChildControls() {
-            base.CreateChildControls();
-            CreateReadOnlyLabel();
-            CreateRequiredLabel();
-            CreateRequiredValidator();
-            CreateRegexValidator();
-
-            SetDefaults();
+        public override ControlCollection Controls {
+            get {
+                EnsureChildControls();
+                return base.Controls;
+            }
         }
 
-        private void SetDefaults() {
-            Required = false;
-            ReadOnly = false;
-            ValidationExpression = string.Empty;
-            ErrorMessage = "Please enter a valid value.";
+        public override string CssClass {
+            get {
+                EnsureChildControls();
+                return base.CssClass;
+            }
+            set {
+                EnsureChildControls();
+                base.CssClass = value;
+                readOnlyLabel.CssClass = value;
+            }
         }
 
-        protected override void OnInit(EventArgs e) {
-            base.OnInit(e);
-            EnsureChildControls();
-            AssignIdsToChildControls();
-            RuheConfiguration.ValidatorConfigurator.ConfigureControl(this);
+        public virtual string DefaultElementClientId {
+            get { return ClientID; }
+        }
+
+        public virtual bool EnableClientScript {
+            get {
+                EnsureChildControls();
+                return requiredValidator.EnableClientScript;
+            }
+            set {
+                EnsureChildControls();
+                foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(this)) {
+                    validator.EnableClientScript = value;
+                }
+            }
+        }
+
+        public virtual string ErrorMessage {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["ErrorMessage"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["ErrorMessage"] = value;
+            }
+        }
+
+        public virtual string FormatText {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["FormatText"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["FormatText"] = value;
+            }
         }
 
         public override string ID {
@@ -45,25 +79,14 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        protected virtual void AssignIdsToChildControls() {
-            EnsureChildControls();
-            requiredLabel.ID = ID + "_requiredLabel";
-            requiredValidator.ID = ID + "_requiredValidator";
-            readOnlyLabel.ID = ID + "_readOnly";
-            regexValidator.ID = ID + "_regexValidator";
-            requiredValidator.ControlToValidate = ID;
-            regexValidator.ControlToValidate = ID;
-        }
-
-        public virtual bool Required {
+        public virtual string LabelText {
             get {
                 EnsureChildControls();
-                return requiredValidator.Enabled;
+                return (string) ViewState["LabelText"];
             }
             set {
                 EnsureChildControls();
-                requiredValidator.Enabled = requiredValidator.Visible = value;
-                requiredLabel.Visible = value;
+                ViewState["LabelText"] = value;
             }
         }
 
@@ -83,38 +106,15 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public virtual string ErrorMessage {
+        public virtual bool Required {
             get {
                 EnsureChildControls();
-                return (string) ViewState["ErrorMessage"];
+                return requiredValidator.Enabled;
             }
             set {
                 EnsureChildControls();
-                ViewState["ErrorMessage"] = value;
-            }
-        }
-
-        public virtual string ValidationExpression {
-            get {
-                EnsureChildControls();
-                return regexValidator.ValidationExpression;
-            }
-            set {
-                EnsureChildControls();
-                regexValidator.ValidationExpression = value;
-                regexValidator.Visible = regexValidator.Enabled = !string.IsNullOrEmpty(value);
-            }
-        }
-
-        public override string CssClass {
-            get {
-                EnsureChildControls();
-                return base.CssClass;
-            }
-            set {
-                EnsureChildControls();
-                base.CssClass = value;
-                readOnlyLabel.CssClass = value;
+                requiredValidator.Enabled = requiredValidator.Visible = value;
+                requiredLabel.Visible = value;
             }
         }
 
@@ -130,46 +130,19 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public virtual string LabelText {
-            get {
-                EnsureChildControls();
-                return (string) ViewState["LabelText"];
-            }
-            set {
-                EnsureChildControls();
-                ViewState["LabelText"] = value;
-            }
-        }
-
-        public virtual string FormatText {
-            get {
-                EnsureChildControls();
-                return (string) ViewState["FormatText"];
-            }
-            set {
-                EnsureChildControls();
-                ViewState["FormatText"] = value;
-            }
-        }
-
-        public virtual string DefaultElementClientId {
-            get { return ClientID; }
-        }
-
         public virtual string ValidatedControlId {
             get { return ID; }
         }
 
-        public virtual bool EnableClientScript {
+        public virtual string ValidationExpression {
             get {
                 EnsureChildControls();
-                return requiredValidator.EnableClientScript;
+                return regexValidator.ValidationExpression;
             }
             set {
                 EnsureChildControls();
-                foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(this)) {
-                    validator.EnableClientScript = value;
-                }
+                regexValidator.ValidationExpression = value;
+                regexValidator.Visible = regexValidator.Enabled = !string.IsNullOrEmpty(value);
             }
         }
 
@@ -187,25 +160,78 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public virtual void Clear() {
-            Text = string.Empty;
-        }
-
-        public override ControlCollection Controls {
-            get {
-                EnsureChildControls();
-                return base.Controls;
+        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            base.AddAttributesToRender(writer);
+            if (MaxLength > 0 && TextMode.Equals(TextBoxMode.MultiLine)) {
+                writer.AddAttribute("maxlength", MaxLength.ToString());
             }
-        }
-
-        protected override ControlCollection CreateControlCollection() {
-            return new ControlCollection(this);
         }
 
         protected override void AddParsedSubObject(object obj) {
             if (obj is Control) {
                 Controls.Add((Control) obj);
             }
+        }
+
+        protected virtual void AssignIdsToChildControls() {
+            EnsureChildControls();
+            requiredLabel.ID = ID + "_requiredLabel";
+            requiredValidator.ID = ID + "_requiredValidator";
+            readOnlyLabel.ID = ID + "_readOnly";
+            regexValidator.ID = ID + "_regexValidator";
+            requiredValidator.ControlToValidate = ID;
+            regexValidator.ControlToValidate = ID;
+        }
+
+        public virtual void Clear() {
+            Text = string.Empty;
+        }
+
+        protected override void CreateChildControls() {
+            base.CreateChildControls();
+            CreateReadOnlyLabel();
+            CreateRequiredLabel();
+            CreateRequiredValidator();
+            CreateRegexValidator();
+
+            SetDefaults();
+        }
+
+        protected override ControlCollection CreateControlCollection() {
+            return new ControlCollection(this);
+        }
+
+        private void CreateReadOnlyLabel() {
+            readOnlyLabel = new EncodedLabel();
+            readOnlyLabel.EnableViewState = false;
+            Controls.Add(readOnlyLabel);
+        }
+
+        private void CreateRegexValidator() {
+            regexValidator = new RegularExpressionValidator();
+            regexValidator.EnableViewState = false;
+            Controls.Add(regexValidator);
+        }
+
+        private void CreateRequiredLabel() {
+            requiredLabel = new RequiredIcon();
+            requiredLabel.EnableViewState = false;
+            Controls.Add(new BreakingSpace());
+            Controls.Add(requiredLabel);
+        }
+
+        private void CreateRequiredValidator() {
+            requiredValidator = new RequiredFieldValidator();
+            requiredValidator.EnableViewState = false;
+            Controls.Add(new BreakingSpace());
+            Controls.Add(requiredValidator);
+        }
+
+        protected override void OnInit(EventArgs e) {
+            base.OnInit(e);
+            EnsureChildControls();
+            AssignIdsToChildControls();
+            RuheConfiguration.ValidatorConfigurator.ConfigureControl(this);
         }
 
         protected override void OnPreRender(EventArgs e) {
@@ -226,37 +252,11 @@ namespace Ruhe.Web.UI.Controls {
             writer.RenderEndTag();
         }
 
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            base.AddAttributesToRender(writer);
-            if (MaxLength > 0 && TextMode.Equals(TextBoxMode.MultiLine)) {
-                writer.AddAttribute("maxlength", MaxLength.ToString());
-            }
-        }
-
-        private void CreateRequiredLabel() {
-            requiredLabel = new RequiredIcon();
-            requiredLabel.EnableViewState = false;
-            Controls.Add(new BreakingSpace());
-            Controls.Add(requiredLabel);
-        }
-
-        private void CreateRequiredValidator() {
-            requiredValidator = new RequiredFieldValidator();
-            requiredValidator.EnableViewState = false;
-            Controls.Add(new BreakingSpace());
-            Controls.Add(requiredValidator);
-        }
-
-        private void CreateReadOnlyLabel() {
-            readOnlyLabel = new EncodedLabel();
-            readOnlyLabel.EnableViewState = false;
-            Controls.Add(readOnlyLabel);
-        }
-
-        private void CreateRegexValidator() {
-            regexValidator = new RegularExpressionValidator();
-            regexValidator.EnableViewState = false;
-            Controls.Add(regexValidator);
+        private void SetDefaults() {
+            Required = false;
+            ReadOnly = false;
+            ValidationExpression = string.Empty;
+            ErrorMessage = "Please enter a valid value.";
         }
     }
 }

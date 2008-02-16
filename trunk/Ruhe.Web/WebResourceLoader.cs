@@ -10,6 +10,13 @@ namespace Ruhe.Web {
             return resource.WebResource;
         }
 
+        private static Page GetPage() {
+            HttpContext context = HttpContext.Current;
+            if (context == null || !(context.Handler is Page))
+                throw new InvalidOperationException(typeof(WebResourceLoader).Name + " can only be used in the context of a Page.");
+            return (Page) context.Handler;
+        }
+
         public static WebResourceAttribute GetResource(Type typeInAssemblyWithResource, string partialName) {
             object[] attributes = typeInAssemblyWithResource.Assembly.GetCustomAttributes(typeof(WebResourceAttribute), true);
             return Collections.First<WebResourceAttribute>(
@@ -21,13 +28,6 @@ namespace Ruhe.Web {
         public static string GetResourceUrl(Type typeInAssemblyWithResource, string partialName) {
             Page page = GetPage();
             return page.ClientScript.GetWebResourceUrl(typeInAssemblyWithResource, GetResource(typeInAssemblyWithResource, partialName).WebResource);
-        }
-
-        private static Page GetPage() {
-            HttpContext context = HttpContext.Current;
-            if (context == null || !(context.Handler is Page))
-                throw new InvalidOperationException(typeof(WebResourceLoader).Name + " can only be used in the context of a Page.");
-            return (Page) context.Handler;
         }
     }
 }

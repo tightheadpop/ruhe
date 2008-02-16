@@ -1,4 +1,3 @@
-using NUnit.Extensions.Asp;
 using NUnit.Framework;
 using Ruhe.TestExtensions.AspTesters;
 using Ruhe.Tests.Web.UI.Controls;

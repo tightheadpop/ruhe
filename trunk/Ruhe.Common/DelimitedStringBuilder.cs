@@ -19,6 +19,11 @@ namespace Ruhe.Common {
             this.delimiter = delimiter;
         }
 
+        public int Length {
+            get { return builder.Length; }
+            set { builder.Length = value; }
+        }
+
         public void Append(string value) {
             if (builder.Length > 0) {
                 builder.Append(delimiter);
@@ -31,11 +36,6 @@ namespace Ruhe.Common {
                 builder.Append(delimiter);
             }
             builder.AppendFormat(value, args);
-        }
-
-        public int Length {
-            get { return builder.Length; }
-            set { builder.Length = value; }
         }
 
         public override string ToString() {

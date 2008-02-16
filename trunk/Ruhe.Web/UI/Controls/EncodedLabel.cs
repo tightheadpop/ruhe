@@ -2,7 +2,6 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
     public class EncodedLabel : Label, ILabeledControl {
@@ -20,17 +19,6 @@ namespace Ruhe.Web.UI.Controls {
 
         #region ILabeledControl Members
 
-        public string LabelText {
-            get {
-                EnsureChildControls();
-                return (string) ViewState["LabelText"];
-            }
-            set {
-                EnsureChildControls();
-                ViewState["LabelText"] = value;
-            }
-        }
-
         public string FormatText {
             get {
                 EnsureChildControls();
@@ -39,6 +27,17 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 ViewState["FormatText"] = value;
+            }
+        }
+
+        public string LabelText {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["LabelText"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["LabelText"] = value;
             }
         }
 

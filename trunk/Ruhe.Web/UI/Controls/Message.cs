@@ -21,6 +21,20 @@ namespace Ruhe.Web.UI.Controls {
             Type = MessageType.Standard;
         }
 
+        public bool FlashHost {
+            get { return Convert.ToBoolean(ViewState["FlashHost"]); }
+            set { ViewState["FlashHost"] = value; }
+        }
+
+        private FlashTransferObject? FlashMessage {
+            get {
+                FlashTransferObject? flashMessage = (FlashTransferObject?) Page.Session["Flash"];
+                FlashMessage = null;
+                return flashMessage;
+            }
+            set { Page.Session["Flash"] = value; }
+        }
+
         public string HeaderText {
             get { return (string) ViewState["headertext"]; }
             set { ViewState["headertext"] = value; }
@@ -82,20 +96,6 @@ namespace Ruhe.Web.UI.Controls {
             header.RenderControl(writer);
         }
 
-        public bool FlashHost {
-            get { return Convert.ToBoolean(ViewState["FlashHost"]); }
-            set { ViewState["FlashHost"] = value; }
-        }
-
-        private FlashTransferObject? FlashMessage {
-            get {
-                FlashTransferObject? flashMessage = (FlashTransferObject?) Page.Session["Flash"];
-                FlashMessage = null;
-                return flashMessage;
-            }
-            set { Page.Session["Flash"] = value; }
-        }
-
         public static void Flash(string message) {
             Flash(message, null);
         }
@@ -114,9 +114,9 @@ namespace Ruhe.Web.UI.Controls {
 
         [Serializable]
         private struct FlashTransferObject {
+            public readonly string HeaderText;
             public readonly string Message;
             public MessageType? Type;
-            public readonly string HeaderText;
 
             public FlashTransferObject(string message, MessageType? type, string headerText) {
                 Message = message;

@@ -4,6 +4,11 @@ using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputDateRangeValidator : BaseValidator {
+        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            base.AddAttributesToRender(writer);
+            Page.ClientScript.RegisterExpandoAttribute(ClientID, "evaluationfunction", "Ruhe_EvaluateInputDateRangeIsValid");
+        }
+
         protected override bool EvaluateIsValid() {
             InputDate to = FindToDate();
             InputDate from = FindFromDate();
@@ -17,11 +22,5 @@ namespace Ruhe.Web.UI.Controls {
         protected virtual InputDate FindToDate() {
             return (InputDate) FindControl(ControlToValidate);
         }
-
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            base.AddAttributesToRender(writer);
-            Page.ClientScript.RegisterExpandoAttribute(ClientID, "evaluationfunction", "Ruhe_EvaluateInputDateRangeIsValid");
-        }
-
     }
 }

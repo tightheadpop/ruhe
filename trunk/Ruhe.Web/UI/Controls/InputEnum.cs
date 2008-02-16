@@ -15,24 +15,40 @@ namespace Ruhe.Web.UI.Controls {
             BindValues();
         }
 
-        protected void BindValues() {
-            EnsureChildControls();
-            List.BindList(Enum.GetNames(typeof(T)));
-        }
-
         public T? Value {
             get { return string.IsNullOrEmpty(List.SelectedValue) ? default(T?) : Reflector.ConvertToEnum<T>(List.SelectedValue); }
             set { List.SelectedValue = (value.HasValue) ? value.Value.ToString() : string.Empty; }
+        }
+
+        protected void BindValues() {
+            EnsureChildControls();
+            List.BindList(Enum.GetNames(typeof(T)));
         }
     }
 
     [ControlBuilder(typeof(InputEnumControlBuilder))]
     public class InputEnum : Control, IInputControl {
-        private InputDropDownList list;
         private Type enumType;
+        private InputDropDownList list;
 
         internal InputEnum(Type enumType) {
             this.enumType = enumType;
+        }
+
+        public override ControlCollection Controls {
+            get {
+                EnsureChildControls();
+                return base.Controls;
+            }
+        }
+
+        public string DefaultElementClientId {
+            get { return List.DefaultElementClientId; }
+        }
+
+        public bool EnableClientScript {
+            get { return List.EnableClientScript; }
+            set { List.EnableClientScript = value; }
         }
 
         /// <summary>
@@ -44,29 +60,19 @@ namespace Ruhe.Web.UI.Controls {
             set { enumType = Type.GetType(value); }
         }
 
-        protected override void CreateChildControls() {
-            base.CreateChildControls();
-            list = new InputDropDownList();
-            Controls.Add(List);
+        public string ErrorMessage {
+            get { return List.ErrorMessage; }
+            set { List.ErrorMessage = value; }
+        }
+
+        public string FormatText {
+            get { return List.FormatText; }
+            set { List.FormatText = value; }
         }
 
         public override string ID {
             get { return list.ID; }
             set { list.ID = value; }
-        }
-
-        public override ControlCollection Controls {
-            get {
-                EnsureChildControls();
-                return base.Controls;
-            }
-        }
-
-        public ListItemCollection Items {
-            get {
-                EnsureChildControls();
-                return List.Items;
-            }
         }
 
         /// <summary>
@@ -89,17 +95,20 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public string DefaultElementClientId {
-            get { return List.DefaultElementClientId; }
+        public ListItemCollection Items {
+            get {
+                EnsureChildControls();
+                return List.Items;
+            }
         }
 
-        public string ValidatedControlId {
-            get { return List.ValidatedControlId; }
+        public string LabelText {
+            get { return List.LabelText; }
+            set { List.LabelText = value; }
         }
 
-        public string ErrorMessage {
-            get { return List.ErrorMessage; }
-            set { List.ErrorMessage = value; }
+        protected InputDropDownList List {
+            get { return list; }
         }
 
         public bool ReadOnly {
@@ -112,32 +121,23 @@ namespace Ruhe.Web.UI.Controls {
             set { List.Required = value; }
         }
 
+        public string ValidatedControlId {
+            get { return List.ValidatedControlId; }
+        }
+
         public string ValidationGroup {
             get { return List.ValidationGroup; }
             set { List.ValidationGroup = value; }
-        }
-
-        public bool EnableClientScript {
-            get { return List.EnableClientScript; }
-            set { List.EnableClientScript = value; }
         }
 
         public void Clear() {
             List.Clear();
         }
 
-        public string LabelText {
-            get { return List.LabelText; }
-            set { List.LabelText = value; }
-        }
-
-        public string FormatText {
-            get { return List.FormatText; }
-            set { List.FormatText = value; }
-        }
-
-        protected InputDropDownList List {
-            get { return list; }
+        protected override void CreateChildControls() {
+            base.CreateChildControls();
+            list = new InputDropDownList();
+            Controls.Add(List);
         }
     }
 

@@ -35,9 +35,10 @@
 
 #endregion
 
+using NUnit.Extensions.Asp;
 using NUnit.Framework;
 
-namespace NUnit.Extensions.Asp {
+namespace Ruhe.Tests {
     /// <summary>
     /// Base class for NUnitAsp test fixtures.  Extend this class to use NUnitAsp.
     /// </summary>
@@ -56,13 +57,6 @@ namespace NUnit.Extensions.Asp {
         }
 
         /// <summary>
-        /// Executed before each test method is run.  Override in subclasses to do subclass
-        /// set up.  NOTE: The [SetUp] attribute cannot be used in subclasses because it is already
-        /// in use.
-        /// </summary>
-        protected virtual void SetUp() {}
-
-        /// <summary>
         /// Do not call.  For use by NUnit only.
         /// </summary>
         [TearDown]
@@ -70,20 +64,9 @@ namespace NUnit.Extensions.Asp {
             TearDown();
         }
 
-        /// <summary>
-        /// Executed after each test method is run.  Override in subclasses to do subclass
-        /// clean up.  NOTE: [TearDown] attribute cannot be used in subclasses because it is
-        /// already in use.
-        /// </summary>
-        protected virtual void TearDown() {}
-
-        /// <summary>
-        /// The web form currently loaded by the browser.
-        /// </summary>
-        protected WebFormTester CurrentWebForm {
-            get {
-                AssertSetUp();
-                return new WebFormTester(HttpClient.Default);
+        private void AssertSetUp() {
+            if (!setupCalled) {
+                Fail("A required setup method in WebFormTestCase was not called.  This is probably because you used the [SetUp] attribute in a subclass of WebFormTestCase.  That is not supported.  Override the SetUp() method instead.");
             }
         }
 
@@ -97,14 +80,30 @@ namespace NUnit.Extensions.Asp {
             }
         }
 
-        private void AssertSetUp() {
-            if (!setupCalled) {
-                Fail("A required setup method in WebFormTestCase was not called.  This is probably because you used the [SetUp] attribute in a subclass of WebFormTestCase.  That is not supported.  Override the SetUp() method instead.");
+        /// <summary>
+        /// The web form currently loaded by the browser.
+        /// </summary>
+        protected WebFormTester CurrentWebForm {
+            get {
+                AssertSetUp();
+                return new WebFormTester(HttpClient.Default);
             }
         }
-    }
 
-// Everything below this line is for backwards compatibility and may be deleted.
+        /// <summary>
+        /// Executed before each test method is run.  Override in subclasses to do subclass
+        /// set up.  NOTE: The [SetUp] attribute cannot be used in subclasses because it is already
+        /// in use.
+        /// </summary>
+        protected virtual void SetUp() {}
+
+        /// <summary>
+        /// Executed after each test method is run.  Override in subclasses to do subclass
+        /// clean up.  NOTE: [TearDown] attribute cannot be used in subclasses because it is
+        /// already in use.
+        /// </summary>
+        protected virtual void TearDown() {}
+    }
 
     /// <summary>
     /// For backwards compatibility; will be deprecated in the future.
@@ -112,20 +111,6 @@ namespace NUnit.Extensions.Asp {
     /// should use Assert and WebAssert methods instead.
     /// </summary>
     public class CompatibilityAdapter {
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertTrue(bool condition) {
-            Assert.IsTrue(condition);
-        }
-
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertTrue(string message, bool condition) {
-            Assert.IsTrue(condition, message);
-        }
-
         /// <summary>
         /// For backwards compatibility; will be deprecated in the future.
         /// </summary>
@@ -138,6 +123,41 @@ namespace NUnit.Extensions.Asp {
         /// </summary>
         public static void AssertEquals(string message, object expected, object actual) {
             Assert.AreEqual(expected, actual, message);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertEquals(string[] expected, string[] actual) {
+            WebAssert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertEquals(string message, string[] expected, string[] actual) {
+            WebAssert.AreEqual(expected, actual, message);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertEquals(string[][] expected, string[][] actual) {
+            WebAssert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertEquals(string message, string[][] expected, string[][] actual) {
+            WebAssert.AreEqual(expected, actual, message);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertEqualsIgnoreOrder(string message, string[][] expected, string[][] actual) {
+            WebAssert.AreEqualIgnoringOrder(expected, actual, message);
         }
 
         /// <summary>
@@ -185,8 +205,22 @@ namespace NUnit.Extensions.Asp {
         /// <summary>
         /// For backwards compatibility; will be deprecated in the future.
         /// </summary>
-        public static void Fail(string message) {
-            Assert.Fail(message);
+        public static void AssertSortOrder(string message, string[][] data, int column, bool isAscending, DataType type) {
+            WebAssert.Sorted(data, column, isAscending, type, message);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertTrue(bool condition) {
+            Assert.IsTrue(condition);
+        }
+
+        /// <summary>
+        /// For backwards compatibility; will be deprecated in the future.
+        /// </summary>
+        public static void AssertTrue(string message, bool condition) {
+            Assert.IsTrue(condition, message);
         }
 
         /// <summary>
@@ -200,43 +234,8 @@ namespace NUnit.Extensions.Asp {
         /// <summary>
         /// For backwards compatibility; will be deprecated in the future.
         /// </summary>
-        public static void AssertEquals(string[] expected, string[] actual) {
-            WebAssert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertEquals(string message, string[] expected, string[] actual) {
-            WebAssert.AreEqual(expected, actual, message);
-        }
-
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertEquals(string[][] expected, string[][] actual) {
-            WebAssert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertEquals(string message, string[][] expected, string[][] actual) {
-            WebAssert.AreEqual(expected, actual, message);
-        }
-
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertEqualsIgnoreOrder(string message, string[][] expected, string[][] actual) {
-            WebAssert.AreEqualIgnoringOrder(expected, actual, message);
-        }
-
-        /// <summary>
-        /// For backwards compatibility; will be deprecated in the future.
-        /// </summary>
-        public static void AssertSortOrder(string message, string[][] data, int column, bool isAscending, DataType type) {
-            WebAssert.Sorted(data, column, isAscending, type, message);
+        public static void Fail(string message) {
+            Assert.Fail(message);
         }
     }
 }

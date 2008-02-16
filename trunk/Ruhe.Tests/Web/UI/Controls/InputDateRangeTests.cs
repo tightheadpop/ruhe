@@ -11,18 +11,18 @@ namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class InputDateRangeTests : RuheWebTest<InputDateRange> {
         private TextBoxTester from;
-        private TextBoxTester to;
+        private ValidatorTester inputRangeValidator;
         private LabelTester inputReadOnlyLabel;
         private LabelTester inputRequiredLabel;
         private ValidatorTester inputRequiredValidator;
-        private ValidatorTester inputRangeValidator;
 
         private TextBoxTester readOnlyFrom;
-        private TextBoxTester readOnlyTo;
         private LabelTester readOnlyLabel;
         private LabelTester readOnlyRequiredLabel;
+        private TextBoxTester readOnlyTo;
 
         private ButtonTester submit;
+        private TextBoxTester to;
 
         [Test]
         public void GetAndSetDateRangeValue() {
@@ -34,32 +34,27 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void SettingWidthActsOnChildInputDateControls() {
-            InputDateRange range = new InputDateRange();
-            Unit expected = Unit.Parse("8em");
-            range.Width = expected;
-            ControlUtilities.FindRecursive<InputDate>(range).ForEach(
-                delegate (InputDate date) {
-                    Assert.AreEqual(expected, date.Width);
-                });
-        }
-
-        [Test]
         public void InitialValueIsNull() {
             Assert.IsNull(new InputDateRange().DateRange);
         }
 
         [Test]
-        public void WhenRequired() {
-            LoadPage();
-            WebAssert.Visible(from);
-            WebAssert.Visible(to);
-            WebAssert.NotVisible(inputReadOnlyLabel);
-            WebAssert.Visible(inputRequiredLabel);
+        public void SettingWidthActsOnChildInputDateControls() {
+            InputDateRange range = new InputDateRange();
+            Unit expected = Unit.Parse("8em");
+            range.Width = expected;
+            ControlUtilities.FindRecursive<InputDate>(range).ForEach(
+                delegate(InputDate date) { Assert.AreEqual(expected, date.Width); });
+        }
 
-            WebAssert.NotVisible(inputRequiredValidator);
+        [Test]
+        public void StartOccursAfterEnd() {
+            LoadPage();
+            from.Text = "01-Jan-2004";
+            to.Text = "31-Dec-2003";
+            WebAssert.NotVisible(inputRangeValidator);
             submit.Click();
-            WebAssert.Visible(inputRequiredValidator);
+            WebAssert.Visible(inputRangeValidator);
         }
 
         [Test]
@@ -74,13 +69,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void StartOccursAfterEnd() {
+        public void WhenRequired() {
             LoadPage();
-            from.Text = "01-Jan-2004";
-            to.Text = "31-Dec-2003";
-            WebAssert.NotVisible(inputRangeValidator);
+            WebAssert.Visible(from);
+            WebAssert.Visible(to);
+            WebAssert.NotVisible(inputReadOnlyLabel);
+            WebAssert.Visible(inputRequiredLabel);
+
+            WebAssert.NotVisible(inputRequiredValidator);
             submit.Click();
-            WebAssert.Visible(inputRangeValidator);
+            WebAssert.Visible(inputRequiredValidator);
         }
 
         protected override void SetUp() {

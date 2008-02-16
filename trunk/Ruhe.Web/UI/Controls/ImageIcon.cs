@@ -3,9 +3,6 @@ using System.Web.UI.WebControls;
 
 namespace Ruhe.Web.UI.Controls {
     public abstract class ImageIcon : Image, IIcon {
-        public abstract string Name { get; }
-        public abstract string Description { get; }
-
         public ImageIcon() {
             EnableViewState = false;
             ImageAlign = ImageAlign.AbsMiddle;
@@ -16,6 +13,9 @@ namespace Ruhe.Web.UI.Controls {
         public ImageIcon(string toolTip) : this() {
             ToolTip = toolTip;
         }
+
+        public abstract string Description { get; }
+        public abstract string Name { get; }
 
         protected override void Render(HtmlTextWriter writer) {
             AlternateText = ToolTip;

@@ -7,21 +7,21 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class InputEnumWebTests : RuheWebTest<InputEnum> {
-        private DropDownListTester noInitialBlank;
-        private DropDownListTester initialBlank;
         private readonly int NumberOfMonths = Enum.GetNames(typeof(Month)).Length;
-
-        [Test]
-        public void PopulatesDropDown() {
-            LoadPage();
-            Assert.AreEqual(NumberOfMonths, noInitialBlank.Items.Count);
-        }
+        private DropDownListTester initialBlank;
+        private DropDownListTester noInitialBlank;
 
         [Test]
         public void IncludesInitialBlank() {
             LoadPage();
             Assert.AreEqual(NumberOfMonths + 1, initialBlank.Items.Count);
             Assert.AreEqual(string.Empty, initialBlank.Items[0].RawText, "the first item should be blank");
+        }
+
+        [Test]
+        public void PopulatesDropDown() {
+            LoadPage();
+            Assert.AreEqual(NumberOfMonths, noInitialBlank.Items.Count);
         }
 
         protected override void LoadPage() {

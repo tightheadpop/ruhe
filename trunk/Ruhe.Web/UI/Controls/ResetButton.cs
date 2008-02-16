@@ -9,17 +9,17 @@ namespace Ruhe.Web.UI.Controls {
             UseSubmitBehavior = false;
         }
 
-        protected override void CreateChildControls() {
-            base.CreateChildControls();
-            ImageUrl = RuheConfiguration.ImageUrlFor<ResetButton>("reset.png");
-        }
-
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
             writer.AddAttribute(HtmlTextWriterAttribute.Type, "reset");
             writer.AddAttribute(HtmlTextWriterAttribute.Id, ClientID);
             writer.AddAttribute(HtmlTextWriterAttribute.Accesskey, AccessKey);
             writer.AddAttribute(HtmlTextWriterAttribute.Class, CssClass);
             writer.AddAttribute(HtmlTextWriterAttribute.Title, ToolTip);
+        }
+
+        protected override void CreateChildControls() {
+            base.CreateChildControls();
+            ImageUrl = RuheConfiguration.ImageUrlFor<ResetButton>("reset.png");
         }
     }
 }

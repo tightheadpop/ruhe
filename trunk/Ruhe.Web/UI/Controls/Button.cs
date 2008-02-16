@@ -15,8 +15,8 @@ namespace Ruhe.Web.UI.Controls {
     /// is submitted as the value, rather than the 'value' attribute.
     /// </remarks>
     public class Button : GrayButton {
-        private string beforeAccessKey;
         private string afterAccessKey;
+        private string beforeAccessKey;
         private string shortcutCharacter;
 
         public string ImageUrl {
@@ -26,6 +26,26 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override HtmlTextWriterTag TagKey {
             get { return HtmlTextWriterTag.Button; }
+        }
+
+        protected virtual void ConfigureImage(Image image) {
+            image.ImageAlign = ImageAlign.AbsMiddle;
+            image.Style[HtmlTextWriterStyle.MarginRight] = "5px";
+        }
+
+        protected override void OnPreRender(EventArgs e) {
+            Match match = Regex.Match(Text, @"(.*?)&(\w)(.*)");
+            shortcutCharacter = match.Groups[2].Value;
+            if (StringUtilities.AreNotEmpty(shortcutCharacter)) {
+                AccessKey = shortcutCharacter.ToLower();
+                beforeAccessKey = match.Groups[1].Value;
+                afterAccessKey = match.Groups[3].Value;
+            } else {
+                AccessKey = string.Empty;
+                beforeAccessKey = Text;
+                afterAccessKey = string.Empty;
+            }
+            base.OnPreRender(e);
         }
 
         protected override void RenderContents(HtmlTextWriter writer) {
@@ -43,27 +63,6 @@ namespace Ruhe.Web.UI.Controls {
                 writer.RenderEndTag();
             }
             writer.WriteEncodedText(afterAccessKey);
-        }
-
-        protected virtual void ConfigureImage(Image image) {
-            image.ImageAlign = ImageAlign.AbsMiddle;
-            image.Style[HtmlTextWriterStyle.MarginRight] = "5px";
-        }
-
-        protected override void OnPreRender(EventArgs e) {
-            Match match = Regex.Match(Text, @"(.*?)&(\w)(.*)");
-            shortcutCharacter = match.Groups[2].Value;
-            if (StringUtilities.AreNotEmpty(shortcutCharacter)) {
-                AccessKey = shortcutCharacter.ToLower();
-                beforeAccessKey = match.Groups[1].Value;
-                afterAccessKey = match.Groups[3].Value;
-            }
-            else {
-                AccessKey = string.Empty;
-                beforeAccessKey = Text;
-                afterAccessKey = string.Empty;
-            }
-            base.OnPreRender(e);
         }
     }
 }

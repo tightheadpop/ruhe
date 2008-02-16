@@ -5,15 +5,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class AbstractValueTypeInputTests {
         [Test]
-        public void ValueIsNullWhenNotSet() {
-            Assert.IsNull(new InputNumber().Value);
+        public void DefaultMaximumValueIsNull() {
+            Assert.IsNull(new InputNumber().MaximumValue);
         }
 
         [Test]
-        public void SettingValueToNullYieldsNullValue() {
-            InputNumber input = new InputNumber();
-            input.Value = null;
-            Assert.IsNull(input.Value);
+        public void DefaultMinimumValueIsNull() {
+            Assert.IsNull(new InputNumber().MinimumValue);
         }
 
         [Test]
@@ -24,13 +22,15 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void DefaultMinimumValueIsNull() {
-            Assert.IsNull(new InputNumber().MinimumValue);
+        public void SettingValueToNullYieldsNullValue() {
+            InputNumber input = new InputNumber();
+            input.Value = null;
+            Assert.IsNull(input.Value);
         }
 
         [Test]
-        public void DefaultMaximumValueIsNull() {
-            Assert.IsNull(new InputNumber().MaximumValue);
+        public void ValueIsNullWhenNotSet() {
+            Assert.IsNull(new InputNumber().Value);
         }
     }
 }

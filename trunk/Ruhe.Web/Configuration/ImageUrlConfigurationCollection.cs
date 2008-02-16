@@ -2,20 +2,20 @@ using System.Configuration;
 
 namespace Ruhe.Web.Configuration {
     public class ImageUrlConfigurationCollection : ConfigurationElementCollection {
-        protected override ConfigurationElement CreateNewElement() {
-            return new ImageUrlElement();
-        }
-
-        protected override object GetElementKey(ConfigurationElement element) {
-            return ((ImageUrlElement) element).Control;
+        public override ConfigurationElementCollectionType CollectionType {
+            get { return ConfigurationElementCollectionType.AddRemoveClearMap; }
         }
 
         public new ImageUrlElement this[string controlTypeName] {
             get { return (ImageUrlElement) BaseGet(controlTypeName); }
         }
 
-        public override ConfigurationElementCollectionType CollectionType {
-            get { return ConfigurationElementCollectionType.AddRemoveClearMap; }
+        protected override ConfigurationElement CreateNewElement() {
+            return new ImageUrlElement();
+        }
+
+        protected override object GetElementKey(ConfigurationElement element) {
+            return ((ImageUrlElement) element).Control;
         }
 
         public class ImageUrlElement : ConfigurationElement {

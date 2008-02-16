@@ -7,17 +7,20 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class LinkButtonTests : RuheWebTest<LinkButton> {
-        private LabelTester target;
         private ButtonTester button;
         private LinkButtonTester link;
+        private LabelTester target;
 
-        protected override void SetUp() {
-            base.SetUp();
-            target = new LabelTester(IdFor("target"));
-            button = new ButtonTester(IdFor("linkButton_button"));
-            link = new LinkButtonTester(IdFor("linkButton"));
+        [Test]
+        public void ClickButton() {
+            button.Click();
+            AssertEquals("clicked", target.Text);
+        }
 
-            LoadPage();
+        [Test]
+        public void ClickLink() {
+            link.Click();
+            AssertEquals("clicked", target.Text);
         }
 
         [Test]
@@ -28,16 +31,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
             AssertEquals(String.Empty, target.Text);
         }
 
-        [Test]
-        public void ClickLink() {
-            link.Click();
-            AssertEquals("clicked", target.Text);
-        }
+        protected override void SetUp() {
+            base.SetUp();
+            target = new LabelTester(IdFor("target"));
+            button = new ButtonTester(IdFor("linkButton_button"));
+            link = new LinkButtonTester(IdFor("linkButton"));
 
-        [Test]
-        public void ClickButton() {
-            button.Click();
-            AssertEquals("clicked", target.Text);
+            LoadPage();
         }
     }
 }

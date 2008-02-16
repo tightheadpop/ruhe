@@ -7,6 +7,28 @@ namespace Ruhe.Tests.Web.UI.Controls {
     public class InputDateRangeValidatorTests {
         private TestableValidator validator;
 
+        [SetUp]
+        public void SetUp() {
+            validator = new TestableValidator();
+        }
+
+        [Test]
+        public void BothBlankIsOkay() {
+            Assert.IsTrue(validator.Evaluate());
+        }
+
+        [Test]
+        public void OnlyEndIsOkay() {
+            validator.To.Value = DateTime.Today;
+            Assert.IsTrue(validator.Evaluate());
+        }
+
+        [Test]
+        public void OnlyStartIsOkay() {
+            validator.From.Value = DateTime.Today;
+            Assert.IsTrue(validator.Evaluate());
+        }
+
         [Test]
         public void ValidatesStartIsOnOrBeforeEnd() {
             validator.To.Value = new DateTime(2000, 1, 1);
@@ -22,42 +44,20 @@ namespace Ruhe.Tests.Web.UI.Controls {
             Assert.IsTrue(validator.Evaluate());
         }
 
-        [Test]
-        public void OnlyStartIsOkay() {
-            validator.From.Value = DateTime.Today;
-            Assert.IsTrue(validator.Evaluate());
-        }
-
-        [Test]
-        public void OnlyEndIsOkay() {
-            validator.To.Value = DateTime.Today;
-            Assert.IsTrue(validator.Evaluate());
-        }
-
-        [Test]
-        public void BothBlankIsOkay() {
-            Assert.IsTrue(validator.Evaluate());
-        }
-
-        [SetUp]
-        public void SetUp() {
-            validator = new TestableValidator();
-        }
-
         private class TestableValidator : InputDateRangeValidator {
-            public readonly InputDate To = new InputDate();
             public readonly InputDate From = new InputDate();
+            public readonly InputDate To = new InputDate();
 
-            protected override InputDate FindToDate() {
-                return To;
+            public bool Evaluate() {
+                return EvaluateIsValid();
             }
 
             protected override InputDate FindFromDate() {
                 return From;
             }
 
-            public bool Evaluate() {
-                return EvaluateIsValid();
+            protected override InputDate FindToDate() {
+                return To;
             }
         }
     }

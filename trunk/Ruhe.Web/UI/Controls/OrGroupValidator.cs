@@ -12,7 +12,7 @@ namespace Ruhe.Web.UI.Controls {
         public string[] GroupToValidate {
             get {
                 EnsureChildControls();
-                return (string[])ViewState["GroupToValidate"];
+                return (string[]) ViewState["GroupToValidate"];
             }
             set {
                 EnsureChildControls();
@@ -30,15 +30,6 @@ namespace Ruhe.Web.UI.Controls {
             return result;
         }
 
-        protected override void OnPreRender(EventArgs args) {
-            base.OnPreRender(args);
-            Page.ClientScript.RegisterClientScriptResource(typeof(RuheScriptReference), "Ruhe.Web.Resources.ruhe.js");
-            Page.ClientScript.RegisterExpandoAttribute(ClientID, "evaluationfunction", "Ruhe_OrGroupValidatorEvaluateIsValid");
-            if (GroupToValidate.Length > 0) {
-                Page.ClientScript.RegisterExpandoAttribute(ClientID, "grouptovalidate", GetControlGroupRenderID(GroupToValidate));
-            }
-        }
-
         protected string GetControlGroupRenderID(string[] names) {
             DelimitedStringBuilder clientIdList = new DelimitedStringBuilder(",");
             foreach (string controlName in names) {
@@ -48,6 +39,15 @@ namespace Ruhe.Web.UI.Controls {
                 }
             }
             return clientIdList.ToString();
+        }
+
+        protected override void OnPreRender(EventArgs args) {
+            base.OnPreRender(args);
+            Page.ClientScript.RegisterClientScriptResource(typeof(RuheScriptReference), "Ruhe.Web.Resources.ruhe.js");
+            Page.ClientScript.RegisterExpandoAttribute(ClientID, "evaluationfunction", "Ruhe_OrGroupValidatorEvaluateIsValid");
+            if (GroupToValidate.Length > 0) {
+                Page.ClientScript.RegisterExpandoAttribute(ClientID, "grouptovalidate", GetControlGroupRenderID(GroupToValidate));
+            }
         }
     }
 }
