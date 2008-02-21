@@ -17,4 +17,5 @@
 			<ruhe:CancelButton runat="server" OnClick="Cancel" />
 		</ruhe:ControlGroup>
 	</ruhe:LabeledControlPanel>
+	<ruhe:Legend runat="server" GroupingText="Legend" />
 </asp:Content>

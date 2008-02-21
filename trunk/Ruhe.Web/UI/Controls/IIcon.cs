@@ -5,6 +5,6 @@ namespace Ruhe.Web.UI.Controls {
     public interface IIcon {
         string Description { get; }
         string Name { get; }
-        string ToolTip { get; set; }
+        string ToolTip { get; }
     }
 }
