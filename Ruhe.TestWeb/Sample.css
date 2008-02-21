@@ -40,6 +40,23 @@ body
 {
 	padding: 0.5em;
 }
+DIV.legend {
+	-moz-border-radius: 15px;
+    width: auto;
+    float:left;
+    clear: both;
+    margin-top: 10px;
+}
+DIV.legend TD {
+    white-space: nowrap;
+}
+DIV.legend FIELDSET {
+    background-color: #DDD;
+    padding: 10px;
+}
+DIV.legend LEGEND {
+    background-color: White;
+}
 fieldset
 {
 	position: relative;

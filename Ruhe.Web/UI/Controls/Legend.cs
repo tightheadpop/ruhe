@@ -1,18 +1,25 @@
 using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
     /// Auto-discovers all IIcons in a <see cref="Page"/> and renders a
     /// table of descriptions for each type found.
     /// </summary>
-    public class Legend : Control {
+    public class Legend : Panel {
         private readonly SortedList controlList;
 
         public Legend() {
             controlList = new SortedList();
+        }
+
+        public string Overview {
+            get { return (string) ViewState["Overview"]; }
+            set { ViewState["Overview"] = value; }
         }
 
         private void Add(IIcon item) {
@@ -22,23 +29,26 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+            CssClass = StringUtilities.ForceSuffix(Regex.Replace(CssClass, @"\blegend\b", string.Empty), " legend").Trim();
+            base.AddAttributesToRender(writer);
+        }
+
         protected override void OnPreRender(EventArgs e) {
             base.OnPreRender(e);
             RegisterIcons();
         }
 
         private void RegisterIcons() {
-            foreach (IIcon icon in ControlUtilities.FindRecursive<IIcon>(Page)) {
-                if (((Control) icon).Visible) {
-                    Add(icon);
-                }
-            }
+            ControlUtilities.FindRecursive<IIcon>(Page).ForEach(Add);
         }
 
         protected override void Render(HtmlTextWriter writer) {
-            Panel overview = new Panel();
-            Controls.Add(overview);
-            overview.Controls.Add(new EncodedLabel("Below are explanations of the symbols that you may encounter on this page."));
+            if (!string.IsNullOrEmpty(Overview)) {
+                Panel overview = new Panel();
+                Controls.Add(overview);
+                overview.Controls.Add(new EncodedLabel(Overview));
+            }
 
             Table table = new Table();
 
@@ -64,16 +74,7 @@ namespace Ruhe.Web.UI.Controls {
             }
 
             if (table.HasControls()) {
-                writer.AddAttribute(HtmlTextWriterAttribute.Class, "legend");
-                writer.RenderBeginTag(HtmlTextWriterTag.Fieldset);
-
-                writer.RenderBeginTag(HtmlTextWriterTag.Legend);
-                writer.Write("Legend");
-                writer.RenderEndTag();
-
                 base.Render(writer);
-
-                writer.RenderEndTag();
             }
         }
     }
