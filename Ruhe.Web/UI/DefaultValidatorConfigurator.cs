@@ -35,7 +35,6 @@ namespace Ruhe.Web.UI {
             validator.Display = ValidatorDisplay.Dynamic;
             validator.ForeColor = Color.Empty;
             validator.CssClass = "validation";
-            validator.EnableViewState = false;
             validator.SetFocusOnError = true;
         }
     }
