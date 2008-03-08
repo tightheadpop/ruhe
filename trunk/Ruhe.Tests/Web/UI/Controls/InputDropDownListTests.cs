@@ -3,6 +3,7 @@ using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Extensions.Asp.HtmlTester;
 using NUnit.Framework;
+using Ruhe.Common;
 using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
 
@@ -65,6 +66,15 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void CanHaveChildControls() {
             InputDropDownList list = new InputDropDownList();
             Assert.IsNotNull(list.Controls[0]);
+        }
+
+        [Test]
+        public void InitialBlankIsSelectedAfterDataBind() {
+            InputDropDownList list = new InputDropDownList();
+            list.InitialBlank = true;
+            list.BindList(Quick.List(1, 2, 3));
+            Assert.AreEqual(4, list.Items.Count);
+            Assert.IsTrue(list.Items[0].Selected);
         }
 
         [Test]
