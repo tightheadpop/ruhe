@@ -185,10 +185,10 @@ namespace Ruhe.Web.UI.Controls {
         /// <summary>
         /// Adds another <see cref="ListItem"/> to the dropdown as the first item.
         /// </summary>
-        /// <param name="initialValue">the <see cref="ListItem.Text"/> and <see cref="ListItem.Value"/> of the <see cref="ListItem"/></param>
+        /// <param name="initialText">the <see cref="ListItem.Text"/> and <see cref="ListItem.Value"/> of the <see cref="ListItem"/></param>
         /// <param name="selected">whether the item is selected initially</param>
-        public void AddInitialValueToList(string initialValue, bool selected) {
-            AddInitialValueToList(initialValue, initialValue, selected);
+        public void AddInitialValueToList(string initialText, bool selected) {
+            AddInitialValueToList(initialText, initialText, selected);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public virtual void Clear() {
-            SelectByValue(String.Empty);
+            SelectByValue(string.Empty);
         }
 
         protected override void CreateChildControls() {
@@ -267,6 +267,18 @@ namespace Ruhe.Web.UI.Controls {
             Controls.Add(requiredValidator);
         }
 
+        public override void DataBind() {
+            base.DataBind();
+            EnsureInitialBlank();
+        }
+
+        private void EnsureInitialBlank() {
+            bool doesNotHaveInitialBlank = Items.Count > 0 && Items[0].Value.Length > 0;
+            if (InitialBlank && doesNotHaveInitialBlank) {
+                AddInitialValueToList(string.Empty, true);
+            }
+        }
+
         protected override void OnInit(EventArgs e) {
             base.OnInit(e);
             EnsureChildControls();
@@ -274,16 +286,10 @@ namespace Ruhe.Web.UI.Controls {
             RuheConfiguration.ValidatorConfigurator.ConfigureControl(this);
         }
 
-        protected override void OnPreRender(EventArgs e) {
-            base.OnPreRender(e);
-            if (InitialBlank && (Items.Count > 0 && Items[0].Value.Length > 0)) {
-                AddInitialValueToList(String.Empty, false);
-            }
-            SynchronizeLabels();
-        }
-
         protected override void Render(HtmlTextWriter writer) {
             EnsureChildControls();
+            EnsureInitialBlank();
+            SynchronizeLabels();
 
             writer.RenderBeginTag(HtmlTextWriterTag.Nobr);
             if (!ReadOnly) {
