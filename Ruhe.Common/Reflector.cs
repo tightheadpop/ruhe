@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Web.UI;
 
 namespace Ruhe.Common {
     /// <summary>
@@ -113,11 +114,11 @@ namespace Ruhe.Common {
         /// Gets the value of a property from a given object
         /// </summary>
         /// <param name="obj">the object to examine</param>
-        /// <param name="propertyName">the property to query</param>
+        /// <param name="propertyName">the property to query (handles OGNL-ish syntax using
+        /// public properties)</param>
         /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
         public static object GetPropertyValue(object obj, string propertyName) {
-            PropertyInfo property = GetProperty(obj, propertyName);
-            return property.GetValue(obj, null);
+            return DataBinder.Eval(obj, propertyName);
         }
 
         /// <summary>
