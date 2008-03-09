@@ -35,7 +35,7 @@ namespace Ruhe.Tests.Common {
         [Test]
         public void GetPropertyValue() {
             TestObject testObject = new TestObject();
-            Assert.AreEqual(false, Reflector.GetPropertyValue(testObject, "VerifySet"));
+            Assert.AreEqual("first".Length, Reflector.GetPropertyValue(testObject, "StringArrayProperty[0].Length"));
         }
 
         [Test]
@@ -117,6 +117,10 @@ namespace Ruhe.Tests.Common {
             public IList List {
                 get { return _list; }
                 set { _list = value; }
+            }
+
+            public string[] StringArrayProperty {
+                get { return new string[] {"first", "second"}; }
             }
 
             public TestEnum TestEnum {
