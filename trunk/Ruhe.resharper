@@ -292,12 +292,17 @@ II.2.12 <HandlesEvent />
       </And>
     </Match>
 
-    <!--fields-->
+    <!--fields and constants-->
     <Entry>
       <Match>
+        <Or>
+          <Kind Is="constant"/>
           <Kind Is="field"/>
+        </Or>
       </Match>
       <Sort>
+        <Kind Order="constant field"/>
+        <Static/>
         <Readonly/>
         <Name/>
       </Sort>
