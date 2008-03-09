@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using NUnit.Framework;
+using Ruhe.Common;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Tests.Common {
@@ -44,6 +45,16 @@ namespace Ruhe.Tests.Common {
         public void FirstForStringArray() {
             Assert.AreEqual("foo", Collections.First(new object[] {"foo", "bar", "baz"}));
             Assert.AreEqual(null, Collections.First(new string[] {}));
+        }
+
+        [Test]
+        public void Last() {
+            Assert.AreEqual("last", Collections.Last(Quick.List("first", "middle", "last")));
+        }
+
+        [Test]
+        public void LastReturnsNullForEmptyList() {
+            Assert.IsNull(Collections.Last(new object[]{}));
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Ruhe.Common.Utilities {
     public class Collections {
@@ -26,6 +27,14 @@ namespace Ruhe.Common.Utilities {
                     return (T) item;
             }
             return default(T);
+        }
+
+        public static T Last<T>(IEnumerable<T> list) {
+            T result = default(T);
+            foreach (T t in list) {
+                result = t;
+            }
+            return result;
         }
     }
 }
