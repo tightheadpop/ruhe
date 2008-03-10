@@ -1,22 +1,21 @@
+using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputCheckBoxListTests {
+    public class InputCheckBoxListTests : RuheWebTest<InputCheckBoxList> {
         private Thing b;
         private Thing c;
         private InputCheckBoxList list;
 
-        [SetUp]
-        public void SetUp() {
-            list = new InputCheckBoxList();
-            list.DataTextField = "Name";
-            list.DataValueField = "Value";
-            b = new Thing("b", 2);
-            c = new Thing("c", 3);
-            Thing a = new Thing("a", 1);
-            list.DataSource = new Thing[] {a, b, c};
+        [Test]
+        public void EmitsDisableScript() {
+            LoadPage();
+            StringAssert.Contains("var ajax_content_checkboxlist_disabled =  new Array('1');", Browser.CurrentPageText, "this is the only way to tell that the second item has been disabled");
+            Assert.IsTrue(new CheckBoxTester(IdFor("checkboxlist_0")).Checked);
+            Assert.IsFalse(new CheckBoxTester(IdFor("checkboxlist_1")).Checked);
+            Assert.IsFalse(new CheckBoxTester(IdFor("checkboxlist_2")).Checked);
         }
 
         [Test]
@@ -64,6 +63,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
             list.DataBind();
 
             Assert.AreEqual(new string[] {"2", "3"}, list.SelectedValues);
+        }
+
+        protected override void SetUp() {
+            list = new InputCheckBoxList();
+            list.DataTextField = "Name";
+            list.DataValueField = "Value";
+            b = new Thing("b", 2);
+            c = new Thing("c", 3);
+            Thing a = new Thing("a", 1);
+            list.DataSource = new Thing[] {a, b, c};
         }
 
         private class Thing {
