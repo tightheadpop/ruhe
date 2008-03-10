@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Extensions.Asp.HtmlTester;
@@ -199,6 +200,34 @@ namespace Ruhe.Tests.Web.UI.Controls {
             list.SelectByValue(2);
             AssertTrue(list.Items[1].Selected);
             AssertTrue(!list.Items[0].Selected && !list.Items[2].Selected);
+        }
+
+        [Test]
+        public void ClearRevertsSelectionAndSelectsInitialBlank() {
+            InputDropDownList list = new InputDropDownList();
+            list.Items.Add(new ListItem());
+            list.Items.Add(new ListItem("a", "0"));
+            list.Items.Add(new ListItem("b", "1"));
+            list.Items.Add(new ListItem("c", "2"));
+            list.Items[2].Selected = true;
+
+            list.Clear();
+
+            Assert.AreEqual(string.Empty, list.SelectedText);
+            Assert.AreEqual(0, list.SelectedIndex);
+        }
+
+        [Test]
+        public void ClearRevertsSelection() {
+            InputDropDownList list = new InputDropDownList();
+            list.Items.Add(new ListItem("a", "0"));
+            list.Items.Add(new ListItem("b", "1"));
+            list.Items.Add(new ListItem("c", "2"));
+            list.Items[2].Selected = true;
+
+            list.Clear();
+
+            Assert.AreEqual(0, list.SelectedIndex);
         }
 
         private void LoadOtherPage(string pageName) {
