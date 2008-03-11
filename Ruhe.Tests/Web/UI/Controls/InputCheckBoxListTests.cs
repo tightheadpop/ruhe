@@ -12,10 +12,11 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void EmitsDisableScript() {
             LoadPage();
-            StringAssert.Contains("var ajax_content_checkboxlist_disabled =  new Array('1');", Browser.CurrentPageText, "this is the only way to tell that the second item has been disabled");
+            StringAssert.Contains("var ajax_content_checkboxlist_disabled =  new Array('1','2');", Browser.CurrentPageText, "this is the only way to tell that the second item has been disabled");
             Assert.IsTrue(new CheckBoxTester(IdFor("checkboxlist_0")).Checked);
             Assert.IsFalse(new CheckBoxTester(IdFor("checkboxlist_1")).Checked);
             Assert.IsFalse(new CheckBoxTester(IdFor("checkboxlist_2")).Checked);
+            Assert.IsFalse(new CheckBoxTester(IdFor("checkboxlist_3")).Checked);
         }
 
         [Test]

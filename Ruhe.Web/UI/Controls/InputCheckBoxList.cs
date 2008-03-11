@@ -139,12 +139,14 @@ namespace Ruhe.Web.UI.Controls {
             }
             if (indexes.Count == 0) return;
             string clientArrayName = ClientID + "_disabled";
-            Page.ClientScript.RegisterArrayDeclaration(clientArrayName, "'" + string.Join(",", indexes.ToArray()) + "'");
+            Page.ClientScript.RegisterArrayDeclaration(clientArrayName, "'" + string.Join("','", indexes.ToArray()) + "'");
             Page.ClientScript.RegisterStartupScript(GetType(), ClientID + "disabled script", string.Format(@"
 for(var i = 0; i < {0}.length; i++) {{
-    $get('{1}_' + {0}[i]).disabled = true;
-}}
-", clientArrayName, ClientID), true);
+    var box = $get('{1}_' + {0}[i]);
+    box.disabled = true;
+    box.name = null;
+    box.parentElement.disabled = true;
+}}", clientArrayName, ClientID), true);
         }
 
         private string GetDataValue(object dataElement) {

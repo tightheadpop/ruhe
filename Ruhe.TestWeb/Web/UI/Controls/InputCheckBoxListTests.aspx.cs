@@ -8,10 +8,11 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
             Whatever a = new Whatever(0, "a");
             Whatever b = new Whatever(1, "b");
             Whatever c = new Whatever(2, "c");
+            Whatever d = new Whatever(3, "d");
 
-            checkboxlist.DataSource = Quick.List(a, b, c);
+            checkboxlist.DataSource = Quick.List(a, b, c, d);
             checkboxlist.SelectedDataSource = Quick.List(a);
-            checkboxlist.DisabledDataSource = Quick.List(b);
+            checkboxlist.DisabledDataSource = Quick.List(b, c);
             checkboxlist.DataBind();
         }
 
