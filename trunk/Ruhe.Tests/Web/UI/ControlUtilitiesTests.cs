@@ -53,6 +53,14 @@ namespace Ruhe.Tests.Web.UI {
             Assert.IsTrue(result.Contains(secondChild), "result set does not contain second child panel");
         }
 
+        [Test]
+        public void FindByTypeStopsRecursing() {
+            List<Panel> result = ControlUtilities.FindRecursive<Panel>(parentControl, delegate(Control c) { return !(c is INamingContainer); });
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains(parentControl), "result set should contain parent panel");
+            Assert.IsTrue(result.Contains(firstChild), "result set should contain first child panel");
+        }
+
         private class GenericNamingContainer : Panel, INamingContainer {}
     }
 }

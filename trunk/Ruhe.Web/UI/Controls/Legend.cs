@@ -40,7 +40,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void RegisterIcons() {
-            ControlUtilities.FindRecursive<IIcon>(Page).ForEach(Add);
+            ControlUtilities.FindRecursive<IIcon>(Page, delegate(Control c) { return c.Visible; }).ForEach(Add);
         }
 
         protected override void Render(HtmlTextWriter writer) {
