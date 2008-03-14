@@ -145,7 +145,7 @@ for(var i = 0; i < {0}.length; i++) {{
     var box = $get('{1}_' + {0}[i]);
     box.disabled = true;
     box.name = null;
-    box.parentElement.disabled = true;
+    box.parentNode.disabled = true;
 }}", clientArrayName, ClientID), true);
         }
 

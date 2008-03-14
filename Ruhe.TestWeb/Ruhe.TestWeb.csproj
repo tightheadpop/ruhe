@@ -71,6 +71,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DisabledElementTest.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>DisabledElementTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DisabledElementTest.aspx.designer.cs">
+      <DependentUpon>DisabledElementTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sample.aspx.cs">
       <DependentUpon>Sample.aspx</DependentUpon>
@@ -269,6 +276,7 @@
   <ItemGroup>
     <Content Include="Ajax.Master" />
     <Content Include="AnotherLayoutContainer.ascx" />
+    <Content Include="DisabledElementTest.aspx" />
     <Content Include="images\INFO.ICO" />
     <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\BoundFieldTests.aspx" />
