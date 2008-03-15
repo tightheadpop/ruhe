@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Ruhe.Common.Utilities;
 
@@ -44,6 +45,22 @@ namespace Ruhe.Common {
 
         public static List<T> List<T>(params T[] items) {
             return new List<T>(items);
+        }
+
+        public static string[] StringArray(params object[] items) {
+            return List(items).ConvertAll<string>(delegate(object o) { return Convert.ToString(o); }).ToArray();
+        }
+
+        public static T[] Array<T>(params T[] items) {
+            return items;
+        }
+
+        public static string Join(string delimiter, params object[] items) {
+            return string.Join(delimiter, StringArray(items));
+        }
+
+        public static string Join(params object[] items) {
+            return Join(", ", items);
         }
     }
 }
