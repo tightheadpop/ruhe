@@ -7,6 +7,11 @@ namespace Ruhe.Tests.Common {
     [TestFixture]
     public class QuickTests {
         [Test]
+        public void Array() {
+            Assert.AreEqual(new int[] {4, 3, 2, 1}, Quick.Array(4, 3, 2, 1));
+        }
+
+        [Test]
         public void Dictionary() {
             Dictionary<string, int> dictionary = Quick.Dictionary<string, int>("a", 19, "b", 42);
             Assert.AreEqual(2, dictionary.Count);
@@ -32,8 +37,8 @@ namespace Ruhe.Tests.Common {
             Bar bar2 = new Bar(new Foo("q"));
             Dictionary<string, Bar> dictionary = Quick.Dictionary<string, Bar>("Foo.ID", Quick.List(bar1, bar2));
             Assert.AreEqual(2, dictionary.Count);
-            Assert.AreEqual(bar1, dictionary["p"]);
-            Assert.AreEqual(bar2, dictionary["q"]);
+            Assert.AreSame(bar1, dictionary["p"]);
+            Assert.AreSame(bar2, dictionary["q"]);
         }
 
         [Test]
@@ -56,6 +61,12 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
+        public void Join() {
+            Assert.AreEqual("4-5--2", Quick.Join("-", 4, 5, null, 2));
+            Assert.AreEqual("4, 5, , 2", Quick.Join(4, 5, null, 2));
+        }
+
+        [Test]
         public void ListFromEnumerable() {
             Assert.AreEqual(new string[] {"a", "b", "c"}, Quick.List(new string[] {"a", "b", "c"}));
         }
@@ -63,6 +74,11 @@ namespace Ruhe.Tests.Common {
         [Test]
         public void ListFromIndividualItems() {
             Assert.AreEqual(new string[] {"a", "b", "c"}, Quick.List("a", "b", "c"));
+        }
+
+        [Test]
+        public void StringArray() {
+            Assert.AreEqual(new string[] {"1", "2", "3"}, Quick.StringArray(1, 2, 3));
         }
 
         private class Bar {
