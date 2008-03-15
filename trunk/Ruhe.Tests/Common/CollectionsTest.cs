@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -54,7 +55,14 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void LastReturnsNullForEmptyList() {
-            Assert.IsNull(Collections.Last(new object[]{}));
+            Assert.IsNull(Collections.Last(new object[] {}));
+        }
+
+        [Test]
+        public void Shift() {
+            List<int> list = Quick.List(1, 2, 3);
+            Assert.AreEqual(1, Collections.Shift(list));
+            Assert.AreEqual(2, list.Count);
         }
     }
 }
