@@ -2,7 +2,7 @@ using System;
 
 namespace Ruhe.Common {
     public abstract class StringValueType : IEquatable<StringValueType> {
-        private readonly string value;
+        private string value;
 
         public StringValueType(string value) {
             Validate.IsNotNull(value, GetType().Name + " must have non-null underlying value");
