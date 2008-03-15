@@ -98,6 +98,7 @@
     <Compile Include="Reflector.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StringValueType.cs" />
     <Compile Include="Utilities\Collections.cs">
       <SubType>Code</SubType>
     </Compile>
