@@ -21,10 +21,9 @@ namespace Ruhe.Common {
 
         public int Length {
             get { return builder.Length; }
-            set { builder.Length = value; }
         }
 
-        public void Append(string value) {
+        public void Append(object value) {
             if (builder.Length > 0) {
                 builder.Append(delimiter);
             }
@@ -36,6 +35,10 @@ namespace Ruhe.Common {
                 builder.Append(delimiter);
             }
             builder.AppendFormat(value, args);
+        }
+
+        public void Clear() {
+            builder.Length = 0;
         }
 
         public override string ToString() {

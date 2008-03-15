@@ -15,5 +15,13 @@ namespace Ruhe.Tests.Common {
             string actual = builder.ToString();
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Clear() {
+            DelimitedStringBuilder builder = new DelimitedStringBuilder(", ");
+            builder.Append("foo");
+            builder.Clear();
+            Assert.AreEqual(string.Empty, builder.ToString());
+        }
     }
 }
