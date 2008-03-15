@@ -139,6 +139,7 @@
     <Compile Include="Common\ReflectorTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\SingleValueTypeTest.cs" />
     <Compile Include="Common\StringValueTypeTest.cs" />
     <Compile Include="Common\ValidateTests.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />

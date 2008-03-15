@@ -2,7 +2,7 @@ using System;
 
 namespace Ruhe.Common {
     public class Int32ValueType : IEquatable<Int32ValueType> {
-        private readonly int value;
+        private int value;
 
         public Int32ValueType(int value) {
             this.value = value;
