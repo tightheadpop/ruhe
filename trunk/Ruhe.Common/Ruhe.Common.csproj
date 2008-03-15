@@ -91,6 +91,7 @@
     <Compile Include="DisposeOf.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Int32ValueType.cs" />
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
     </Compile>

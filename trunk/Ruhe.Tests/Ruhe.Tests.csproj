@@ -134,6 +134,7 @@
     <Compile Include="Common\DisposeOfTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\Int32ValueTypeTest.cs" />
     <Compile Include="Common\QuickTests.cs" />
     <Compile Include="Common\ReflectorTests.cs">
       <SubType>Code</SubType>

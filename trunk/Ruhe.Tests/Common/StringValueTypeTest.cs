@@ -40,8 +40,7 @@ namespace Ruhe.Tests.Common {
         }
 
         private class OtherCustomType : StringValueType {
-            public OtherCustomType(string s)
-                : base(s) {}
+            public OtherCustomType(string s) : base(s) {}
         }
     }
 }
