@@ -6,19 +6,15 @@ namespace Ruhe.Common.Utilities {
     public class Collections {
         private Collections() {}
 
-        public static object First(object[] collection) {
-            if (collection.Length > 0) {
-                return collection[0];
+        public static T First<T>(IEnumerable<T> collection) {
+            return First<T>(collection, delegate { return true; });
+        }
+
+        public static object First(IEnumerable collection) {
+            foreach (object o in collection) {
+                return o;
             }
             return null;
-        }
-
-        public static string First(string[] collection) {
-            return (string) First((object[]) collection);
-        }
-
-        public static object First(ICollection collection) {
-            return First(new ArrayList(collection).ToArray());
         }
 
         public static T First<T>(IEnumerable collection, Predicate<T> predicate) {
@@ -34,6 +30,12 @@ namespace Ruhe.Common.Utilities {
             foreach (T t in list) {
                 result = t;
             }
+            return result;
+        }
+
+        public static T Shift<T>(ICollection<T> items) {
+            T result = First(items);
+            items.Remove(result);
             return result;
         }
     }
