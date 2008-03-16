@@ -5,24 +5,6 @@ using Ruhe.Common;
 namespace Ruhe.Tests.Common {
     [TestFixture]
     public class ValueTypesTest {
-//        [Test]
-//        public void CreateInt32ValueType() {
-//            Assert.AreEqual(5, ValueTypes.Create<CustomInt32>(5).Value);
-//            Assert.IsNull(ValueTypes.Create<CustomInt32>((int?) null));
-//        }
-//
-//        [Test]
-//        public void CreateSingleValueType() {
-//            Assert.AreEqual(5.6f, ValueTypes.Create<CustomFloat>(5.6f).Value);
-//            Assert.IsNull(ValueTypes.Create<CustomFloat>((float?)null));
-//        }
-//
-//        [Test]
-//        public void CreateStringValueType() {
-//            Assert.AreEqual("moo", ValueTypes.Create<CustomString>("moo").ToString());
-//            Assert.IsNull(ValueTypes.Create<CustomString>((string) null));
-//        }
-
         [Test]
         public void EqualityOperators() {
             Assert.IsTrue(new CustomFloat(1) == new CustomFloat(1));
@@ -62,10 +44,6 @@ namespace Ruhe.Tests.Common {
             public CustomFloat(float i) : base(i) {}
         }
 
-//        private class CustomInt32 : ValueType<int> {
-//            public CustomInt32(int value) : base(value) {}
-//        }
-//
         private class CustomString : ValueType<string> {
             public CustomString(string value) : base(value) {}
         }
