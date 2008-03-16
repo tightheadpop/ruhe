@@ -91,7 +91,6 @@
     <Compile Include="DisposeOf.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Int32ValueType.cs" />
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -99,8 +98,6 @@
     <Compile Include="Reflector.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SingleValueType.cs" />
-    <Compile Include="StringValueType.cs" />
     <Compile Include="Utilities\Collections.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -114,6 +111,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Validate.cs" />
+    <Compile Include="ValueType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

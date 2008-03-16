@@ -134,14 +134,12 @@
     <Compile Include="Common\DisposeOfTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\Int32ValueTypeTest.cs" />
     <Compile Include="Common\QuickTests.cs" />
     <Compile Include="Common\ReflectorTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\SingleValueTypeTest.cs" />
-    <Compile Include="Common\StringValueTypeTest.cs" />
     <Compile Include="Common\ValidateTests.cs" />
+    <Compile Include="Common\ValueTypesTest.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />
     <Compile Include="Web\UI\Controls\InputCheckBoxListTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeTests.cs" />
