@@ -19,21 +19,22 @@ namespace Ruhe.Common {
             return methods;
         }
 
-        private static void Invoke(object obj, IEnumerable<MethodInfo> methods) {
+        private static void Invoke(object obj, IEnumerable<MethodInfo> methods, bool rethrowExceptions) {
             foreach (MethodInfo method in methods) {
                 if (method != null) {
                     try {
                         method.Invoke(obj, null);
                     }
                     catch (Exception e) {
-                        throw e.InnerException;
+                        if (rethrowExceptions)
+                            throw e.InnerException;
                     }
                 }
             }
         }
 
-        private static void InvokeDisposingMethods(object obj) {
-            Invoke(obj, GetDisposingMethods(obj));
+        private static void InvokeDisposingMethods(object obj, bool rethrowExceptions) {
+            Invoke(obj, GetDisposingMethods(obj), rethrowExceptions);
         }
 
         /// <summary>
@@ -42,8 +43,8 @@ namespace Ruhe.Common {
         /// <remarks>
         /// Flush, Close, Dispose, in that order.
         /// </remarks>
-        public static void These(params object[] stuff) {
-            These((IEnumerable) stuff);
+        public static void These(params object[] items) {
+            These((IEnumerable) items);
         }
 
         public static void These(IEnumerable items) {
@@ -51,7 +52,21 @@ namespace Ruhe.Common {
                 return;
             foreach (object item in items) {
                 if (item != null) {
-                    InvokeDisposingMethods(item);
+                    InvokeDisposingMethods(item, true);
+                }
+            }
+        }
+
+        public static void TheseQuietly(params object[] items) {
+            TheseQuietly((IEnumerable) items);
+        }
+
+        public static void TheseQuietly(IEnumerable items) {
+            if (items == null)
+                return;
+            foreach (object item in items) {
+                if (item != null) {
+                    InvokeDisposingMethods(item, false);
                 }
             }
         }

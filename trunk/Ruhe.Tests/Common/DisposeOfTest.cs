@@ -52,6 +52,33 @@ namespace Ruhe.Tests.Common {
             DisposeOf.These(new ExceptionThrowingDisposable());
         }
 
+        [Test]
+        public void QuietlyDisposes() {
+            Foo foo = new Foo();
+            FooWriter writer = new FooWriter();
+            FooConnection connection = new FooConnection();
+            DisposeOf.TheseQuietly(null, foo, writer, connection);
+            Assert.IsTrue(foo.Disposed);
+            Assert.IsTrue(writer.Disposed);
+            Assert.IsTrue(connection.Disposed);
+        }
+
+        [Test]
+        public void QuietlyDisposesList() {
+            Foo foo = new Foo();
+            FooWriter writer = new FooWriter();
+            FooConnection connection = new FooConnection();
+            DisposeOf.TheseQuietly(Quick.Array<object>(null, foo, writer, connection));
+            Assert.IsTrue(foo.Disposed);
+            Assert.IsTrue(writer.Disposed);
+            Assert.IsTrue(connection.Disposed);
+        }
+
+        [Test]
+        public void QuietlyDoesNotRethrowException() {
+            DisposeOf.TheseQuietly(new ExceptionThrowingDisposable());
+        }
+
         private class ExceptionThrowingDisposable : IDisposable {
             public void Dispose() {
                 throw new ApplicationException("Simulate a fatal disposal.");
