@@ -19,7 +19,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void UsesOgnlNavigationOnBoundItem() {
             LoadPage();
-            StringAssert.Contains("hi, mom!".Length.ToString(), Browser.CurrentPageText);
+            StringAssert.Contains("hi, mom! i've got a new job.".Length.ToString(), Browser.CurrentPageText);
         }
     }
 }
