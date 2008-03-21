@@ -14,9 +14,49 @@ namespace Ruhe.Web.UI.Controls {
             LabelPosition = LabelPosition.Left;
         }
 
+        public string FormatText {
+            get { return (string) ViewState["FormatText"]; }
+            set { ViewState["FormatText"] = value; }
+        }
+
+        public bool IsLayoutContainer {
+            get {
+                EnsureChildControls();
+                return Convert.ToBoolean(ViewState["IsLayoutPassthrough"]);
+            }
+            set {
+                EnsureChildControls();
+                ViewState["IsLayoutPassthrough"] = value;
+            }
+        }
+
         public LabelPosition LabelPosition {
             get { return Reflector.ConvertToEnum<LabelPosition>((string) ViewState["LabelPosition"]); }
             set { ViewState["LabelPosition"] = value.ToString(); }
+        }
+
+        public string LabelText {
+            get { return (string) ViewState["LabelText"]; }
+            set { ViewState["LabelText"] = value; }
+        }
+
+        public string ValidationGroup {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["ValidationGroup"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["ValidationGroup"] = value;
+
+                List<Control> controlsToUpdate = ControlUtilities.FindRecursive<Control>(this);
+                controlsToUpdate.Remove(this);
+                foreach (Control c in controlsToUpdate) {
+                    if (Reflector.HasProperty(c, "ValidationGroup")) {
+                        Reflector.SetPropertyValue(c, "ValidationGroup", value);
+                    }
+                }
+            }
         }
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
@@ -172,52 +212,5 @@ namespace Ruhe.Web.UI.Controls {
             cell.RenderEndTag(writer);
             row.RenderEndTag(writer);
         }
-
-        #region ILayoutContainer Members
-
-        public bool IsLayoutContainer {
-            get {
-                EnsureChildControls();
-                return Convert.ToBoolean(ViewState["IsLayoutPassthrough"]);
-            }
-            set {
-                EnsureChildControls();
-                ViewState["IsLayoutPassthrough"] = value;
-            }
-        }
-
-        #endregion
-
-        #region ILabeledControl Members
-
-        public string FormatText {
-            get { return (string) ViewState["FormatText"]; }
-            set { ViewState["FormatText"] = value; }
-        }
-
-        public string LabelText {
-            get { return (string) ViewState["LabelText"]; }
-            set { ViewState["LabelText"] = value; }
-        }
-
-        public string ValidationGroup {
-            get {
-                EnsureChildControls();
-                return (string) ViewState["ValidationGroup"];
-            }
-            set {
-                EnsureChildControls();
-                ViewState["ValidationGroup"] = value;
-                List<Control> controls = ControlUtilities.FindRecursive<Control>(this);
-                controls.Remove(this);
-                foreach (Control c in controls) {
-                    if (Reflector.HasProperty(c, "ValidationGroup")) {
-                        Reflector.SetPropertyValue(c, "ValidationGroup", value);
-                    }
-                }
-            }
-        }
-
-        #endregion
     }
 }
