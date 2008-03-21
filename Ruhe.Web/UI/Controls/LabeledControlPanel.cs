@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ruhe.Common;
@@ -197,6 +198,24 @@ namespace Ruhe.Web.UI.Controls {
         public string LabelText {
             get { return (string) ViewState["LabelText"]; }
             set { ViewState["LabelText"] = value; }
+        }
+
+        public string ValidationGroup {
+            get {
+                EnsureChildControls();
+                return (string) ViewState["ValidationGroup"];
+            }
+            set {
+                EnsureChildControls();
+                ViewState["ValidationGroup"] = value;
+                List<Control> controls = ControlUtilities.FindRecursive<Control>(this);
+                controls.Remove(this);
+                foreach (Control c in controls) {
+                    if (Reflector.HasProperty(c, "ValidationGroup")) {
+                        Reflector.SetPropertyValue(c, "ValidationGroup", value);
+                    }
+                }
+            }
         }
 
         #endregion

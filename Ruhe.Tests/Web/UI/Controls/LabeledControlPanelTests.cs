@@ -1,3 +1,4 @@
+using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
@@ -8,13 +9,14 @@ namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class LabeledControlPanelTests : RuheWebTest<LabeledControlPanel> {
         private LabelTester format;
+        private LabelTester myEncodedLabel;
         private HtmlTagTester table;
 
         [Test]
         public void LabelAboveLayoutAndCssClasses() {
             LoadPageWithOption("Above");
 
-            Assert.AreEqual(6, table.Children("tr").Length, "should have two rows of output for each control");
+            Assert.AreEqual(8, table.Children("tr").Length, "should have two rows of output for each control");
             Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_label", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "label should be in the first row");
             Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_format", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "format text should be in the first row");
             Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox", "tr[2]/td[1]//input[@id = \"{0}\"]")).Length, "control should be in the second row");
@@ -29,9 +31,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
             LoadPage();
 
             Assert.IsTrue(table.Visible);
-            Assert.AreEqual(3, table.Children("tr").Length, "should have one row of output");
+            Assert.AreEqual(4, table.Children("tr").Length, "should have one row of output per control");
             HtmlTagTester[] cells = table.ChildrenByXPath(".//td");
-            Assert.AreEqual(6, cells.Length, "should have 2 cells");
+            Assert.AreEqual(8, cells.Length, "should have 2 cells per control");
             Assert.AreEqual(1, cells[0].ChildrenByXPath(Tests.IdFor.Format("textbox_label", ".//span[@id='{0}']")).Length, "first cell should contain the label");
             Assert.AreEqual(1, cells[1].ChildrenByXPath(Tests.IdFor.Format("textbox_format", ".//span[@id='{0}']")).Length, "second cell should contain the format text");
             Assert.AreEqual(1, cells[1].ChildrenByXPath(Tests.IdFor.Format("textbox", ".//input[@id='{0}']")).Length, "second cell should contain the control");
@@ -49,6 +51,30 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
+        public void RendersEncodedLabelCorrectly() {
+            LoadPage();
+            WebAssert.Visible(myEncodedLabel);
+        }
+
+        [Test]
+        public void SettingValidationGroupSetsOnAllContainedControlsWithValidationGroupProperty() {
+            LabeledControlPanel panel = new LabeledControlPanel();
+            InputTextBox iinputControlChild = new InputTextBox();
+            Label childWithoutProperty = new Label();
+            TextBox nonIInputControlChild = new TextBox();
+            panel.Controls.Add(iinputControlChild);
+            panel.Controls.Add(childWithoutProperty);
+            panel.Controls.Add(nonIInputControlChild);
+
+            string groupName = "foo";
+            panel.ValidationGroup = groupName;
+
+            Assert.AreEqual(groupName, panel.ValidationGroup);
+            Assert.AreEqual(groupName, iinputControlChild.ValidationGroup);
+            Assert.AreEqual(groupName, nonIInputControlChild.ValidationGroup);
+        }
+
+        [Test]
         public void SupportsUserControlAsLayoutContainer() {
             LoadPage();
             WebAssert.Visible(new TextBoxTester(IdFor("userControl_anotherTextBox")));
@@ -59,6 +85,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             base.SetUp();
             table = new HtmlTagTester(IdFor("panel_layoutTable"));
             format = new LabelTester(IdFor("textbox_format"));
+            myEncodedLabel = new LabelTester(IdFor("myEncodedLabel"));
         }
     }
 }

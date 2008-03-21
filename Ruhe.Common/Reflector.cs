@@ -137,6 +137,16 @@ namespace Ruhe.Common {
             return property.GetCustomAttributes(attributeType, true).Length > 0;
         }
 
+        public static bool HasProperty(object obj, string propertyName) {
+            try {
+                GetPropertyValue(obj, propertyName);
+            }
+            catch {
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// Determines if a given Type implements a specified interface
         /// </summary>
