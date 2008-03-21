@@ -113,6 +113,7 @@
     <Compile Include="QueryStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Controls\BooleanBoundField.cs" />
     <Compile Include="UI\Controls\BoundField.cs" />
     <Compile Include="UI\Controls\DateBoundField.cs" />
     <Compile Include="UI\Controls\GrayButton.cs" />

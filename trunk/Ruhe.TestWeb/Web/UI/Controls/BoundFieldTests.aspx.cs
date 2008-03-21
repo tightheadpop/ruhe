@@ -10,7 +10,7 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
         }
 
         public class Foo {
-            private readonly string[] bar = new string[] { "hi, mom! i've got a new job." };
+            private readonly string[] bar = new string[] {"hi, mom! i've got a new job."};
 
             public string[] Bar {
                 get { return bar; }
@@ -22,6 +22,10 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
 
             public DateRange Boz {
                 get { return DateRange.StartingOn(new DateTime(1983, 9, 17)); }
+            }
+
+            public bool IsIt {
+                get { return false; }
             }
         }
     }

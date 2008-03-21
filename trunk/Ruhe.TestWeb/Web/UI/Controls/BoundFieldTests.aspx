@@ -14,6 +14,7 @@
                 <ruhe:BoundField HeaderText="Check this OGNL!" DataField="Bar[0].Length" />
                 <ruhe:DateBoundField HeaderText="Date with configured default" DataField="Baz" />
                 <ruhe:DateBoundField HeaderText="Date with user format" DataField="Boz" DataFormatString="{0:M/d/yyyy}" />
+                <ruhe:BooleanBoundField HeaderText="Bool as text" DataField="IsIt" TrueText="Yes" FalseText="No" />
             </Columns>
         </asp:GridView>
     </div>
