@@ -1,12 +1,15 @@
-using System;
 using System.Collections.Generic;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Common {
     /// <summary>
-    /// Function bucket for generating different enumerables quickly.
+    /// Function bucket for generating different enumerables.
     /// </summary>
     public class Quick {
+        public static T[] Array<T>(params T[] items) {
+            return items;
+        }
+
         public static Dictionary<K, V> Dictionary<K, V>(params object[] keyValuePairs) {
             Validate.That(keyValuePairs.Length % 2 == 0, "arguments must be in pairs");
             Dictionary<K, V> result = new Dictionary<K, V>();
@@ -39,6 +42,22 @@ namespace Ruhe.Common {
             return Dictionary(keys, myValues);
         }
 
+        public static string Join(string delimiter, params object[] items) {
+            return string.Join(delimiter, StringArray((IEnumerable<object>) items));
+        }
+
+        public static string Join<T>(string delimiter, IEnumerable<T> items) {
+            return string.Join(delimiter, StringArray(items));
+        }
+
+        public static string Join(params object[] items) {
+            return Join(", ", items);
+        }
+
+        public static string Join<T>(IEnumerable<T> items) {
+            return Join(", ", items);
+        }
+
         public static List<T> List<T>(IEnumerable<T> items) {
             return new List<T>(items);
         }
@@ -48,19 +67,12 @@ namespace Ruhe.Common {
         }
 
         public static string[] StringArray(params object[] items) {
-            return List(items).ConvertAll<string>(delegate(object o) { return Convert.ToString(o); }).ToArray();
+            return new List<object>(items).ConvertAll<string>(delegate(object o) { return o.ToString(); }).ToArray();
         }
 
-        public static T[] Array<T>(params T[] items) {
-            return items;
-        }
-
-        public static string Join(string delimiter, params object[] items) {
-            return string.Join(delimiter, StringArray(items));
-        }
-
-        public static string Join(params object[] items) {
-            return Join(", ", items);
+        public static string[] StringArray<T>(IEnumerable<T> items) {
+            return List(items).ConvertAll<string>(
+                delegate(T o) { return o == null ? string.Empty : o.ToString(); }).ToArray();
         }
     }
 }
