@@ -27,6 +27,10 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
             public bool IsIt {
                 get { return false; }
             }
+
+            public object Null {
+                get { return null; }
+            }
         }
     }
 }
