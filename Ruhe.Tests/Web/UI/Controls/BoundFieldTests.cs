@@ -21,5 +21,11 @@ namespace Ruhe.Tests.Web.UI.Controls {
             LoadPage();
             StringAssert.Contains("hi, mom! i've got a new job.".Length.ToString(), Browser.CurrentPageText);
         }
+
+        [Test]
+        public void BooleanBoundFieldAsText() {
+            LoadPage();
+            StringAssert.Contains("No", Browser.CurrentPageText);
+        }
     }
 }
