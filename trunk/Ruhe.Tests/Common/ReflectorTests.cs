@@ -39,6 +39,13 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
+        public void HasProperty() {
+            TestObject obj = new TestObject();
+            Assert.IsTrue(Reflector.HasProperty(obj, "List.Count"));
+            Assert.IsFalse(Reflector.HasProperty(obj, "Won't have it"));
+        }
+
+        [Test]
         public void Implements() {
             Assert.IsTrue(Reflector.ImplementsInterface(typeof(TestObject), typeof(IDisposable)));
             Assert.IsFalse(Reflector.ImplementsInterface(typeof(TestObject), typeof(IList)));
