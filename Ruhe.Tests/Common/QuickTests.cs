@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Ruhe.Common;
@@ -67,8 +68,9 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void ListFromEnumerable() {
-            Assert.AreEqual(new string[] {"a", "b", "c"}, Quick.List(new string[] {"a", "b", "c"}));
+        public void JoinIEnumerable() {
+            Assert.AreEqual("4-5--2", Quick.Join("-", Quick.List<object>(4, 5, null, 2)));
+            Assert.AreEqual("4, 5, , 2", Quick.Join(Quick.List<object>(4, 5, null, 2)));
         }
 
         [Test]
@@ -79,6 +81,11 @@ namespace Ruhe.Tests.Common {
         [Test]
         public void StringArray() {
             Assert.AreEqual(new string[] {"1", "2", "3"}, Quick.StringArray(1, 2, 3));
+        }
+
+        [Test]
+        public void StringArrayFromIEnumerable() {
+            Assert.AreEqual(new string[] {"1", "2", "3"}, Quick.StringArray(Quick.List(1, 2, 3)));
         }
 
         private class Bar {
