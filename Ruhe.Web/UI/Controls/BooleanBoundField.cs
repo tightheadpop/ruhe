@@ -16,12 +16,12 @@ namespace Ruhe.Web.UI.Controls {
             set { trueText = value; }
         }
 
-        protected override object GetValue(Control controlContainer) {
-            return Evaluate(controlContainer) ? TrueText : FalseText;
-        }
-
         protected virtual bool Evaluate(Control controlContainer) {
             return Convert.ToBoolean(base.GetValue(controlContainer));
+        }
+
+        protected override object GetValue(Control controlContainer) {
+            return Evaluate(controlContainer) ? TrueText : FalseText;
         }
     }
 }

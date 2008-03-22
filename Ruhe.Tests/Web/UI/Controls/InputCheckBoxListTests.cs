@@ -20,6 +20,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
+        public void EmitsReadOnlyScript() {
+            LoadPage();
+            StringAssert.Contains(".onclick=function(){return false;};", Browser.CurrentPageText);
+        }
+
+        [Test]
         public void SelectByList() {
             list.DataBind();
 
