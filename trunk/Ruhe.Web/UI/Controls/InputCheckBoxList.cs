@@ -63,11 +63,12 @@ namespace Ruhe.Web.UI.Controls {
 
         public bool ReadOnly {
             get {
-                // TODO:  Add InputCheckBoxList.ReadOnly getter implementation
-                return false;
+                EnsureChildControls();
+                return Convert.ToBoolean(ViewState["ReadOnly"]);
             }
             set {
-                // TODO:  Add InputCheckBoxList.ReadOnly setter implementation
+                EnsureChildControls();
+                ViewState["ReadOnly"] = value;
             }
         }
 
@@ -163,6 +164,14 @@ for(var i = 0; i < {0}.length; i++) {{
             base.Render(writer);
 
             writer.RenderEndTag();
+        }
+
+        protected override void RenderItem(ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer) {
+            if (ReadOnly) {
+                string itemId = ClientID + "_" + repeatIndex;
+                Page.ClientScript.RegisterStartupScript(GetType(), itemId, string.Format(@"$get('{0}').onclick=function(){{return false;}};", itemId), true);
+            }
+            base.RenderItem(itemType, repeatIndex, repeatInfo, writer);
         }
 
         //TODO: optionally add items that aren't in the list; otherwise, skip
