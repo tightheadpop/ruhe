@@ -5,8 +5,6 @@ namespace Ruhe.Common {
     public class Validate : ValidateOrThrow<ArgumentException> {}
 
     public class ValidateOrThrow<T> where T : Exception {
-        protected static Type exceptionType = typeof(T);
-
         public static void HasNoNullElements(IEnumerable list, string errorMessage) {
             IsNotNull(list, "list cannot be null");
             HasNoNullElements(list, errorMessage, new object[0]);
@@ -62,6 +60,7 @@ namespace Ruhe.Common {
         }
 
         private static void ThrowNewException(string errorMessage) {
+            Type exceptionType = typeof(T);
             if (null != exceptionType.GetConstructor(new Type[] {typeof(string)}))
                 throw (T) Activator.CreateInstance(exceptionType, errorMessage);
             throw (T) Activator.CreateInstance(exceptionType);
