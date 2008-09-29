@@ -69,6 +69,10 @@ namespace Ruhe.Common.Utilities {
             return false;
         }
 
+        public static string Quoted(string s) {
+            return string.Format("\"{0}\"", s);
+        }
+
         public static bool IsNumeric(string value) {
             double number;
             return double.TryParse(value, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number);

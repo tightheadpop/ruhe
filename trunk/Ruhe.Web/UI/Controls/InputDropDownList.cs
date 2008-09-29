@@ -23,6 +23,18 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
+        public override string CssClass {
+            get {
+                EnsureChildControls();
+                return base.CssClass;
+            }
+            set {
+                EnsureChildControls();
+                base.CssClass = value;
+                readOnlyLabel.CssClass = value;
+            }
+        }
+
         public string DefaultElementClientId {
             get { return ClientID; }
         }
@@ -113,7 +125,7 @@ namespace Ruhe.Web.UI.Controls {
         /// is rendered as a <see cref="Label"/>.
         /// </summary>
         [DefaultValue(false)]
-        public bool ReadOnly {
+        public virtual bool ReadOnly {
             get {
                 EnsureChildControls();
                 return Convert.ToBoolean(ViewState["ReadOnly"]) ||
