@@ -55,7 +55,7 @@ namespace Ruhe.Common {
             return assembly.GetType(fullName, throwExceptionOnFailure, true);
         }
 
-        private static FieldInfo GetField(Type domainObjectType, string fieldName) {
+        public static FieldInfo GetField(Type domainObjectType, string fieldName) {
             FieldInfo field = null;
             Type type = domainObjectType;
             while (field == null) {
@@ -68,7 +68,7 @@ namespace Ruhe.Common {
             return field;
         }
 
-        private static FieldInfo GetField(object obj, string fieldName) {
+        public static FieldInfo GetField(object obj, string fieldName) {
             return GetField(obj.GetType(), fieldName);
         }
 
