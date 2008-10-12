@@ -12,11 +12,16 @@ namespace Ruhe.TestExtensions {
             if (IsServerAlreadyStarted(port))
                 return;
 
-            developmentServerProcess = new Process();
-            developmentServerProcess.StartInfo.FileName = @"C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\WebDev.WebServer.EXE";
-            developmentServerProcess.StartInfo.Arguments = String.Format("/port:{0} /path:\"{1}\" /vpath:\"/{2}\"", port, path, virtualPath);
-            developmentServerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-
+            developmentServerProcess =
+                new Process
+                    {
+                        StartInfo =
+                            {
+                                FileName = @"C:\Program Files\Common Files\Microsoft Shared\DevServer\9.0\WebDev.WebServer.EXE",
+                                Arguments = String.Format("/port:{0} /path:\"{1}\" /vpath:\"/{2}\"", port, path, virtualPath),
+                                WindowStyle = ProcessWindowStyle.Minimized
+                            }
+                    };
             developmentServerProcess.Start();
         }
 
