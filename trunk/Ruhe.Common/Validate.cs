@@ -2,68 +2,83 @@ using System;
 using System.Collections;
 
 namespace Ruhe.Common {
-    public class Validate : ValidateOrThrow<ArgumentException> {}
-
-    public class ValidateOrThrow<T> where T : Exception {
-        public static void HasNoNullElements(IEnumerable list, string errorMessage) {
-            IsNotNull(list, "list cannot be null");
-            HasNoNullElements(list, errorMessage, new object[0]);
+    public static class Validate {
+        public static void MustBeFalse(this bool expression) {
+            (!expression).MustBeFalse("Expression should be false.");
         }
 
-        public static void HasNoNullElements(IEnumerable list, string errorMessageFormat, params object[] parameters) {
-            foreach (object o in list) {
-                IsNotNull(o, string.Format(errorMessageFormat, parameters));
-            }
-        }
-
-        public static void IsFalse(bool expression, string errorMessage) {
+        public static void MustBeFalse(this bool expression, string errorMessage) {
             That(!expression, errorMessage);
         }
 
-        public static void IsFalse(bool expression, string errorMessageFormat, params object[] parameters) {
-            IsFalse(expression, string.Format(errorMessageFormat, parameters));
+        public static void MustBeFalse(this bool expression, string errorMessageFormat, params object[] parameters) {
+            expression.MustBeFalse(string.Format(errorMessageFormat, parameters));
         }
 
-        public static void IsNotEmpty(IEnumerable list, string errorMessage) {
-            IsNotNull(list, errorMessage);
-            if (list.GetEnumerator().MoveNext()) return;
-            ThrowNewException(errorMessage);
+        public static void MustBeTrue(this bool expression) {
+            expression.MustBeTrue("Expression should be true.");
         }
 
-        public static void IsNotEmpty(IEnumerable list, string errorMessageFormat, params object[] parameters) {
-            IsNotEmpty(list, string.Format(errorMessageFormat, parameters));
-        }
-
-        public static void IsNotNull(object obj, string errorMessage) {
-            That(obj != null, errorMessage);
-        }
-
-        public static void IsNotNull(object obj, string errorMessageFormat, params object[] parameters) {
-            IsNotNull(obj, string.Format(errorMessageFormat, parameters));
-        }
-
-        public static void IsTrue(bool expression, string errorMessage) {
+        public static void MustBeTrue(this bool expression, string errorMessage) {
             That(expression, errorMessage);
         }
 
-        public static void IsTrue(bool expression, string errorMessageFormat, params object[] parameters) {
-            IsTrue(expression, string.Format(errorMessageFormat, parameters));
+        public static void MustBeTrue(this bool expression, string errorMessageFormat, params object[] parameters) {
+            expression.MustBeTrue(string.Format(errorMessageFormat, parameters));
+        }
+
+        public static void MustHaveNoNullElements(this IEnumerable list) {
+            list.MustHaveNoNullElements("List should not contain any null items.");
+        }
+
+        public static void MustHaveNoNullElements(this IEnumerable list, string errorMessage) {
+            list.MustNotBeNull();
+            list.MustHaveNoNullElements(errorMessage, new object[0]);
+        }
+
+        public static void MustHaveNoNullElements(this IEnumerable list, string errorMessageFormat, params object[] parameters) {
+            foreach (var o in list) {
+                MustNotBeNull(o, string.Format(errorMessageFormat, parameters));
+            }
+        }
+
+        public static void MustNotBeEmpty(this IEnumerable list) {
+            list.MustNotBeEmpty("List should not be empty.");
+        }
+
+        public static void MustNotBeEmpty(this IEnumerable list, string errorMessage) {
+            list.MustNotBeNull(errorMessage);
+            if (list.GetEnumerator().MoveNext()) return;
+            Throw(errorMessage);
+        }
+
+        public static void MustNotBeEmpty(IEnumerable list, string errorMessageFormat, params object[] parameters) {
+            list.MustNotBeEmpty(string.Format(errorMessageFormat, parameters));
+        }
+
+        public static void MustNotBeNull(this object obj) {
+            obj.MustNotBeNull("object should not be null");
+        }
+
+        public static void MustNotBeNull(this object obj, string errorMessage) {
+            That(obj != null, errorMessage);
+        }
+
+        public static void MustNotBeNull(this object obj, string errorMessageFormat, params object[] parameters) {
+            obj.MustNotBeNull(string.Format(errorMessageFormat, parameters));
         }
 
         public static void That(bool expression, string errorMessage) {
             if (!expression)
-                ThrowNewException(errorMessage);
+                Throw(errorMessage);
         }
 
         public static void That(bool expression, string errorMessageFormat, params object[] parameters) {
             That(expression, string.Format(errorMessageFormat, parameters));
         }
 
-        private static void ThrowNewException(string errorMessage) {
-            Type exceptionType = typeof(T);
-            if (null != exceptionType.GetConstructor(new Type[] {typeof(string)}))
-                throw (T) Activator.CreateInstance(exceptionType, errorMessage);
-            throw (T) Activator.CreateInstance(exceptionType);
+        private static void Throw(string errorMessage) {
+            throw new ArgumentException(errorMessage);
         }
     }
 }

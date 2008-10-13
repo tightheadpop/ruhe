@@ -12,7 +12,7 @@ namespace Ruhe.Tests.TestExtensions {
         public void GetHtmlFromControl() {
             Label thing = new Label();
             thing.Text = "thing";
-            string result = ControlTesterUtilities.GetHtml(thing);
+            string result = thing.GetHtml();
             Assert.AreEqual("<span>thing</span>", result, "Html output does not match");
         }
 
@@ -26,7 +26,7 @@ namespace Ruhe.Tests.TestExtensions {
         public void HasChildElement() {
             Browser.GetPage(GetUrlPath<Message>());
             PanelTester messageWrapper1 = new PanelTester(IdFor("message1"));
-            AssertTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1_header")));
+            AssertTrue(messageWrapper1.HasChildElement(IdFor("message1_header")));
         }
     }
 }

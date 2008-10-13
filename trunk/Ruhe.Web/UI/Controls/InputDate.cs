@@ -30,7 +30,7 @@ namespace Ruhe.Web.UI.Controls {
         public virtual string Format {
             get {
                 EnsureChildControls();
-                return StringUtilities.TrimToNull((string) ViewState["Format"])
+                return ((string) ViewState["Format"]).TrimToNull()
                        ?? RuheConfiguration.DateFormat;
             }
             set {
@@ -71,16 +71,14 @@ namespace Ruhe.Web.UI.Controls {
         protected override DateTime? Adapt(string value) {
             if (string.IsNullOrEmpty(value))
                 return null;
-            else {
-                DateTime result;
-                if (DateTime.TryParseExact(value, Format, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
-                    return result;
-                return null;
-            }
+            DateTime result;
+            if (DateTime.TryParseExact(value, Format, Thread.CurrentThread.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out result))
+                return result;
+            return null;
         }
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            CssClass = StringUtilities.ForceSuffix(Regex.Replace(CssClass, @"\binput-date\b", string.Empty), @" input-date").Trim();
+            CssClass = Regex.Replace(CssClass, @"\binput-date\b", string.Empty).WithSuffix(@" input-date").Trim();
             base.AddAttributesToRender(writer);
             Page.ClientScript.RegisterExpandoAttribute(ClientID, "datePattern", Format);
         }

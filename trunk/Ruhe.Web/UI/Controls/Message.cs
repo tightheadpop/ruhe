@@ -28,7 +28,7 @@ namespace Ruhe.Web.UI.Controls {
 
         private FlashTransferObject? FlashMessage {
             get {
-                FlashTransferObject? flashMessage = (FlashTransferObject?) Page.Session["Flash"];
+                var flashMessage = (FlashTransferObject?) Page.Session["Flash"];
                 FlashMessage = null;
                 return flashMessage;
             }
@@ -41,7 +41,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public MessageType Type {
-            get { return Reflector.ConvertToEnum<MessageType>(ViewState["type"]); }
+            get { return ViewState["type"].As<MessageType>(); }
             set { ViewState["type"] = value.ToString(); }
         }
 

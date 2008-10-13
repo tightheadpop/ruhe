@@ -46,14 +46,14 @@ namespace Ruhe.Tests.Web.UI.Controls {
             WebAssert.Visible(messageWrapper5);
             WebAssert.Visible(messageBody5);
             WebAssert.Visible(messageHeader5);
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody5, IdFor("message5_replacement")));
+            Assert.IsTrue(messageBody5.HasChildElement(IdFor("message5_replacement")));
         }
 
         [Test]
         public void ControlAddedDynamicallyIsRenderedInTheBody() {
             addControl.Click();
             WebAssert.Visible(added);
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor("message1_added")), "the added control must appear inside the message body");
+            Assert.IsTrue(messageBody1.HasChildElement(IdFor("message1_added")), "the added control must appear inside the message body");
         }
 
         [Test]
@@ -65,9 +65,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void Layout() {
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1_header")));
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageWrapper1, IdFor("message1")));
-            Assert.IsTrue(ControlTesterUtilities.HasChildElement(messageBody1, IdFor("message1_dummyLink")));
+            Assert.IsTrue(messageWrapper1.HasChildElement(IdFor("message1_header")));
+            Assert.IsTrue(messageWrapper1.HasChildElement(IdFor("message1")));
+            Assert.IsTrue(messageBody1.HasChildElement(IdFor("message1_dummyLink")));
         }
 
         [Test]

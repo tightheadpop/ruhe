@@ -16,7 +16,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public T? Value {
-            get { return string.IsNullOrEmpty(List.SelectedValue) ? default(T?) : Reflector.ConvertToEnum<T>(List.SelectedValue); }
+            get { return string.IsNullOrEmpty(List.SelectedValue) ? default(T?) : List.SelectedValue.As<T>(); }
             set { List.SelectedValue = (value.HasValue) ? value.Value.ToString() : string.Empty; }
         }
 

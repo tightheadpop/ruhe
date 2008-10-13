@@ -22,46 +22,46 @@ namespace Ruhe.Tests.Common {
             notExpected.ID = "notExpected";
             list.Add(notExpected);
 
-            Control actual = Collections.First<Control>(list, delegate(Control c) { return c.ID == "expected"; });
+            Control actual = list.First(delegate(Control c) { return c.ID == "expected"; });
             Assert.AreSame(expected, actual);
         }
 
         [Test]
         public void FirstForCollection() {
             StringCollection collection = new StringCollection();
-            Assert.AreEqual(null, Collections.First(collection));
+            Assert.AreEqual(null, collection.First());
 
             collection.Add("1");
             collection.Add("foo");
-            Assert.AreEqual("1", Collections.First(collection));
+            Assert.AreEqual("1", collection.First());
         }
 
         [Test]
         public void FirstForObjectArray() {
-            Assert.AreEqual(1, Collections.First(new object[] {1, 2, 3}));
-            Assert.AreEqual(null, Collections.First(new object[] {}));
+            Assert.AreEqual(1, new object[] {1, 2, 3}.First());
+            Assert.AreEqual(null, new object[] {}.First());
         }
 
         [Test]
         public void FirstForStringArray() {
-            Assert.AreEqual("foo", Collections.First(new object[] {"foo", "bar", "baz"}));
-            Assert.AreEqual(null, Collections.First(new string[] {}));
+            Assert.AreEqual("foo", new object[] {"foo", "bar", "baz"}.First());
+            Assert.AreEqual(null, new string[] {}.First());
         }
 
         [Test]
         public void Last() {
-            Assert.AreEqual("last", Collections.Last(Quick.List("first", "middle", "last")));
+            Assert.AreEqual("last", Quick.List("first", "middle", "last").Last());
         }
 
         [Test]
         public void LastReturnsNullForEmptyList() {
-            Assert.IsNull(Collections.Last(new object[] {}));
+            Assert.IsNull(new object[] {}.Last());
         }
 
         [Test]
         public void Shift() {
             List<int> list = Quick.List(1, 2, 3);
-            Assert.AreEqual(1, Collections.Shift(list));
+            Assert.AreEqual(1, list.Shift());
             Assert.AreEqual(2, list.Count);
         }
     }

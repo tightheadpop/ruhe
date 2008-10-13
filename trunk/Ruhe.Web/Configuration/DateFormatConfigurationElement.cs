@@ -1,5 +1,6 @@
 using System.Configuration;
 using System.Threading;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.Configuration {
     public class DateFormatConfigurationElement : ConfigurationElement {
@@ -13,7 +14,7 @@ namespace Ruhe.Web.Configuration {
         public string Value {
             get {
                 string configuredFormat = (string) base["value"];
-                if (string.IsNullOrEmpty(configuredFormat))
+                if (configuredFormat.IsNullOrEmpty())
                     return Thread.CurrentThread.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 return configuredFormat;
             }

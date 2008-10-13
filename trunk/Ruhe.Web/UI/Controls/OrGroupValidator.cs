@@ -17,7 +17,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 ViewState["GroupToValidate"] = value;
-                ControlToValidate = StringUtilities.TrimToEmpty(Collections.First(value));
+                ControlToValidate = value.First().TrimToEmpty();
             }
         }
 

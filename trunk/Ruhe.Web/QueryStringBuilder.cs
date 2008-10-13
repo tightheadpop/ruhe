@@ -7,14 +7,14 @@ using Ruhe.Common.Utilities;
 namespace Ruhe.Web {
     public class QueryStringBuilder : NameValueCollection {
         public QueryStringBuilder(NameValueCollection collection) : base(collection) {}
-        public QueryStringBuilder() : base() {}
+        public QueryStringBuilder() {}
         public QueryStringBuilder(string encodedInput) : this(Parse(encodedInput)) {}
 
         public override void Add(string name, string value) {
             if (name == null) {
                 throw new ArgumentException("name cannot be null.", "name");
             }
-            base.Add(name, StringUtilities.NullToEmpty(value));
+            base.Add(name, value.NullToEmpty());
         }
 
         public void Add(string name, int value) {
@@ -30,7 +30,7 @@ namespace Ruhe.Web {
         }
 
         public override string ToString() {
-            StringBuilder result = new StringBuilder(300);
+            var result = new StringBuilder(300);
             foreach (string key in AllKeys) {
                 foreach (string value in GetValues(key)) {
                     result.AppendFormat("&{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(value));
@@ -45,15 +45,12 @@ namespace Ruhe.Web {
         }
 
         public static QueryStringBuilder Parse(string encodedInput) {
-            QueryStringBuilder querystring = new QueryStringBuilder();
-            string name;
-            string value;
-            string[] nameAndValue;
+            var querystring = new QueryStringBuilder();
 
             foreach (string pair in encodedInput.Split("&".ToCharArray())) {
-                nameAndValue = pair.Split("=".ToCharArray(), 2);
-                name = HttpUtility.UrlDecode(nameAndValue[0]);
-                value = HttpUtility.UrlDecode(StringUtilities.NullToEmpty(nameAndValue[1]));
+                string[] nameAndValue = pair.Split("=".ToCharArray(), 2);
+                string name = HttpUtility.UrlDecode(nameAndValue[0]);
+                string value = HttpUtility.UrlDecode(nameAndValue[1].NullToEmpty());
 
                 querystring.Add(name, value);
             }

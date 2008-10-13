@@ -19,10 +19,7 @@ namespace Ruhe.Web {
 
         public static WebResourceAttribute GetResource(Type typeInAssemblyWithResource, string partialName) {
             object[] attributes = typeInAssemblyWithResource.Assembly.GetCustomAttributes(typeof(WebResourceAttribute), true);
-            return Collections.First<WebResourceAttribute>(
-                attributes,
-                delegate(WebResourceAttribute a) { return a.WebResource.EndsWith(partialName); }
-                );
+            return attributes.First(delegate(WebResourceAttribute a) { return a.WebResource.EndsWith(partialName); });
         }
 
         public static string GetResourceUrl(Type typeInAssemblyWithResource, string partialName) {
