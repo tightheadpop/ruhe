@@ -8,11 +8,11 @@ namespace Ruhe.Common {
     /// Utility for disposing cleanly of items
     /// </summary>
     public class DisposeOf {
-        private static readonly string[] DisposingMethods = new string[] {"Flush", "Close", "Dispose"};
+        private static readonly string[] DisposingMethods = new[] {"Flush", "Close", "Dispose"};
         private DisposeOf() {}
 
         private static IEnumerable<MethodInfo> GetDisposingMethods(object obj) {
-            List<MethodInfo> methods = new List<MethodInfo>(DisposingMethods.Length);
+            var methods = new List<MethodInfo>(DisposingMethods.Length);
             foreach (string methodName in DisposingMethods) {
                 methods.Add(obj.GetType().GetMethod(methodName, new Type[] {}));
             }

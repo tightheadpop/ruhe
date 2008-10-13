@@ -10,7 +10,7 @@ namespace Ruhe.Web.UI.Controls {
     public class BoundField : System.Web.UI.WebControls.BoundField {
         protected override object GetValue(Control controlContainer) {
             object dataItem = DataBinder.GetDataItem(controlContainer);
-            return Reflector.GetPropertyValue(dataItem, DataField);
+            return dataItem.GetPropertyValue(DataField);
         }
     }
 }

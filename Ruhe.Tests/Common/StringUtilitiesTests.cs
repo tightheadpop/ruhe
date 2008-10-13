@@ -19,86 +19,86 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void CsvQuote() {
-            Assert.AreEqual(String.Empty, StringUtilities.CsvQuote((string) null));
-            Assert.AreEqual(String.Empty, StringUtilities.CsvQuote(String.Empty));
-            Assert.AreEqual("\"foo,bar\"", StringUtilities.CsvQuote("foo,bar"), "should wrap in quotes if a comma is present");
-            Assert.AreEqual("\"\"\"foo,bar\"\"\"", StringUtilities.CsvQuote("\"foo,bar\""),
+            Assert.AreEqual(String.Empty, ((string) null).CsvQuote());
+            Assert.AreEqual(String.Empty, String.Empty.CsvQuote());
+            Assert.AreEqual("\"foo,bar\"", "foo,bar".CsvQuote(), "should wrap in quotes if a comma is present");
+            Assert.AreEqual("\"\"\"foo,bar\"\"\"", "\"foo,bar\"".CsvQuote(),
                             "should esacpe double quotes by doubling them");
         }
 
         [Test]
         public void ForcePrefix() {
-            Assert.AreEqual("rattest", StringUtilities.ForcePrefix("rat", "test"));
-            Assert.AreEqual("rattest", StringUtilities.ForcePrefix("rat", "rattest"));
+            Assert.AreEqual("rattest", "rat".WithPrefix("test"));
+            Assert.AreEqual("rattest", "rat".WithPrefix("rattest"));
         }
 
         [Test]
         public void ForceSuffix() {
-            Assert.AreEqual("rattest", StringUtilities.ForceSuffix("rat", "test"));
-            Assert.AreEqual("rattest", StringUtilities.ForceSuffix("rattest", "test"));
+            Assert.AreEqual("rattest", "rat".WithSuffix("test"));
+            Assert.AreEqual("rattest", "rattest".WithSuffix("test"));
         }
 
         [Test]
         public void IsEmpty() {
             Assert.IsTrue(StringUtilities.IsEmpty(null));
-            Assert.IsTrue(StringUtilities.IsEmpty(string.Empty));
-            Assert.IsFalse(StringUtilities.IsEmpty("foo"));
+            Assert.IsTrue(string.Empty.IsEmpty());
+            Assert.IsFalse("foo".IsEmpty());
         }
 
         [Test]
         public void IsNumeric() {
-            Assert.IsTrue(StringUtilities.IsNumeric("1"));
-            Assert.IsTrue(StringUtilities.IsNumeric("1,000.00"));
-            Assert.IsTrue(StringUtilities.IsNumeric(" 1 "));
-            Assert.IsTrue(StringUtilities.IsNumeric("-1"));
-            Assert.IsTrue(StringUtilities.IsNumeric("1."));
-            Assert.IsTrue(StringUtilities.IsNumeric("1.0"));
-            Assert.IsTrue(StringUtilities.IsNumeric(".0"));
-            Assert.IsFalse(StringUtilities.IsNumeric("1a"));
-            Assert.IsFalse(StringUtilities.IsNumeric("1.0.0"));
-            Assert.IsFalse(StringUtilities.IsNumeric("(1.0)"));
-            Assert.IsFalse(StringUtilities.IsNumeric("$1.0"));
-            Assert.IsFalse(StringUtilities.IsNumeric(string.Empty));
+            Assert.IsTrue("1".IsNumeric());
+            Assert.IsTrue("1,000.00".IsNumeric());
+            Assert.IsTrue(" 1 ".IsNumeric());
+            Assert.IsTrue("-1".IsNumeric());
+            Assert.IsTrue("1.".IsNumeric());
+            Assert.IsTrue("1.0".IsNumeric());
+            Assert.IsTrue(".0".IsNumeric());
+            Assert.IsFalse("1a".IsNumeric());
+            Assert.IsFalse("1.0.0".IsNumeric());
+            Assert.IsFalse("(1.0)".IsNumeric());
+            Assert.IsFalse("$1.0".IsNumeric());
+            Assert.IsFalse(string.Empty.IsNumeric());
         }
 
         [Test]
         public void NullToEmpty() {
-            Assert.AreEqual(string.Empty, StringUtilities.NullToEmpty((string) null));
-            Assert.AreEqual(string.Empty, StringUtilities.NullToEmpty(string.Empty));
-            Assert.AreEqual("test", StringUtilities.NullToEmpty("test"));
+            Assert.AreEqual(string.Empty, ((string) null).NullToEmpty());
+            Assert.AreEqual(string.Empty, string.Empty.NullToEmpty());
+            Assert.AreEqual("test", "test".NullToEmpty());
         }
 
         [Test]
         public void RemovePrefix() {
-            Assert.AreEqual("test", StringUtilities.RemovePrefix("ratstest", "RAT."));
-            Assert.AreEqual("ratstest", StringUtilities.RemovePrefix("ratstest", "test"));
+            Assert.AreEqual("test", "ratstest".WithoutPrefix("RAT."));
+            Assert.AreEqual("ratstest", "ratstest".WithoutPrefix("test"));
         }
 
         [Test]
         public void RemoveSuffix() {
-            Assert.AreEqual("test", StringUtilities.RemoveSuffix("testrat", "rAt"));
-            Assert.AreEqual("testrat", StringUtilities.RemoveSuffix("testrat", "rrAt"));
+            Assert.AreEqual("test", "testrat".WithoutSuffix("rAt"));
+            Assert.AreEqual("testrat", "testrat".WithoutSuffix("rrAt"));
         }
 
         [Test]
         public void StringAfter() {
-            Assert.AreEqual("extension", StringUtilities.StringAfter("file.name.extension", "."));
-            Assert.AreEqual("file.name.extension", StringUtilities.StringAfter("file.name.extension", @"\"));
+            Assert.AreEqual("extension", "file.name.extension".StringAfter("."));
+            Assert.AreEqual("file.name.extension", "file.name.extension".StringAfter(@"\"));
         }
 
         [Test]
         public void TrimToEmpty() {
             Assert.AreEqual(String.Empty, StringUtilities.TrimToEmpty(null));
-            Assert.AreEqual(String.Empty, StringUtilities.TrimToEmpty(String.Empty));
-            Assert.AreEqual("paul", StringUtilities.TrimToEmpty("  paul "));
+            Assert.AreEqual(String.Empty, String.Empty.TrimToEmpty());
+            Assert.AreEqual("paul", "  paul ".TrimToEmpty());
         }
 
         [Test]
         public void TrimToNull() {
             Assert.IsNull(StringUtilities.TrimToNull(null));
-            Assert.IsNull(StringUtilities.TrimToNull(string.Empty));
-            Assert.IsNull(StringUtilities.TrimToNull(" "));
-            Assert.AreEqual("v", StringUtilities.TrimToNull(" v "));
+            Assert.IsNull(string.Empty.TrimToNull());
+            Assert.IsNull(" ".TrimToNull());
+            Assert.AreEqual("v", " v ".TrimToNull());
         }
     }
 }

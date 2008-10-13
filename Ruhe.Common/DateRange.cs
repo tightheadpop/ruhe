@@ -6,11 +6,9 @@ namespace Ruhe.Common {
     /// </remarks>
     public struct DateRange : IComparable, IEquatable<DateRange>, IComparable<DateRange> {
         public static readonly DateRange Eternity = new DateRange(DateTime.MinValue.Date, DateTime.MaxValue.Date);
-        private DateTime end;
-        private DateTime start;
 
         //TODO: don't accept nullables?
-        public DateRange(DateTime start, DateTime end) {
+        public DateRange(DateTime start, DateTime end) : this() {
             if (start.TimeOfDay.TotalMilliseconds > 0)
                 throw new ArgumentException("DateRange requires date precision, but the Start date has reference to time of day.");
             if (end.TimeOfDay.TotalMilliseconds > 0)
@@ -18,17 +16,13 @@ namespace Ruhe.Common {
             if (start > end)
                 throw new ArgumentException("Start of date range must be on or before end.");
 
-            this.start = start;
-            this.end = end;
+            Start = start;
+            End = end;
         }
 
-        public DateTime End {
-            get { return end; }
-        }
+        public DateTime End { get; private set; }
 
-        public DateTime Start {
-            get { return start; }
-        }
+        public DateTime Start { get; private set; }
 
         public bool Abuts(DateRange range) {
             return !Overlaps(range) && !GetGap(range).HasValue;
@@ -43,12 +37,11 @@ namespace Ruhe.Common {
         public int CompareTo(DateRange range) {
             if (Start != range.Start)
                 return Start.CompareTo(range.Start);
-            else
-                return End.CompareTo(range.End);
+            return End.CompareTo(range.End);
         }
 
         public bool Equals(DateRange dateRange) {
-            return Equals(start, dateRange.start) && Equals(end, dateRange.end);
+            return Equals(Start, dateRange.Start) && Equals(End, dateRange.End);
         }
 
         public override bool Equals(object obj) {
@@ -74,7 +67,7 @@ namespace Ruhe.Common {
         }
 
         public override int GetHashCode() {
-            return start.GetHashCode() + 29 * end.GetHashCode();
+            return Start.GetHashCode() + 29 * End.GetHashCode();
         }
 
         public bool Includes(DateTime date) {
@@ -92,8 +85,7 @@ namespace Ruhe.Common {
         public bool IsPartitionedBy(params DateRange[] ranges) {
             if (!IsContiguous(ranges))
                 return false;
-            else
-                return Equals(Combine(ranges));
+            return Equals(Combine(ranges));
         }
 
         public bool Overlaps(DateRange range) {
@@ -110,13 +102,14 @@ namespace Ruhe.Common {
             }
             if (this == Eternity) {
                 return "infinite";
-            } else if (Start == DateTime.MinValue.Date) {
-                return "to " + End.ToString(format);
-            } else if (End == DateTime.MaxValue.Date) {
-                return "from " + Start.ToString(format);
-            } else {
-                return string.Format("{0} to {1}", Start.ToString(format), End.ToString(format));
             }
+            if (Start == DateTime.MinValue.Date) {
+                return "to " + End.ToString(format);
+            }
+            if (End == DateTime.MaxValue.Date) {
+                return "from " + Start.ToString(format);
+            }
+            return string.Format("{0} to {1}", Start.ToString(format), End.ToString(format));
         }
 
         public static DateRange Combine(params DateRange[] ranges) {

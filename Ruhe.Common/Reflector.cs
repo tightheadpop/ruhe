@@ -6,10 +6,28 @@ namespace Ruhe.Common {
     /// <summary>
     /// Function bucket providing quick access to System.Reflection actions
     /// </summary>
-    public class Reflector {
+    public static class Reflector {
         private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy;
 
-        private Reflector() {}
+        /// <summary>
+        /// Converts input to specified Enum type
+        /// </summary>
+        /// <typeparam name="T">Enum or value type</typeparam>
+        /// <param name="value">value to convert to T</param>
+        public static T As<T>(this string value) where T : struct {
+            if (typeof(T).IsEnum)
+                return (T) Enum.Parse(typeof(T), value);
+            return (T) Convert.ChangeType(value, typeof(T));
+        }
+
+        /// <summary>
+        /// Converts input to specified Enum type
+        /// </summary>
+        /// <typeparam name="T">Enum or value type</typeparam>
+        /// <param name="value">value to convert to T</param>
+        public static T As<T>(this object value) where T : struct {
+            return Convert.ToString(value).As<T>();
+        }
 
         /// <summary>
         /// Converts input to specified Enum value
@@ -17,7 +35,7 @@ namespace Ruhe.Common {
         /// <param name="value">input to convert</param>
         /// <param name="enumerationType">the enumeration defining the desired value</param>
         /// <returns>a single value defined in given enumeration</returns>
-        public static object ConvertToEnum(object value, Type enumerationType) {
+        private static object ConvertToEnum(object value, Type enumerationType) {
             if (value.GetType().IsInstanceOfType(enumerationType))
                 return value;
 
@@ -30,34 +48,26 @@ namespace Ruhe.Common {
             return enumerationValue;
         }
 
-        public static T ConvertToEnum<T>(string value) where T : struct {
-            return (T) Enum.Parse(typeof(T), value);
+        public static bool FieldExists(this object obj, string fieldName) {
+            return obj.GetField(fieldName) != null;
         }
 
-        public static T ConvertToEnum<T>(object value) where T : struct {
-            return ConvertToEnum<T>(Convert.ToString(value));
-        }
-
-        public static bool FieldExists(object obj, string fieldName) {
-            return GetField(obj, fieldName) != null;
-        }
-
-        public static bool FieldExists(Type domainObjectType, string fieldName) {
+        public static bool FieldExists(this Type domainObjectType, string fieldName) {
             return GetField(domainObjectType, fieldName) != null;
         }
 
-        public static Type GetCrossAssemblyType(string assemblyName, string fullName) {
-            return GetCrossAssemblyType(assemblyName, fullName, false);
+        public static Type GetCrossAssemblyType(this string assemblyName, string fullName) {
+            return assemblyName.GetCrossAssemblyType(fullName, false);
         }
 
-        public static Type GetCrossAssemblyType(string assemblyName, string fullName, bool throwExceptionOnFailure) {
-            Assembly assembly = Assembly.Load(assemblyName);
+        public static Type GetCrossAssemblyType(this string assemblyName, string fullName, bool throwExceptionOnFailure) {
+            var assembly = Assembly.Load(assemblyName);
             return assembly.GetType(fullName, throwExceptionOnFailure, true);
         }
 
-        public static FieldInfo GetField(Type domainObjectType, string fieldName) {
+        public static FieldInfo GetField(this Type domainObjectType, string fieldName) {
             FieldInfo field = null;
-            Type type = domainObjectType;
+            var type = domainObjectType;
             while (field == null) {
                 field = type.GetField(fieldName, Flags);
                 if (type.BaseType.Name == "Object") {
@@ -68,20 +78,16 @@ namespace Ruhe.Common {
             return field;
         }
 
-        public static FieldInfo GetField(object obj, string fieldName) {
+        public static FieldInfo GetField(this object obj, string fieldName) {
             return GetField(obj.GetType(), fieldName);
         }
 
-        public static FieldInfo[] GetFields(object obj) {
+        public static FieldInfo[] GetFields(this object obj) {
             return obj.GetType().GetFields(Flags);
         }
 
-        public static FieldInfo[] GetFields(Type type) {
+        public static FieldInfo[] GetFields(this Type type) {
             return type.GetFields(Flags);
-        }
-
-        public static Type GetFieldType(object obj, string fieldName) {
-            return GetField(obj, fieldName).FieldType;
         }
 
         /// <summary>
@@ -90,24 +96,24 @@ namespace Ruhe.Common {
         /// <param name="obj">the object to examine</param>
         /// <param name="fieldName">the field to query</param>
         /// <returns>the value of <c>fieldName</c> on <c>obj</c></returns>
-        public static object GetFieldValue(object obj, string fieldName) {
-            return GetField(obj, fieldName).GetValue(obj);
+        public static object GetFieldValue(this object obj, string fieldName) {
+            return obj.GetField(fieldName).GetValue(obj);
         }
 
-        public static PropertyInfo[] GetProperties(object obj) {
+        public static PropertyInfo[] GetProperties(this object obj) {
             return obj.GetType().GetProperties(Flags);
         }
 
-        public static PropertyInfo GetProperty(object obj, string propertyName) {
-            return GetProperty(obj, propertyName, Flags);
+        public static PropertyInfo GetProperty(this object obj, string propertyName) {
+            return obj.GetProperty(propertyName, Flags);
         }
 
-        public static PropertyInfo GetProperty(object obj, string propertyName, BindingFlags bindingFlags) {
+        public static PropertyInfo GetProperty(this object obj, string propertyName, BindingFlags bindingFlags) {
             return obj.GetType().GetProperty(propertyName, bindingFlags);
         }
 
-        public static Type GetPropertyType(object obj, string propertyName) {
-            return GetProperty(obj, propertyName).PropertyType;
+        public static Type GetPropertyType(this object obj, string propertyName) {
+            return obj.GetProperty(propertyName).PropertyType;
         }
 
         /// <summary>
@@ -117,7 +123,7 @@ namespace Ruhe.Common {
         /// <param name="propertyName">the property to query (handles OGNL-ish syntax using
         /// public properties)</param>
         /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
-        public static object GetPropertyValue(object obj, string propertyName) {
+        public static object GetPropertyValue(this object obj, string propertyName) {
             return DataBinder.Eval(obj, propertyName);
         }
 
@@ -128,18 +134,18 @@ namespace Ruhe.Common {
         /// <param name="propertyName">the property to query</param>
         /// <param name="flags">BindingFlags to use in finding the property</param>
         /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
-        public static object GetPropertyValue(object obj, string propertyName, BindingFlags flags) {
-            PropertyInfo property = GetProperty(obj, propertyName, flags);
+        public static object GetPropertyValue(this object obj, string propertyName, BindingFlags flags) {
+            var property = obj.GetProperty(propertyName, flags);
             return property.GetValue(obj, null);
         }
 
-        public static bool HasAttribute(PropertyInfo property, Type attributeType) {
+        public static bool HasAttribute(this PropertyInfo property, Type attributeType) {
             return property.GetCustomAttributes(attributeType, true).Length > 0;
         }
 
-        public static bool HasProperty(object obj, string propertyName) {
+        public static bool HasProperty(this object obj, string propertyName) {
             try {
-                GetPropertyValue(obj, propertyName);
+                obj.GetPropertyValue(propertyName);
             }
             catch {
                 return false;
@@ -151,29 +157,28 @@ namespace Ruhe.Common {
         /// Determines if a given Type implements a specified interface
         /// </summary>
         /// <param name="implementingType">the Type to examine</param>
-        /// <param name="interfaceType">the interface that it might implement</param>
         /// <returns>true if <c>implementingType</c> implements <c>interfaceType</c></returns>
-        public static bool ImplementsInterface(Type implementingType, Type interfaceType) {
-            return implementingType.GetInterface(interfaceType.FullName) != null;
+        public static bool Implements<I>(this Type implementingType) {
+            return implementingType.GetInterface(typeof(I).FullName) != null;
         }
 
-        public static object InvokeMethod(object obj, string methodName) {
-            return InvokeMethod(obj, methodName, null);
+        public static object InvokeMethod(this object obj, string methodName) {
+            return obj.InvokeMethod(methodName, null);
         }
 
-        public static object InvokeMethod(object obj, string methodName, object[] parameters) {
-            MethodInfo method = obj.GetType().GetMethod(methodName, Flags);
+        public static object InvokeMethod(this object obj, string methodName, object[] parameters) {
+            var method = obj.GetType().GetMethod(methodName, Flags);
             return method.Invoke(obj, parameters);
         }
 
-        public static bool PropertyExists(object obj, string propertyName) {
-            return GetProperty(obj, propertyName) != null;
+        public static bool PropertyExists(this object obj, string propertyName) {
+            return obj.GetProperty(propertyName) != null;
         }
 
-        public static void SetFieldValue(object obj, string fieldName, object fieldValue) {
+        public static void SetFieldValue(this object obj, string fieldName, object fieldValue) {
             try {
-                FieldInfo field = GetField(obj, fieldName);
-                object value = fieldValue;
+                var field = obj.GetField(fieldName);
+                var value = fieldValue;
                 if (field.FieldType.IsEnum) {
                     value = ConvertToEnum(value, field.FieldType);
                 }
@@ -181,7 +186,7 @@ namespace Ruhe.Common {
             }
             catch (Exception ex) {
                 throw new ApplicationException(
-                    String.Format("field {0} of object {1} cannot be set with value {2}", fieldName, obj.GetType(), fieldValue), ex);
+                    string.Format("field {0} of object {1} cannot be set with value {2}", fieldName, obj.GetType(), fieldValue), ex);
             }
         }
 
@@ -191,9 +196,9 @@ namespace Ruhe.Common {
         /// <param name="obj">the object to operate on</param>
         /// <param name="propertyName">the property to set</param>
         /// <param name="propertyValue">the value to assign to the property</param>
-        public static void SetPropertyValue(object obj, string propertyName, object propertyValue) {
-            PropertyInfo property = GetProperty(obj, propertyName);
-            object value = propertyValue;
+        public static void SetPropertyValue(this object obj, string propertyName, object propertyValue) {
+            var property = obj.GetProperty(propertyName);
+            var value = propertyValue;
             if (property.PropertyType.IsEnum) {
                 value = ConvertToEnum(value, property.PropertyType);
             }

@@ -13,78 +13,79 @@ namespace Ruhe.Tests.Common {
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void HasNoNullElements() {
-            Validate.HasNoNullElements(Quick.List(new object()), ShouldNotFail);
-            Validate.HasNoNullElements(Quick.List<object>(1, null), ExpectedMessage);
+            Quick.List(new object()).MustHaveNoNullElements(ShouldNotFail);
+            Quick.List<object>(1, null).MustHaveNoNullElements(ExpectedMessage);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void HasNoNullElementsDislikesNullLists() {
-            Validate.HasNoNullElements(null, ExpectedMessage);
+            object[] o = null;
+            o.MustHaveNoNullElements(ExpectedMessage);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void HasNoNullElementsFormatted() {
-            Validate.HasNoNullElements(Quick.List<object>(1, null), Format, 1);
+            Quick.List<object>(1, null).MustHaveNoNullElements(Format, 1);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsFalse() {
-            Validate.IsFalse(false, ShouldNotFail);
-            Validate.IsFalse(true, ExpectedMessage);
+            false.MustBeFalse(ShouldNotFail);
+            true.MustBeFalse(ExpectedMessage);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsFalseFormatted() {
-            Validate.IsFalse(true, Format, 1);
+            true.MustBeFalse(Format, 1);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotEmpty() {
-            Validate.IsNotEmpty(Quick.List(new object()), ShouldNotFail);
-            Validate.IsNotEmpty(Quick.List<object>(), ExpectedMessage);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
-        public void IsNotEmptyFormatted() {
-            Validate.IsNotEmpty(Quick.List<object>(), Format, 1);
+            Quick.List(new object()).MustNotBeEmpty(ShouldNotFail);
+            Quick.List<object>().MustNotBeEmpty(ExpectedMessage);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotEmptyDislikesNullLists() {
-            Validate.IsNotEmpty(null, ExpectedMessage);
+            Validate.MustNotBeEmpty(null, ExpectedMessage);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
+        public void IsNotEmptyFormatted() {
+            Validate.MustNotBeEmpty(Quick.List<object>(), Format, 1);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotNull() {
-            Validate.IsNotNull(new object(), ShouldNotFail);
-            Validate.IsNotNull(null, ExpectedMessage);
+            new object().MustNotBeNull(ShouldNotFail);
+            Validate.MustNotBeNull(null, ExpectedMessage);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsNotNullFormatted() {
-            Validate.IsNotNull(null, Format, 1);
+            Validate.MustNotBeNull(null, Format, 1);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsTrue() {
-            Validate.IsTrue(true, ShouldNotFail);
-            Validate.IsTrue(false, ExpectedMessage);
+            true.MustBeTrue(ShouldNotFail);
+            false.MustBeTrue(ExpectedMessage);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsTrueFormatted() {
-            Validate.IsTrue(false, Format, 1);
+            false.MustBeTrue(Format, 1);
         }
 
         [Test]
@@ -98,12 +99,6 @@ namespace Ruhe.Tests.Common {
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void ThatFormatted() {
             Validate.That(false, Format, 1);
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException), ExpectedMessage = ExpectedMessage)]
-        public void ThrowsSpecificExceptionType() {
-            ValidateOrThrow<InvalidOperationException>.That(false, ExpectedMessage);
         }
     }
 }

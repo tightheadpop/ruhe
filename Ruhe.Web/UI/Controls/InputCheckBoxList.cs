@@ -12,7 +12,6 @@ namespace Ruhe.Web.UI.Controls {
     /// </summary>
     public class InputCheckBoxList : CheckBoxList, IInputControl {
         private IList disabledDataSource;
-        private IList selectedDataSource;
 
         public new IList DataSource {
             get { return (IList) base.DataSource; }
@@ -82,22 +81,15 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public IList SelectedDataSource {
-            get { return selectedDataSource; }
-            set { selectedDataSource = value; }
-        }
+        public IList SelectedDataSource { get; set; }
 
         public List<int> SelectedIntValues {
-            get {
-                return SelectedItems.ConvertAll(
-                    new Converter<ListItem, int>(
-                        delegate(ListItem i) { return Convert.ToInt32(i.Value); }));
-            }
+            get { return SelectedItems.ConvertAll(i => Convert.ToInt32(i.Value)); }
         }
 
         public List<ListItem> SelectedItems {
             get {
-                List<ListItem> selectedItems = new List<ListItem>();
+                var selectedItems = new List<ListItem>();
                 foreach (ListItem item in Items) {
                     if (item.Selected)
                         selectedItems.Add(item);
@@ -107,18 +99,12 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public List<string> SelectedValues {
-            get {
-                return SelectedItems.ConvertAll(
-                    new Converter<ListItem, string>(
-                        delegate(ListItem i) { return i.Value; }));
-            }
+            get { return SelectedItems.ConvertAll(i => i.Value); }
         }
 
         public string ValidatedControlId {
-            get {
-                // TODO:  Add InputCheckBoxList.ValidatedControlId getter implementation
-                return null;
-            }
+            // TODO:  Add InputCheckBoxList.ValidatedControlId getter implementation
+            get { return null; }
         }
 
         public void Clear() {
@@ -134,7 +120,7 @@ namespace Ruhe.Web.UI.Controls {
         private void EmitDisabledScript() {
             if (disabledDataSource == null || Page == null) return;
 
-            List<string> indexes = new List<string>();
+            var indexes = new List<string>();
             foreach (object o in disabledDataSource) {
                 indexes.Add(DataSource.IndexOf(o).ToString());
             }
@@ -151,9 +137,9 @@ for(var i = 0; i < {0}.length; i++) {{
         }
 
         private string GetDataValue(object dataElement) {
-            if (StringUtilities.TrimToNull(DataValueField) == null)
+            if (DataValueField.TrimToNull() == null)
                 return dataElement.ToString();
-            return Convert.ToString(Reflector.GetPropertyValue(dataElement, DataValueField));
+            return Convert.ToString(dataElement.GetPropertyValue(DataValueField));
         }
 
         protected override void Render(HtmlTextWriter writer) {

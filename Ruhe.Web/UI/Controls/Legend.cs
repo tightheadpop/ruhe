@@ -30,7 +30,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            CssClass = StringUtilities.ForceSuffix(Regex.Replace(CssClass, @"\blegend\b", string.Empty), " legend").Trim();
+            CssClass = Regex.Replace(CssClass, @"\blegend\b", string.Empty).WithSuffix(" legend").Trim();
             base.AddAttributesToRender(writer);
         }
 

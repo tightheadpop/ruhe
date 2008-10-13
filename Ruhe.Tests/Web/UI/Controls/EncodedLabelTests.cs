@@ -8,7 +8,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void HtmlEncodesText() {
             EncodedLabel label = new EncodedLabel("test & stuff");
-            string html = ControlTesterUtilities.GetHtml(label);
+            string html = label.GetHtml();
             Assert.IsTrue(html.Contains("test &amp; stuff"));
         }
     }

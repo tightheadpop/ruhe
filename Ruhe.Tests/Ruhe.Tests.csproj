@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F461081F-4BE4-493B-94E6-CBB33D5E69CD}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -27,6 +27,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -91,6 +92,9 @@
       <Name>System</Name>
     </Reference>
     <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
@@ -161,9 +165,6 @@
     <Compile Include="TestExtensions\HtmlTesters\HtmlImageTester.cs" />
     <Compile Include="Web\Configuration\RuheConfigurationSectionTests.cs" />
     <Compile Include="Web\Configuration\ValidatorConfiguratorConfigurationElementTests.cs" />
-    <Compile Include="Web\FileStreamerTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\QueryStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>

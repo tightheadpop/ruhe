@@ -5,7 +5,7 @@ namespace Ruhe.Common {
         private T value;
 
         protected ValueType(T value) {
-            Validate.IsNotNull(value, GetType().Name + " must have non-null underlying value");
+            value.MustNotBeNull(GetType().Name + " must have non-null underlying value");
             this.value = value;
         }
 
@@ -16,14 +16,11 @@ namespace Ruhe.Common {
         public bool Equals(ValueType<T> other) {
             if (other == null)
                 return false;
-            if (!GetType().Equals(other.GetType()))
-                return false;
-            return value.Equals(other.value);
+            return GetType().Equals(other.GetType()) && value.Equals(other.value);
         }
 
         public override bool Equals(object other) {
-            if (ReferenceEquals(this, other)) return true;
-            return Equals(other as ValueType<T>);
+            return ReferenceEquals(this, other) || Equals(other as ValueType<T>);
         }
 
         public override int GetHashCode() {

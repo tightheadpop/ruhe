@@ -31,7 +31,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public LabelPosition LabelPosition {
-            get { return Reflector.ConvertToEnum<LabelPosition>((string) ViewState["LabelPosition"]); }
+            get { return ((string) ViewState["LabelPosition"]).As<LabelPosition>(); }
             set { ViewState["LabelPosition"] = value.ToString(); }
         }
 
@@ -52,8 +52,8 @@ namespace Ruhe.Web.UI.Controls {
                 List<Control> controlsToUpdate = ControlUtilities.FindRecursive<Control>(this);
                 controlsToUpdate.Remove(this);
                 foreach (Control c in controlsToUpdate) {
-                    if (Reflector.HasProperty(c, "ValidationGroup")) {
-                        Reflector.SetPropertyValue(c, "ValidationGroup", value);
+                    if (c.HasProperty("ValidationGroup")) {
+                        c.SetPropertyValue("ValidationGroup", value);
                     }
                 }
             }
@@ -61,7 +61,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
             string cssClass = CssClass.Replace("labeledControlPanel", String.Empty);
-            CssClass = StringUtilities.ForceSuffix(cssClass, " labeledControlPanel").Trim();
+            CssClass = cssClass.WithSuffix(" labeledControlPanel").Trim();
             base.AddAttributesToRender(writer);
         }
 
@@ -132,7 +132,7 @@ namespace Ruhe.Web.UI.Controls {
 
             ILabeledControl labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
-                labelText = StringUtilities.TrimToEmpty(labeledControl.LabelText);
+                labelText = labeledControl.LabelText.TrimToEmpty();
                 labelText = string.IsNullOrEmpty(labelText) ? string.Empty : labelText + ":";
             }
             EncodedLabel nameLabel = new EncodedLabel(labelText);
@@ -187,7 +187,7 @@ namespace Ruhe.Web.UI.Controls {
 
             ILabeledControl labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
-                string formatText = StringUtilities.TrimToEmpty(labeledControl.FormatText);
+                string formatText = labeledControl.FormatText.TrimToEmpty();
                 if (formatText.Length > 0) {
                     formatLabel.Text = formatText;
                 }
