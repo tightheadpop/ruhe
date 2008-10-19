@@ -47,7 +47,7 @@ namespace Ruhe.Web {
         public static QueryStringBuilder Parse(string encodedInput) {
             var querystring = new QueryStringBuilder();
 
-            foreach (string pair in encodedInput.Split("&".ToCharArray())) {
+            foreach (string pair in encodedInput.WithoutPrefix("?").Split("&".ToCharArray())) {
                 string[] nameAndValue = pair.Split("=".ToCharArray(), 2);
                 string name = HttpUtility.UrlDecode(nameAndValue[0]);
                 string value = HttpUtility.UrlDecode(nameAndValue[1].NullToEmpty());

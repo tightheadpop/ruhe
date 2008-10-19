@@ -20,6 +20,12 @@ namespace Ruhe.Tests.Web {
         }
 
         [Test]
+        public void IgnoresInitialQuestionMark() {
+            QueryStringBuilder builder = QueryStringBuilder.Parse("?x=1%2&?x=7");
+            Assert.AreEqual("x=1%252&%3fx=7", builder.ToString());
+        }
+
+        [Test]
         public void ParseTest() {
             QueryStringBuilder builder = QueryStringBuilder.Parse("x=1%2c&x=+&y=3%3d%3d3");
 
@@ -29,11 +35,7 @@ namespace Ruhe.Tests.Web {
 
         [Test]
         public void ToStringTest() {
-            QueryStringBuilder builder = new QueryStringBuilder();
-
-            builder.Add("x", "1,");
-            builder.Add("x", " ");
-            builder.Add("y", "3==3");
+            var builder = new QueryStringBuilder {{"x", "1,"}, {"x", " "}, {"y", "3==3"}};
 
             Assert.AreEqual("x=1%2c&x=+&y=3%3d%3d3", builder.ToString(), "Incorrect concatenation");
         }
