@@ -8,7 +8,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         protected string GlobalDatePattern = "dd-MMM-yyyy";
 
         protected static string GetUrlPath<R>() {
-            string subPath = typeof(R).FullName.WithoutPrefix(@"\w+\.").Replace(".", "/");
+            string subPath = typeof(R).FullName.WithoutPrefixPattern(@"\w+\.").Replace(".", "/");
             return string.Format("{0}{1}Tests.aspx", "http://localhost:4269/Ruhe.TestWeb/", subPath);
         }
 
@@ -36,7 +36,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         private string TestWebPath {
             get {
-                string executingPath = GetType().Assembly.CodeBase.WithoutPrefix("file:///");
+                string executingPath = GetType().Assembly.CodeBase.WithoutPrefixPattern("file:///");
                 return Regex.Replace(executingPath, string.Format("/{0}/.*", GetType().Assembly.GetName().Name), "/Ruhe.TestWeb").Replace('/', '\\');
             }
         }

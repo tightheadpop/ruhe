@@ -4,7 +4,7 @@ using System.Collections;
 namespace Ruhe.Common {
     public static class Validate {
         public static void MustBeFalse(this bool expression) {
-            (!expression).MustBeFalse("Expression should be false.");
+            expression.MustBeFalse("Expression should be false.");
         }
 
         public static void MustBeFalse(this bool expression, string errorMessage) {
@@ -25,6 +25,10 @@ namespace Ruhe.Common {
 
         public static void MustBeTrue(this bool expression, string errorMessageFormat, params object[] parameters) {
             expression.MustBeTrue(string.Format(errorMessageFormat, parameters));
+        }
+
+        public static void MustEqual(this object o, object other) {
+            Equals(o, other).MustBeTrue();
         }
 
         public static void MustHaveNoNullElements(this IEnumerable list) {
@@ -79,6 +83,10 @@ namespace Ruhe.Common {
 
         private static void Throw(string errorMessage) {
             throw new ArgumentException(errorMessage);
+        }
+
+        public static void MustEqual(this object o, object other, string errorMessage) {
+            Equals(o, other).MustBeTrue(errorMessage);
         }
     }
 }

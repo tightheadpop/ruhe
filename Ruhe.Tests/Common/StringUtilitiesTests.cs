@@ -1,20 +1,21 @@
 using System;
 using NUnit.Framework;
 using Ruhe.Common.Utilities;
+using Ruhe.Common;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
     public class StringUtilitiesTests {
         [Test]
-        public void Compare() {
-            Assert.IsTrue(StringUtilities.Compare("test", "TEST"));
-            Assert.IsFalse(StringUtilities.Compare("test", "rat"));
-        }
-
-        [Test]
         public void Contains() {
-            Assert.IsTrue(StringUtilities.Contains("this test is neat", "TEST"));
-            Assert.IsFalse(StringUtilities.Contains("this test is neat", "rat"));
+            "this test".Contains("test").MustBeTrue();
+            "this test".Contains("TEST").MustBeFalse();
+            "this test".Contains("foo").MustBeFalse();
+        }
+        [Test]
+        public void ContainsIgnoreCase() {
+            "this test is neat".ContainsIgnoreCase("TEST").MustBeTrue();
+            "this test is neat".ContainsIgnoreCase("rat").MustBeFalse();
         }
 
         [Test]
@@ -24,6 +25,12 @@ namespace Ruhe.Tests.Common {
             Assert.AreEqual("\"foo,bar\"", "foo,bar".CsvQuote(), "should wrap in quotes if a comma is present");
             Assert.AreEqual("\"\"\"foo,bar\"\"\"", "\"foo,bar\"".CsvQuote(),
                             "should esacpe double quotes by doubling them");
+        }
+
+        [Test]
+        public void EqualsIgnoreCase() {
+            "test".EqualsIgnoreCase("TEST").MustBeTrue();
+            "test".EqualsIgnoreCase("rat").MustBeFalse();
         }
 
         [Test]
@@ -70,20 +77,47 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void RemovePrefix() {
-            Assert.AreEqual("test", "ratstest".WithoutPrefix("RAT."));
-            Assert.AreEqual("ratstest", "ratstest".WithoutPrefix("test"));
+            Assert.AreEqual("test", "ratstest".WithoutPrefix("rats"));
+            Assert.AreEqual("myratstest", "myratstest".WithoutPrefix("rats"), "should ignore missing prefix");
         }
 
         [Test]
-        public void RemoveSuffix() {
-            Assert.AreEqual("test", "testrat".WithoutSuffix("rAt"));
-            Assert.AreEqual("testrat", "testrat".WithoutSuffix("rrAt"));
+        public void RemovePrefixByPattern() {
+            Assert.AreEqual("test", "ratstest".WithoutPrefixPattern("RAT."));
+            Assert.AreEqual("ratstest", "ratstest".WithoutPrefixPattern("test"));
+        }
+
+        [Test]
+        public void RemoveSuffixByPattern() {
+            Assert.AreEqual("test", "testrat".WithoutSuffixPattern("rAt"));
+            Assert.AreEqual("testrat", "testrat".WithoutSuffixPattern("rrAt"));
         }
 
         [Test]
         public void StringAfter() {
-            Assert.AreEqual("extension", "file.name.extension".StringAfter("."));
-            Assert.AreEqual("file.name.extension", "file.name.extension".StringAfter(@"\"));
+            Assert.AreEqual("extension", "file.name.extension".StringAfterLast("."));
+            Assert.AreEqual("file.name.extension", "file.name.extension".StringAfterLast(@"\"));
+        }
+
+        [Test]
+        public void StringAfterFirst() {
+            Assert.AreEqual("?foo?bar", "foo?foo?bar".StringAfterFirst("foo"));
+            Assert.AreEqual(string.Empty, "foo".StringAfterFirst("foo"));
+            Assert.AreEqual("foo?foo?bar", "foo?foo?bar".StringAfterFirst("zoinks"));
+        }
+
+        [Test]
+        public void StringBeforeFirst() {
+            Assert.AreEqual(string.Empty, "foo?foo?bar".StringBeforeFirst("foo"));
+            Assert.AreEqual("foo?foo?", "foo?foo?bar".StringBeforeFirst("bar"));
+            Assert.AreEqual("foo?foo?bar", "foo?foo?bar".StringBeforeFirst("zoinks"), "should ignore missing token");
+        }
+
+        [Test]
+        public void StringBeforeLast() {
+            Assert.AreEqual("foo?", "foo?foo?bar".StringBeforeLast("foo"));
+            Assert.AreEqual("foo?", "foo?foo?bar".StringBeforeLast("foo"));
+            Assert.AreEqual("foo?foo?bar", "foo?foo?bar".StringBeforeLast("zoinks"), "should ignore missing token");
         }
 
         [Test]
