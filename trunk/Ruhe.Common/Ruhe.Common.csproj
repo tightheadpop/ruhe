@@ -93,7 +93,7 @@
     <Compile Include="DelimitedStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DisposeOf.cs">
+    <Compile Include="Utilities\DisposeUtilities.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Month.cs">
