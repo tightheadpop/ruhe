@@ -6,6 +6,11 @@ using Ruhe.Common;
 namespace Ruhe.Tests.Common {
     [TestFixture]
     public class ReflectorTests {
+
+        [Test]
+        public void TryWalkFindsValue() {
+            
+        }
         [Test]
         public void ConvertToEnum() {
             Assert.AreEqual(TestEnum.Tchotchke, "Tchotchke".As<TestEnum>());
