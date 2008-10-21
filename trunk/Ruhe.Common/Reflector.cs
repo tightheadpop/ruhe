@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using System.Web.UI;
 
 namespace Ruhe.Common {
     /// <summary>
@@ -61,13 +60,13 @@ namespace Ruhe.Common {
         }
 
         public static Type GetCrossAssemblyType(this string assemblyName, string fullName, bool throwExceptionOnFailure) {
-            var assembly = Assembly.Load(assemblyName);
+            Assembly assembly = Assembly.Load(assemblyName);
             return assembly.GetType(fullName, throwExceptionOnFailure, true);
         }
 
         public static FieldInfo GetField(this Type domainObjectType, string fieldName) {
             FieldInfo field = null;
-            var type = domainObjectType;
+            Type type = domainObjectType;
             while (field == null) {
                 field = type.GetField(fieldName, Flags);
                 if (type.BaseType.Name == "Object") {
@@ -113,7 +112,10 @@ namespace Ruhe.Common {
         }
 
         public static Type GetPropertyType(this object obj, string propertyName) {
-            return obj.GetProperty(propertyName).PropertyType;
+            object value;
+            PropertyInfo info;
+            TryNavigate(obj, propertyName, out info, out value);
+            return info.PropertyType;
         }
 
         /// <summary>
@@ -124,7 +126,11 @@ namespace Ruhe.Common {
         /// public properties)</param>
         /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
         public static object GetPropertyValue(this object obj, string propertyName) {
-            return DataBinder.Eval(obj, propertyName);
+            object value;
+            PropertyInfo unused;
+            if (!TryNavigate(obj, propertyName, out unused, out value))
+                throw new NotImplementedException("Property does not exist: " + propertyName);
+            return value;
         }
 
         /// <summary>
@@ -135,7 +141,7 @@ namespace Ruhe.Common {
         /// <param name="flags">BindingFlags to use in finding the property</param>
         /// <returns>the value of <c>propertyName</c> on <c>obj</c></returns>
         public static object GetPropertyValue(this object obj, string propertyName, BindingFlags flags) {
-            var property = obj.GetProperty(propertyName, flags);
+            PropertyInfo property = obj.GetProperty(propertyName, flags);
             return property.GetValue(obj, null);
         }
 
@@ -144,13 +150,9 @@ namespace Ruhe.Common {
         }
 
         public static bool HasProperty(this object obj, string propertyName) {
-            try {
-                obj.GetPropertyValue(propertyName);
-            }
-            catch {
-                return false;
-            }
-            return true;
+            object value;
+            PropertyInfo info;
+            return TryNavigate(obj, propertyName, out info, out value);
         }
 
         /// <summary>
@@ -167,7 +169,7 @@ namespace Ruhe.Common {
         }
 
         public static object InvokeMethod(this object obj, string methodName, object[] parameters) {
-            var method = obj.GetType().GetMethod(methodName, Flags);
+            MethodInfo method = obj.GetType().GetMethod(methodName, Flags);
             return method.Invoke(obj, parameters);
         }
 
@@ -177,8 +179,8 @@ namespace Ruhe.Common {
 
         public static void SetFieldValue(this object obj, string fieldName, object fieldValue) {
             try {
-                var field = obj.GetField(fieldName);
-                var value = fieldValue;
+                FieldInfo field = obj.GetField(fieldName);
+                object value = fieldValue;
                 if (field.FieldType.IsEnum) {
                     value = ConvertToEnum(value, field.FieldType);
                 }
@@ -197,12 +199,30 @@ namespace Ruhe.Common {
         /// <param name="propertyName">the property to set</param>
         /// <param name="propertyValue">the value to assign to the property</param>
         public static void SetPropertyValue(this object obj, string propertyName, object propertyValue) {
-            var property = obj.GetProperty(propertyName);
-            var value = propertyValue;
+            PropertyInfo property = obj.GetProperty(propertyName);
+            object value = propertyValue;
             if (property.PropertyType.IsEnum) {
                 value = ConvertToEnum(value, property.PropertyType);
             }
             property.SetValue(obj, value, null);
+        }
+
+        private static bool TryNavigate(object obj, string propertyName, out PropertyInfo propertyInfo, out object value) {
+            propertyInfo = null;
+            value = null;
+
+            object property = obj;
+            PropertyInfo info = null;
+            foreach (string s in propertyName.Split('.')) {
+                if (property == null) return false;
+                info = property.GetType().GetProperty(s, Flags);
+                if (info == null)
+                    return false;
+                property = info.GetValue(property, null);
+            }
+            propertyInfo = info;
+            value = property;
+            return true;
         }
     }
 }

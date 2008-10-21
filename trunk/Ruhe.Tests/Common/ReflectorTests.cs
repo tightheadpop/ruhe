@@ -6,11 +6,6 @@ using Ruhe.Common;
 namespace Ruhe.Tests.Common {
     [TestFixture]
     public class ReflectorTests {
-
-        [Test]
-        public void TryWalkFindsValue() {
-            
-        }
         [Test]
         public void ConvertToEnum() {
             Assert.AreEqual(TestEnum.Tchotchke, "Tchotchke".As<TestEnum>());
@@ -28,7 +23,7 @@ namespace Ruhe.Tests.Common {
         public void FieldExists() {
             var testObject = new TestObject();
             Assert.IsTrue(testObject.FieldExists("_list"));
-            Assert.IsFalse(testObject.FieldExists("_nofieldherebuddy"));
+            Assert.IsFalse(testObject.FieldExists("_nofieldhere"));
         }
 
         [Test]
@@ -42,8 +37,19 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void GetPropertyValue() {
-            Assert.AreEqual("first".Length, new TestObject().GetPropertyValue("StringArrayProperty[0].Length"));
+        public void GetPropertyValueNavigatesObjectGraph() {
+            Assert.AreEqual("expected", new TestObject().GetPropertyValue("ComplexProperty.StringProperty"));
+        }
+
+        [Test]
+        [Ignore]
+        public void GetPropertyValueRecognizesIndexer() {
+            Assert.AreEqual(5, new TestObject().GetPropertyValue("StringArrayProperty[0].Length"));
+        }
+
+        [Test]
+        public void GetPropertyTypeNavigatesObjectGraph() {
+            Assert.AreEqual(typeof(string), new TestObject().GetPropertyType("ComplexProperty.StringProperty"));
         }
 
         [Test]
@@ -63,7 +69,7 @@ namespace Ruhe.Tests.Common {
         public void InvokeNonPublicMethod() {
             var testObject = new TestObject();
 
-            var result = testObject.InvokeMethod("Set");
+            object result = testObject.InvokeMethod("Set");
             Assert.IsNull(result);
             Assert.IsTrue(testObject.VerifySet);
         }
@@ -71,7 +77,7 @@ namespace Ruhe.Tests.Common {
         [Test]
         public void InvokePublicMethod() {
             var testObject = new TestObject();
-            var result = testObject.InvokeMethod("Get");
+            object result = testObject.InvokeMethod("Get");
             Assert.IsTrue(result.GetType().Equals(typeof(string)));
             Assert.AreEqual("set", result);
         }
@@ -118,6 +124,12 @@ namespace Ruhe.Tests.Common {
             Assert.AreEqual(TestEnum.Dingsbums, testObject.TestEnum);
         }
 
+        public class ComplexType {
+            public string StringProperty {
+                get { return "expected"; }
+            }
+        }
+
         public enum TestEnum {
             Tchotchke = 0,
             Dingsbums = 1
@@ -127,6 +139,10 @@ namespace Ruhe.Tests.Common {
             private IList _list = new ArrayList();
             private TestEnum _testEnum = TestEnum.Tchotchke;
             private bool _verifySet;
+
+            public ComplexType ComplexProperty {
+                get { return new ComplexType(); }
+            }
 
             public IList List {
                 get { return _list; }
