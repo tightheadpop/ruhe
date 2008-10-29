@@ -3,10 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
     public class ReflectorTests {
+        [Test]
+        public void BroadcastCanInvokeExtensionMethod() {
+            var a = new TestObject();
+            Quick.List(a).Broadcast().DisposeQuietly();
+            Assert.IsTrue(a.disposed);
+        }
+
+        [Test]
+        public void BroadcastPropertySet() {
+            var a = new TestObject();
+            Quick.List(a).Broadcast().VerifySet = true;
+            Assert.IsTrue(a.VerifySet);
+        }
+
         [Test]
         public void BroadcastsMethodInvocationToAllItemsInList() {
             var a = new TestObject();
@@ -49,6 +64,11 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
+        public void GetPropertyTypeNavigatesObjectGraph() {
+            Assert.AreEqual(typeof(string), new TestObject().GetPropertyType("ComplexProperty.StringProperty"));
+        }
+
+        [Test]
         public void GetPropertyValueNavigatesObjectGraph() {
             Assert.AreEqual("expected", new TestObject().GetPropertyValue("ComplexProperty.StringProperty"));
         }
@@ -57,11 +77,6 @@ namespace Ruhe.Tests.Common {
         [Ignore]
         public void GetPropertyValueRecognizesIndexer() {
             Assert.AreEqual(5, new TestObject().GetPropertyValue("StringArrayProperty[0].Length"));
-        }
-
-        [Test]
-        public void GetPropertyTypeNavigatesObjectGraph() {
-            Assert.AreEqual(typeof(string), new TestObject().GetPropertyType("ComplexProperty.StringProperty"));
         }
 
         [Test]
@@ -151,6 +166,7 @@ namespace Ruhe.Tests.Common {
             private IList _list = new ArrayList();
             private TestEnum _testEnum = TestEnum.Tchotchke;
             private bool _verifySet;
+            public bool disposed;
             public bool poked;
 
             public ComplexType ComplexProperty {
@@ -171,23 +187,25 @@ namespace Ruhe.Tests.Common {
                 set { _testEnum = value; }
             }
 
-            public bool VerifySet {
+            public virtual bool VerifySet {
                 get { return _verifySet; }
                 set { _verifySet = value; }
             }
 
-            public void Dispose() {}
+            public virtual void Dispose() {
+                disposed = true;
+            }
 
             public string Get() {
                 return "set";
             }
 
-            protected void Set() {
-                _verifySet = true;
-            }
-
             public virtual void Poke() {
                 poked = true;
+            }
+
+            protected void Set() {
+                _verifySet = true;
             }
         }
     }
