@@ -32,8 +32,7 @@ namespace Ruhe.Common {
         }
 
         /// <summary>
-        /// Broadcasts method invocation to all items in the list. The method must be virtual
-        /// or an interface implementation.
+        /// Broadcasts method invocation to all items in the list. The method must be virtual.
         /// </summary>
         /// <typeparam name="T">Any non-sealed class</typeparam>
         /// <param name="items"></param>
