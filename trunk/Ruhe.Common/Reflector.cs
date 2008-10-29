@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
+using Castle.Core.Interceptor;
+using Castle.DynamicProxy;
 
 namespace Ruhe.Common {
     /// <summary>
@@ -26,6 +29,17 @@ namespace Ruhe.Common {
         /// <param name="value">value to convert to T</param>
         public static T As<T>(this object value) where T : struct {
             return Convert.ToString(value).As<T>();
+        }
+
+        /// <summary>
+        /// Broadcasts method invocation to all items in the list. The method must be virtual
+        /// or an interface implementation.
+        /// </summary>
+        /// <typeparam name="T">Any non-sealed class</typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public static T Broadcast<T>(this IEnumerable<T> items) {
+            return new ProxyGenerator().CreateClassProxy<T>(new BroadcastInterceptor<T>(items));
         }
 
         /// <summary>
@@ -223,6 +237,20 @@ namespace Ruhe.Common {
             propertyInfo = info;
             value = property;
             return true;
+        }
+
+        private class BroadcastInterceptor<T> : IInterceptor {
+            private readonly IEnumerable<T> items;
+
+            public BroadcastInterceptor(IEnumerable<T> items) {
+                this.items = items;
+            }
+
+            public void Intercept(IInvocation invocation) {
+                foreach (var t in items) {
+                    invocation.Method.Invoke(t, invocation.Arguments);
+                }
+            }
         }
     }
 }
