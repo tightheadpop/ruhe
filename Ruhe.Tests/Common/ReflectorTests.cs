@@ -1,11 +1,23 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Ruhe.Common;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
     public class ReflectorTests {
+        [Test]
+        public void BroadcastsMethodInvocationToAllItemsInList() {
+            var a = new TestObject();
+            var b = new TestObject();
+            List<TestObject> list = Quick.List(a, b);
+            list.Broadcast().Poke();
+
+            a.poked.MustBeTrue();
+            b.poked.MustBeTrue();
+        }
+
         [Test]
         public void ConvertToEnum() {
             Assert.AreEqual(TestEnum.Tchotchke, "Tchotchke".As<TestEnum>());
@@ -139,6 +151,7 @@ namespace Ruhe.Tests.Common {
             private IList _list = new ArrayList();
             private TestEnum _testEnum = TestEnum.Tchotchke;
             private bool _verifySet;
+            public bool poked;
 
             public ComplexType ComplexProperty {
                 get { return new ComplexType(); }
@@ -171,6 +184,10 @@ namespace Ruhe.Tests.Common {
 
             protected void Set() {
                 _verifySet = true;
+            }
+
+            public virtual void Poke() {
+                poked = true;
             }
         }
     }
