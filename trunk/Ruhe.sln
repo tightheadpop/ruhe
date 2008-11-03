@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59C18FA1-5FD7-4983-BDD9-FF1E0C047359}"
 	ProjectSection(SolutionItems) = preProject
 		bin\AjaxControlToolkit.dll = bin\AjaxControlToolkit.dll
+		bin\Castle.Core.dll = bin\Castle.Core.dll
 		bin\Castle.Core.xml = bin\Castle.Core.xml
 		bin\Castle.DynamicProxy2.dll = bin\Castle.DynamicProxy2.dll
 		bin\Castle.DynamicProxy2.xml = bin\Castle.DynamicProxy2.xml

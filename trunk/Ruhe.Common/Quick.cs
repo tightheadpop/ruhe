@@ -74,5 +74,13 @@ namespace Ruhe.Common {
             return List(items).ConvertAll(
                 o => o == null ? string.Empty : o.ToString()).ToArray();
         }
+
+        public static HashSet<T> Set<T>(params T[] items) {
+            var result = new HashSet<T>();
+            foreach (var item in items) {
+                result.Add(item);
+            }
+            return result;
+        }
     }
 }

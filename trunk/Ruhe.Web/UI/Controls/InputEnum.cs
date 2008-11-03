@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
     //TODO : IInputControl
@@ -16,7 +16,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public T? Value {
-            get { return string.IsNullOrEmpty(List.SelectedValue) ? default(T?) : List.SelectedValue.As<T>(); }
+            get { return string.IsNullOrEmpty(List.SelectedValue) ? default(T?) : ((object) List.SelectedValue).As<T>(); }
             set { List.SelectedValue = (value.HasValue) ? value.Value.ToString() : string.Empty; }
         }
 
@@ -147,7 +147,7 @@ namespace Ruhe.Web.UI.Controls {
     public class InputEnumControlBuilder : ControlBuilder {
         [DebuggerStepThrough]
         public override void Init(TemplateParser parser, ControlBuilder parentBuilder, Type type, string tagName, string id, IDictionary attribs) {
-            string enumTypeName = (string) attribs["EnumType"];
+            var enumTypeName = (string) attribs["EnumType"];
             Type enumType = Type.GetType(enumTypeName);
 
             if (enumType == null)

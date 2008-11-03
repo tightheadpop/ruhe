@@ -108,7 +108,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Quick.cs" />
-    <Compile Include="Reflector.cs">
+    <Compile Include="Utilities\ObjectUtilities.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\Collections.cs">

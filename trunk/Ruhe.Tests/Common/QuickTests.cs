@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Ruhe.Common;
@@ -9,7 +8,7 @@ namespace Ruhe.Tests.Common {
     public class QuickTests {
         [Test]
         public void Array() {
-            Assert.AreEqual(new int[] {4, 3, 2, 1}, Quick.Array(4, 3, 2, 1));
+            Assert.AreEqual(new[] {4, 3, 2, 1}, Quick.Array(4, 3, 2, 1));
         }
 
         [Test]
@@ -34,8 +33,8 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void DictionaryKeyedByComplexProperty() {
-            Bar bar1 = new Bar(new Foo("p"));
-            Bar bar2 = new Bar(new Foo("q"));
+            var bar1 = new Bar(new Foo("p"));
+            var bar2 = new Bar(new Foo("q"));
             Dictionary<string, Bar> dictionary = Quick.Dictionary<string, Bar>("Foo.ID", Quick.List(bar1, bar2));
             Assert.AreEqual(2, dictionary.Count);
             Assert.AreSame(bar1, dictionary["p"]);
@@ -75,17 +74,26 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void ListFromIndividualItems() {
-            Assert.AreEqual(new string[] {"a", "b", "c"}, Quick.List("a", "b", "c"));
+            Assert.AreEqual(new[] {"a", "b", "c"}, Quick.List("a", "b", "c"));
+        }
+
+        [Test]
+        public void Set() {
+            HashSet<int> set = Quick.Set(1, 2, 3, 3);
+            Assert.AreEqual(3, set.Count);
+            Assert.IsTrue(set.Contains(1));
+            Assert.IsTrue(set.Contains(2));
+            Assert.IsTrue(set.Contains(3));
         }
 
         [Test]
         public void StringArray() {
-            Assert.AreEqual(new string[] {"1", "2", "3"}, Quick.StringArray(1, 2, 3));
+            Assert.AreEqual(new[] {"1", "2", "3"}, Quick.StringArray(1, 2, 3));
         }
 
         [Test]
         public void StringArrayFromIEnumerable() {
-            Assert.AreEqual(new string[] {"1", "2", "3"}, Quick.StringArray(Quick.List(1, 2, 3)));
+            Assert.AreEqual(new[] {"1", "2", "3"}, Quick.StringArray(Quick.List(1, 2, 3)));
         }
 
         private class Bar {
