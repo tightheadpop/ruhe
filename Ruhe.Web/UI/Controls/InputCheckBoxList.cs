@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Common;
 using Ruhe.Common.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
@@ -11,8 +10,6 @@ namespace Ruhe.Web.UI.Controls {
     /// Under development.
     /// </summary>
     public class InputCheckBoxList : CheckBoxList, IInputControl {
-        private IList disabledDataSource;
-
         public new IList DataSource {
             get { return (IList) base.DataSource; }
             set { base.DataSource = value; }
@@ -25,10 +22,7 @@ namespace Ruhe.Web.UI.Controls {
             }
         }
 
-        public IList DisabledDataSource {
-            get { return disabledDataSource; }
-            set { disabledDataSource = value; }
-        }
+        public IList DisabledDataSource { get; set; }
 
         public bool EnableClientScript {
             get {
@@ -118,10 +112,10 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void EmitDisabledScript() {
-            if (disabledDataSource == null || Page == null) return;
+            if (DisabledDataSource == null || Page == null) return;
 
             var indexes = new List<string>();
-            foreach (object o in disabledDataSource) {
+            foreach (object o in DisabledDataSource) {
                 indexes.Add(DataSource.IndexOf(o).ToString());
             }
             if (indexes.Count == 0) return;

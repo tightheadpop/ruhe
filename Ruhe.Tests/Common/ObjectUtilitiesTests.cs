@@ -7,7 +7,7 @@ using Ruhe.Common.Utilities;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
-    public class ReflectorTests {
+    public class ObjectUtilitiesTests {
         [Test]
         public void BroadcastCanInvokeExtensionMethod() {
             var a = new TestObject();

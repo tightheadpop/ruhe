@@ -140,7 +140,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\QuickTests.cs" />
-    <Compile Include="Common\ReflectorTests.cs">
+    <Compile Include="Common\ObjectUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\ValidateTests.cs" />

@@ -4,11 +4,11 @@ using System.Reflection;
 using Castle.Core.Interceptor;
 using Castle.DynamicProxy;
 
-namespace Ruhe.Common {
+namespace Ruhe.Common.Utilities {
     /// <summary>
     /// Function bucket providing quick access to System.Reflection actions
     /// </summary>
-    public static class Reflector {
+    public static class ObjectUtilities {
         private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy;
 
         /// <summary>
