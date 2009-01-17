@@ -10,6 +10,7 @@ namespace Ruhe.Web.UI.Controls {
             }
             set { base.DataFormatString = value; }
         }
+
         protected override string FormatDataValue(object dataValue, bool encode) {
             return string.Format(DataFormatString, dataValue);
         }

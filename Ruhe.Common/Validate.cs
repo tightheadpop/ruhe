@@ -31,6 +31,10 @@ namespace Ruhe.Common {
             Equals(o, other).MustBeTrue();
         }
 
+        public static void MustEqual(this object o, object other, string errorMessage) {
+            Equals(o, other).MustBeTrue(errorMessage);
+        }
+
         public static void MustHaveNoNullElements(this IEnumerable list) {
             list.MustHaveNoNullElements("List should not contain any null items.");
         }
@@ -83,10 +87,6 @@ namespace Ruhe.Common {
 
         private static void Throw(string errorMessage) {
             throw new ArgumentException(errorMessage);
-        }
-
-        public static void MustEqual(this object o, object other, string errorMessage) {
-            Equals(o, other).MustBeTrue(errorMessage);
         }
     }
 }

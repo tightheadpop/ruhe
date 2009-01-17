@@ -5,6 +5,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class BoundFieldTests : RuheWebTest<BoundField> {
         [Test]
+        public void BooleanBoundFieldAsText() {
+            LoadPage();
+            StringAssert.Contains("No", Browser.CurrentPageText);
+        }
+
+        [Test]
         public void DateBoundFieldAppliesConfiguredDateFormat() {
             LoadPage();
             StringAssert.Contains("09-Feb-2009", Browser.CurrentPageText);
@@ -20,12 +26,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void UsesOgnlNavigationOnBoundItem() {
             LoadPage();
             StringAssert.Contains("hi, mom! i've got a new job.".Length.ToString(), Browser.CurrentPageText);
-        }
-
-        [Test]
-        public void BooleanBoundFieldAsText() {
-            LoadPage();
-            StringAssert.Contains("No", Browser.CurrentPageText);
         }
     }
 }

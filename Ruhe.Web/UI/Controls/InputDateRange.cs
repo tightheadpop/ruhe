@@ -151,7 +151,7 @@ namespace Ruhe.Web.UI.Controls {
             readOnlyLabel.ID = ID + "_readOnly";
             requiredLabel.ID = ID + "_requiredLabel";
             groupValidator.ID = ID + "_groupValidator";
-            groupValidator.GroupToValidate = new string[] {fromDate.ID, toDate.ID};
+            groupValidator.GroupToValidate = new[] {fromDate.ID, toDate.ID};
             rangeValidator.ID = ID + "_rangeValidator";
             rangeValidator.ControlToValidate = toDate.ID;
         }

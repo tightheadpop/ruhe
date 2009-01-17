@@ -17,7 +17,7 @@ public partial class Web_UI_Controls_InputTextBoxTests : Page {
             testBox.Visible = false;
             aspxRequired.Visible = true;
         }
-        submitButton.Click += new EventHandler(submitButton_Click);
+        submitButton.Click += submitButton_Click;
     }
 
     private void submitButton_Click(object sender, EventArgs e) {

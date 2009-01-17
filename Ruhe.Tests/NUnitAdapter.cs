@@ -44,7 +44,7 @@ namespace Ruhe.Tests {
     /// </summary>
     [TestFixture]
     public abstract class WebFormTestCase : CompatibilityAdapter {
-        private bool setupCalled = false;
+        private bool setupCalled;
 
         /// <summary>
         /// Do not call.  For use by NUnit only.

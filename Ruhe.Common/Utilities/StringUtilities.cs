@@ -16,10 +16,6 @@ namespace Ruhe.Common.Utilities {
             return true;
         }
 
-        public static bool EqualsIgnoreCase(this string string1, string string2) {
-            return string.Compare(string1, string2, true) == 0;
-        }
-
         public static bool ContainsIgnoreCase(this string searchIn, string subString) {
             return searchIn.ToLower().IndexOf(subString.ToLower(), 0) >= 0;
         }
@@ -37,6 +33,10 @@ namespace Ruhe.Common.Utilities {
                 strings[i] = strings[i].CsvQuote();
             }
             return strings;
+        }
+
+        public static bool EqualsIgnoreCase(this string string1, string string2) {
+            return string.Compare(string1, string2, true) == 0;
         }
 
         public static bool IsEmpty(this string s) {

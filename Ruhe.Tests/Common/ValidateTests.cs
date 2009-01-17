@@ -44,20 +44,6 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void MustEqual() {
-            true.MustEqual(true);
-
-            var o = new object();
-            o.MustEqual(o);
-            1.MustEqual(6-5);
-            "p".MustEqual("p");
-            "p".MustEqual("foo");
-        }
-
-
-
-        [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotEmpty() {
             Quick.List(new object()).MustNotBeEmpty(ShouldNotFail);
@@ -100,6 +86,18 @@ namespace Ruhe.Tests.Common {
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsTrueFormatted() {
             false.MustBeTrue(Format, 1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MustEqual() {
+            true.MustEqual(true);
+
+            var o = new object();
+            o.MustEqual(o);
+            1.MustEqual(6 - 5);
+            "p".MustEqual("p");
+            "p".MustEqual("foo");
         }
 
         [Test]

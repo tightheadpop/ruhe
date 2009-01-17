@@ -52,7 +52,7 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void DisposingListsQuietlyIgnoresNulls() {
-            Quick.List((IDisposable)null).DisposeQuietly();
+            Quick.List((IDisposable) null).DisposeQuietly();
         }
 
         [Test]
