@@ -65,7 +65,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void RegexValidation() {
             // expression in page = \d{3}
-            string[] badValues = new string[] {"12", "1234", "a123", "abc"};
+            string[] badValues = new[] {"12", "1234", "a123", "abc"};
 
             LoadPageWithOption("Regex");
 

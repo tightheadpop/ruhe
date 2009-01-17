@@ -10,7 +10,7 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
         }
 
         public class Foo {
-            private readonly string[] bar = new string[] {"hi, mom! i've got a new job."};
+            private readonly string[] bar = new[] {"hi, mom! i've got a new job."};
 
             public string[] Bar {
                 get { return bar; }

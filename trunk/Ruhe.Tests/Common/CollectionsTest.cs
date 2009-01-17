@@ -13,22 +13,19 @@ namespace Ruhe.Tests.Common {
     public class CollectionsTest {
         [Test]
         public void FindFirstTypeThatSatisfiesPredicate() {
-            ArrayList list = new ArrayList();
-            list.Add(new DateTime());
-            Literal expected = new Literal();
-            expected.ID = "expected";
+            var list = new ArrayList {new DateTime()};
+            var expected = new Literal {ID = "expected"};
             list.Add(expected);
-            Literal notExpected = new Literal();
-            notExpected.ID = "notExpected";
+            var notExpected = new Literal {ID = "notExpected"};
             list.Add(notExpected);
 
-            Control actual = list.First(delegate(Control c) { return c.ID == "expected"; });
+            Control actual = list.First((Control c) => c.ID == "expected");
             Assert.AreSame(expected, actual);
         }
 
         [Test]
         public void FirstForCollection() {
-            StringCollection collection = new StringCollection();
+            var collection = new StringCollection();
             Assert.AreEqual(null, collection.First());
 
             collection.Add("1");
@@ -49,17 +46,17 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        public void Last() {
+        public void LastShouldReturnItemAtEndOfList() {
             Assert.AreEqual("last", Quick.List("first", "middle", "last").Last());
         }
 
         [Test]
-        public void LastReturnsNullForEmptyList() {
+        public void LastShouldReturnNullForEmptyList() {
             Assert.IsNull(new object[] {}.Last());
         }
 
         [Test]
-        public void Shift() {
+        public void ShiftShouldReturnTheFirstItemAndRemoveItFromTheList() {
             List<int> list = Quick.List(1, 2, 3);
             Assert.AreEqual(1, list.Shift());
             Assert.AreEqual(2, list.Count);

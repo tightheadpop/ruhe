@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
-using Ruhe.Common.Utilities;
 using Ruhe.Common;
+using Ruhe.Common.Utilities;
 
 namespace Ruhe.Tests.Common {
     [TestFixture]
@@ -12,6 +12,7 @@ namespace Ruhe.Tests.Common {
             "this test".Contains("TEST").MustBeFalse();
             "this test".Contains("foo").MustBeFalse();
         }
+
         [Test]
         public void ContainsIgnoreCase() {
             "this test is neat".ContainsIgnoreCase("TEST").MustBeTrue();

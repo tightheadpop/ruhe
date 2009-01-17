@@ -29,7 +29,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void SelectByList() {
             list.DataBind();
 
-            list.SelectByList(new Thing[] {b, c});
+            list.SelectByList(new[] {b, c});
 
             Assert.IsFalse(list.Items[0].Selected);
             Assert.IsTrue(list.Items[1].Selected);
@@ -38,7 +38,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void SelectedDataSource() {
-            list.SelectedDataSource = new Thing[] {b, c};
+            list.SelectedDataSource = new[] {b, c};
             list.DataBind();
 
             Assert.IsFalse(list.Items[0].Selected);
@@ -48,15 +48,15 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void SelectedIntValues() {
-            list.SelectedDataSource = new Thing[] {b, c};
+            list.SelectedDataSource = new[] {b, c};
             list.DataBind();
 
-            Assert.AreEqual(new int[] {2, 3}, list.SelectedIntValues);
+            Assert.AreEqual(new[] {2, 3}, list.SelectedIntValues);
         }
 
         [Test]
         public void SelectedItems() {
-            list.SelectedDataSource = new Thing[] {b, c};
+            list.SelectedDataSource = new[] {b, c};
             list.DataBind();
 
             Assert.AreEqual(2, list.SelectedItems.Count);
@@ -66,10 +66,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void SelectedValues() {
-            list.SelectedDataSource = new Thing[] {b, c};
+            list.SelectedDataSource = new[] {b, c};
             list.DataBind();
 
-            Assert.AreEqual(new string[] {"2", "3"}, list.SelectedValues);
+            Assert.AreEqual(new[] {"2", "3"}, list.SelectedValues);
         }
 
         protected override void SetUp() {
@@ -79,7 +79,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             b = new Thing("b", 2);
             c = new Thing("c", 3);
             Thing a = new Thing("a", 1);
-            list.DataSource = new Thing[] {a, b, c};
+            list.DataSource = new[] {a, b, c};
         }
 
         private class Thing {
