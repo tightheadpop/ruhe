@@ -7,28 +7,55 @@ namespace Ruhe.Tests.Common {
     [TestFixture]
     public class DateTimeUtilitiesTests {
         [Test]
+        public void AfterShouldGiveDateInFuture() {
+            var start = new DateTime(2005, 5, 9);
+            var actual = 2.Days().After(start);
+            Assert.AreEqual(start.AddDays(2), actual);
+        }
+
+        [Test]
+        public void AgoShouldGiveDateInPast() {
+            //TODO: typemock to mock DateTime.Now
+            var ago = 2.Days().Ago();
+            Assert.AreEqual(DateTime.Today.AddDays(-2), ago.Date);
+        }
+
+        [Test]
+        public void BeforeShouldGiveDateInFuture() {
+            var start = new DateTime(2005, 5, 9);
+            var actual = 2.Days().Before(start);
+            Assert.AreEqual(start.AddDays(-2), actual);
+        }
+
+        [Test]
+        public void DaysShouldGiveTimeSpan() {
+            var span = 2.Days();
+            Assert.AreEqual(2, span.Days);
+        }
+
+        [Test]
         public void GetFirstDayOfWeek() {
-            int sunday = 4;
-            DateTime originalDate = new DateTime(2004, 7, sunday);
-            DateTime firstDay = originalDate.GetFirstDayOfWeek();
+            const int sunday = 4;
+            var originalDate = new DateTime(2004, 7, sunday);
+            var firstDay = originalDate.FirstDayOfWeek();
             Assert.IsTrue(firstDay.DayOfWeek == DayOfWeek.Sunday);
             Assert.IsTrue(firstDay.Year == originalDate.Year);
             Assert.IsTrue(firstDay.Month == originalDate.Month);
             Assert.IsTrue(firstDay.Day == originalDate.Day);
             Assert.IsTrue(firstDay.DayOfWeek == originalDate.DayOfWeek);
 
-            int monday = 5;
+            const int monday = 5;
             originalDate = new DateTime(2004, 7, monday);
-            firstDay = originalDate.GetFirstDayOfWeek();
+            firstDay = originalDate.FirstDayOfWeek();
             Assert.IsTrue(firstDay.DayOfWeek == DayOfWeek.Sunday);
             Assert.IsTrue(firstDay.Year == originalDate.Year);
             Assert.IsTrue(firstDay.Month == originalDate.Month);
             Assert.IsTrue(firstDay.Day != originalDate.Day);
             Assert.IsTrue(firstDay.DayOfWeek != originalDate.DayOfWeek);
 
-            int thursday = 8;
+            const int thursday = 8;
             originalDate = new DateTime(2004, 7, thursday);
-            firstDay = originalDate.GetFirstDayOfWeek();
+            firstDay = originalDate.FirstDayOfWeek();
             Assert.IsTrue(firstDay.DayOfWeek == DayOfWeek.Sunday);
             Assert.IsTrue(firstDay.Year == originalDate.Year);
             Assert.IsTrue(firstDay.Month == originalDate.Month);
@@ -38,42 +65,67 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void GetNextDayOfWeek() {
-            DateTime expected = new DateTime(2005, 5, 9);
+            var expected = new DateTime(2005, 5, 9);
 
-            DateTime startingDate = new DateTime(2005, 5, 3);
-            Assert.AreEqual(expected, startingDate.GetNext(DayOfWeek.Monday));
+            var startingDate = new DateTime(2005, 5, 3);
+            Assert.AreEqual(expected, startingDate.Next(DayOfWeek.Monday));
 
             startingDate = new DateTime(2005, 5, 2);
-            Assert.AreEqual(expected, startingDate.GetNext(DayOfWeek.Monday));
+            Assert.AreEqual(expected, startingDate.Next(DayOfWeek.Monday));
 
             startingDate = new DateTime(2005, 5, 8);
-            Assert.AreEqual(expected, startingDate.GetNext(DayOfWeek.Monday));
+            Assert.AreEqual(expected, startingDate.Next(DayOfWeek.Monday));
         }
 
         [Test]
         public void GetNthDayOfWeekInMonth() {
-            DateTime May9th2005 = new DateTime(2005, 5, 9);
+            var May9th2005 = new DateTime(2005, 5, 9);
             Assert.AreEqual(May9th2005, 2.GetNthDayOfWeekInMonth(DayOfWeek.Monday, Month.May, 2005));
 
-            DateTime May1st2005 = new DateTime(2005, 5, 1);
+            var May1st2005 = new DateTime(2005, 5, 1);
             Assert.AreEqual(May1st2005, 1.GetNthDayOfWeekInMonth(DayOfWeek.Sunday, Month.May, 2005));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetNthDayOfWeekInMonthOutOfRange() {
-            (-1).GetNthDayOfWeekInMonth(DayOfWeek.Sunday, Month.May, 2005);
+            (0).GetNthDayOfWeekInMonth(DayOfWeek.Sunday, Month.May, 2005);
         }
 
         [Test]
         public void GetPreviousDayOfWeek() {
-            DateTime expected = new DateTime(2005, 5, 9);
+            var expected = new DateTime(2005, 5, 9);
 
-            DateTime start = new DateTime(2005, 5, 12);
-            Assert.AreEqual(expected, start.GetPrevious(DayOfWeek.Monday));
+            var start = new DateTime(2005, 5, 12);
+            Assert.AreEqual(expected, start.Previous(DayOfWeek.Monday));
 
             start = new DateTime(2005, 5, 16);
-            Assert.AreEqual(expected, start.GetPrevious(DayOfWeek.Monday));
+            Assert.AreEqual(expected, start.Previous(DayOfWeek.Monday));
+        }
+
+        [Test]
+        public void HenceShouldGiveDateInFuture() {
+            //TODO: typemock to mock DateTime.Now
+            var hence = 2.Days().FromNow();
+            Assert.AreEqual(DateTime.Today.AddDays(2), hence.Date);
+        }
+
+        [Test]
+        public void HoursShouldGiveTimeSpan() {
+            var span = 2.Hours();
+            Assert.AreEqual(2, span.Hours);
+        }
+
+        [Test]
+        public void MinutesShouldGiveTimeSpan() {
+            var span = 2.Minutes();
+            Assert.AreEqual(2, span.Minutes);
+        }
+
+        [Test]
+        public void SecondsShouldGiveTimeSpan() {
+            var span = 2.Seconds();
+            Assert.AreEqual(2, span.Seconds);
         }
     }
 }

@@ -74,7 +74,13 @@ namespace Ruhe.Tests.Common {
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Make it so")]
+        public void GetPropertyValueNavigatesObjectGraphUsingPropertiesAndFields() {
+            Assert.AreEqual("expected", new TestObject().GetPropertyValue("child.ComplexProperty.StringProperty"));
+        }
+
+        [Test]
+        [Ignore("Make it so")]
         public void GetPropertyValueRecognizesIndexer() {
             Assert.AreEqual(5, new TestObject().GetPropertyValue("StringArrayProperty[0].Length"));
         }
