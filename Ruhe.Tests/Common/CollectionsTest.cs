@@ -19,7 +19,7 @@ namespace Ruhe.Tests.Common {
             var notExpected = new Literal {ID = "notExpected"};
             list.Add(notExpected);
 
-            Control actual = list.First((Control c) => c.ID == "expected");
+            var actual = list.First((Control c) => c.ID == "expected");
             Assert.AreSame(expected, actual);
         }
 
@@ -57,9 +57,29 @@ namespace Ruhe.Tests.Common {
 
         [Test]
         public void ShiftShouldReturnTheFirstItemAndRemoveItFromTheList() {
-            List<int> list = Quick.List(1, 2, 3);
+            var list = Quick.List(1, 2, 3);
             Assert.AreEqual(1, list.Shift());
             Assert.AreEqual(2, list.Count);
+        }
+
+        [Test]
+        public void ShouldProvideAddRangeForICollection() {
+            var list = new List<int> { 1, 2 };
+            ((ICollection<int>) list).AddRange(new[] {3});
+            Assert.AreEqual(new[] { 1, 2, 3 }, list);
+        }
+
+        [Test]
+        public void ShouldProvideConvertAllForIEnumerable() {
+            Assert.AreEqual(new [] {"1", "2", "3"}, new[] {1, 2, 3}.ConvertAll(i => i.ToString()));
+        }
+
+        [Test]
+        public void ShouldProvideContainsForIEnumerable() {
+            var things = new object[]{1,2,3,null};
+            things.Contains(1).MustBeTrue();
+            things.Contains(null).MustBeTrue();
+            things.Contains(5).MustBeFalse();
         }
     }
 }

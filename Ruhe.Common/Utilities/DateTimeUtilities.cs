@@ -39,9 +39,9 @@ namespace Ruhe.Common.Utilities {
             if (n <= 0)
                 throw new ArgumentOutOfRangeException("n", n, "n must be greater than zero");
 
-            DateTime startingDate = new DateTime(year, (int) month, 1).AddDays(-1);
-            DateTime result = startingDate;
-            for (int i = 0; i < n; i++)
+            var startingDate = new DateTime(year, (int) month, 1).AddDays(-1);
+            var result = startingDate;
+            for (var i = 0; i < n; i++)
                 result = result.Next(dayOfWeek);
             return result;
         }
@@ -68,11 +68,11 @@ namespace Ruhe.Common.Utilities {
         }
 
         public static long MonthsBetween(this DateTime date1, DateTime date2, RoundingOption roundingOption) {
-            long differenceInMonths = DateAndTime.DateDiff(DateInterval.Month, date1, date2, Microsoft.VisualBasic.FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1);
+            var differenceInMonths = DateAndTime.DateDiff(DateInterval.Month, date1, date2, Microsoft.VisualBasic.FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1);
 
             if (roundingOption == RoundingOption.Up) {
-                DateTime tempDate = date1.AddMonths((int) differenceInMonths);
-                long differenceInDays = DateAndTime.DateDiff(DateInterval.Day, tempDate, date2, Microsoft.VisualBasic.FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1);
+                var tempDate = date1.AddMonths((int) differenceInMonths);
+                var differenceInDays = DateAndTime.DateDiff(DateInterval.Day, tempDate, date2, Microsoft.VisualBasic.FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1);
                 if (differenceInDays > 0) {
                     differenceInMonths++;
                 }
