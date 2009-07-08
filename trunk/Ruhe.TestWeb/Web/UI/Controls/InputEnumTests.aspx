@@ -2,6 +2,6 @@
 
 
 <asp:Content runat="server" ContentPlaceHolderID="content">
-    <ruhe:InputEnum id="noInitialBlank" EnumType="Ruhe.Common.Month, Ruhe.Common" runat="server" />
-    <ruhe:InputEnum id="initialBlank" runat="server" EnumType="Ruhe.Common.Month, Ruhe.Common" InitialBlank="true"/>
+    <ruhe:InputEnum id="noInitialBlank" EnumType="Ruhe.Month, Ruhe" runat="server" />
+    <ruhe:InputEnum id="initialBlank" runat="server" EnumType="Ruhe.Month, Ruhe" InitialBlank="true"/>
 </asp:Content>

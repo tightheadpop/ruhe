@@ -2,8 +2,7 @@ using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Common;
-using Ruhe.Common.Utilities;
+using Ruhe.Utilities;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {

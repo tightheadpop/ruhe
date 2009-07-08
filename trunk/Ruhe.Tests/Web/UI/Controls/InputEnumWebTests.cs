@@ -1,7 +1,6 @@
 using System;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Common;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {

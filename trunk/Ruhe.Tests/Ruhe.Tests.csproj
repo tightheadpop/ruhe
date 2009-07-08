@@ -108,52 +108,46 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <ProjectReference Include="..\Ruhe.Common\Ruhe.Common.csproj">
-      <Name>Ruhe.Common</Name>
-      <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
     <ProjectReference Include="..\Ruhe.TestExtensions\Ruhe.TestExtensions.csproj">
       <Name>Ruhe.TestExtensions</Name>
       <Project>{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
-    <ProjectReference Include="..\Ruhe.Web\Ruhe.Web.csproj">
-      <Name>Ruhe.Web</Name>
-      <Project>{8262DC2E-A3BB-4999-9F70-97E268C2EB71}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    <ProjectReference Include="..\Ruhe\Ruhe.csproj">
+      <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
+      <Name>Ruhe</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\CollectionsTest.cs">
+    <Compile Include="CollectionsTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\DateRangeTests.cs" />
-    <Compile Include="Common\DateTimeUtilitiesTests.cs">
+    <Compile Include="DateRangeTests.cs" />
+    <Compile Include="DateTimeUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\DelimitedStringBuilderTests.cs">
+    <Compile Include="DelimitedStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\DisposeOfTest.cs">
+    <Compile Include="DisposeOfTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\QuickTests.cs" />
-    <Compile Include="Common\ObjectUtilitiesTests.cs">
+    <Compile Include="QuickTests.cs" />
+    <Compile Include="ObjectUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\ValidateTests.cs" />
-    <Compile Include="Common\ValueTypesTest.cs" />
+    <Compile Include="ValidateTests.cs" />
+    <Compile Include="ValueTypesTest.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />
     <Compile Include="Web\UI\Controls\InputCheckBoxListTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
-    <Compile Include="Common\StringUtilitiesTests.cs">
+    <Compile Include="StringUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdFor.cs" />
