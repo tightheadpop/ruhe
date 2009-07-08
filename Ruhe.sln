@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		external\nunit.framework.dll = external\nunit.framework.dll
 		external\NUnitAsp.dll = external\NUnitAsp.dll
 		Ruhe.resharper = Ruhe.resharper
-		bin\System.Web.Extensions.dll = bin\System.Web.Extensions.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.Web", "Ruhe.Web\Ruhe.Web.csproj", "{8262DC2E-A3BB-4999-9F70-97E268C2EB71}"
