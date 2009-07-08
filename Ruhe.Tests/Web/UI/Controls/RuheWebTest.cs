@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using NUnit.Framework;
-using Ruhe.Common.Utilities;
 using Ruhe.TestExtensions;
+using Ruhe.Utilities;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     public class RuheWebTest<T> : WebFormTestCase {

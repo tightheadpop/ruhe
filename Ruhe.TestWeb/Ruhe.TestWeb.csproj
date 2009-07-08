@@ -273,16 +273,6 @@
     <Content Include="Web\UI\Controls\MessageTests.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ruhe.Common\Ruhe.Common.csproj">
-      <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
-      <Name>Ruhe.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ruhe.Web\Ruhe.Web.csproj">
-      <Project>{8262DC2E-A3BB-4999-9F70-97E268C2EB71}</Project>
-      <Name>Ruhe.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Ajax.Master" />
     <Content Include="AnotherLayoutContainer.ascx" />
     <Content Include="DisabledElementTest.aspx" />
@@ -298,6 +288,12 @@
     <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
     <Content Include="Web\UI\RequireTests.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ruhe\Ruhe.csproj">
+      <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
+      <Name>Ruhe</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" Condition="" />

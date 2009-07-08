@@ -3,7 +3,6 @@ using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Common;
 using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
 
@@ -26,8 +25,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void GetAndSetDateRangeValue() {
-            InputDateRange input = new InputDateRange();
-            DateRange oneWeek = new DateRange(DateTime.Today, DateTime.Today.AddDays(7));
+            var input = new InputDateRange();
+            var oneWeek = new DateRange(DateTime.Today, DateTime.Today.AddDays(7));
             input.DateRange = oneWeek;
 
             Assert.AreEqual(oneWeek, input.DateRange);
@@ -40,11 +39,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void SettingWidthActsOnChildInputDateControls() {
-            InputDateRange range = new InputDateRange();
-            Unit expected = Unit.Parse("8em");
+            var range = new InputDateRange();
+            var expected = Unit.Parse("8em");
             range.Width = expected;
-            ControlUtilities.FindRecursive<InputDate>(range).ForEach(
-                delegate(InputDate date) { Assert.AreEqual(expected, date.Width); });
+            ControlUtilities.FindRecursive<InputDate>(range).ForEach(date => Assert.AreEqual(expected, date.Width));
         }
 
         [Test]
@@ -64,7 +62,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             WebAssert.NotVisible(readOnlyTo);
             WebAssert.NotVisible(readOnlyRequiredLabel);
             WebAssert.Visible(readOnlyLabel);
-            DateRange expected = new DateRange(DateTime.Today, DateTime.Today.AddDays(3));
+            var expected = new DateRange(DateTime.Today, DateTime.Today.AddDays(3));
             Assert.AreEqual(expected.ToString("M/d/yyyy"), readOnlyLabel.Text);
         }
 

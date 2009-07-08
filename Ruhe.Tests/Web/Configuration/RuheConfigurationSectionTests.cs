@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Threading;
 using NUnit.Framework;
-using Ruhe.Web.Configuration;
+using Ruhe.Configuration;
 
 namespace Ruhe.Tests.Web.Configuration {
     [TestFixture]

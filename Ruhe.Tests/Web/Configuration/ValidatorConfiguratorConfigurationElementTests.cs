@@ -1,6 +1,6 @@
 using System.Web.UI.WebControls;
 using NUnit.Framework;
-using Ruhe.Web.Configuration;
+using Ruhe.Configuration;
 using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
 
