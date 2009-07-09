@@ -193,15 +193,15 @@
     <Compile Include="Web\WebUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\calendar.png" />
-    <Content Include="Resources\cancel.png" />
-    <Content Include="Resources\error.gif" />
-    <Content Include="Resources\maxlength.htc" />
-    <Content Include="Resources\required.gif" />
-    <Content Include="Resources\reset.png" />
-    <Content Include="Resources\ruhe.css" />
-    <Content Include="Resources\ruhe.js" />
-    <Content Include="Resources\save.png" />
+    <EmbeddedResource Include="Web\Resources\calendar.png" />
+    <EmbeddedResource Include="Web\Resources\cancel.png" />
+    <EmbeddedResource Include="Web\Resources\error.gif" />
+    <EmbeddedResource Include="Web\Resources\maxlength.htc" />
+    <EmbeddedResource Include="Web\Resources\required.gif" />
+    <EmbeddedResource Include="Web\Resources\reset.png" />
+    <EmbeddedResource Include="Web\Resources\ruhe.css" />
+    <EmbeddedResource Include="Web\Resources\ruhe.js" />
+    <EmbeddedResource Include="Web\Resources\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
