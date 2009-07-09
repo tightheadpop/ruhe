@@ -137,35 +137,71 @@
     </Compile>
     <Compile Include="Validate.cs" />
     <Compile Include="ValueType.cs" />
+    <Compile Include="Web\UI\CompositeControl.cs" />
+    <Compile Include="Web\UI\Controls\AbstractValueTypeInput.cs" />
+    <Compile Include="Web\UI\Controls\BooleanBoundField.cs" />
+    <Compile Include="Web\UI\Controls\BoundField.cs" />
+    <Compile Include="Web\UI\Controls\BreakingSpace.cs" />
+    <Compile Include="Web\UI\Controls\Button.cs" />
+    <Compile Include="Web\UI\Controls\CancelButton.cs" />
+    <Compile Include="Web\UI\Controls\ControlGroup.cs" />
+    <Compile Include="Web\UI\Controls\DateBoundField.cs" />
+    <Compile Include="Web\UI\Controls\EncodedLabel.cs" />
+    <Compile Include="Web\UI\Controls\ErrorIcon.cs" />
+    <Compile Include="Web\UI\Controls\GrayButton.cs" />
+    <Compile Include="Web\UI\Controls\IIcon.cs" />
+    <Compile Include="Web\UI\Controls\IInputControl.cs" />
+    <Compile Include="Web\UI\Controls\ILabeledControl.cs" />
+    <Compile Include="Web\UI\Controls\ILayoutContainer.cs" />
+    <Compile Include="Web\UI\Controls\ImageIcon.cs" />
+    <Compile Include="Web\UI\Controls\InputCheckBoxList.cs" />
+    <Compile Include="Web\UI\Controls\InputDate.cs" />
+    <Compile Include="Web\UI\Controls\InputDateRange.cs" />
+    <Compile Include="Web\UI\Controls\InputDateRangeValidator.cs" />
+    <Compile Include="Web\UI\Controls\InputDateValidator.cs" />
+    <Compile Include="Web\UI\Controls\InputDropDownList.cs" />
+    <Compile Include="Web\UI\Controls\InputEmailAddress.cs" />
+    <Compile Include="Web\UI\Controls\InputEnum.cs" />
+    <Compile Include="Web\UI\Controls\InputInteger.cs" />
+    <Compile Include="Web\UI\Controls\InputListBox.cs" />
+    <Compile Include="Web\UI\Controls\InputNumber.cs" />
+    <Compile Include="Web\UI\Controls\InputPhoneExtension.cs" />
+    <Compile Include="Web\UI\Controls\InputPhoneNumber.cs" />
+    <Compile Include="Web\UI\Controls\InputTextBox.cs" />
+    <Compile Include="Web\UI\Controls\InputZipCode.cs" />
+    <Compile Include="Web\UI\Controls\LabeledControlPanel.cs" />
+    <Compile Include="Web\UI\Controls\LabelPosition.cs" />
+    <Compile Include="Web\UI\Controls\Legend.cs" />
+    <Compile Include="Web\UI\Controls\LineBreak.cs" />
+    <Compile Include="Web\UI\Controls\LinkButton.cs" />
+    <Compile Include="Web\UI\Controls\Message.cs" />
+    <Compile Include="Web\UI\Controls\NonBreakingSpace.cs" />
+    <Compile Include="Web\UI\Controls\OrGroupValidator.cs" />
+    <Compile Include="Web\UI\Controls\RadioButtonList.cs" />
+    <Compile Include="Web\UI\Controls\RequiredIcon.cs" />
+    <Compile Include="Web\UI\Controls\ResetButton.cs" />
+    <Compile Include="Web\UI\Controls\RuheScriptReference.cs" />
+    <Compile Include="Web\UI\Controls\SaveButton.cs" />
+    <Compile Include="Web\UI\Controls\SectionHeader.cs" />
+    <Compile Include="Web\UI\Controls\UpdateLabel.cs" />
+    <Compile Include="Web\UI\Controls\ValidationSummary.cs" />
+    <Compile Include="Web\UI\ControlUtilities.cs" />
+    <Compile Include="Web\UI\DefaultValidatorConfigurator.cs" />
+    <Compile Include="Web\UI\IValidatorConfigurator.cs" />
+    <Compile Include="Web\UI\Require.cs" />
     <Compile Include="Web\WebResourceLoader.cs" />
     <Compile Include="Web\WebUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\calendar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\error.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\maxlength.htc" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\required.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\reset.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ruhe.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ruhe.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\save.png" />
+    <Content Include="Resources\calendar.png" />
+    <Content Include="Resources\cancel.png" />
+    <Content Include="Resources\error.gif" />
+    <Content Include="Resources\maxlength.htc" />
+    <Content Include="Resources\required.gif" />
+    <Content Include="Resources\reset.png" />
+    <Content Include="Resources\ruhe.css" />
+    <Content Include="Resources\ruhe.js" />
+    <Content Include="Resources\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
