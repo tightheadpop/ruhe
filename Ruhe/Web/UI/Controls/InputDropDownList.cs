@@ -157,7 +157,7 @@ namespace Ruhe.Web.UI.Controls {
         /// </summary>
         public string SelectedText {
             get {
-                string result = string.Empty;
+                var result = string.Empty;
                 if (SelectedItem != null) {
                     result = SelectedItem.Text;
                 }
@@ -210,7 +210,7 @@ namespace Ruhe.Web.UI.Controls {
         /// <param name="initialValue">the <see cref="ListItem.Value"/> of the <see cref="ListItem"/></param>
         /// <param name="selected">whether the item is selected initially</param>
         public void AddInitialValueToList(string initialText, string initialValue, bool selected) {
-            ListItem item = new ListItem(initialText, initialValue);
+            var item = new ListItem(initialText, initialValue);
             Items.Insert(0, item);
             if (selected) {
                 SelectByValue(initialValue);
@@ -218,7 +218,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected virtual void AssignIdsToChildControls() {
-            string baseId = ID + "_";
+            var baseId = ID + "_";
             requiredLabel.ID = baseId + "required";
             readOnlyLabel.ID = baseId + "readOnly";
             requiredValidator.ID = baseId + "requiredValidator";
@@ -285,7 +285,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void EnsureInitialBlank() {
-            bool doesNotHaveInitialBlank = Items.Count > 0 && Items[0].Value.Length > 0;
+            var doesNotHaveInitialBlank = Items.Count > 0 && Items[0].Value.Length > 0;
             if (InitialBlank && doesNotHaveInitialBlank) {
                 AddInitialValueToList(string.Empty, true);
             }

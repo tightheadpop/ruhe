@@ -6,7 +6,7 @@ namespace Ruhe.Tests.Web {
     public class QueryStringBuilderTests {
         [Test]
         public void Decoding() {
-            QueryStringBuilder builder = QueryStringBuilder.Parse("x=1%2&x=7");
+            var builder = QueryStringBuilder.Parse("x=1%2&x=7");
 
             Assert.AreEqual(1, builder.Keys.Count, "Incorrect count of keys");
             Assert.AreEqual("x=1%252&x=7", builder.ToString(), "Incorrect concatenation");
@@ -14,20 +14,20 @@ namespace Ruhe.Tests.Web {
 
         [Test]
         public void EqualsInValue() {
-            QueryStringBuilder builder = QueryStringBuilder.Parse("x=7=7");
+            var builder = QueryStringBuilder.Parse("x=7=7");
 
             Assert.AreEqual("x=7%3d7", builder.ToString());
         }
 
         [Test]
         public void IgnoresInitialQuestionMark() {
-            QueryStringBuilder builder = QueryStringBuilder.Parse("?x=1%2&?x=7");
+            var builder = QueryStringBuilder.Parse("?x=1%2&?x=7");
             Assert.AreEqual("x=1%252&%3fx=7", builder.ToString());
         }
 
         [Test]
         public void ParseTest() {
-            QueryStringBuilder builder = QueryStringBuilder.Parse("x=1%2c&x=+&y=3%3d%3d3");
+            var builder = QueryStringBuilder.Parse("x=1%2c&x=+&y=3%3d%3d3");
 
             Assert.AreEqual(2, builder.Keys.Count, "Incorrect count of keys");
             Assert.AreEqual("x=1%2c&x=+&y=3%3d%3d3", builder.ToString(), "Incorrect concatenation");

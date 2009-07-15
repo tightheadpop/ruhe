@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Ruhe.Tests {
@@ -12,48 +11,60 @@ namespace Ruhe.Tests {
 
         [Test]
         public void Dictionary() {
-            Dictionary<string, int> dictionary = Quick.Dictionary<string, int>("a", 19, "b", 42);
+            var dictionary = Quick.Dictionary<string, int>("a", 19, "b", 42);
             Assert.AreEqual(2, dictionary.Count);
             Assert.AreEqual(19, dictionary["a"]);
             Assert.AreEqual(42, dictionary["b"]);
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void DictionaryExpectsEvenNumberOfItems() {
-            Quick.Dictionary<string, int>("a", 19, "b");
+            try {
+                Quick.Dictionary<string, int>("a", 19, "b");
+                Assert.Fail();
+            }
+            catch (ArgumentException) {
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void DictionaryFromTwoCollectionsRequiresSameSize() {
-            Quick.Dictionary(Quick.List("a"), Quick.List(1, 2, 3));
+            try {
+                Quick.Dictionary(Quick.List("a"), Quick.List("1", "2", "3"));
+                Assert.Fail();
+            }
+            catch (ArgumentException) {
+            }
         }
 
         [Test]
         public void DictionaryKeyedByComplexProperty() {
             var bar1 = new Bar(new Foo("p"));
             var bar2 = new Bar(new Foo("q"));
-            Dictionary<string, Bar> dictionary = Quick.Dictionary<string, Bar>("Foo.ID", Quick.List(bar1, bar2));
+            var dictionary = Quick.Dictionary<string, Bar>("Foo.ID", Quick.List(bar1, bar2));
             Assert.AreEqual(2, dictionary.Count);
             Assert.AreSame(bar1, dictionary["p"]);
             Assert.AreSame(bar2, dictionary["q"]);
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidCastException))]
         public void DictionaryRequiresCorrectTypesInPairs() {
-            Quick.Dictionary<string, int>("a", 19, "b", "p");
+            try {
+                Quick.Dictionary<string, int>("a", 19, "b", "p");
+                Assert.Fail();
+            }
+            catch (InvalidCastException) {
+            }
         }
 
         [Test]
         public void DisctionaryByCombiningTwoCollections() {
-            List<string> keys = Quick.List("a", "b");
-            List<int> values = Quick.List(4, 89);
-            Dictionary<string, int> dictionary = Quick.Dictionary(keys, values);
+            var keys = Quick.List("a", "b");
+            var values = Quick.List("4", "89");
+            var dictionary = Quick.Dictionary(keys, values);
             Assert.AreEqual(2, dictionary.Count);
-            Assert.AreEqual(4, dictionary["a"]);
-            Assert.AreEqual(89, dictionary["b"]);
+            Assert.AreEqual("4", dictionary["a"]);
+            Assert.AreEqual("89", dictionary["b"]);
 
             Assert.AreEqual(2, keys.Count, "original key list should be unchanged");
             Assert.AreEqual(2, values.Count, "original value list should be unchanged");
@@ -78,7 +89,7 @@ namespace Ruhe.Tests {
 
         [Test]
         public void Set() {
-            HashSet<int> set = Quick.Set(1, 2, 3, 3);
+            var set = Quick.Set(1, 2, 3, 3);
             Assert.AreEqual(3, set.Count);
             Assert.IsTrue(set.Contains(1));
             Assert.IsTrue(set.Contains(2));

@@ -78,7 +78,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             list.DataValueField = "Value";
             b = new Thing("b", 2);
             c = new Thing("c", 3);
-            Thing a = new Thing("a", 1);
+            var a = new Thing("a", 1);
             list.DataSource = new[] {a, b, c};
         }
 

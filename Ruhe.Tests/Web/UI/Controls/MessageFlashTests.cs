@@ -18,9 +18,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void FlashIsNotUsableOutsideWebContext() {
-            Message.Flash("doesn't matter");
+            try {
+                Message.Flash("doesn't matter");
+                Assert.Fail();
+            }
+            catch (InvalidOperationException) {
+            }
         }
 
         [Test]

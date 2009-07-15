@@ -1,10 +1,13 @@
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
+using LiquidSyntax;
+using LiquidSyntax.ForWeb;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
+using LiquidSyntax.ForTesting;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
@@ -38,11 +41,16 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
+        public void ShouldHaveTwoInputDateControls() {
+            new InputDateRange().FindAll<InputDate>().Count().Should(Be.EqualTo(2));
+        }
+
+        [Test]
         public void SettingWidthActsOnChildInputDateControls() {
             var range = new InputDateRange();
             var expected = Unit.Parse("8em");
             range.Width = expected;
-            ControlUtilities.FindRecursive<InputDate>(range).ForEach(date => Assert.AreEqual(expected, date.Width));
+            range.FindAll<InputDate>().ForEach(o => o.Width.Should(Be.EqualTo(expected)));
         }
 
         [Test]

@@ -18,7 +18,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ControlCollection() {
-            InputTextBox box = new InputTextBox();
+            var box = new InputTextBox();
             AssertTrue(box.Controls[0] != null);
         }
 
@@ -65,11 +65,11 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void RegexValidation() {
             // expression in page = \d{3}
-            string[] badValues = new[] {"12", "1234", "a123", "abc"};
+            var badValues = new[] {"12", "1234", "a123", "abc"};
 
             LoadPageWithOption("Regex");
 
-            foreach (string badValue in badValues) {
+            foreach (var badValue in badValues) {
                 testBox.Text = badValue;
                 submitButton.Click();
                 AssertTrue(summary.Messages[0].Length > 0);

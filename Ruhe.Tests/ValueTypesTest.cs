@@ -24,9 +24,13 @@ namespace Ruhe.Tests {
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void RequiresNonNullConstructorArgument() {
-            new CustomString(null);
+            try {
+                new CustomString(null);
+                Assert.Fail();
+            }
+            catch (ArgumentException) {
+            }
         }
 
         [Test]

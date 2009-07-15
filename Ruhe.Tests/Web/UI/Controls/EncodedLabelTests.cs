@@ -7,8 +7,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
     public class EncodedLabelTest {
         [Test]
         public void HtmlEncodesText() {
-            EncodedLabel label = new EncodedLabel("test & stuff");
-            string html = label.GetHtml();
+            var label = new EncodedLabel("test & stuff");
+            var html = label.GetHtml();
             Assert.IsTrue(html.Contains("test &amp; stuff"));
         }
     }

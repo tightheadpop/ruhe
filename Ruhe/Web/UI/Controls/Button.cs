@@ -2,7 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Utilities;
+using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -34,9 +34,9 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void OnPreRender(EventArgs e) {
-            Match match = Regex.Match(Text, @"(.*?)&(\w)(.*)");
+            var match = Regex.Match(Text, @"(.*?)&(\w)(.*)");
             shortcutCharacter = match.Groups[2].Value;
-            if (StringUtilities.AreNotEmpty(shortcutCharacter)) {
+            if (shortcutCharacter.IsNotEmpty()) {
                 AccessKey = shortcutCharacter.ToLower();
                 beforeAccessKey = match.Groups[1].Value;
                 afterAccessKey = match.Groups[3].Value;
@@ -49,14 +49,13 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void RenderContents(HtmlTextWriter writer) {
-            if (StringUtilities.AreNotEmpty(ImageUrl)) {
-                Image image = new Image();
-                image.ImageUrl = ImageUrl;
+            if (ImageUrl.IsNotEmpty()) {
+                var image = new Image {ImageUrl = ImageUrl};
                 ConfigureImage(image);
                 image.RenderControl(writer);
             }
             writer.WriteEncodedText(beforeAccessKey);
-            if (StringUtilities.AreNotEmpty(AccessKey)) {
+            if (AccessKey.IsNotEmpty()) {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.TextDecoration, "underline");
                 writer.RenderBeginTag(HtmlTextWriterTag.Span);
                 writer.WriteEncodedText(shortcutCharacter);

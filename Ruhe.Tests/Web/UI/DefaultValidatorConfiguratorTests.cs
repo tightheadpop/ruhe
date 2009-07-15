@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using LiquidSyntax.ForWeb;
 using NUnit.Framework;
 using Ruhe.Web.UI;
 using Ruhe.Web.UI.Controls;
@@ -9,11 +11,10 @@ namespace Ruhe.Tests.Web.UI {
     public class DefaultValidatorConfiguratorTests : WebFormTestCase {
         [Test]
         public void EachValidatorHasValidatorExtender() {
-            InputTextBox inputTextBox = new InputTextBox();
-            inputTextBox.ID = "foo";
+            var inputTextBox = new InputTextBox {ID = "foo"};
             new DefaultValidatorConfigurator().ConfigureControl(inputTextBox);
-            foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(inputTextBox)) {
-                ValidatorCalloutExtender extender = ControlUtilities.FindRecursive(inputTextBox, validator.ID + "_callout") as ValidatorCalloutExtender;
+            foreach (var validator in inputTextBox.FindAll<BaseValidator>()) {
+                var extender = inputTextBox.FindDescendantWithId(validator.ID + "_callout") as ValidatorCalloutExtender;
                 Assert.IsNotNull(extender);
                 Assert.AreEqual(validator.ID, extender.TargetControlID);
             }
@@ -21,21 +22,17 @@ namespace Ruhe.Tests.Web.UI {
 
         [Test]
         public void RequiredValidatorHasRequiredIcon() {
-            InputTextBox inputTextBox = new InputTextBox();
-            inputTextBox.ID = "foo";
-            inputTextBox.LabelText = "Field Name";
-            inputTextBox.ErrorMessage = "you're wrong";
+            var inputTextBox = new InputTextBox {ID = "foo", LabelText = "Field Name", ErrorMessage = "you're wrong"};
             new DefaultValidatorConfigurator().ConfigureControl(inputTextBox);
-            Assert.AreEqual(1, ControlUtilities.FindRecursive<RequiredIcon>(inputTextBox).Count);
+            Assert.AreEqual(1, inputTextBox.FindAll<RequiredIcon>().Count());
         }
 
         [Test]
         public void SetsValidationGroupOnAllChildValidators() {
-            InputTextBox inputTextBox = new InputTextBox();
-            inputTextBox.ValidationGroup = "myGroup";
+            var inputTextBox = new InputTextBox {ValidationGroup = "myGroup"};
             new DefaultValidatorConfigurator().ConfigureControl(inputTextBox);
 
-            foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(inputTextBox)) {
+            foreach (var validator in inputTextBox.FindAll<BaseValidator>()) {
                 Assert.AreEqual("myGroup", validator.ValidationGroup);
             }
         }

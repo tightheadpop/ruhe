@@ -15,16 +15,15 @@ using System.Web.UI;
 [assembly : AssemblyCopyright("")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
-
-[assembly: WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
-[assembly: WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
-[assembly: WebResource("Ruhe.Web.Resources.save.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.cancel.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.calendar.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
-[assembly: WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
-[assembly: WebResource("Ruhe.Web.Resources.maxlength.htc", "text/x-component")]
-[assembly: WebResource("Ruhe.Web.Resources.ruhe.css", "text/css", PerformSubstitution = true)]
+[assembly : WebResource("Ruhe.Web.Resources.error.gif", "image/gif")]
+[assembly : WebResource("Ruhe.Web.Resources.required.gif", "image/gif")]
+[assembly : WebResource("Ruhe.Web.Resources.save.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.cancel.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.calendar.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.reset.png", "image/png")]
+[assembly : WebResource("Ruhe.Web.Resources.ruhe.js", "text/javascript")]
+[assembly : WebResource("Ruhe.Web.Resources.maxlength.htc", "text/x-component")]
+[assembly : WebResource("Ruhe.Web.Resources.ruhe.css", "text/css", PerformSubstitution = true)]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -37,7 +36,7 @@ using System.Web.UI;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly : AssemblyVersion("3.0.*")]
+[assembly : AssemblyVersion("3.0.0.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

@@ -1,6 +1,7 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using LiquidSyntax.ForWeb;
 using Ruhe.Configuration;
 
 namespace Ruhe.Web.UI.Controls {
@@ -43,7 +44,7 @@ namespace Ruhe.Web.UI.Controls {
             }
             set {
                 EnsureChildControls();
-                foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(this)) {
+                foreach (var validator in this.FindAll<BaseValidator>()) {
                     validator.EnableClientScript = value;
                 }
             }
@@ -154,7 +155,7 @@ namespace Ruhe.Web.UI.Controls {
             set {
                 EnsureChildControls();
                 base.ValidationGroup = value;
-                foreach (BaseValidator validator in ControlUtilities.FindRecursive<BaseValidator>(this)) {
+                foreach (var validator in this.FindAll<BaseValidator>()) {
                     validator.ValidationGroup = value;
                 }
             }
@@ -202,27 +203,23 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void CreateReadOnlyLabel() {
-            readOnlyLabel = new EncodedLabel();
-            readOnlyLabel.EnableViewState = false;
+            readOnlyLabel = new EncodedLabel {EnableViewState = false};
             Controls.Add(readOnlyLabel);
         }
 
         private void CreateRegexValidator() {
-            regexValidator = new RegularExpressionValidator();
-            regexValidator.EnableViewState = false;
+            regexValidator = new RegularExpressionValidator {EnableViewState = false};
             Controls.Add(regexValidator);
         }
 
         private void CreateRequiredLabel() {
-            requiredLabel = new RequiredIcon();
-            requiredLabel.EnableViewState = false;
+            requiredLabel = new RequiredIcon {EnableViewState = false};
             Controls.Add(new BreakingSpace());
             Controls.Add(requiredLabel);
         }
 
         private void CreateRequiredValidator() {
-            requiredValidator = new RequiredFieldValidator();
-            requiredValidator.EnableViewState = false;
+            requiredValidator = new RequiredFieldValidator {EnableViewState = false};
             Controls.Add(new BreakingSpace());
             Controls.Add(requiredValidator);
         }

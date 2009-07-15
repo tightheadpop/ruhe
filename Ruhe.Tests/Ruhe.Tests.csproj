@@ -80,6 +80,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="LiquidSyntax, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\LiquidSyntax.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\nunit.framework.dll</HintPath>
@@ -122,23 +126,11 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CollectionsTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DateRangeTests.cs" />
-    <Compile Include="DateTimeUtilitiesTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DelimitedStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DisposeOfTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="QuickTests.cs" />
-    <Compile Include="ObjectUtilitiesTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ValidateTests.cs" />
     <Compile Include="ValueTypesTest.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />
@@ -147,9 +139,6 @@
     <Compile Include="Web\UI\Controls\InputDateRangeValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
-    <Compile Include="StringUtilitiesTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="IdFor.cs" />
     <Compile Include="NUnitAdapter.cs" />
     <Compile Include="TestExtensions\AspTesters\InputDropDownListTesterTests.cs">
@@ -200,9 +189,6 @@
     <Compile Include="Web\UI\Controls\UpdateLabelTests.cs" />
     <Compile Include="Web\UI\Controls\ValidationSummaryTests.cs" />
     <Compile Include="Web\UI\DefaultValidatorConfiguratorTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\UI\ControlUtilitiesTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\RequireTests.cs" />

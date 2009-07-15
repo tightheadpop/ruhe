@@ -9,8 +9,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
     public class InputEnumTests {
         [Test]
         public void BindsAllEnumNames() {
-            InputEnumeration<Milkables> input = new InputEnumeration<Milkables>();
-            List<string> actual = new List<string>();
+            var input = new InputEnumeration<Milkables>();
+            var actual = new List<string>();
             foreach (ListItem item in input.Items) {
                 actual.Add(item.Text);
             }
@@ -19,7 +19,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ConvertsEnumValueWhenSettingsAndReading() {
-            InputEnumeration<Milkables> input = new InputEnumeration<Milkables>();
+            var input = new InputEnumeration<Milkables>();
             input.Value = Milkables.Trout;
             Assert.AreEqual(input.Value, Milkables.Trout);
         }

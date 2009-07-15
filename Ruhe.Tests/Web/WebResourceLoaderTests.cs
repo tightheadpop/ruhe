@@ -9,14 +9,14 @@ namespace Ruhe.Tests.Web {
     public class WebResourceLoaderTests {
         [Test]
         public void GetWebResource() {
-            WebResourceAttribute resource = WebResourceLoader.GetResource(GetType(), "ResourceLoaderTarget.txt");
+            var resource = WebResourceLoader.GetResource(GetType(), "ResourceLoaderTarget.txt");
             Assert.AreEqual("Ruhe.Tests.Resources.ResourceLoaderTarget.txt", resource.WebResource);
             Assert.AreEqual("text/plain", resource.ContentType);
         }
 
         [Test]
         public void GetWebResourceNameParsesAssemblyAttributesToFindTheFullName() {
-            string actual = WebResourceLoader.GetFullName(GetType(), "ResourceLoaderTarget.txt");
+            var actual = WebResourceLoader.GetFullName(GetType(), "ResourceLoaderTarget.txt");
             Assert.AreEqual("Ruhe.Tests.Resources.ResourceLoaderTarget.txt", actual);
         }
     }

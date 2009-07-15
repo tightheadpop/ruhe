@@ -5,19 +5,19 @@ namespace Ruhe.Tests {
     public class DelimitedStringBuilderTests {
         [Test]
         public void AppendTest() {
-            DelimitedStringBuilder builder = new DelimitedStringBuilder(", ");
+            var builder = new DelimitedStringBuilder(", ");
             builder.Append("test");
             builder.Append("test");
             builder.Append("test");
             builder.Append("test");
-            string expected = "test, test, test, test";
-            string actual = builder.ToString();
+            var expected = "test, test, test, test";
+            var actual = builder.ToString();
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void Clear() {
-            DelimitedStringBuilder builder = new DelimitedStringBuilder(", ");
+            var builder = new DelimitedStringBuilder(", ");
             builder.Append("foo");
             builder.Clear();
             Assert.AreEqual(string.Empty, builder.ToString());

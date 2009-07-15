@@ -78,13 +78,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="LiquidSyntax, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.DynamicProxy2, Version=2.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Castle.DynamicProxy2.dll</HintPath>
+      <HintPath>..\bin\LiquidSyntax.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic">
       <Name>Microsoft.VisualBasic</Name>
@@ -116,25 +112,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\QueryStringBuilder.cs" />
-    <Compile Include="Utilities\DisposeUtilities.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Quick.cs" />
-    <Compile Include="Utilities\ObjectUtilities.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\Collections.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\DateTimeUtilities.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Utilities\StringUtilities.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Validate.cs" />
     <Compile Include="ValueType.cs" />
     <Compile Include="Web\UI\CompositeControl.cs" />
@@ -185,7 +166,6 @@
     <Compile Include="Web\UI\Controls\SectionHeader.cs" />
     <Compile Include="Web\UI\Controls\UpdateLabel.cs" />
     <Compile Include="Web\UI\Controls\ValidationSummary.cs" />
-    <Compile Include="Web\UI\ControlUtilities.cs" />
     <Compile Include="Web\UI\DefaultValidatorConfigurator.cs" />
     <Compile Include="Web\UI\IValidatorConfigurator.cs" />
     <Compile Include="Web\UI\Require.cs" />

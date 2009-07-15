@@ -18,7 +18,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void Render(HtmlTextWriter writer) {
-            for (int i = 0; i < numberOfSpaces; i++) {
+            for (var i = 0; i < numberOfSpaces; i++) {
                 writer.Write(nonBreakingSpace);
             }
         }

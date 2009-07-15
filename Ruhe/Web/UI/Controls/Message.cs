@@ -2,7 +2,7 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Utilities;
+using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     public enum MessageType {
@@ -54,7 +54,7 @@ namespace Ruhe.Web.UI.Controls {
         protected override void Render(HtmlTextWriter writer) {
             EnsureChildControls();
 
-            FlashTransferObject? flashMessage = FlashMessage;
+            var flashMessage = FlashMessage;
             if (FlashHost) {
                 if (!flashMessage.HasValue) return;
                 Controls.Clear();
@@ -68,9 +68,9 @@ namespace Ruhe.Web.UI.Controls {
             if (!string.IsNullOrEmpty(HeaderText))
                 header.Controls.Add(new LiteralControl(HttpUtility.HtmlEncode(HeaderText)));
             header.Visible = header.HasControls();
-            bool bodyIsVisible = Visible && HasControls();
+            var bodyIsVisible = Visible && HasControls();
             if (bodyIsVisible || header.Visible) {
-                string oldClass = CssClass;
+                var oldClass = CssClass;
                 CssClass += Type.ToString().ToLower() + " wrapper";
                 body.CssClass = "body";
                 header.CssClass = "header";
@@ -105,7 +105,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public static void Flash(string message, MessageType? messageType, string headerText) {
-            HttpContext context = HttpContext.Current;
+            var context = HttpContext.Current;
             if (context == null)
                 throw new InvalidOperationException("Flash can only be used in a web context");
 

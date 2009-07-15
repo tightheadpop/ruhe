@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Utilities;
+using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     //TODO : IInputControl
@@ -148,7 +148,7 @@ namespace Ruhe.Web.UI.Controls {
         [DebuggerStepThrough]
         public override void Init(TemplateParser parser, ControlBuilder parentBuilder, Type type, string tagName, string id, IDictionary attribs) {
             var enumTypeName = (string) attribs["EnumType"];
-            Type enumType = Type.GetType(enumTypeName);
+            var enumType = Type.GetType(enumTypeName);
 
             if (enumType == null)
                 throw new ArgumentNullException(string.Format("{0} cannot be found", enumTypeName));
@@ -156,7 +156,7 @@ namespace Ruhe.Web.UI.Controls {
             if (!enumType.IsEnum)
                 throw new ArgumentException(string.Format("{0} is not an enumeration", enumTypeName));
 
-            Type dropDownType = typeof(InputEnumeration<>).MakeGenericType(enumType);
+            var dropDownType = typeof(InputEnumeration<>).MakeGenericType(enumType);
             base.Init(parser, parentBuilder, dropDownType, tagName, id, attribs);
         }
     }

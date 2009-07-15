@@ -4,10 +4,10 @@ using System.Web.UI;
 namespace Ruhe.TestWeb.Web.UI.Controls {
     public partial class InputCheckBoxListTests : Page {
         protected void Page_Load(object sender, EventArgs e) {
-            Whatever a = new Whatever(0, "a");
-            Whatever b = new Whatever(1, "b");
-            Whatever c = new Whatever(2, "c");
-            Whatever d = new Whatever(3, "d");
+            var a = new Whatever(0, "a");
+            var b = new Whatever(1, "b");
+            var c = new Whatever(2, "c");
+            var d = new Whatever(3, "d");
 
             checkboxlist.DataSource = Quick.List(a, b, c, d);
             checkboxlist.SelectedDataSource = Quick.List(a);

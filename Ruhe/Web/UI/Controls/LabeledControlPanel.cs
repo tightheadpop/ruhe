@@ -1,8 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Utilities;
+using LiquidSyntax;
+using LiquidSyntax.ForWeb;
+using System.Linq;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -48,9 +49,9 @@ namespace Ruhe.Web.UI.Controls {
                 EnsureChildControls();
                 ViewState["ValidationGroup"] = value;
 
-                List<Control> controlsToUpdate = ControlUtilities.FindRecursive<Control>(this);
+                var controlsToUpdate = this.FindAll<Control>().ToList();
                 controlsToUpdate.Remove(this);
-                foreach (Control c in controlsToUpdate) {
+                foreach (var c in controlsToUpdate) {
                     if (c.HasProperty("ValidationGroup")) {
                         c.SetPropertyValue("ValidationGroup", value);
                     }
@@ -59,13 +60,13 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            string cssClass = CssClass.Replace("labeledControlPanel", String.Empty);
+            var cssClass = CssClass.Replace("labeledControlPanel", String.Empty);
             CssClass = cssClass.WithSuffix(" labeledControlPanel").Trim();
             base.AddAttributesToRender(writer);
         }
 
         public void ClearFormControls() {
-            foreach (IInputControl control in ControlUtilities.FindRecursive<IInputControl>(this)) {
+            foreach (var control in this.FindAll<IInputControl>()) {
                 control.Clear();
             }
         }
@@ -96,9 +97,8 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void RenderContentCell(Control control, HtmlTextWriter writer) {
-            TableCell controlCell = new TableCell();
+            var controlCell = new TableCell {CssClass = "labeled"};
 
-            controlCell.CssClass = "labeled";
             controlCell.RenderBeginTag(writer);
             control.RenderControl(writer);
             if (LabelPosition == LabelPosition.Left) {
@@ -108,10 +108,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void RenderContents(HtmlTextWriter writer) {
-            Table layoutTable = new Table();
-
-            layoutTable.CssClass = "layoutTable";
-            layoutTable.ID = UniqueID + "_layoutTable";
+            var layoutTable = new Table {CssClass = "layoutTable", ID = UniqueID + "_layoutTable"};
 
             if (HasControls()) {
                 layoutTable.RenderBeginTag(writer);
@@ -125,22 +122,20 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void RenderNameLabelCell(Control control, HtmlTextWriter writer) {
-            string labelText = string.Empty;
-            TableCell labelCell = new TableCell();
-            labelCell.CssClass = "label " + LabelPosition.ToString().ToLower();
+            var labelText = string.Empty;
+            var labelCell = new TableCell {CssClass = "label " + LabelPosition.ToString().ToLower()};
 
-            ILabeledControl labeledControl = control as ILabeledControl;
+            var labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
                 labelText = labeledControl.LabelText.TrimToEmpty();
                 labelText = string.IsNullOrEmpty(labelText) ? string.Empty : labelText + ":";
             }
-            EncodedLabel nameLabel = new EncodedLabel(labelText);
-            nameLabel.ID = control.UniqueID.Replace(":", "_") + "_label";
+            var nameLabel = new EncodedLabel(labelText) {ID = control.UniqueID.Replace(":", "_") + "_label"};
 
             labelCell.RenderBeginTag(writer);
             writer.RenderBeginTag(HtmlTextWriterTag.Nobr);
 
-            IInputControl inputControl = control as IInputControl;
+            var inputControl = control as IInputControl;
             if (inputControl != null) {
                 writer.AddAttribute(HtmlTextWriterAttribute.For, inputControl.DefaultElementClientId);
                 writer.RenderBeginTag(HtmlTextWriterTag.Label);
@@ -158,7 +153,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private void RenderRow(Control control, HtmlTextWriter writer) {
-            TableRow row = new TableRow();
+            var row = new TableRow();
             row.RenderBeginTag(writer);
 
             RenderNameLabelCell(control, writer);
@@ -181,12 +176,11 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private static void RenderFormatLabel(Control control, HtmlTextWriter writer) {
-            Label formatLabel = new Label();
-            formatLabel.CssClass = "format";
+            var formatLabel = new Label {CssClass = "format"};
 
-            ILabeledControl labeledControl = control as ILabeledControl;
+            var labeledControl = control as ILabeledControl;
             if (labeledControl != null) {
-                string formatText = labeledControl.FormatText.TrimToEmpty();
+                var formatText = labeledControl.FormatText.TrimToEmpty();
                 if (formatText.Length > 0) {
                     formatLabel.Text = formatText;
                 }
@@ -199,11 +193,9 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private static void RenderHeaderRow(Control control, HtmlTextWriter writer) {
-            TableRow row = new TableRow();
+            var row = new TableRow();
 
-            TableCell cell = new TableCell();
-            cell.ColumnSpan = 2;
-            cell.CssClass = "sectionHeader";
+            var cell = new TableCell {ColumnSpan = 2, CssClass = "sectionHeader"};
 
             row.RenderBeginTag(writer);
             cell.RenderBeginTag(writer);

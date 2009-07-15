@@ -1,5 +1,5 @@
 using System.Configuration;
-using Ruhe.Utilities;
+using LiquidSyntax;
 using Ruhe.Web.UI;
 
 namespace Ruhe.Configuration {
