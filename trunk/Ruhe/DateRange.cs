@@ -135,7 +135,7 @@ namespace Ruhe {
 
         public static bool IsContiguous(params DateRange[] ranges) {
             Array.Sort(ranges);
-            for (int i = 0; i < ranges.Length - 1; i++) {
+            for (var i = 0; i < ranges.Length - 1; i++) {
                 if (!ranges[i].Abuts(ranges[i + 1]))
                     return false;
             }

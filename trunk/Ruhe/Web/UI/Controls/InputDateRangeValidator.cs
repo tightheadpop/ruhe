@@ -10,8 +10,8 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override bool EvaluateIsValid() {
-            InputDate to = FindToDate();
-            InputDate from = FindFromDate();
+            var to = FindToDate();
+            var from = FindFromDate();
             return to.Value == null || from.Value == null || from.Value.Value <= to.Value.Value;
         }
 

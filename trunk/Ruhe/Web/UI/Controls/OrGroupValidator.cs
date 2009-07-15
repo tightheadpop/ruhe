@@ -1,7 +1,8 @@
 using System;
-using System.Web.UI;
+using System.Linq;
 using System.Web.UI.WebControls;
-using Ruhe.Utilities;
+using LiquidSyntax;
+using LiquidSyntax.ForWeb;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -21,18 +22,17 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override bool EvaluateIsValid() {
-            bool result = false;
-
-            foreach (string controlId in GroupToValidate) {
+            var result = false;
+            foreach (var controlId in GroupToValidate) {
                 result |= GetControlValidationValue(controlId.Trim()).Trim() != string.Empty;
             }
             return result;
         }
 
         protected string GetControlGroupRenderID(string[] names) {
-            DelimitedStringBuilder clientIdList = new DelimitedStringBuilder(",");
-            foreach (string controlName in names) {
-                Control control = ControlUtilities.FindRecursive(Page, controlName);
+            var clientIdList = new DelimitedStringBuilder(",");
+            foreach (var controlName in names) {
+                var control = Page.FindDescendantWithId(controlName);
                 if (control != null) {
                     clientIdList.Append(control.ClientID);
                 }

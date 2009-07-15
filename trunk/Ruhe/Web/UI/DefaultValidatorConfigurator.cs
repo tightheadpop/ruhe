@@ -2,22 +2,22 @@ using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using LiquidSyntax.ForWeb;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Web.UI {
     public class DefaultValidatorConfigurator : IValidatorConfigurator {
         protected virtual void AddValidatorExtender(BaseValidator validator, IInputControl control) {
-            var calloutExtender = new ValidatorCalloutExtender
-                                      {
-                                          ID = validator.ID + "_callout",
-                                          TargetControlID = validator.ID,
-                                          HighlightCssClass = "validation-error"
-                                      };
+            var calloutExtender = new ValidatorCalloutExtender {
+                ID = validator.ID + "_callout",
+                TargetControlID = validator.ID,
+                HighlightCssClass = "validation-error"
+            };
             ((Control) control).Controls.Add(calloutExtender);
         }
 
         public virtual void ConfigureControl(IInputControl inputControl) {
-            foreach (var validator in ControlUtilities.FindRecursive<BaseValidator>((Control) inputControl)) {
+            foreach (var validator in ((Control) inputControl).FindAll<BaseValidator>()) {
                 validator.ValidationGroup = inputControl.ValidationGroup;
                 ConfigureValidator(validator, inputControl);
                 AddValidatorExtender(validator, inputControl);

@@ -7,26 +7,26 @@ namespace Ruhe.Tests.Web.UI.Controls {
     public class AllLiteralControlTests {
         [Test]
         public void BreakingSpace() {
-            string result = new BreakingSpace().GetHtml();
+            var result = new BreakingSpace().GetHtml();
             Assert.AreEqual(" ", result);
         }
 
         [Test]
         public void LineBreak() {
-            string result = new LineBreak().GetHtml();
+            var result = new LineBreak().GetHtml();
             Assert.AreEqual("<br />", result);
         }
 
         [Test]
         public void NonBreakingSpaceDefaultRender() {
-            string result = new NonBreakingSpace().GetHtml();
+            var result = new NonBreakingSpace().GetHtml();
             Assert.AreEqual("&nbsp;", result);
         }
 
         [Test]
         public void NonBreakingSpaceNRepeats() {
-            int n = 3;
-            string result = new NonBreakingSpace(n).GetHtml();
+            var n = 3;
+            var result = new NonBreakingSpace(n).GetHtml();
             Assert.AreEqual("&nbsp;&nbsp;&nbsp;", result);
         }
     }

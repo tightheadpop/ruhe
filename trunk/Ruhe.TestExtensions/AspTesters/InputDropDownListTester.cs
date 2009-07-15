@@ -9,7 +9,7 @@ namespace Ruhe.TestExtensions.AspTesters {
         }
 
         public void SelectByValue(string value) {
-            for (int i = 0; i < Items.Count; i++) {
+            for (var i = 0; i < Items.Count; i++) {
                 if (Items[i].Value == value) {
                     SelectedIndex = i;
                     break;

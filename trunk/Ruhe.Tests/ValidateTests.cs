@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using LiquidSyntax.ForTesting;
 
 namespace Ruhe.Tests {
     [TestFixture]
@@ -10,85 +11,143 @@ namespace Ruhe.Tests {
         private const string ShouldNotFail = "should not fail";
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void HasNoNullElements() {
             Quick.List(new object()).MustHaveNoNullElements(ShouldNotFail);
-            Quick.List<object>(1, null).MustHaveNoNullElements(ExpectedMessage);
+            try {
+                Quick.List<object>(1, null).MustHaveNoNullElements(ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void HasNoNullElementsDislikesNullLists() {
             object[] o = null;
-            o.MustHaveNoNullElements(ExpectedMessage);
+            try {
+                o.MustHaveNoNullElements(ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException) {
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void HasNoNullElementsFormatted() {
-            Quick.List<object>(1, null).MustHaveNoNullElements(Format, 1);
+            try {
+                Quick.List<object>(1, null).MustHaveNoNullElements(Format, 1);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedFormattedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsFalse() {
             false.MustBeFalse(ShouldNotFail);
-            true.MustBeFalse(ExpectedMessage);
+            try {
+                true.MustBeFalse(ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsFalseFormatted() {
-            true.MustBeFalse(Format, 1);
+            try {
+                true.MustBeFalse(Format, 1);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedFormattedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotEmpty() {
             Quick.List(new object()).MustNotBeEmpty(ShouldNotFail);
-            Quick.List<object>().MustNotBeEmpty(ExpectedMessage);
+            try {
+                Quick.List<object>().MustNotBeEmpty(ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotEmptyDislikesNullLists() {
-            Validate.MustNotBeEmpty(null, ExpectedMessage);
+            try {
+                Validate.MustNotBeEmpty(null, ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsNotEmptyFormatted() {
-            Validate.MustNotBeEmpty(Quick.List<object>(), Format, 1);
+            try {
+                Validate.MustNotBeEmpty(Quick.List<object>(), Format, 1);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedFormattedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsNotNull() {
             new object().MustNotBeNull(ShouldNotFail);
-            Validate.MustNotBeNull(null, ExpectedMessage);
+            try {
+                Validate.MustNotBeNull(null, ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsNotNullFormatted() {
-            Validate.MustNotBeNull(null, Format, 1);
+            try {
+                Validate.MustNotBeNull(null, Format, 1);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedFormattedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void IsTrue() {
             true.MustBeTrue(ShouldNotFail);
-            false.MustBeTrue(ExpectedMessage);
+            try {
+                false.MustBeTrue(ExpectedMessage);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void IsTrueFormatted() {
-            false.MustBeTrue(Format, 1);
+            try {
+                false.MustBeTrue(Format, 1);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedFormattedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void MustEqual() {
             true.MustEqual(true);
 
@@ -96,20 +155,34 @@ namespace Ruhe.Tests {
             o.MustEqual(o);
             1.MustEqual(6 - 5);
             "p".MustEqual("p");
-            "p".MustEqual("foo");
+            try {
+                "p".MustEqual("foo");
+                Assert.Fail();
+            }
+            catch (ArgumentException) {
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedMessage)]
         public void That() {
             Validate.That(true, ShouldNotFail);
-            Validate.That(false, ExpectedMessage);
+            try {
+                Validate.That(false, ExpectedMessage);
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedMessage));
+            }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ExpectedFormattedMessage)]
         public void ThatFormatted() {
-            Validate.That(false, Format, 1);
+            try {
+                Validate.That(false, Format, 1);
+                Assert.Fail();
+            }
+            catch (ArgumentException e) {
+                e.Message.Should(Be.EqualTo(ExpectedFormattedMessage));
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override bool EvaluateIsValid() {
-            InputDate input = GetControlToValidate();
+            var input = GetControlToValidate();
             if (string.IsNullOrEmpty(input.Text))
                 return true;
             return input.Value != null;

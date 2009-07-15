@@ -5,8 +5,8 @@ using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using LiquidSyntax;
 using Ruhe.Configuration;
-using Ruhe.Utilities;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -90,16 +90,13 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private Image CreateCalendarButton() {
-            image = new Image();
-            image.AlternateText = "Select a date";
-            image.ImageAlign = ImageAlign.AbsMiddle;
+            image = new Image {AlternateText = "Select a date", ImageAlign = ImageAlign.AbsMiddle};
             image.Style[HtmlTextWriterStyle.Padding] = "3px";
             return image;
         }
 
         private CalendarExtender CreateCalendarExtender() {
-            calendar = new CalendarExtender();
-            calendar.Format = Format;
+            calendar = new CalendarExtender {Format = Format};
             return calendar;
         }
 

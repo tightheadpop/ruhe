@@ -22,9 +22,13 @@ namespace Ruhe.Tests.Web.UI {
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void RequireDoesNotWorkInWithoutWebContext() {
-            Require.DefaultStyleSheet(GetType(), "doesn't matter");
+            try {
+                Require.DefaultStyleSheet(GetType(), "doesn't matter");
+                Assert.Fail();
+            }
+            catch (InvalidOperationException) {
+            }
         }
     }
 }

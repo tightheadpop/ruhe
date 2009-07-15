@@ -13,15 +13,15 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void DefaultingValueToTodaySetsValue() {
-            InputDate input = new InputDate();
+            var input = new InputDate();
             input.DefaultToToday = true;
             Assert.AreEqual(DateTime.Today, input.Value);
         }
 
         [Test]
         public void DefaultToTodayOnlySetsValueIfOneIsNotAlreadySet() {
-            InputDate input = new InputDate();
-            DateTime expected = new DateTime(2000, 1, 1);
+            var input = new InputDate();
+            var expected = new DateTime(2000, 1, 1);
             input.Value = expected;
             input.DefaultToToday = true;
             Assert.AreEqual(expected, input.Value);
@@ -29,7 +29,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void DefaultValueIsNull() {
-            InputDate input = new InputDate();
+            var input = new InputDate();
             input.Text = string.Empty;
             Assert.IsNull(input.Value);
         }
@@ -60,9 +60,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void NonNullValueCanBeConvertedToDateTime() {
-            InputDate input = new InputDate();
+            var input = new InputDate();
             input.Format = "MM/dd/yyyy";
-            DateTime expected = new DateTime(2002, 10, 21);
+            var expected = new DateTime(2002, 10, 21);
             input.Value = expected;
             Assert.AreEqual("10/21/2002", input.Text);
             Assert.AreEqual(expected, input.Value);
@@ -70,7 +70,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ParsesInvalidToNull() {
-            InputDate input = new InputDate();
+            var input = new InputDate();
             input.Format = "MM/dd/yyyy";
             input.Text = "21/10/2002";
             Assert.IsNull(input.Value);
@@ -78,7 +78,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ParsesValidInputToDateTime() {
-            InputDate input = new InputDate();
+            var input = new InputDate();
             input.Format = "MM/dd/yyyy";
             input.Text = "10/21/2002";
             Assert.AreEqual(new DateTime(2002, 10, 21), input.Value);
@@ -86,8 +86,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void SettingDatePatternOverridesDefaultForThisInstance() {
-            string newFormat = "dd-MMM-yyyy";
-            InputDate input = new InputDate();
+            var newFormat = "dd-MMM-yyyy";
+            var input = new InputDate();
             Assert.AreNotEqual(newFormat, input.Format);
             input.Format = newFormat;
             Assert.AreEqual(newFormat, input.Format);

@@ -224,7 +224,7 @@ namespace Ruhe.Web.UI.Controls {
             base.OnInit(e);
             EnsureChildControls();
             AssignIdsToChildControls();
-            IValidatorConfigurator configurator = RuheConfiguration.ValidatorConfigurator;
+            var configurator = RuheConfiguration.ValidatorConfigurator;
             configurator.ConfigureValidator(groupValidator, this);
             configurator.ConfigureValidator(rangeValidator, this);
         }

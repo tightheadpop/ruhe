@@ -13,7 +13,7 @@ namespace Ruhe.Tests.Web.Configuration {
 
         [Test]
         public void DateFormatDefaultsToCurrentUIThreadShortDate() {
-            CultureInfo cultureInfo = new CultureInfo("en-us");
+            var cultureInfo = new CultureInfo("en-us");
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
             Assert.AreEqual(cultureInfo.DateTimeFormat.ShortDatePattern, RuheConfiguration.DateFormat);
         }

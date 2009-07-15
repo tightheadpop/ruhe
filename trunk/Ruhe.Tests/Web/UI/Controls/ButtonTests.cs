@@ -14,9 +14,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void AddsImageToButtonWhenImageUrlIsSet() {
-            HtmlTagTester[] images = button1.ChildrenByXPath("./img");
+            var images = button1.ChildrenByXPath("./img");
             Assert.Greater(images.Length, 0);
-            HtmlTagTester image = images[0];
+            var image = images[0];
             Assert.AreEqual("../../../images/foo.gif", image.Attribute("src"), "should translate ~ to relative application path");
         }
 

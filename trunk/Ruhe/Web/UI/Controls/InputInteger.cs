@@ -16,7 +16,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void Render(HtmlTextWriter writer) {
-            string oldCssClass = CssClass;
+            var oldCssClass = CssClass;
             CssClass = (CssClass + " numeric").Trim();
             base.Render(writer);
             CssClass = oldCssClass;

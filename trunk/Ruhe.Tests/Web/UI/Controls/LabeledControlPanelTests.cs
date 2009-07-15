@@ -1,8 +1,8 @@
 using System.Web.UI.WebControls;
+using LiquidSyntax;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
-using Ruhe.Utilities;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.Tests.Web.UI.Controls {
@@ -21,7 +21,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
             Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox_format", "tr[1]/td[1]//span[@id = \"{0}\"]")).Length, "format text should be in the first row");
             Assert.AreEqual(1, table.ChildrenByXPath(Tests.IdFor.Format("textbox", "tr[2]/td[1]//input[@id = \"{0}\"]")).Length, "control should be in the second row");
 
-            HtmlTagTester[] cells = table.ChildrenByXPath(".//td");
+            var cells = table.ChildrenByXPath(".//td");
             Assert.IsTrue(cells[0].Attribute("class").ContainsIgnoreCase("above"), "label cell css class should contain 'above'");
             Assert.IsTrue(cells[0].Attribute("class").ContainsIgnoreCase("label"), "label cell css class should contain 'label'");
         }
@@ -32,7 +32,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
             Assert.IsTrue(table.Visible);
             Assert.AreEqual(4, table.Children("tr").Length, "should have one row of output per control");
-            HtmlTagTester[] cells = table.ChildrenByXPath(".//td");
+            var cells = table.ChildrenByXPath(".//td");
             Assert.AreEqual(8, cells.Length, "should have 2 cells per control");
             Assert.AreEqual(1, cells[0].ChildrenByXPath(Tests.IdFor.Format("textbox_label", ".//span[@id='{0}']")).Length, "first cell should contain the label");
             Assert.AreEqual(1, cells[1].ChildrenByXPath(Tests.IdFor.Format("textbox_format", ".//span[@id='{0}']")).Length, "second cell should contain the format text");

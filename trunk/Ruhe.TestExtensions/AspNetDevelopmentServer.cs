@@ -13,15 +13,13 @@ namespace Ruhe.TestExtensions {
                 return;
 
             developmentServerProcess =
-                new Process
-                    {
-                        StartInfo =
-                            {
-                                FileName = @"C:\Program Files\Common Files\Microsoft Shared\DevServer\9.0\WebDev.WebServer.EXE",
-                                Arguments = String.Format("/port:{0} /path:\"{1}\" /vpath:\"/{2}\"", port, path, virtualPath),
-                                WindowStyle = ProcessWindowStyle.Minimized
-                            }
-                    };
+                new Process {
+                    StartInfo = {
+                        FileName = @"C:\Program Files\Common Files\Microsoft Shared\DevServer\9.0\WebDev.WebServer.EXE",
+                        Arguments = String.Format("/port:{0} /path:\"{1}\" /vpath:\"/{2}\"", port, path, virtualPath),
+                        WindowStyle = ProcessWindowStyle.Minimized
+                    }
+                };
             developmentServerProcess.Start();
         }
 

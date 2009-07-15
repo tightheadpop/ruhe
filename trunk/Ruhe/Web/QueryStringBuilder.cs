@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Text;
 using System.Web;
-using Ruhe.Utilities;
+using LiquidSyntax;
 
 namespace Ruhe.Web {
     public class QueryStringBuilder : NameValueCollection {

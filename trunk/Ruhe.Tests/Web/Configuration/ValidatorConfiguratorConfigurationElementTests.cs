@@ -14,7 +14,7 @@ namespace Ruhe.Tests.Web.Configuration {
 
         [Test]
         public void YieldsNewlyChosenType() {
-            ValidatorConfiguratorConfigurationElement element = new ValidatorConfiguratorConfigurationElement();
+            var element = new ValidatorConfiguratorConfigurationElement();
             element.Type = typeof(TestValidatorConfigurator).FullName;
             Assert.AreEqual(typeof(TestValidatorConfigurator).FullName, element.Type);
         }

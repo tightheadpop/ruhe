@@ -1,14 +1,14 @@
 using System.Text.RegularExpressions;
+using LiquidSyntax;
 using NUnit.Framework;
 using Ruhe.TestExtensions;
-using Ruhe.Utilities;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     public class RuheWebTest<T> : WebFormTestCase {
-        protected string GlobalDatePattern = "dd-MMM-yyyy";
+        protected const string GlobalDatePattern = "dd-MMM-yyyy";
 
         protected static string GetUrlPath<R>() {
-            string subPath = typeof(R).FullName.WithoutPrefixPattern(@"\w+\.").Replace(".", "/");
+            var subPath = typeof(R).FullName.WithoutPrefixPattern(@"\w+\.").Replace(".", "/");
             return string.Format("{0}{1}Tests.aspx", "http://localhost:4269/Ruhe.TestWeb/", subPath);
         }
 
@@ -36,7 +36,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         private string TestWebPath {
             get {
-                string executingPath = GetType().Assembly.CodeBase.WithoutPrefixPattern("file:///");
+                var executingPath = GetType().Assembly.CodeBase.WithoutPrefixPattern("file:///");
                 return Regex.Replace(executingPath, string.Format("/{0}/.*", GetType().Assembly.GetName().Name), "/Ruhe.TestWeb").Replace('/', '\\');
             }
         }

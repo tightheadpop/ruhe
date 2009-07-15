@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ruhe.Utilities;
+using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -115,11 +115,11 @@ namespace Ruhe.Web.UI.Controls {
             if (DisabledDataSource == null || Page == null) return;
 
             var indexes = new List<string>();
-            foreach (object o in DisabledDataSource) {
+            foreach (var o in DisabledDataSource) {
                 indexes.Add(DataSource.IndexOf(o).ToString());
             }
             if (indexes.Count == 0) return;
-            string clientArrayName = ClientID + "_disabled";
+            var clientArrayName = ClientID + "_disabled";
             Page.ClientScript.RegisterArrayDeclaration(clientArrayName, "'" + string.Join("','", indexes.ToArray()) + "'");
             Page.ClientScript.RegisterStartupScript(GetType(), ClientID + "disabled script", string.Format(@"
 for(var i = 0; i < {0}.length; i++) {{
@@ -148,7 +148,7 @@ for(var i = 0; i < {0}.length; i++) {{
 
         protected override void RenderItem(ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer) {
             if (ReadOnly) {
-                string itemId = ClientID + "_" + repeatIndex;
+                var itemId = ClientID + "_" + repeatIndex;
                 Page.ClientScript.RegisterStartupScript(GetType(), itemId, string.Format(@"$get('{0}').onclick=function(){{return false;}};", itemId), true);
             }
             base.RenderItem(itemType, repeatIndex, repeatInfo, writer);
@@ -158,7 +158,7 @@ for(var i = 0; i < {0}.length; i++) {{
         public void SelectByList(IEnumerable dataList) {
             Clear();
             if (dataList != null) {
-                foreach (object dataElement in dataList) {
+                foreach (var dataElement in dataList) {
                     Items.FindByValue(GetDataValue(dataElement)).Selected = true;
                 }
             }
