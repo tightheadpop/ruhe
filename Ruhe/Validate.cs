@@ -60,7 +60,7 @@ namespace Ruhe {
             Throw(errorMessage);
         }
 
-        public static void MustNotBeEmpty(IEnumerable list, string errorMessageFormat, params object[] parameters) {
+        public static void MustNotBeEmpty(this IEnumerable list, string errorMessageFormat, params object[] parameters) {
             list.MustNotBeEmpty(string.Format(errorMessageFormat, parameters));
         }
 

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using LiquidSyntax.ForTesting;
+using LiquidSyntax;
 
 namespace Ruhe.Tests {
     [TestFixture]
@@ -12,9 +14,9 @@ namespace Ruhe.Tests {
 
         [Test]
         public void HasNoNullElements() {
-            Quick.List(new object()).MustHaveNoNullElements(ShouldNotFail);
+            new object().AsList().MustHaveNoNullElements(ShouldNotFail);
             try {
-                Quick.List<object>(1, null).MustHaveNoNullElements(ExpectedMessage);
+                new List<object>{1, null}.MustHaveNoNullElements(ExpectedMessage);
                 Assert.Fail();
             }
             catch (ArgumentException e) {
@@ -36,7 +38,7 @@ namespace Ruhe.Tests {
         [Test]
         public void HasNoNullElementsFormatted() {
             try {
-                Quick.List<object>(1, null).MustHaveNoNullElements(Format, 1);
+                new List<object>{1, null}.MustHaveNoNullElements(Format, 1);
                 Assert.Fail();
             }
             catch (ArgumentException e) {
@@ -69,9 +71,9 @@ namespace Ruhe.Tests {
 
         [Test]
         public void IsNotEmpty() {
-            Quick.List(new object()).MustNotBeEmpty(ShouldNotFail);
+            new object().AsList().MustNotBeEmpty(ShouldNotFail);
             try {
-                Quick.List<object>().MustNotBeEmpty(ExpectedMessage);
+                new List<object>().MustNotBeEmpty(ExpectedMessage);
                 Assert.Fail();
             }
             catch (ArgumentException e) {
@@ -93,7 +95,7 @@ namespace Ruhe.Tests {
         [Test]
         public void IsNotEmptyFormatted() {
             try {
-                Validate.MustNotBeEmpty(Quick.List<object>(), Format, 1);
+                new List<object>().MustNotBeEmpty(Format, 1);
                 Assert.Fail();
             }
             catch (ArgumentException e) {

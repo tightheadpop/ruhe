@@ -115,7 +115,6 @@
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Quick.cs" />
     <Compile Include="Validate.cs" />
     <Compile Include="ValueType.cs" />
     <Compile Include="Web\UI\CompositeControl.cs" />

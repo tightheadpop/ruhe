@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI;
+using LiquidSyntax;
 
 namespace Ruhe.TestWeb.Web.UI.Controls {
     public partial class InputCheckBoxListTests : Page {
@@ -9,9 +10,9 @@ namespace Ruhe.TestWeb.Web.UI.Controls {
             var c = new Whatever(2, "c");
             var d = new Whatever(3, "d");
 
-            checkboxlist.DataSource = Quick.List(a, b, c, d);
-            checkboxlist.SelectedDataSource = Quick.List(a);
-            checkboxlist.DisabledDataSource = Quick.List(b, c);
+            checkboxlist.DataSource = new []{a, b, c, d};
+            checkboxlist.SelectedDataSource = a.AsList();
+            checkboxlist.DisabledDataSource = new []{b, c};
             checkboxlist.DataBind();
         }
 
