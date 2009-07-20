@@ -98,9 +98,8 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void InitialBlankIsSelectedAfterDataBind() {
-            var list = new InputDropDownList();
-            list.InitialBlank = true;
-            list.BindList(Quick.List(1, 2, 3));
+            var list = new InputDropDownList {InitialBlank = true};
+            list.BindList(new [] {1,2,3});
             Assert.AreEqual(4, list.Items.Count);
             Assert.IsTrue(list.Items[0].Selected);
         }

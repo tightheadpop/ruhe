@@ -1,10 +1,11 @@
 using System;
 using System.Web.UI;
+using LiquidSyntax;
 
 namespace Ruhe.TestWeb.Web.UI.Controls {
     public partial class BoundFieldTests : Page {
         protected void Page_Load(object sender, EventArgs e) {
-            grid.DataSource = Quick.List(new Foo());
+            grid.DataSource = new Foo().AsList();
             grid.DataBind();
         }
 

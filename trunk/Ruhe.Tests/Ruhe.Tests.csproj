@@ -130,7 +130,6 @@
     <Compile Include="DelimitedStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="QuickTests.cs" />
     <Compile Include="ValidateTests.cs" />
     <Compile Include="ValueTypesTest.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />
