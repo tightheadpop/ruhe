@@ -2,16 +2,24 @@ using System;
 using System.Diagnostics;
 using System.Net.Sockets;
 
-namespace Ruhe.TestExtensions {
+namespace Ruhe.Web {
     public class AspNetDevelopmentServer : IDisposable {
-        private readonly Process developmentServerProcess;
+        private readonly int port;
+        private readonly string path;
+        private readonly string virtualPath;
+        private Process developmentServerProcess;
 
         public AspNetDevelopmentServer(int port, string path) : this(port, path, string.Empty) {}
 
         public AspNetDevelopmentServer(int port, string path, string virtualPath) {
+            this.port = port;
+            this.path = path;
+            this.virtualPath = virtualPath;
+        }
+
+        public void Start() {
             if (IsServerAlreadyStarted(port))
                 return;
-
             developmentServerProcess =
                 new Process {
                     StartInfo = {
@@ -24,9 +32,17 @@ namespace Ruhe.TestExtensions {
         }
 
         public void Dispose() {
+            Stop();
+        }
+
+        public void Stop() {
             //taskkill /IM webdev.webserver.exe
             if (developmentServerProcess != null)
                 developmentServerProcess.Kill();
+        }
+
+        public void DisposeOnAppDomainUnload() {
+            AppDomain.CurrentDomain.DomainUnload += (sender, args) => Dispose();
         }
 
         private static bool IsServerAlreadyStarted(int port) {

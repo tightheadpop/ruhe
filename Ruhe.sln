@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe", "Ruhe\Ruhe.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.Tests", "Ruhe.Tests\Ruhe.Tests.csproj", "{F461081F-4BE4-493B-94E6-CBB33D5E69CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestExtensions", "Ruhe.TestExtensions\Ruhe.TestExtensions.csproj", "{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestWeb", "Ruhe.TestWeb\Ruhe.TestWeb.csproj", "{8645D657-2B79-49E9-86B3-4EB59B65A3D6}"
 EndProject
 Global
@@ -48,16 +46,6 @@ Global
 		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F461081F-4BE4-493B-94E6-CBB33D5E69CD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release|.NET.ActiveCfg = Release|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8645D657-2B79-49E9-86B3-4EB59B65A3D6}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{8645D657-2B79-49E9-86B3-4EB59B65A3D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8645D657-2B79-49E9-86B3-4EB59B65A3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU

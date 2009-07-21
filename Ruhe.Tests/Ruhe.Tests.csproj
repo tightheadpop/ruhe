@@ -112,11 +112,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <ProjectReference Include="..\Ruhe.TestExtensions\Ruhe.TestExtensions.csproj">
-      <Name>Ruhe.TestExtensions</Name>
-      <Project>{B4FAF89E-BA17-4E81-88DA-BF77C40AE0C6}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
     <ProjectReference Include="..\Ruhe\Ruhe.csproj">
       <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
       <Name>Ruhe</Name>
@@ -130,6 +125,9 @@
     <Compile Include="DelimitedStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TestExtensions\AspTesters\InputDropDownListTester.cs" />
+    <Compile Include="TestExtensions\ControlTesterUtilities.cs" />
+    <Compile Include="TestExtensions\WebControlTester.cs" />
     <Compile Include="ValidateTests.cs" />
     <Compile Include="ValueTypesTest.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />

@@ -111,6 +111,7 @@
     <Compile Include="DelimitedStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\AspNetDevelopmentServer.cs" />
     <Compile Include="Web\QueryStringBuilder.cs" />
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
