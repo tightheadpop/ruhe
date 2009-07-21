@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Ruhe.TestExtensions.AspTesters;
 using Ruhe.Tests.Web.UI.Controls;
 
 namespace Ruhe.Tests.TestExtensions.AspTesters {

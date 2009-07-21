@@ -44,7 +44,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
             LoadPage();
             testBox.Text = "12";
             submitButton.Click();
-            Console.Write(Browser.CurrentPageText);
             Assert.AreEqual(string.Empty, new HtmlTagTester(summary.AspId).InnerHtml.Trim());
         }
 

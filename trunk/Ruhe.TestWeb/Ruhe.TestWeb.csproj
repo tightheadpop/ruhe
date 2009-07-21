@@ -35,7 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiquidSyntax, Version=1.0.3484.30105, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="LiquidSyntax, Version=1.0.3488.29527, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\LiquidSyntax.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -96,11 +99,11 @@
     <Compile Include="Sample.aspx.designer.cs">
       <DependentUpon>Sample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.cs">
+    <Compile Include="Tests\TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.cs">
       <DependentUpon>InputDropDownListTesterTests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.designer.cs">
+    <Compile Include="Tests\TestExtensions\AspTesters\InputDropDownListTesterTests.aspx.designer.cs">
       <DependentUpon>InputDropDownListTesterTests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web\UI\Controls\BoundFieldTests.aspx.cs">
@@ -259,7 +262,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestExtensions\AspTesters\InputDropDownListTesterTests.aspx" />
+    <Content Include="Tests\TestExtensions\AspTesters\InputDropDownListTesterTests.aspx" />
     <Content Include="Web\UI\Controls\ButtonTests.aspx" />
     <Content Include="Web\UI\Controls\InputDropDownAutoPostBackDisplay.aspx" />
     <Content Include="Web\UI\Controls\InputDropDownNotRequired.aspx" />

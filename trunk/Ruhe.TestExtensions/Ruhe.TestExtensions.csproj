@@ -99,7 +99,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspNetDevelopmentServer.cs" />
     <Compile Include="AspTesters\InputDropDownListTester.cs">
       <SubType>Code</SubType>
     </Compile>

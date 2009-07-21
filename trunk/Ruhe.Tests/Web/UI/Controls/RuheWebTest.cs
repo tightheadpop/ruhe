@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using LiquidSyntax;
 using NUnit.Framework;
-using Ruhe.TestExtensions;
+using Ruhe.Web;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     public class RuheWebTest<T> : WebFormTestCase {
@@ -31,7 +31,9 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [TestFixtureSetUp]
         public virtual void TestFixtureSetUp() {
             //launches at http://localhost:4269/Ruhe.TestWeb
-            new AspNetDevelopmentServer(4269, TestWebPath, "Ruhe.TestWeb");
+            var server = new AspNetDevelopmentServer(4269, TestWebPath, "Ruhe.TestWeb");
+            server.DisposeOnAppDomainUnload();
+            server.Start();
         }
 
         private string TestWebPath {
