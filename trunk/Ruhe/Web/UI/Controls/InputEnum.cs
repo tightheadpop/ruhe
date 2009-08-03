@@ -29,7 +29,6 @@ namespace Ruhe.Web.UI.Controls {
     [ControlBuilder(typeof(InputEnumControlBuilder))]
     public class InputEnum : Control, IInputControl {
         private Type enumType;
-        private InputDropDownList list;
 
         internal InputEnum(Type enumType) {
             this.enumType = enumType;
@@ -71,8 +70,8 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         public override string ID {
-            get { return list.ID; }
-            set { list.ID = value; }
+            get { return List.ID; }
+            set { List.ID = value; }
         }
 
         /// <summary>
@@ -107,9 +106,7 @@ namespace Ruhe.Web.UI.Controls {
             set { List.LabelText = value; }
         }
 
-        protected InputDropDownList List {
-            get { return list; }
-        }
+        protected InputDropDownList List { get; private set; }
 
         public bool ReadOnly {
             get { return List.ReadOnly; }
@@ -136,7 +133,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            list = new InputDropDownList();
+            List = new InputDropDownList();
             Controls.Add(List);
         }
     }
