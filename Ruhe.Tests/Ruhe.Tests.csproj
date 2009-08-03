@@ -125,6 +125,7 @@
     <Compile Include="DelimitedStringBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DerivedTypeRepositoryTests.cs" />
     <Compile Include="TestExtensions\AspTesters\InputDropDownListTester.cs" />
     <Compile Include="TestExtensions\ControlTesterUtilities.cs" />
     <Compile Include="TestExtensions\WebControlTester.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Web\UI\Controls\InputDateRangeTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />
+    <Compile Include="Web\UI\Controls\InputDerivedTypeDropDownListTests.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
     <Compile Include="IdFor.cs" />
     <Compile Include="NUnitAdapter.cs" />

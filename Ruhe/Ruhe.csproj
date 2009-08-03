@@ -111,6 +111,7 @@
     <Compile Include="DelimitedStringBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DerivedTypeRepository.cs" />
     <Compile Include="Web\AspNetDevelopmentServer.cs" />
     <Compile Include="Web\QueryStringBuilder.cs" />
     <Compile Include="Month.cs">
@@ -140,6 +141,7 @@
     <Compile Include="Web\UI\Controls\InputDateRange.cs" />
     <Compile Include="Web\UI\Controls\InputDateRangeValidator.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidator.cs" />
+    <Compile Include="Web\UI\Controls\InputDerivedTypeDropDownList.cs" />
     <Compile Include="Web\UI\Controls\InputDropDownList.cs" />
     <Compile Include="Web\UI\Controls\InputEmailAddress.cs" />
     <Compile Include="Web\UI\Controls\InputEnum.cs" />
