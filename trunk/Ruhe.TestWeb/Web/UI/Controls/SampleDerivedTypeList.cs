@@ -1,8 +1,13 @@
+using System;
 using System.ComponentModel;
 using Ruhe.Web.UI.Controls;
 
 namespace Ruhe.TestWeb.Web.UI.Controls {
-    public class SampleDerivedTypeList : InputDerivedTypeDropDownList<Foo> {}
+    public class SampleDerivedTypeList : InputDerivedTypeDropDownList<Foo> {
+        protected override Type DefaultValue {
+            get { return typeof(C); }
+        }
+    }
 
     public abstract class Foo {}
 

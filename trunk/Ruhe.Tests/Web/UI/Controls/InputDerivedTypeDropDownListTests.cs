@@ -17,6 +17,12 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
+        public void ShouldSelectDefaultValueWhenPageIsInitiallyLoaded() {
+            label.Text.Should(Be.EqualTo("C"));
+            otherLabel.Text.Should(Be.EqualTo("C"));
+        }
+
+        [Test]
         public void ShouldShowTypeBIsSelectedWhenUserChoosesDisplayNameOfTypeB() {
             list.SelectByValue("Another class that extends Foo");
             label.Text.Should(Be.EqualTo("B"));
@@ -25,10 +31,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void ShouldNotAffectTheSelectionOfAnotherSimilarControlOnTheSamePage() {
             list.SelectByValue("Another class that extends Foo");
-            otherList.SelectByValue("Yet another class that extends Foo");
+            otherList.SelectByValue("A class that extends Foo");
 
             label.Text.Should(Be.EqualTo("B"));
-            otherLabel.Text.Should(Be.EqualTo("C"));
+            otherLabel.Text.Should(Be.EqualTo("A"));
         }
 
         protected override void SetUp() {
