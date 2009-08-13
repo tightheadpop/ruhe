@@ -21,6 +21,10 @@ namespace Ruhe.Tests.Web.UI.Controls {
             Browser.GetPage(GetUrlPath<T>());
         }
 
+        protected void LoadOtherPage(string pageName) {
+            Browser.GetPage(Regex.Replace(GetUrlPath<T>(), "(.*/).*", "$1") + pageName);
+        }
+
         protected virtual void LoadPageWithOption(string option) {
             Browser.GetPage(string.Format("{0}?{1}=on", GetUrlPath<T>(), option));
         }
