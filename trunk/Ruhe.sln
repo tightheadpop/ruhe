@@ -3,19 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59C18FA1-5FD7-4983-BDD9-FF1E0C047359}"
 	ProjectSection(SolutionItems) = preProject
 		bin\AjaxControlToolkit.dll = bin\AjaxControlToolkit.dll
-		bin\Castle.Core.dll = bin\Castle.Core.dll
-		bin\Castle.Core.xml = bin\Castle.Core.xml
-		bin\Castle.DynamicProxy2.dll = bin\Castle.DynamicProxy2.dll
-		bin\Castle.DynamicProxy2.xml = bin\Castle.DynamicProxy2.xml
 		bin\Interop.SHDocVw.dll = bin\Interop.SHDocVw.dll
 		bin\LiquidSyntax.dll = bin\LiquidSyntax.dll
 		bin\Microsoft.mshtml.dll = bin\Microsoft.mshtml.dll
 		external\nunit.core.extensions.dll = external\nunit.core.extensions.dll
 		external\nunit.framework.dll = external\nunit.framework.dll
+		bin\NUnit.license.txt = bin\NUnit.license.txt
 		external\NUnitAsp.dll = external\NUnitAsp.dll
+		bin\NUnitAsp.license.txt = bin\NUnitAsp.license.txt
 		Ruhe.4.5.resharper = Ruhe.4.5.resharper
 		bin\WatiN.Core.dll = bin\WatiN.Core.dll
 		bin\WatiN.Core.xml = bin\WatiN.Core.xml
+		bin\WatiN.License.txt = bin\WatiN.License.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe", "Ruhe\Ruhe.csproj", "{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}"
