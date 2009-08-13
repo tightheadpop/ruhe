@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using LiquidSyntax;
 using LiquidSyntax.ForWeb;
@@ -32,7 +33,7 @@ namespace Ruhe.Web.UI.Controls {
         protected string GetControlGroupRenderID(string[] names) {
             var clientIdList = new DelimitedStringBuilder(",");
             foreach (var controlName in names) {
-                var control = Page.FindDescendantWithId(controlName);
+                var control = Page.FindFirst<Control>(c => c.ID == controlName);
                 if (control != null) {
                     clientIdList.Append(control.ClientID);
                 }

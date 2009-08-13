@@ -204,6 +204,13 @@
     <Compile Include="Web\UI\Controls\InputNumberTests.aspx.designer.cs">
       <DependentUpon>InputNumberTests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\Controls\InputTextBoxMultiLineMaxLength.aspx.cs">
+      <DependentUpon>InputTextBoxMultiLineMaxLength.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\InputTextBoxMultiLineMaxLength.aspx.designer.cs">
+      <DependentUpon>InputTextBoxMultiLineMaxLength.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web\UI\Controls\InputTextBoxReadOnly.aspx.cs">
       <DependentUpon>InputTextBoxReadOnly.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -297,6 +304,7 @@
     <Content Include="Web\UI\Controls\InputDerivedTypeDropDownListTests.aspx" />
     <Content Include="Web\UI\Controls\InputEnumTests.aspx" />
     <Content Include="Web\UI\Controls\InputIntegerTests.aspx" />
+    <Content Include="Web\UI\Controls\InputTextBoxMultiLineMaxLength.aspx" />
     <Content Include="Web\UI\Controls\MessageFlash.aspx" />
     <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />

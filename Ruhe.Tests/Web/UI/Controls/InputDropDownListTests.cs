@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
@@ -10,8 +9,6 @@ using Ruhe.Web.UI.Controls;
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
     public class InputDropDownListTests : RuheWebTest<InputDropDownList> {
-        private string baseUrl;
-
         [Test]
         public void BecomesNonReadOnlyWhenSingleValueBecomesMultipleValues() {
             LoadOtherPage("InputDropDownAutoPostBackDisplay.aspx");
@@ -99,7 +96,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
         [Test]
         public void InitialBlankIsSelectedAfterDataBind() {
             var list = new InputDropDownList {InitialBlank = true};
-            list.BindList(new [] {1,2,3});
+            list.BindList(new[] {1, 2, 3});
             Assert.AreEqual(4, list.Items.Count);
             Assert.IsTrue(list.Items[0].Selected);
         }
@@ -226,15 +223,6 @@ namespace Ruhe.Tests.Web.UI.Controls {
             list.SelectByValue(2);
             AssertTrue(list.Items[1].Selected);
             AssertTrue(!list.Items[0].Selected && !list.Items[2].Selected);
-        }
-
-        private void LoadOtherPage(string pageName) {
-            Browser.GetPage(baseUrl + pageName);
-        }
-
-        protected override void SetUp() {
-            base.SetUp();
-            baseUrl = Regex.Replace(GetUrlPath<InputDropDownList>(), "(.*/).*", "$1");
         }
     }
 }

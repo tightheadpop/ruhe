@@ -14,7 +14,7 @@ namespace Ruhe.Tests.Web.UI {
             var inputTextBox = new InputTextBox {ID = "foo"};
             new DefaultValidatorConfigurator().ConfigureControl(inputTextBox);
             foreach (var validator in inputTextBox.FindAll<BaseValidator>()) {
-                var extender = inputTextBox.FindDescendantWithId(validator.ID + "_callout") as ValidatorCalloutExtender;
+                var extender = inputTextBox.FindFirst<ValidatorCalloutExtender>(v => v.ID == validator.ID + "_callout");
                 Assert.IsNotNull(extender);
                 Assert.AreEqual(validator.ID, extender.TargetControlID);
             }

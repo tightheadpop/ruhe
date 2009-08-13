@@ -112,6 +112,10 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
+    <Reference Include="WatiN.Core, Version=2.0.10.928, Culture=neutral, PublicKeyToken=db7cfd3acb5ad44e, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\WatiN.Core.dll</HintPath>
+    </Reference>
     <ProjectReference Include="..\Ruhe\Ruhe.csproj">
       <Project>{643FA05B-3CEB-41EA-B4C1-4F25BE47B398}</Project>
       <Name>Ruhe</Name>
@@ -137,6 +141,7 @@
     <Compile Include="Web\UI\Controls\InputDateRangeValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDerivedTypeDropDownListTests.cs" />
+    <Compile Include="Web\UI\Controls\InputTextBoxMultiLineMaxLengthTests.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
     <Compile Include="IdFor.cs" />
     <Compile Include="NUnitAdapter.cs" />
@@ -194,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ResourceLoaderTarget.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

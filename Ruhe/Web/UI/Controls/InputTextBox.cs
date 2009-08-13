@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using LiquidSyntax.ForWeb;
 using Ruhe.Configuration;
+using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
@@ -165,6 +166,7 @@ namespace Ruhe.Web.UI.Controls {
             base.AddAttributesToRender(writer);
             if (MaxLength > 0 && TextMode.Equals(TextBoxMode.MultiLine)) {
                 writer.AddAttribute("maxlength", MaxLength.ToString());
+                writer.AddStyleAttribute("behavior", "url({0})".Substitute(WebResourceLoader.GetResourceUrl(GetType(), "maxlength.htc")));
             }
         }
 
@@ -229,11 +231,6 @@ namespace Ruhe.Web.UI.Controls {
             EnsureChildControls();
             AssignIdsToChildControls();
             RuheConfiguration.ValidatorConfigurator.ConfigureControl(this);
-        }
-
-        protected override void OnPreRender(EventArgs e) {
-            base.OnPreRender(e);
-            Require.DefaultStyleSheet(typeof(Require), "ruhe.css");
         }
 
         protected override void Render(HtmlTextWriter writer) {

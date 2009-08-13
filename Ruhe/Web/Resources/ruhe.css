@@ -15,7 +15,6 @@
     padding: 2px;
     margin: 0px;
 }
-TEXTAREA { behavior: url(<%= WebResource("Ruhe.Web.Resources.maxlength.htc") %>); }
 
 /* fixes issue with calendar extender in InputDateRange */
 .ajax__calendar { display: inline; }
