@@ -27,7 +27,7 @@ namespace Ruhe {
             var typesOfT = new List<Type>();
             foreach (var assembly in GetAssembliesToSearch()) {
                 foreach (var type in assembly.GetTypes()) {
-                    if (type.IsSubclassOf(typeof(T)))
+                    if (!type.IsAbstract && type.IsClass && typeof(T).IsAssignableFrom(type))
                         typesOfT.Add(type);
                 }
             }
