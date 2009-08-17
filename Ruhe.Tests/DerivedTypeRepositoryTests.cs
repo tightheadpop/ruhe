@@ -27,7 +27,15 @@ namespace Ruhe.Tests {
             new DerivedTypeRepository<Foo>().GetInstanceOfDerivedType("This is Bar").Should(Be.InstanceOf<Bar>());
         }
 
-        private abstract class Foo {}
+        [Test]
+        public void ShouldDiscoverInterfaceImplementers() {
+            new DerivedTypeRepository<IFoo>().GetDerivedTypes().Should(Have.Count.EqualTo(3));
+        }
+
+        private interface IFoo {
+            
+        }
+        private abstract class Foo : IFoo{}
 
         [DisplayName("This is fun")]
         private class Fun : Foo {}
