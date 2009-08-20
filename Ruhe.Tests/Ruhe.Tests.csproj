@@ -130,6 +130,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DerivedTypeRepositoryTests.cs" />
+    <Compile Include="MultiMapSetTest.cs" />
     <Compile Include="TestExtensions\AspTesters\InputDropDownListTester.cs" />
     <Compile Include="TestExtensions\ControlTesterUtilities.cs" />
     <Compile Include="TestExtensions\WebControlTester.cs" />

@@ -112,6 +112,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DerivedTypeRepository.cs" />
+    <Compile Include="MultiMapSet.cs" />
     <Compile Include="Web\AspNetDevelopmentServer.cs" />
     <Compile Include="Web\QueryStringBuilder.cs" />
     <Compile Include="Month.cs">
