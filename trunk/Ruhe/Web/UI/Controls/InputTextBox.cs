@@ -9,6 +9,7 @@ namespace Ruhe.Web.UI.Controls {
     /// <summary>
     /// TextBox providing built-in validation
     /// </summary>
+    [ParseChildren(ChildrenAsProperties = false)]
     public class InputTextBox : TextBox, IInputControl {
         private EncodedLabel readOnlyLabel;
         private RegularExpressionValidator regexValidator;

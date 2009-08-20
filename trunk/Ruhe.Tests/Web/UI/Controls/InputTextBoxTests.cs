@@ -4,6 +4,8 @@ using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
 using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
+using LiquidSyntax.ForTesting;
+using System.Linq;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
@@ -89,6 +91,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
         public void RequiredIndicatorDoesNotAppearWhenFieldIsNotRequired() {
             LoadPage();
             WebAssert.NotVisible(requiredImage);
+        }
+
+        [Test]
+        public void ShouldAddParsedEmbeddedValidatorToChildControls() {
+            LoadPageWithSuffix("EmbeddedValidator");
+            submitButton.Click();
+            summary.Messages.First().Should(Be.EqualTo("you're wrong."));
         }
 
         protected override void SetUp() {
