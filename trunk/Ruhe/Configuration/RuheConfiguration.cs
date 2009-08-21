@@ -1,6 +1,8 @@
 using System;
 using Ruhe.Web;
+using Ruhe.Web.Resources;
 using Ruhe.Web.UI;
+using System.Linq;
 
 namespace Ruhe.Configuration {
     public class RuheConfiguration {
@@ -19,7 +21,11 @@ namespace Ruhe.Configuration {
             }
         }
 
-        public static string ImageUrlFor<T>(string defaultResourceName) {
+        public static string ImageUrlFor<T>() {
+            var defaultResourceNameAttribute = (DefaultImageResourceAttribute)typeof(T).GetCustomAttributes(typeof(DefaultImageResourceAttribute), true).FirstOrDefault();
+            defaultResourceNameAttribute.MustNotBeNull(typeof(T).Name + " must have a declared default image resource.");
+
+            var defaultResourceName = defaultResourceNameAttribute.ResourceFileName;
             var imageConfig = RuheConfigurationSection.GetCurrent().Images[typeof(T).Name];
             if (imageConfig == null)
                 return WebResourceLoader.GetResourceUrl(typeof(T), defaultResourceName);

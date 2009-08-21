@@ -1,6 +1,8 @@
 using Ruhe.Configuration;
+using Ruhe.Web.Resources;
 
 namespace Ruhe.Web.UI.Controls {
+    [DefaultImageResource("cancel.png")]
     public class CancelButton : Button {
         public CancelButton() {
             CausesValidation = false;
@@ -9,7 +11,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            ImageUrl = RuheConfiguration.ImageUrlFor<CancelButton>("cancel.png");
+            ImageUrl = RuheConfiguration.ImageUrlFor<CancelButton>();
         }
     }
 }
