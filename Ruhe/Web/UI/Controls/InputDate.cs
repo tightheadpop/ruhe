@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using AjaxControlToolkit;
 using LiquidSyntax;
 using Ruhe.Configuration;
+using Ruhe.Web.Resources;
 
 namespace Ruhe.Web.UI.Controls {
     /// <summary>
     /// Provides a simplified user input that respects the user's culture settings.
     /// Includes a pop-up calendar for input using the mouse.
     /// </summary>
+    [DefaultImageResource("calendar.png")]
     public class InputDate : AbstractValueTypeInput<DateTime> {
         private CalendarExtender calendar;
         private InputDateValidator dateValidator;
@@ -119,7 +121,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void OnLoad(EventArgs e) {
             image.ID = ID + "_calendar";
-            image.ImageUrl = RuheConfiguration.ImageUrlFor<InputDate>("calendar.png");
+            image.ImageUrl = RuheConfiguration.ImageUrlFor<InputDate>();
             calendar.TargetControlID = ID;
             calendar.PopupButtonID = image.ID;
             calendar.PopupPosition = CalendarPosition.BottomLeft;

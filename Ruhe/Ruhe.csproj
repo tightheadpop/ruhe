@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Validate.cs" />
     <Compile Include="ValueType.cs" />
+    <Compile Include="Web\Resources\DefaultImageResourceAttribute.cs" />
     <Compile Include="Web\UI\CompositeControl.cs" />
     <Compile Include="Web\UI\Controls\AbstractValueTypeInput.cs" />
     <Compile Include="Web\UI\Controls\BooleanBoundField.cs" />

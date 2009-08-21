@@ -1,7 +1,9 @@
 using System.Web.UI;
 using Ruhe.Configuration;
+using Ruhe.Web.Resources;
 
 namespace Ruhe.Web.UI.Controls {
+    [DefaultImageResource("reset.png")]
     public class ResetButton : Button {
         public ResetButton() {
             Text = "&Reset";
@@ -19,7 +21,7 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void CreateChildControls() {
             base.CreateChildControls();
-            ImageUrl = RuheConfiguration.ImageUrlFor<ResetButton>("reset.png");
+            ImageUrl = RuheConfiguration.ImageUrlFor<ResetButton>();
         }
     }
 }
