@@ -1,22 +1,27 @@
 using System;
 
 namespace Ruhe {
-    public abstract class ValueType<T> : IEquatable<ValueType<T>> {
-        protected ValueType(T value) {
+    public abstract class ValueType<TValue, TValueType> : IEquatable<ValueType<TValue, TValueType>> where TValueType : ValueType<TValue, TValueType> {
+        protected ValueType(TValue value) {
             value.MustNotBeNull(GetType().Name + " must have non-null underlying value");
             Value = value;
         }
 
-        public T Value { get; private set; }
+        public TValue Value { get; private set; }
 
-        public bool Equals(ValueType<T> other) {
+        public static TValueType From(TValue value) {
+            if (Equals(value, null)) return null;
+            return (TValueType) Activator.CreateInstance(typeof(TValueType), new object[] {value});
+        }
+
+        public bool Equals(ValueType<TValue, TValueType> other) {
             if (other == null)
                 return false;
             return GetType().Equals(other.GetType()) && Value.Equals(other.Value);
         }
 
         public override bool Equals(object other) {
-            return ReferenceEquals(this, other) || Equals(other as ValueType<T>);
+            return ReferenceEquals(this, other) || Equals(other as ValueType<TValue, TValueType>);
         }
 
         public override int GetHashCode() {
@@ -27,11 +32,11 @@ namespace Ruhe {
             return Value.ToString();
         }
 
-        public static bool operator !=(ValueType<T> valueType1, ValueType<T> valueType2) {
+        public static bool operator !=(ValueType<TValue, TValueType> valueType1, ValueType<TValue, TValueType> valueType2) {
             return !Equals(valueType1, valueType2);
         }
 
-        public static bool operator ==(ValueType<T> valueType1, ValueType<T> valueType2) {
+        public static bool operator ==(ValueType<TValue, TValueType> valueType1, ValueType<TValue, TValueType> valueType2) {
             return Equals(valueType1, valueType2);
         }
     }
