@@ -16,15 +16,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void SettingValueToNonNullValueYieldsSameValue() {
-            var input = new InputNumber();
-            input.Value = 1.2;
+            var input = new InputNumber {Value = 1.2};
             Assert.AreEqual(1.2, input.Value);
         }
 
         [Test]
         public void SettingValueToNullYieldsNullValue() {
-            var input = new InputNumber();
-            input.Value = null;
+            var input = new InputNumber {Value = null};
             Assert.IsNull(input.Value);
         }
 
