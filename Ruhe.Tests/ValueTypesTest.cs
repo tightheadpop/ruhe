@@ -1,6 +1,7 @@
 using System;
-using NUnit.Framework;
+using LiquidSyntax;
 using LiquidSyntax.ForTesting;
+using NUnit.Framework;
 
 namespace Ruhe.Tests {
     [TestFixture]
@@ -29,7 +30,20 @@ namespace Ruhe.Tests {
                 new CustomString(null);
                 Assert.Fail();
             }
-            catch (ArgumentException) {
+            catch (ArgumentException) {}
+        }
+
+        [Test]
+        public void ShouldPassThroughExceptionsFromConstructorWhenCreatedUsingFromMethod() {
+            try {
+                ThrowsExceptionInConstructor.From("doesn't matter");
+                Assert.Fail("expected argument exception");
+            }
+            catch (ArgumentException e) {
+                e.Ignore();
+            }
+            catch (Exception e) {
+                Assert.Fail("expected argument exception but was "+ e.GetType());
             }
         }
 
@@ -63,6 +77,12 @@ namespace Ruhe.Tests {
 
         private class OtherCustomFloat : ValueType<float, OtherCustomFloat> {
             public OtherCustomFloat(float i) : base(i) {}
+        }
+
+        protected class ThrowsExceptionInConstructor : ValueType<string, ThrowsExceptionInConstructor> {
+            public ThrowsExceptionInConstructor(string value) : base(value) {
+                throw new ArgumentException("foo");
+            }
         }
     }
 }

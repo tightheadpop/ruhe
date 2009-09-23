@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 namespace Ruhe {
     public abstract class ValueType<TValue, TValueType> : IEquatable<ValueType<TValue, TValueType>> where TValueType : ValueType<TValue, TValueType> {
@@ -11,7 +12,11 @@ namespace Ruhe {
 
         public static TValueType From(TValue value) {
             if (Equals(value, null)) return null;
-            return (TValueType) Activator.CreateInstance(typeof(TValueType), new object[] {value});
+            try {
+                return (TValueType) Activator.CreateInstance(typeof(TValueType), new object[] {value});
+            }catch(TargetInvocationException e) {
+                throw e.InnerException;
+            }
         }
 
         public bool Equals(ValueType<TValue, TValueType> other) {
