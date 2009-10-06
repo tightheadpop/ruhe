@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -33,6 +34,11 @@ namespace Ruhe.Web.UI.Controls {
                 base.CssClass = value;
                 readOnlyLabel.CssClass = value;
             }
+        }
+
+        public override object DataSource {
+            get { return base.DataSource; }
+            set { base.DataSource = value ?? new ArrayList(); }
         }
 
         public string DefaultElementClientId {

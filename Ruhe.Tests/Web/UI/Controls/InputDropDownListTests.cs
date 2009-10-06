@@ -1,4 +1,5 @@
 using System.Web.UI.WebControls;
+using LiquidSyntax;
 using NUnit.Extensions.Asp;
 using NUnit.Extensions.Asp.AspTester;
 using NUnit.Extensions.Asp.HtmlTester;
@@ -223,6 +224,19 @@ namespace Ruhe.Tests.Web.UI.Controls {
             list.SelectByValue(2);
             AssertTrue(list.Items[1].Selected);
             AssertTrue(!list.Items[0].Selected && !list.Items[2].Selected);
+        }
+
+        [Test]
+        public void SettingDataSourceToNullMakesItemsEmpty() {
+            var list = new InputDropDownList();
+
+            list.DataSource = "moo".AsList();
+            list.DataBind();
+            Assert.IsNotEmpty(list.Items);
+
+            list.DataSource = null;
+            list.DataBind();
+            Assert.IsEmpty(list.Items);
         }
     }
 }
