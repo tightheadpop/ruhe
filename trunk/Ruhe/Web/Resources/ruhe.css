@@ -1,12 +1,17 @@
 .labeledControlPanel .label {
     white-space: nowrap;
+    padding-right: 0px;
+	line-height: 1.7em;
+	vertical-align: top;
 }
-.labeledControlPanel .label.left {
-    vertical-align: top;
-    padding-top: 0.3em;
+.labeledControlPanel .label.above {
+    vertical-align: bottom;
+	line-height: 1.0em;
 }
 .labeledControlPanel .labeled {
     white-space: nowrap;
+    vertical-align: top;
+	line-height: 1.7em;
 }
 .labeledControlPanel .layoutTable {
     border-width: 0px;
@@ -15,6 +20,7 @@
     padding: 2px;
     margin: 0px;
 }
+
 
 /* fixes issue with calendar extender in InputDateRange */
 .ajax__calendar { display: inline; }
