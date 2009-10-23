@@ -120,6 +120,13 @@
     <Compile Include="Web\UI\Controls\ButtonTests.aspx.designer.cs">
       <DependentUpon>ButtonTests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\Controls\HyperLinkFieldTests.aspx.cs">
+      <DependentUpon>HyperLinkFieldTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Controls\HyperLinkFieldTests.aspx.designer.cs">
+      <DependentUpon>HyperLinkFieldTests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web\UI\Controls\InputCheckBoxListTests.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>InputCheckBoxListTests.aspx</DependentUpon>
@@ -305,6 +312,7 @@
     <Content Include="images\INFO.ICO" />
     <Content Include="Sample.css" />
     <Content Include="Web\UI\Controls\BoundFieldTests.aspx" />
+    <Content Include="Web\UI\Controls\HyperLinkFieldTests.aspx" />
     <Content Include="Web\UI\Controls\InputCheckBoxListTests.aspx" />
     <Content Include="Web\UI\Controls\InputDateRangeTests.aspx" />
     <Content Include="Web\UI\Controls\InputDateTests.aspx" />
