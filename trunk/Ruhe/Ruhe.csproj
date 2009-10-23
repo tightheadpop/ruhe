@@ -92,11 +92,13 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
@@ -133,6 +135,7 @@
     <Compile Include="Web\UI\Controls\EncodedLabel.cs" />
     <Compile Include="Web\UI\Controls\ErrorIcon.cs" />
     <Compile Include="Web\UI\Controls\GrayButton.cs" />
+    <Compile Include="Web\UI\Controls\HyperLinkField.cs" />
     <Compile Include="Web\UI\Controls\IIcon.cs" />
     <Compile Include="Web\UI\Controls\IInputControl.cs" />
     <Compile Include="Web\UI\Controls\ILabeledControl.cs" />
