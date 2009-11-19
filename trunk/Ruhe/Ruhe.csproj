@@ -105,6 +105,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\DateFormatConfigurationElement.cs" />
+    <Compile Include="Configuration\DevelopmentServerConfigurationElement.cs" />
     <Compile Include="Configuration\ImageUrlConfigurationCollection.cs" />
     <Compile Include="Configuration\RuheConfiguration.cs" />
     <Compile Include="Configuration\RuheConfigurationSection.cs" />

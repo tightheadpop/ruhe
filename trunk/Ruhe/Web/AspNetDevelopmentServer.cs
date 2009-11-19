@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Net.Sockets;
+using Ruhe.Configuration;
 
 namespace Ruhe.Web {
     public class AspNetDevelopmentServer : IDisposable {
@@ -23,7 +24,7 @@ namespace Ruhe.Web {
             developmentServerProcess =
                 new Process {
                     StartInfo = {
-                        FileName = @"C:\Program Files\Common Files\Microsoft Shared\DevServer\9.0\WebDev.WebServer.EXE",
+                        FileName = RuheConfiguration.DevelopmentServerPath,
                         Arguments = String.Format("/port:{0} /path:\"{1}\" /vpath:\"/{2}\"", port, path, virtualPath),
                         WindowStyle = ProcessWindowStyle.Minimized
                     }

@@ -21,6 +21,10 @@ namespace Ruhe.Configuration {
             }
         }
 
+        public static string DevelopmentServerPath {
+            get { return RuheConfigurationSection.GetCurrent().DevelopmentServer.Path ?? @"C:\Program Files\Common Files\Microsoft Shared\DevServer\9.0\WebDev.WebServer.EXE"; }
+        }
+
         public static string ImageUrlFor<T>() {
             var defaultResourceNameAttribute = (DefaultImageResourceAttribute)typeof(T).GetCustomAttributes(typeof(DefaultImageResourceAttribute), true).FirstOrDefault();
             defaultResourceNameAttribute.MustNotBeNull(typeof(T).Name + " must have a declared default image resource.");

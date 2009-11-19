@@ -17,6 +17,11 @@ namespace Ruhe.Configuration {
             get { return (ValidatorConfiguratorConfigurationElement) base["validatorConfigurator"]; }
         }
 
+        [ConfigurationProperty("developmentServer")]
+        public DevelopmentServerConfigurationElement DevelopmentServer {
+            get { return (DevelopmentServerConfigurationElement)base["developmentServer"]; }
+        }
+
         public static RuheConfigurationSection GetCurrent() {
             return (RuheConfigurationSection) (ConfigurationManager.GetSection("ruhe") ?? new RuheConfigurationSection());
         }
