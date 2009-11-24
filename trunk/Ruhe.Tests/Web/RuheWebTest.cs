@@ -3,14 +3,13 @@ using LiquidSyntax;
 using NUnit.Framework;
 using Ruhe.Web;
 
-namespace Ruhe.Tests.Web.UI.Controls {
+namespace Ruhe.Tests.Web {
     public class RuheWebTest<T> : WebFormTestCase {
         protected const string GlobalDatePattern = "dd-MMM-yyyy";
-        protected const string TestUrl = "http://localhost:4269/Ruhe.TestWeb/";
 
         protected virtual string GetUrlPath<R>() {
             var subPath = typeof(R).FullName.WithoutPrefixPattern(@"\w+\.").Replace(".", "/");
-            return string.Format("{0}{1}Tests.aspx", TestUrl, subPath);
+            return string.Format("{0}{1}Tests.aspx", WatinTest<string>.TestUrl, subPath);
         }
 
         protected static string IdFor(string partialId) {

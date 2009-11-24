@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Ruhe.Tests.Web.UI.Controls;
+using Ruhe.Tests.Web;
 
 namespace Ruhe.Tests.TestExtensions.AspTesters {
     public class InputDropDownListTesterTests : RuheWebTest<InputDropDownListTester> {
