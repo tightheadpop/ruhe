@@ -72,7 +72,7 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         protected override void OnPreRender(EventArgs e) {
-            Require.DefaultStyleSheet(typeof(Require), "ruhe.css");
+            Require.DefaultStyleSheet();
             base.OnPreRender(e);
         }
 

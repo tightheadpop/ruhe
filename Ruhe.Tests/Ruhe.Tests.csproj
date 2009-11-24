@@ -109,6 +109,7 @@
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -144,6 +145,8 @@
     <Compile Include="Web\UI\Controls\InputDateValidatorTests.cs" />
     <Compile Include="Web\UI\Controls\InputDerivedTypeDropDownListTests.cs" />
     <Compile Include="Web\UI\Controls\InputTextBoxMultiLineMaxLengthTests.cs" />
+    <Compile Include="Web\WatinExtensions.cs" />
+    <Compile Include="Web\WatinTest.cs" />
     <Compile Include="Web\WebResourceLoaderTests.cs" />
     <Compile Include="IdFor.cs" />
     <Compile Include="NUnitAdapter.cs" />
@@ -191,7 +194,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\Controls\RadioButtonListTests.cs" />
-    <Compile Include="Web\UI\Controls\RuheWebTest.cs" />
+    <Compile Include="Web\RuheWebTest.cs" />
     <Compile Include="Web\UI\Controls\UpdateLabelTests.cs" />
     <Compile Include="Web\UI\Controls\ValidationSummaryTests.cs" />
     <Compile Include="Web\UI\DefaultValidatorConfiguratorTests.cs">

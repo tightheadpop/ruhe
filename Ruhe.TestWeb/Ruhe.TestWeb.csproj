@@ -282,6 +282,20 @@
     <Compile Include="Web\UI\Controls\UpdateLabelTests.aspx.designer.cs">
       <DependentUpon>UpdateLabelTests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\UI\JQueryIncludeTests.aspx.cs">
+      <DependentUpon>JQueryIncludeTests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\JQueryIncludeTests.aspx.designer.cs">
+      <DependentUpon>JQueryIncludeTests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\UI\RequireFailsIfMissingTitleTest.aspx.cs">
+      <DependentUpon>RequireFailsIfMissingTitleTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\RequireFailsIfMissingTitleTest.aspx.designer.cs">
+      <DependentUpon>RequireFailsIfMissingTitleTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web\UI\RequireTests.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>RequireTests.aspx</DependentUpon>
@@ -324,6 +338,8 @@
     <Content Include="Web\UI\Controls\MessageFlash.aspx" />
     <Content Include="Web\UI\Controls\RadioButtonListTests.aspx" />
     <Content Include="Web\UI\Controls\UpdateLabelTests.aspx" />
+    <Content Include="Web\UI\JQueryIncludeTests.aspx" />
+    <Content Include="Web\UI\RequireFailsIfMissingTitleTest.aspx" />
     <Content Include="Web\UI\RequireTests.aspx" />
   </ItemGroup>
   <ItemGroup>
