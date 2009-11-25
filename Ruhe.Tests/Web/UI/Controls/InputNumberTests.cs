@@ -1,50 +1,62 @@
-using NUnit.Extensions.Asp;
-using NUnit.Extensions.Asp.AspTester;
+using LiquidSyntax.ForTesting;
 using NUnit.Framework;
 using Ruhe.Web.UI.Controls;
+using WatiN.Core;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputNumberTests : RuheWebTest<InputNumber> {
-        private LabelTester formatErrorMessage;
-        private TextBoxTester inputNumber;
-        private LabelTester rangeErrorMessage;
-        private ButtonTester submitButton;
-
+    public class InputNumberTests : WatinTest<InputNumber> {
         [Test]
         public void DoubleShowOnlyOneValidatorAtATime() {
-            inputNumber.Text = "sdf";
-            submitButton.Click();
-            WebAssert.NotVisible(formatErrorMessage);
-            WebAssert.Visible(rangeErrorMessage);
+            InputPositiveNumber.TypeText("sdf");
+            SubmitButton.ClickAndWait();
+            FormatValidator.ShouldNotBeVisible();
+            RangeValidator.ShouldBeVisible();
         }
 
         [Test]
         public void HasNumericCssClass() {
-            StringAssert.Contains("class=\"numeric\"", Browser.CurrentPageText);
+            InputPositiveNumber.ClassName.Should(Be.EqualTo("numeric number positive"));
+            InputNumber.ClassName.Should(Be.EqualTo("numeric number"));
         }
 
         [Test]
-        public void InvalidDoubleValidation() {
-            inputNumber.Text = "1.2.2";
-            submitButton.Click();
-            WebAssert.Visible(rangeErrorMessage);
+        public void InvalidDataTypeValidation() {
+            InputPositiveNumber.TypeText("1.2.2");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldBeVisible();
         }
 
         [Test]
-        public void ValidDoubleValidation() {
-            inputNumber.Text = "1.2";
-            submitButton.Click();
-            WebAssert.NotVisible(formatErrorMessage);
+        public void ValidDataTypeValidation() {
+            InputPositiveNumber.TypeText("1.2");
+            SubmitButton.ClickAndWait();
+            FormatValidator.ShouldNotBeVisible();
         }
 
-        protected override void SetUp() {
-            base.SetUp();
-            LoadPage();
-            inputNumber = new TextBoxTester(IdFor("inputNumber"));
-            submitButton = new ButtonTester(IdFor("submitButton"));
-            formatErrorMessage = new LabelTester(IdFor("inputNumber_compare"));
-            rangeErrorMessage = new LabelTester(IdFor("inputNumber_range"));
+        [SetUp]
+        public void SetUp() {
+            NavigateTo("InputNumberTests.aspx");
+        }
+
+        private TextField InputPositiveNumber {
+            get { return Browser.TextField(IdFor.It("inputPositiveNumber")); }
+        }
+
+        private TextField InputNumber {
+            get { return Browser.TextField(IdFor.It("inputNumber")); }
+        }
+
+        private Span FormatValidator {
+            get { return Browser.Span(IdFor.It("inputPositiveNumber_compare")); }
+        }
+
+        private Span RangeValidator {
+            get { return Browser.Span(IdFor.It("inputPositiveNumber_range")); }
+        }
+
+        private WatiN.Core.Button SubmitButton {
+            get { return Browser.Button(IdFor.It("submitButton")); }
         }
     }
 }
