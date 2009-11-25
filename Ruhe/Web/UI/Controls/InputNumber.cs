@@ -1,5 +1,6 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputNumber : AbstractValueTypeInput<double> {
@@ -19,7 +20,8 @@ namespace Ruhe.Web.UI.Controls {
         }
 
         private string GetCssClass() {
-            return "numeric number" + ((MinimumValue.HasValue && MinimumValue >= 0) ? " positive" : string.Empty);
+            var positive = ((MinimumValue.HasValue && MinimumValue >= 0) ? "positive-" : string.Empty);
+            return "numeric {0}number".Substitute(positive);
         }
     }
 }

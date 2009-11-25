@@ -16,7 +16,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void HasNumericCssClass() {
-            InputPositiveNumber.ClassName.Should(Be.EqualTo("numeric number positive"));
+            InputPositiveNumber.ClassName.Should(Be.EqualTo("numeric positive-number"));
             InputNumber.ClassName.Should(Be.EqualTo("numeric number"));
         }
 
@@ -32,6 +32,26 @@ namespace Ruhe.Tests.Web.UI.Controls {
             InputPositiveNumber.TypeText("1.2");
             SubmitButton.ClickAndWait();
             FormatValidator.ShouldNotBeVisible();
+        }
+
+        [Test]
+        public void InvalidValueIfOutsideOfRange() {
+            InputPositiveNumber.TypeText("-1");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldBeVisible();
+        }
+
+        [Test]
+        public void FiltersNonNumericInput() {
+            TypeTextWithEvents(InputPositiveNumber, "-abc123.6.7");
+            InputPositiveNumber.Text.Should(Be.EqualTo("123.67"));
+        }
+
+        [Test]
+        public void FiltersNonNumericInputAfterPostback() {
+            SubmitButton.ClickAndWait();
+            TypeTextWithEvents(InputNumber, "-abc12-3.6.7");
+            InputNumber.Text.Should(Be.EqualTo("-123.67"));
         }
 
         [SetUp]
