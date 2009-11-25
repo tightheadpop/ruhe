@@ -1,20 +1,14 @@
 using System;
-using NUnit.Extensions.Asp;
 using NUnit.Framework;
-using Ruhe.Tests.TestExtensions.HtmlTesters;
 using Ruhe.Web.UI.Controls;
+using WatiN.Core;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputDateTests : RuheWebTest<InputDate> {
-        private HtmlImageTester calendar;
-        private HtmlImageTester readonlyCalendar;
-        private HtmlTagTester readonlyDateValidator;
-
+    public class InputDateTests : WatinTest<InputDate> {
         [Test]
         public void DefaultingValueToTodaySetsValue() {
-            var input = new InputDate();
-            input.DefaultToToday = true;
+            var input = new InputDate {DefaultToToday = true};
             Assert.AreEqual(DateTime.Today, input.Value);
         }
 
@@ -29,39 +23,32 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void DefaultValueIsNull() {
-            var input = new InputDate();
-            input.Text = string.Empty;
+            var input = new InputDate {Text = string.Empty};
             Assert.IsNull(input.Value);
         }
 
         [Test]
-        public void DoesNotEmitValidatorWhenReadOnly() {
+        public void DoesNotEmitTextBoxOrValidatorWhenReadOnly() {
             LoadTestPage();
-            WebAssert.NotVisible(readonlyDateValidator);
+            ReadOnlyDate.ShouldNotBeVisible();
+            ReadOnlyDateValidator.ShouldNotBeVisible();
         }
 
         [Test]
         public void DoesNotHaveCalendarImageWhenReadOnly() {
             LoadTestPage();
-            WebAssert.NotVisible(readonlyCalendar);
-        }
-
-        [Test]
-        public void EmitsKeystrokeFilterScript() {
-            LoadTestPage();
-            Assert.IsTrue(Browser.CurrentPageText.Contains("Ruhe$DATE"));
+            ReadOnlyDateImage.ShouldNotBeVisible();
         }
 
         [Test]
         public void HasCalendarImage() {
             LoadTestPage();
-            WebAssert.Visible(calendar);
+            InputDateImage.ShouldBeVisible();
         }
 
         [Test]
         public void NonNullValueCanBeConvertedToDateTime() {
-            var input = new InputDate();
-            input.Format = "MM/dd/yyyy";
+            var input = new InputDate {Format = "MM/dd/yyyy"};
             var expected = new DateTime(2002, 10, 21);
             input.Value = expected;
             Assert.AreEqual("10/21/2002", input.Text);
@@ -70,17 +57,13 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void ParsesInvalidToNull() {
-            var input = new InputDate();
-            input.Format = "MM/dd/yyyy";
-            input.Text = "21/10/2002";
+            var input = new InputDate {Format = "MM/dd/yyyy", Text = "21/10/2002"};
             Assert.IsNull(input.Value);
         }
 
         [Test]
         public void ParsesValidInputToDateTime() {
-            var input = new InputDate();
-            input.Format = "MM/dd/yyyy";
-            input.Text = "10/21/2002";
+            var input = new InputDate {Format = "MM/dd/yyyy", Text = "10/21/2002"};
             Assert.AreEqual(new DateTime(2002, 10, 21), input.Value);
         }
 
@@ -94,16 +77,43 @@ namespace Ruhe.Tests.Web.UI.Controls {
         }
 
         [Test]
-        public void ValidatorIsPresent() {
+        public void ValidatesInvalideDataType() {
             LoadTestPage();
-            StringAssert.Contains("date_dateValidator", Browser.CurrentPageText);
+            InputDate.TypeText("this is not a date");
+            SubmitButton.ClickAndWait();
+            InputDateValidator.ShouldBeVisible();
         }
 
         private void LoadTestPage() {
-            LoadPage();
-            calendar = new HtmlImageTester(IdFor("date_calendar"));
-            readonlyCalendar = new HtmlImageTester(IdFor("readOnly_calendar"));
-            readonlyDateValidator = new HtmlTagTester(IdFor("readOnly_dateValidator"));
+            NavigateTo("InputDateTests.aspx");
+        }
+
+        private TextField InputDate {
+            get { return Browser.TextField(IdFor.It("date")); }
+        }
+
+        private Image InputDateImage {
+            get { return Browser.Image(IdFor.It("date_calendar")); }
+        }
+
+        private Span InputDateValidator {
+            get { return Browser.Span(IdFor.It("date_dateValidator")); }
+        }
+
+        private TextField ReadOnlyDate {
+            get { return Browser.TextField(IdFor.It("readOnly")); }
+        }
+
+        private Image ReadOnlyDateImage {
+            get { return Browser.Image(IdFor.It("readOnly_calendar")); }
+        }
+
+        private Span ReadOnlyDateValidator {
+            get { return Browser.Span(IdFor.It("readOnly_dateValidator")); }
+        }
+
+        private WatiN.Core.Button SubmitButton {
+            get { return Browser.Button(IdFor.It("submitButton")); }
         }
     }
 }

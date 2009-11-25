@@ -2,4 +2,5 @@
 <asp:Content ContentPlaceHolderID="content" runat="server">
     <ruhe:inputdate id="date" runat="server" Format="M/d/yyyy" />
     <ruhe:InputDate ID="readOnly" ReadOnly="true" runat="server" />
+    <ruhe:GrayButton ID="submitButton" runat="server" />
 </asp:Content>

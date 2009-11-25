@@ -154,4 +154,3 @@ var Ruhe$POSITIVE_NUMBER = function(){
         return /[\d]/;
     return /[\d.]/;
 };
-var Ruhe$DATE = null;
