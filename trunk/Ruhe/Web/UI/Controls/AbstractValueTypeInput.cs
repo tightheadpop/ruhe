@@ -10,7 +10,6 @@ namespace Ruhe.Web.UI.Controls {
     public abstract class AbstractValueTypeInput<T> : InputTextBox where T : struct {
         private CompareValidator compareValidator;
         private RangeValidator rangeValidator;
-        protected abstract string KeystrokeFilter { get; }
 
         /// <summary>
         /// Gets or sets the maximum value of type T for user input
@@ -96,20 +95,6 @@ namespace Ruhe.Web.UI.Controls {
         private void CreateRangeValidator() {
             rangeValidator = new RangeValidator {Visible = false};
             Controls.Add(rangeValidator);
-        }
-
-        protected override void OnPreRender(EventArgs e) {
-            base.OnPreRender(e);
-            RegisterClientScript();
-        }
-
-        private void RegisterClientScript() {
-            if (Visible && !ReadOnly) {
-                Page.ClientScript.RegisterClientScriptResource(typeof(RuheScriptReference), "Ruhe.Web.Resources.ruhe.js");
-                Page.ClientScript.RegisterStartupScript(GetType(), ClientID, string.Format(@"
-$get('{0}').onkeypress = Ruhe_KeyPressFilter({1});
-", ClientID, KeystrokeFilter), true);
-            }
         }
 
         protected override void Render(HtmlTextWriter writer) {

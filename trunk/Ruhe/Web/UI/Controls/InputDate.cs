@@ -47,10 +47,6 @@ namespace Ruhe.Web.UI.Controls {
             set { base.FormatText = value; }
         }
 
-        protected override string KeystrokeFilter {
-            get { return "Ruhe$DATE"; }
-        }
-
         public override bool ReadOnly {
             get { return base.ReadOnly; }
             set {

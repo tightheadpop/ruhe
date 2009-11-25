@@ -4,10 +4,6 @@ using LiquidSyntax;
 
 namespace Ruhe.Web.UI.Controls {
     public class InputInteger : AbstractValueTypeInput<int> {
-        protected override string KeystrokeFilter {
-            get { return string.Empty; }
-        }
-
         protected override ValidationDataType ValidationDataType {
             get { return ValidationDataType.Integer; }
         }
