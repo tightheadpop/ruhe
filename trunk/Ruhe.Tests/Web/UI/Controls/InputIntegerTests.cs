@@ -9,7 +9,7 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void HasNumericCssClass() {
-            InputPositiveInteger.ClassName.Should(Be.EqualTo("numeric integer positive"));
+            InputPositiveInteger.ClassName.Should(Be.EqualTo("numeric positive-integer"));
             InputInteger.ClassName.Should(Be.EqualTo("numeric integer"));
         }
 

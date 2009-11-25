@@ -121,8 +121,10 @@ function Ruhe_KeyPressFilter(regex) {
 };
 
 $(function(){
+    $('.number').live('keypress', Ruhe_KeyPressFilter(Ruhe$NUMBER));
+    $('.positive-number').live('keypress', Ruhe_KeyPressFilter(Ruhe$POSITIVE_NUMBER));
     $('.integer').live('keypress', Ruhe_KeyPressFilter(Ruhe$INTEGER));
-    $('.integer.positive').live('keypress', Ruhe_KeyPressFilter(Ruhe$POSITIVE_INTEGER));
+    $('.positive-integer').live('keypress', Ruhe_KeyPressFilter(Ruhe$POSITIVE_INTEGER));
 });
 
 /* keystroke filters */
