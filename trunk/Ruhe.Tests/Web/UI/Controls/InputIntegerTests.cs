@@ -9,57 +9,91 @@ namespace Ruhe.Tests.Web.UI.Controls {
 
         [Test]
         public void HasNumericCssClass() {
-            InputInteger.ClassName.Should(Be.EqualTo("numeric"));
+            InputPositiveInteger.ClassName.Should(Be.EqualTo("numeric integer positive"));
+            InputInteger.ClassName.Should(Be.EqualTo("numeric integer"));
         }
 
         [Test]
         public void IntegerShowOnlyOneValidatorAtATime() {
-            InputInteger.TypeText("sdf");
+            InputPositiveInteger.TypeText("sdf");
             SubmitButton.ClickAndWait();
-            RangeValidator.ShouldBeVisible();
-            CompareValidator.ShouldNotBeVisible();
+            InputPositiveIntegerRangeValidator.ShouldBeVisible();
+            InputPositiveIntegerCompareValidator.ShouldNotBeVisible();
         }
 
         [Test]
         public void InvalidBelowLowerBoundOfRange() {
-            InputInteger.TypeText("-1");
+            InputPositiveInteger.TypeText("-1");
             SubmitButton.ClickAndWait();
-            RangeValidator.ShouldBeVisible();
+            InputPositiveIntegerRangeValidator.ShouldBeVisible();
         }
 
         [Test]
-        public void InvalidBeyondUpperBoundOfRange() {
-            InputInteger.TypeText("25");
+        public void InvalidWhenValueIsBeyondUpperBoundOfRange() {
+            InputPositiveInteger.TypeText("25");
             SubmitButton.ClickAndWait();
-            RangeValidator.ShouldBeVisible();
+            InputPositiveIntegerRangeValidator.ShouldBeVisible();
         }
 
         [Test]
-        public void IsInvalidWithNonIntegerNumber() {
-            InputInteger.TypeText("1.1");
+        public void IsInvalidDataTypeWithNonIntegerNumber() {
+            InputPositiveInteger.TypeText("1.1");
             SubmitButton.ClickAndWait();
-            RangeValidator.ShouldBeVisible();
+            InputPositiveIntegerRangeValidator.ShouldBeVisible();
         }
 
         [Test]
-        public void IsValidWithInteger() {
-            InputInteger.TypeText("1");
+        public void IsValidDataTypeWithInteger() {
+            InputPositiveInteger.TypeText("1");
             SubmitButton.ClickAndWait();
-            CompareValidator.ShouldNotBeVisible();
+            InputPositiveIntegerCompareValidator.ShouldNotBeVisible();
         }
 
         [Test]
-        public void IsValidWithNegativeInteger() {
-            InputInteger.TypeText("-1");
+        public void IsValidDataTypeWithNegativeInteger() {
+            InputPositiveInteger.TypeText("-1");
             SubmitButton.ClickAndWait();
-            CompareValidator.ShouldNotBeVisible();
+            InputPositiveIntegerCompareValidator.ShouldNotBeVisible();
         }
 
         [Test]
         public void ValidWithinRange() {
-            InputInteger.TypeText("0");
+            InputPositiveInteger.TypeText("0");
             SubmitButton.ClickAndWait();
-            RangeValidator.ShouldNotBeVisible();
+            InputPositiveIntegerRangeValidator.ShouldNotBeVisible();
+        }
+
+        [Test]
+        public void ShouldOnlyAcceptNumbersAsTypedInputForPositiveInteger() {
+            TypeTextWithEvents(InputPositiveInteger, "-abc123");
+            InputPositiveInteger.Text.Should(Be.EqualTo("123"));
+        }
+
+        [Test]
+        public void ShouldOnlyAcceptNumbersAsTypedInputAfterAjaxPostbackForPositiveInteger() {
+            SubmitButton.ClickAndWait();
+            TypeTextWithEvents(InputPositiveInteger, "-abc123");
+            InputPositiveInteger.Text.Should(Be.EqualTo("123"));
+        }
+
+        [Test]
+        public void ShouldOnlyAcceptNumbersAsTypedInputForInteger() {
+            TypeTextWithEvents(InputInteger, "-abc123");
+            InputInteger.Text.Should(Be.EqualTo("-123"));
+        }
+
+        [Test]
+        public void ShouldOnlyAcceptNumbersAsTypedInputAfterAjaxPostbackForInteger() {
+            SubmitButton.ClickAndWait();
+            TypeTextWithEvents(InputInteger, "-abc123");
+            InputInteger.Text.Should(Be.EqualTo("-123"));
+        }
+
+        [Test]
+        public void DoesNotAcceptTypedNegativeSignIfItIsAfterNumbers() {
+            SubmitButton.ClickAndWait();
+            TypeTextWithEvents(InputInteger, "abc1-23");
+            InputInteger.Text.Should(Be.EqualTo("123"));
         }
 
         [SetUp]
@@ -67,20 +101,24 @@ namespace Ruhe.Tests.Web.UI.Controls {
             NavigateTo("InputIntegerTests.aspx");
         }
 
+        private TextField InputPositiveInteger {
+            get { return Browser.TextField(IdFor.It("inputPositiveInteger")); }
+        }
+
         private TextField InputInteger {
-            get { return Browser.TextField(IdFor.It("inputNumber")); }
+            get { return Browser.TextField(IdFor.It("inputInteger")); }
         }
 
         private WatiN.Core.Button SubmitButton {
             get { return Browser.Button(IdFor.It("submitButton")); }
         }
 
-        private Span RangeValidator {
-            get { return Browser.Span(IdFor.It("inputNumber_range")); }
+        private Span InputPositiveIntegerRangeValidator {
+            get { return Browser.Span(IdFor.It("inputPositiveInteger_range")); }
         }
 
-        private Span CompareValidator {
-            get { return Browser.Span(IdFor.It("inputNumber_compare")); }
+        private Span InputPositiveIntegerCompareValidator {
+            get { return Browser.Span(IdFor.It("inputPositiveInteger_compare")); }
         }
 
     }

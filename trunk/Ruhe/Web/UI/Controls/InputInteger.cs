@@ -4,11 +4,7 @@ using System.Web.UI.WebControls;
 namespace Ruhe.Web.UI.Controls {
     public class InputInteger : AbstractValueTypeInput<int> {
         protected override string KeystrokeFilter {
-            get {
-                if (!MinimumValue.HasValue || MinimumValue < 0)
-                    return "Ruhe$INTEGER";
-                return "Ruhe$POSITIVE_INTEGER";
-            }
+            get { return string.Empty; }
         }
 
         protected override ValidationDataType ValidationDataType {
@@ -17,9 +13,13 @@ namespace Ruhe.Web.UI.Controls {
 
         protected override void Render(HtmlTextWriter writer) {
             var oldCssClass = CssClass;
-            CssClass = (CssClass + " numeric").Trim();
+            CssClass = (CssClass + " " + GetCssClass()).Trim();
             base.Render(writer);
             CssClass = oldCssClass;
+        }
+
+        private string GetCssClass() {
+            return "numeric integer" + ((MinimumValue.HasValue && MinimumValue >= 0) ? " positive" : string.Empty);
         }
     }
 }

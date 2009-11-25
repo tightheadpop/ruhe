@@ -72,5 +72,10 @@ namespace Ruhe.Web.UI {
             var url = WebResourceLoader.GetResourceUrl(type, resourceName);
             page.ClientScript.RegisterClientScriptInclude(type, resourceName, url);
         }
+
+        public static void RuheScript() {
+            JQuery();
+            Script(typeof(Require), "ruhe.js");
+        }
     }
 }

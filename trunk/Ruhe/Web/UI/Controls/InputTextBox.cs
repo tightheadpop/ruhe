@@ -232,6 +232,7 @@ namespace Ruhe.Web.UI.Controls {
             EnsureChildControls();
             AssignIdsToChildControls();
             RuheConfiguration.ValidatorConfigurator.ConfigureControl(this);
+            Require.RuheScript();
         }
 
         protected override void Render(HtmlTextWriter writer) {
