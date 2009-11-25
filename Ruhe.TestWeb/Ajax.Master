@@ -9,7 +9,11 @@
 	<form id="form1" runat="server">
 		<asp:ScriptManager ID="scriptManager" runat="server" />
 		<div>
-			<asp:ContentPlaceHolder ID="content" runat="server"/>
+		    <asp:UpdatePanel ChildrenAsTriggers="true" runat="server">
+		        <ContentTemplate>
+			        <asp:ContentPlaceHolder ID="content" runat="server"/>
+			    </ContentTemplate>
+			</asp:UpdatePanel>
 		</div>
 	</form>
 </body>

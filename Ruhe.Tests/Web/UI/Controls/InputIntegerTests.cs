@@ -1,78 +1,87 @@
-using NUnit.Extensions.Asp;
-using NUnit.Extensions.Asp.AspTester;
 using NUnit.Framework;
+using LiquidSyntax.ForTesting;
 using Ruhe.Web.UI.Controls;
+using WatiN.Core;
 
 namespace Ruhe.Tests.Web.UI.Controls {
     [TestFixture]
-    public class InputIntegerTests : RuheWebTest<InputInteger> {
-        private LabelTester formatErrorMessage;
-        private TextBoxTester inputNumber;
-        private LabelTester rangeErrorMessage;
-        private ButtonTester submitButton;
+    public class InputIntegerTests : WatinTest<InputInteger> {
 
         [Test]
         public void HasNumericCssClass() {
-            StringAssert.Contains("class=\"numeric\"", Browser.CurrentPageText);
+            InputInteger.ClassName.Should(Be.EqualTo("numeric"));
         }
 
         [Test]
         public void IntegerShowOnlyOneValidatorAtATime() {
-            inputNumber.Text = "sdf";
-            submitButton.Click();
-            WebAssert.Visible(rangeErrorMessage);
-            WebAssert.NotVisible(formatErrorMessage);
+            InputInteger.TypeText("sdf");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldBeVisible();
+            CompareValidator.ShouldNotBeVisible();
         }
 
         [Test]
         public void InvalidBelowLowerBoundOfRange() {
-            inputNumber.Text = "-1";
-            submitButton.Click();
-            WebAssert.Visible(rangeErrorMessage);
+            InputInteger.TypeText("-1");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldBeVisible();
         }
 
         [Test]
         public void InvalidBeyondUpperBoundOfRange() {
-            inputNumber.Text = "25";
-            submitButton.Click();
-            WebAssert.Visible(rangeErrorMessage);
+            InputInteger.TypeText("25");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldBeVisible();
         }
 
         [Test]
-        public void IsInvalidWithDouble() {
-            inputNumber.Text = "1.1";
-            submitButton.Click();
-            WebAssert.Visible(rangeErrorMessage);
+        public void IsInvalidWithNonIntegerNumber() {
+            InputInteger.TypeText("1.1");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldBeVisible();
         }
 
         [Test]
         public void IsValidWithInteger() {
-            inputNumber.Text = "1";
-            submitButton.Click();
-            WebAssert.NotVisible(formatErrorMessage);
+            InputInteger.TypeText("1");
+            SubmitButton.ClickAndWait();
+            CompareValidator.ShouldNotBeVisible();
         }
 
         [Test]
         public void IsValidWithNegativeInteger() {
-            inputNumber.Text = "-1";
-            submitButton.Click();
-            WebAssert.NotVisible(formatErrorMessage);
+            InputInteger.TypeText("-1");
+            SubmitButton.ClickAndWait();
+            CompareValidator.ShouldNotBeVisible();
         }
 
         [Test]
         public void ValidWithinRange() {
-            inputNumber.Text = "0";
-            submitButton.Click();
-            WebAssert.NotVisible(rangeErrorMessage);
+            InputInteger.TypeText("0");
+            SubmitButton.ClickAndWait();
+            RangeValidator.ShouldNotBeVisible();
         }
 
-        protected override void SetUp() {
-            base.SetUp();
-            LoadPage();
-            inputNumber = new TextBoxTester(IdFor("inputNumber"));
-            submitButton = new ButtonTester(IdFor("submitButton"));
-            formatErrorMessage = new LabelTester(IdFor("inputNumber_compare"));
-            rangeErrorMessage = new LabelTester(IdFor("inputNumber_range"));
+        [SetUp]
+        public void SetUp() {
+            NavigateTo("InputIntegerTests.aspx");
         }
+
+        private TextField InputInteger {
+            get { return Browser.TextField(IdFor.It("inputNumber")); }
+        }
+
+        private WatiN.Core.Button SubmitButton {
+            get { return Browser.Button(IdFor.It("submitButton")); }
+        }
+
+        private Span RangeValidator {
+            get { return Browser.Span(IdFor.It("inputNumber_range")); }
+        }
+
+        private Span CompareValidator {
+            get { return Browser.Span(IdFor.It("inputNumber_compare")); }
+        }
+
     }
 }
