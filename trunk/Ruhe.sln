@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		bin\NUnit.license.txt = bin\NUnit.license.txt
 		external\NUnitAsp.dll = external\NUnitAsp.dll
 		bin\NUnitAsp.license.txt = bin\NUnitAsp.license.txt
+		bin\NVelocity.dll = bin\NVelocity.dll
+		bin\NVelocity.xml = bin\NVelocity.xml
 		Ruhe.4.5.resharper = Ruhe.4.5.resharper
 		bin\WatiN.Core.dll = bin\WatiN.Core.dll
 		bin\WatiN.Core.xml = bin\WatiN.Core.xml
@@ -24,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ruhe.TestWeb", "Ruhe.TestWeb\Ruhe.TestWeb.csproj", "{8645D657-2B79-49E9-86B3-4EB59B65A3D6}"
 EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU
@@ -66,9 +72,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

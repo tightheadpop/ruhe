@@ -82,8 +82,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\LiquidSyntax.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v3.5">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic">
       <Name>Microsoft.VisualBasic</Name>
+    </Reference>
+    <Reference Include="NVelocity, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\NVelocity.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -115,6 +123,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DerivedTypeRepository.cs" />
+    <Compile Include="MsBuild\ApplyTemplateTask.cs" />
     <Compile Include="MultiMapSet.cs" />
     <Compile Include="Web\AspNetDevelopmentServer.cs" />
     <Compile Include="Web\QueryStringBuilder.cs" />
