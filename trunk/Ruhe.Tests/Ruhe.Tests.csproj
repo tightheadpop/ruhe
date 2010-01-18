@@ -127,7 +127,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MsBuild\ApplyTemplateTaskTests.cs" />
+    <Compile Include="MsBuild\ApplyVelocityTemplateTaskTests.cs" />
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

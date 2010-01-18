@@ -5,7 +5,7 @@ using NVelocity;
 using NVelocity.App;
 
 namespace Ruhe.MsBuild {
-    public class ApplyTemplateTask : Task {
+    public class ApplyVelocityTemplateTask : Task {
         [Required]
         public string TemplateFile { get; set; }
 
