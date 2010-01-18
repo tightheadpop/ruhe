@@ -8,7 +8,7 @@ using LiquidSyntax.ForTesting;
 
 namespace Ruhe.Tests.MsBuild {
     [TestFixture]
-    public class ApplyTemplateTaskTests {
+    public class ApplyVelocityTemplateTaskTests {
         private static readonly string outputFile = Path.GetTempFileName();
         private static readonly string templateFile = GetResourceName("Template.txt");
         private static readonly string propertiesFile = GetResourceName("Properties.txt");
@@ -28,7 +28,7 @@ On that farm, he had a cow that says ""moo."""));
 
         [SetUp]
         public void SetUp() {
-            task = new ApplyTemplateTask {TemplateFile = templateFile, PropertiesFile = propertiesFile, OutputFile = outputFile};
+            task = new ApplyVelocityTemplateTask {TemplateFile = templateFile, PropertiesFile = propertiesFile, OutputFile = outputFile};
         }
 
         [TearDown]
