@@ -1,0 +1,4 @@
+﻿animal=cow
+noise=moo
+indefiniteArticle=a
+foo
