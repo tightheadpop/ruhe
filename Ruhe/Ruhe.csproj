@@ -123,7 +123,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DerivedTypeRepository.cs" />
-    <Compile Include="MsBuild\ApplyVelocityTemplateTask.cs" />
+    <Compile Include="MsBuild\ApplyVelocityTemplate.cs" />
     <Compile Include="MultiMapSet.cs" />
     <Compile Include="Web\AspNetDevelopmentServer.cs" />
     <Compile Include="Web\QueryStringBuilder.cs" />

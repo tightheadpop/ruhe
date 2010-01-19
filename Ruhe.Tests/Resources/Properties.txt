@@ -2,3 +2,4 @@
 noise=moo
 indefiniteArticle=a
 foo
+withEqualSign=a=b=c
