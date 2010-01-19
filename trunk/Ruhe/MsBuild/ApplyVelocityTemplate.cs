@@ -5,7 +5,7 @@ using NVelocity;
 using NVelocity.App;
 
 namespace Ruhe.MsBuild {
-    public class ApplyVelocityTemplateTask : Task {
+    public class ApplyVelocityTemplate : Task {
         [Required]
         public string TemplateFile { get; set; }
 
@@ -33,7 +33,7 @@ namespace Ruhe.MsBuild {
             using (var propertiesStream = new StreamReader(PropertiesFile)) {
                 string line;
                 while (null != (line = propertiesStream.ReadLine())) {
-                    var pair = line.Split('=');
+                    var pair = line.Split("=".ToCharArray(), 2);
                     if (pair.Length < 2) continue;
                     context.Put(pair[0].Trim(), pair[1].Trim());
                 }

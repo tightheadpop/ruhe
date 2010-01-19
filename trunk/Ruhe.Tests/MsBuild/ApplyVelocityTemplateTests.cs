@@ -8,7 +8,7 @@ using LiquidSyntax.ForTesting;
 
 namespace Ruhe.Tests.MsBuild {
     [TestFixture]
-    public class ApplyVelocityTemplateTaskTests {
+    public class ApplyVelocityTemplateTests {
         private static readonly string outputFile = Path.GetTempFileName();
         private static readonly string templateFile = GetResourceName("Template.txt");
         private static readonly string propertiesFile = GetResourceName("Properties.txt");
@@ -18,7 +18,8 @@ namespace Ruhe.Tests.MsBuild {
         public void CreatesOutputFileWithSubstitutionsMade() {
             task.Execute();
             File.ReadAllText(outputFile).Should(Be.EqualTo(@"Old McDonald had a farm.
-On that farm, he had a cow that says ""moo."""));
+On that farm, he had a cow that says ""moo.""
+The text here should contain an equal sign: a=b=c"));
         }
 
         [Test]
@@ -28,7 +29,7 @@ On that farm, he had a cow that says ""moo."""));
 
         [SetUp]
         public void SetUp() {
-            task = new ApplyVelocityTemplateTask {TemplateFile = templateFile, PropertiesFile = propertiesFile, OutputFile = outputFile};
+            task = new ApplyVelocityTemplate {TemplateFile = templateFile, PropertiesFile = propertiesFile, OutputFile = outputFile};
         }
 
         [TearDown]
