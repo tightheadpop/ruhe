@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -23,7 +24,8 @@ namespace Ruhe.MsBuild {
                 }
                 return true;
             }
-            catch {
+            catch (Exception e){
+                Log.LogError(e.Message);
                 return false;
             }
         }

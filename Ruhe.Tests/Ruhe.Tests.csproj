@@ -136,6 +136,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DerivedTypeRepositoryTests.cs" />
+    <Compile Include="MsBuild\TestableBuildEngine.cs" />
     <Compile Include="MultiMapSetTest.cs" />
     <Compile Include="TestExtensions\AspTesters\InputDropDownListTester.cs" />
     <Compile Include="TestExtensions\ControlTesterUtilities.cs" />
@@ -214,6 +215,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\TemplateWithError.txt" />
     <Content Include="Resources\Properties.txt" />
     <Content Include="Resources\Template.txt" />
   </ItemGroup>
