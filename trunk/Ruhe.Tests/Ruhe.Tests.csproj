@@ -136,7 +136,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DerivedTypeRepositoryTests.cs" />
-    <Compile Include="MsBuild\TestableBuildEngine.cs" />
+    <Compile Include="MsBuild\FakeBuildEngine.cs" />
     <Compile Include="MultiMapSetTest.cs" />
     <Compile Include="TestExtensions\AspTesters\InputDropDownListTester.cs" />
     <Compile Include="TestExtensions\ControlTesterUtilities.cs" />
