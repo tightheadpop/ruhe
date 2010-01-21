@@ -1,4 +1,4 @@
-#Use the ApplyVelocityTemplate to generate a Web.config file per environment by separating the common elements of the .config from the properties that differ.
+Use the ApplyVelocityTemplate to generate a Web.config file per environment by separating the common elements of the .config from the properties that differ.
 
 = Introduction =
 
@@ -16,7 +16,7 @@ To include the velocity task in your MsBuild script, simply reference the class 
 Then you can generate files from your build.
 
 {{{
-  <Target Name="UpdateWebConfig" Inputs="WebConfig/template.web.config;WebConfig/$(Configuration).properties" Outputs="Web.Config" DependsOnTargets="Build">
+  <Target Name="UpdateWebConfig" Inputs="WebConfig/template.web.config;WebConfig/$(Configuration).properties" Outputs="Web.Config">
     <ApplyVelocityTemplate TemplateFile="WebConfig/template.web.config" PropertiesFile="WebConfig/$(Configuration).properties" OutputFile="Web.Config" />
   </Target>
   
