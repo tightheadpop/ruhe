@@ -3,11 +3,12 @@ using System.Collections;
 using Microsoft.Build.Framework;
 
 namespace Ruhe.Tests.MsBuild {
-    public class TestableBuildEngine : IBuildEngine {
+    public class FakeBuildEngine : IBuildEngine {
         public int ColumnNumberOfTaskNode { get; set; }
         public bool ContinueOnError { get; set; }
         public int LineNumberOfTaskNode { get; set; }
         public string ProjectFileOfTaskNode { get; set; }
+        public string LoggedMessage = null;
 
         public bool BuildProjectFile(string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs) {
             throw new NotImplementedException();
@@ -20,7 +21,7 @@ namespace Ruhe.Tests.MsBuild {
         public void LogErrorEvent(BuildErrorEventArgs e) {}
 
         public void LogMessageEvent(BuildMessageEventArgs e) {
-            throw new NotImplementedException();
+            LoggedMessage = e.Message;
         }
 
         public void LogWarningEvent(BuildWarningEventArgs e) {

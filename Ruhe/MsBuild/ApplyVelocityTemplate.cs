@@ -18,15 +18,20 @@ namespace Ruhe.MsBuild {
 
         public override bool Execute() {
             try {
-                using (var templateStream = new FileStream(TemplateFile, FileMode.Open, FileAccess.Read)) {
-                    var context = GetInitializedContext();
-                    ApplyTemplate(templateStream, context);
-                }
+                CreateOutputFile();
+                Log.LogMessage("Successfully created {0}", OutputFile);
                 return true;
             }
             catch (Exception e){
                 Log.LogError(e.Message);
                 return false;
+            }
+        }
+
+        private void CreateOutputFile() {
+            using (var templateStream = new FileStream(TemplateFile, FileMode.Open, FileAccess.Read)) {
+                var context = GetInitializedContext();
+                ApplyTemplate(templateStream, context);
             }
         }
 

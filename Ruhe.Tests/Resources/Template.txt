@@ -1,3 +1,4 @@
 ﻿Old McDonald had a farm.
 On that farm, he had $indefiniteArticle $animal that says "$noise."
 The text here should contain an equal sign: $withEqualSign
+$anEmptyValue
