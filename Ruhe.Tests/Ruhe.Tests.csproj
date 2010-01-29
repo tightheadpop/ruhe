@@ -143,6 +143,10 @@
     <Compile Include="TestExtensions\WebControlTester.cs" />
     <Compile Include="ValidateTests.cs" />
     <Compile Include="ValueTypesTest.cs" />
+    <Compile Include="Web\FakeHttpApplication.cs" />
+    <Compile Include="Web\FakeHttpRequest.cs" />
+    <Compile Include="Web\FakeHttpResponse.cs" />
+    <Compile Include="Web\SslRedirectModuleTest.cs" />
     <Compile Include="Web\UI\Controls\BoundFieldTests.cs" />
     <Compile Include="Web\UI\Controls\HyperLinkFieldTests.cs" />
     <Compile Include="Web\UI\Controls\InputCheckBoxListTests.cs" />

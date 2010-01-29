@@ -78,6 +78,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="DeftTech.DuckTyping, Version=0.9.30.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\DeftTech.DuckTyping.dll</HintPath>
+    </Reference>
     <Reference Include="LiquidSyntax, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\LiquidSyntax.dll</HintPath>
@@ -88,6 +92,10 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic">
       <Name>Microsoft.VisualBasic</Name>
+    </Reference>
+    <Reference Include="NGenerics, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e4b41be133ea7faf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\NGenerics.dll</HintPath>
     </Reference>
     <Reference Include="NVelocity, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,6 +134,9 @@
     <Compile Include="MsBuild\ApplyVelocityTemplate.cs" />
     <Compile Include="MultiMapSet.cs" />
     <Compile Include="Web\AspNetDevelopmentServer.cs" />
+    <Compile Include="Web\IHttpApplication.cs" />
+    <Compile Include="Web\IHttpRequest.cs" />
+    <Compile Include="Web\IHttpResponse.cs" />
     <Compile Include="Web\QueryStringBuilder.cs" />
     <Compile Include="Month.cs">
       <SubType>Code</SubType>
@@ -133,6 +144,7 @@
     <Compile Include="Validate.cs" />
     <Compile Include="ValueType.cs" />
     <Compile Include="Web\Resources\DefaultImageResourceAttribute.cs" />
+    <Compile Include="Web\SslRedirectModule.cs" />
     <Compile Include="Web\UI\CompositeControl.cs" />
     <Compile Include="Web\UI\Controls\AbstractValueTypeInput.cs" />
     <Compile Include="Web\UI\Controls\BooleanBoundField.cs" />
