@@ -16,7 +16,7 @@ To include the velocity task in your MsBuild script, simply reference the class 
 Then you can generate files from your build.
 
 {{{
-  <Target Name="UpdateWebConfig" Inputs="WebConfig/template.web.config;WebConfig/$(Configuration).properties" Outputs="Web.Config">
+  <Target Name="UpdateWebConfig">
     <ApplyVelocityTemplate TemplateFile="WebConfig/template.web.config" PropertiesFile="WebConfig/$(Configuration).properties" OutputFile="Web.Config" />
   </Target>
   
