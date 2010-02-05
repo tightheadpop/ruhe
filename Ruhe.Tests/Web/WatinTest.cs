@@ -5,8 +5,6 @@ using LiquidSyntax;
 using NUnit.Framework;
 using Ruhe.Web;
 using WatiN.Core;
-using LiquidSyntax.ForTesting;
-using WatiN.Core.Native;
 
 namespace Ruhe.Tests.Web {
     public class WatinTest<T> {
@@ -22,7 +20,7 @@ namespace Ruhe.Tests.Web {
             Browser = new IE(GetBaseUrl() + aspxName);
         }
 
-        private string GetBaseUrl() {
+        private static string GetBaseUrl() {
             var subPath = typeof(T).Namespace.WithoutPrefixPattern(@"\w+\.").Replace(".", "/");
             return string.Format("{0}{1}/", TestUrl, subPath);
         }

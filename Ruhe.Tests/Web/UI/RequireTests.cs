@@ -36,11 +36,5 @@ namespace Ruhe.Tests.Web.UI {
             NavigateTo("RequireFailsIfMissingTitleTest.aspx");
             Browser.Expect<ArgumentException>();
         }
-
-        [Test]
-        public void ShouldIncludeJQuery() {
-            NavigateTo("JQueryIncludeTests.aspx");
-            Browser.Span("text").Text.Should(Be.EqualTo("updated!"));
-        }
     }
 }

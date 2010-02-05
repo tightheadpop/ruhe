@@ -232,7 +232,11 @@ namespace Ruhe.Web.UI.Controls {
             EnsureChildControls();
             AssignIdsToChildControls();
             RuheConfiguration.ValidatorConfigurator.ConfigureControl(this);
-            Require.RuheScript();
+        }
+
+        protected override void OnPreRender(EventArgs e) {
+            base.OnPreRender(e);
+            ScriptManager.GetCurrent(Page).Scripts.Add(new ScriptReference("Ruhe.Web.Resources.ruhe.js", GetType().Assembly.FullName));
         }
 
         protected override void Render(HtmlTextWriter writer) {
