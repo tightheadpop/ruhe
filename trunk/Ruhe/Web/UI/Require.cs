@@ -60,21 +60,16 @@ namespace Ruhe.Web.UI {
             StyleSheet(typeof(Require), "ruhe.css");
         }
 
-        public static void JQuery() {
-            Script(typeof(Require), "jquery-1.3.2.min.js");
-            Script(typeof(Require), "jquery-ui-1.7.2.custom.min.js");
-        }
-
         public static void Script(Type type, string resourceName) {
             var page = GetPage();
-            if (page.ClientScript.IsClientScriptIncludeRegistered(type, resourceName))
-                return;
-            var url = WebResourceLoader.GetResourceUrl(type, resourceName);
-            page.ClientScript.RegisterClientScriptInclude(type, resourceName, url);
+            ScriptManager.GetCurrent(page).Scripts.Add(new ScriptReference("Ruhe.Web.Resources.ruhe.js", typeof(Require).Assembly.FullName));
+//            if (page.ClientScript.IsClientScriptIncludeRegistered(type, resourceName))
+//                return;
+//            var url = WebResourceLoader.GetResourceUrl(type, resourceName);
+//            page.ClientScript.RegisterClientScriptInclude(type, resourceName, url);
         }
 
         public static void RuheScript() {
-            JQuery();
             Script(typeof(Require), "ruhe.js");
         }
     }
