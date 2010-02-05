@@ -62,10 +62,10 @@ namespace Ruhe.Web.UI {
 
         public static void Script(Type type, string resourceName) {
             var page = GetPage();
-            ScriptManager.GetCurrent(page).Scripts.Add(new ScriptReference("Ruhe.Web.Resources.ruhe.js", typeof(Require).Assembly.FullName));
+            var url = WebResourceLoader.GetResourceUrl(type, resourceName);
+            ScriptManager.GetCurrent(page).Scripts.Add(new ScriptReference(url));
 //            if (page.ClientScript.IsClientScriptIncludeRegistered(type, resourceName))
 //                return;
-//            var url = WebResourceLoader.GetResourceUrl(type, resourceName);
 //            page.ClientScript.RegisterClientScriptInclude(type, resourceName, url);
         }
 
