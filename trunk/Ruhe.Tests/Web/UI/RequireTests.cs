@@ -2,7 +2,6 @@ using System;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Ruhe.Web.UI;
-using LiquidSyntax.ForTesting;
 
 namespace Ruhe.Tests.Web.UI {
     [TestFixture]

@@ -32,10 +32,9 @@ namespace Ruhe.Tests {
             new DerivedTypeRepository<IFoo>().GetDerivedTypes().Should(Have.Count.EqualTo(3));
         }
 
-        private interface IFoo {
-            
-        }
-        private abstract class Foo : IFoo{}
+        private interface IFoo {}
+
+        private abstract class Foo : IFoo {}
 
         [DisplayName("This is fun")]
         private class Fun : Foo {}

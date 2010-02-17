@@ -18,9 +18,8 @@ namespace Ruhe {
         }
 
         private void EnsureDerivedTypesOfT() {
-            if (!DerivedTypes.ContainsKey(typeof(T))) {
+            if (!DerivedTypes.ContainsKey(typeof(T)))
                 AddDerivedTypesOfT();
-            }
         }
 
         private void AddDerivedTypesOfT() {
@@ -31,7 +30,7 @@ namespace Ruhe {
                         typesOfT.Add(type);
                 }
             }
-            DerivedTypes.Add(typeof(T), typesOfT);
+            DerivedTypes[typeof(T)] = typesOfT;
         }
 
         public IEnumerable<string> GetDisplayNames() {
