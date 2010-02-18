@@ -78,10 +78,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="DeftTech.DuckTyping, Version=0.9.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\DeftTech.DuckTyping.dll</HintPath>
-    </Reference>
     <Reference Include="LiquidSyntax, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\LiquidSyntax.dll</HintPath>
@@ -134,6 +130,9 @@
     <Compile Include="MsBuild\ApplyVelocityTemplate.cs" />
     <Compile Include="MultiMapSet.cs" />
     <Compile Include="Web\AspNetDevelopmentServer.cs" />
+    <Compile Include="Web\HttpApplicationWrapper.cs" />
+    <Compile Include="Web\HttpRequestWrapper.cs" />
+    <Compile Include="Web\HttpResponseWrapper.cs" />
     <Compile Include="Web\IHttpApplication.cs" />
     <Compile Include="Web\IHttpRequest.cs" />
     <Compile Include="Web\IHttpResponse.cs" />
