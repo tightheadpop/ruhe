@@ -6,7 +6,8 @@ using LiquidSyntax;
 
 namespace Ruhe {
     public class DerivedTypeRepository<T> where T : class {
-        private static readonly Dictionary<Type, List<Type>> DerivedTypes = new Dictionary<Type, List<Type>>();
+        private static List<Type> derivedTypes;
+        private static readonly object lockable = new object();
 
         public virtual IEnumerable<Assembly> GetAssembliesToSearch() {
             return typeof(T).Assembly.AsList();
@@ -14,23 +15,24 @@ namespace Ruhe {
 
         public IEnumerable<Type> GetDerivedTypes() {
             EnsureDerivedTypesOfT();
-            return DerivedTypes[typeof(T)];
+            return derivedTypes;
         }
 
         private void EnsureDerivedTypesOfT() {
-            if (!DerivedTypes.ContainsKey(typeof(T)))
-                AddDerivedTypesOfT();
+            if (derivedTypes == null)
+                lock (lockable)
+                    if (derivedTypes == null)
+                        AddDerivedTypesOfT();
         }
 
         private void AddDerivedTypesOfT() {
-            var typesOfT = new List<Type>();
+            derivedTypes = new List<Type>();
             foreach (var assembly in GetAssembliesToSearch()) {
                 foreach (var type in assembly.GetTypes()) {
                     if (!type.IsAbstract && type.IsClass && typeof(T).IsAssignableFrom(type))
-                        typesOfT.Add(type);
+                        derivedTypes.Add(type);
                 }
             }
-            DerivedTypes[typeof(T)] = typesOfT;
         }
 
         public IEnumerable<string> GetDisplayNames() {

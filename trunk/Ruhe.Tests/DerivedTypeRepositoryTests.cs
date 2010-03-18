@@ -32,6 +32,15 @@ namespace Ruhe.Tests {
             new DerivedTypeRepository<IFoo>().GetDerivedTypes().Should(Have.Count.EqualTo(3));
         }
 
+        [Test]
+        public void ShouldWorkWithMultipleDerivedTypeRepositories() {
+            var foos = new DerivedTypeRepository<Foo>();
+            var unknowns = new DerivedTypeRepository<Unknown>();
+
+            foos.GetDerivedTypes();
+            unknowns.GetDerivedTypes().Should(Have.Count.EqualTo(1));
+        }
+
         private interface IFoo {}
 
         private abstract class Foo : IFoo {}
@@ -44,5 +53,10 @@ namespace Ruhe.Tests {
 
         [DisplayName("This is Baz")]
         private class Baz : Foo {}
+
+        private abstract class Unknown{}
+// ReSharper disable UnusedMember.Local
+        private class MyFeelings : Unknown{}
+// ReSharper restore UnusedMember.Local
     }
 }
